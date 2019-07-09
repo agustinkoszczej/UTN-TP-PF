@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import { View, Text } from 'react-native';
+import AppNavigator from '@components/AppNavigator';
 
 class App extends Component {
   componentDidMount() {
@@ -8,16 +8,11 @@ class App extends Component {
   }
 
   render() {
-    return (<View>
-      <Text>
-      Hola Fede
-      </Text>
-    </View>);
+    return <AppNavigator/>
+
   }
 }
 
-// const MyAppWithOverlay = __DEV__ ? Reactotron.overlay(App) : App;
 
-// export default connect()(MyAppWithOverlay);
 
 export default App;

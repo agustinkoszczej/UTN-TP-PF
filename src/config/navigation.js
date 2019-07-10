@@ -1,12 +1,10 @@
 import { getActiveChildNavigationOptions, HeaderBackButton } from 'react-navigation';
-import CustomHeader from '@components/CustomHeader';
 import TabBarIcon from '@components/TabBarIcon';
 import { black, boulder, dustyGray, headerBorder, oceanGreen, thunderbird, white } from '@constants/colors';
 import { isIos } from '@constants/platform';
 import Routes from '@constants/routes';
 import statusBarConfig from '@constants/statusBar';
 
-import I18n from './i18n';
 
 const homeScreensHeaderTitleStyle = {
   alignSelf: 'center',
@@ -36,13 +34,13 @@ const overlapHeader = {
 
 // Default nav options for all screens
 const defaultNavOptions = ({ navigation }) => ({
-  title: I18n.t(`app:${navigation.state.routeName}`),
+  title: navigation.state.routeName,
   headerStyle: {
     backgroundColor: white
   },
   headerLeft: HeaderBackButton,
   headerTintColor: dustyGray,
-  headerBackTitle: I18n.t('app:back'),
+  headerBackTitle: 'Volver',
 });
 
 // Default tab options for all tabs
@@ -53,7 +51,7 @@ const defaultTabOptions = ({ navigation }) => ({
     inactiveTintColor: boulder
   },
   headerLeft: null,
-  title: I18n.t(`app:${navigation.state.routeName}`),
+  title: navigation.state.routeName,
   tabBarIcon: props => TabBarIcon({ route: navigation.state.routeName, ...props })
 });
 
@@ -84,13 +82,12 @@ const topTabOptions = ({ navigation }) => ({
     }
   },
   headerLeft: null,
-  title: I18n.t(`app:${navigation.state.routeName}`)
+  title: navigation.state.routeName
 });
 
 export const screensNavOptions = {
   [Routes.Menu]: {
     gesturesEnabled: false,
-    headerTitle: CustomHeader,
     headerStyle: {
       backgroundColor: oceanGreen,
       elevation: 0
@@ -104,12 +101,12 @@ export const screensNavOptions = {
   [Routes.PasswordRecoverySuccess]: { header: null },
   [Routes.Orders]: {
     gesturesEnabled: false,
-    tabBarLabel: I18n.t(`app:ordersLabel`),
+    tabBarLabel: 'Pedidos',
     headerTitleStyle: homeScreensHeaderTitleStyle
   },
   [Routes.Profile]: {
     gesturesEnabled: false,
-    tabBarLabel: I18n.t(`app:profileLabel`),
+    tabBarLabel: 'Perfil',
     headerTitleStyle: homeScreensHeaderTitleStyle
   }
 };

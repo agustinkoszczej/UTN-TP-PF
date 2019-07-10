@@ -6,7 +6,6 @@ import CustomButton from '@components/CustomButton';
 import CustomModal from '@components/CustomModal';
 import { isIos } from '@constants/platform';
 
-import { strings } from './i18n';
 import styles from './styles';
 
 function CustomDialog({
@@ -61,8 +60,8 @@ function CustomDialog({
 }
 
 CustomDialog.defaultProps = {
-  acceptTitle: strings.CONFIRM_DEFAULT(),
-  denyTitle: strings.DENY_DEFAULT()
+  acceptTitle: 'Si',
+  denyTitle: 'No'
 };
 
 CustomDialog.propTypes = {

@@ -2,14 +2,13 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { BackHandler, StatusBar } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import { reduxifyNavigator } from 'react-navigation-redux-helpers';
+import { createReduxContainer } from 'react-navigation-redux-helpers';
 import { connect } from 'react-redux';
 import Navigator from '@app/screens';
 import { statusBarStyles } from '@config/navigation';
-import { ROOT } from '@constants/platform';
 import { getCurrentRouteName } from '@utils/navUtils';
 
-const AppWithNavigationState = reduxifyNavigator(Navigator, ROOT);
+const AppWithNavigationState = createReduxContainer(Navigator);
 
 class AppNavigator extends Component {
   componentDidMount() {

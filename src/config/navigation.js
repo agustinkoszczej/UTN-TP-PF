@@ -1,10 +1,8 @@
 import { getActiveChildNavigationOptions, HeaderBackButton } from 'react-navigation';
 import TabBarIcon from '@components/TabBarIcon';
-import { black, boulder, dustyGray, headerBorder, oceanGreen, thunderbird, white } from '@constants/colors';
-import { isIos } from '@constants/platform';
+import { black, boulder, dustyGray, oceanGreen, thunderbird, white } from '@constants/colors';
 import Routes from '@constants/routes';
 import statusBarConfig from '@constants/statusBar';
-
 
 const homeScreensHeaderTitleStyle = {
   alignSelf: 'center',
@@ -22,16 +20,6 @@ const emptyTitleHeader = {
   }
 };
 
-const overlapHeader = {
-  title: '',
-  headerStyle: {
-    backgroundColor: white,
-    elevation: 4,
-    borderBottomColor: headerBorder,
-    shadowOpacity: isIos && 1
-  }
-};
-
 // Default nav options for all screens
 const defaultNavOptions = ({ navigation }) => ({
   title: navigation.state.routeName,
@@ -40,7 +28,7 @@ const defaultNavOptions = ({ navigation }) => ({
   },
   headerLeft: HeaderBackButton,
   headerTintColor: dustyGray,
-  headerBackTitle: 'Volver',
+  headerBackTitle: 'Volver'
 });
 
 // Default tab options for all tabs
@@ -97,7 +85,6 @@ export const screensNavOptions = {
   [Routes.InitialLoading]: { header: null },
   [Routes.SignUp]: { header: null },
   [Routes.RecoverPassword]: emptyTitleHeader,
-  [Routes.RecoverPasswordCodeVerification]: emptyTitleHeader,
   [Routes.PasswordRecoverySuccess]: { header: null },
   [Routes.Orders]: {
     gesturesEnabled: false,

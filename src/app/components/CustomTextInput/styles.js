@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { alto, red, caribbeanGreen, transparent } from '@constants/colors';
 import { scale } from '@utils/scalingUtils';
-import fonts from '@config/fonts';
 
 const ICON_SIZE = scale(18);
 
@@ -13,7 +12,6 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   inputStyle: {
-    ...fonts.primaryTextAndInputFont,
     padding: 0,
     marginHorizontal: 0,
     marginBottom: 0

@@ -8,10 +8,8 @@ class App extends Component {
   }
 
   render() {
-    return <AppNavigator/>
+    return <AppNavigator />;
   }
 }
-
-
 
 export default App;

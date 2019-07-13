@@ -1,71 +1,32 @@
 import { StyleSheet } from 'react-native';
-import { alto, transparent, facebookBlue, googleRed } from '@constants/colors';
+import { transparent, gray, black, white } from '@constants/colors';
 import { scale, verticalScale } from '@utils/scalingUtils';
 
 export default StyleSheet.create({
-  background: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
-    paddingTop: verticalScale(25),
-    resizeMode: 'stretch'
-  },
-  graySeparator: {
-    alignSelf: 'center',
-    borderTopWidth: 1,
-    borderTopColor: alto,
-    flex: 1,
-    width: '100%'
-  },
-  googleLogInBtn: {
-    borderColor: googleRed
-  },
-  googleBtnText: {
-    color: googleRed,
-    marginRight: 0
-  },
   separatorText: {
     marginHorizontal: scale(10)
   },
   container: {
-    padding: scale(30)
-  },
-  facebookLogInBtn: {
-    borderColor: facebookBlue
-  },
-  facebookBtnText: {
-    marginRight: 0,
-    color: facebookBlue
+    padding: scale(30),
+    flex: 1,
+    height: '100%',
+    justifyContent: 'space-around'
   },
   forgotPasswordBtn: {
     alignSelf: 'flex-end'
   },
-  formElementContainer: {
-    backgroundColor: transparent,
-    borderBottomColor: facebookBlue,
-    borderBottomWidth: 1
-  },
   formElement: {
     backgroundColor: transparent,
     height: verticalScale(42),
-    width: '100%'
-  },
-  orderBtn: {
-    alignSelf: 'center'
-  },
-  otherLoginOptions: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
-    justifyContent: 'center',
-    marginVertical: verticalScale(20)
+    width: '100%',
+    color: black
   },
   logo: {
     alignSelf: 'center',
     marginTop: verticalScale(40),
     marginBottom: verticalScale(25),
-    height: scale(60),
-    width: scale(150)
+    height: scale(200),
+    width: scale(400)
   },
   logInOptionBtn: {
     padding: scale(10),
@@ -92,14 +53,13 @@ export default StyleSheet.create({
   },
   signUpTxt: {
     alignSelf: 'center',
-    marginHorizontal: scale(10)
+    marginHorizontal: scale(10),
+    color: gray
   },
-  footerImg: {
-    position: 'absolute',
-    bottom: 3,
-    right: 3,
-    height: scale(56),
-    width: scale(73),
-    zIndex: 1
+  blackText: {
+    color: black
+  },
+  whiteText: {
+    color: white
   }
 });

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { transparent, alto, white, oceanGreen, caribbeanGreen } from '@constants/colors';
+import { transparent, alto, white, black } from '@constants/colors';
 
 const iconSize = 30;
 
@@ -35,8 +35,9 @@ export default StyleSheet.create({
     tintColor: alto
   },
   primaryBtn: {
-    backgroundColor: oceanGreen,
-    borderRadius: 4
+    backgroundColor: black,
+    borderRadius: 4,
+    color: white
   },
   secondaryBtn: {
     borderWidth: 2,
@@ -53,7 +54,7 @@ export default StyleSheet.create({
   },
   borderlessText: {
     textDecorationLine: 'none',
-    color: caribbeanGreen
+    color: white
   },
   boldText: {
     fontWeight: 'bold'

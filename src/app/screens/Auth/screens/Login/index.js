@@ -11,6 +11,8 @@ import Login from './layout';
 class LoginContainer extends Component {
   EMPTY_STRING = '';
 
+  state = { credentialsError: this.EMPTY_STRING };
+
   initialValues = {
     [LOGIN_FIELDS.EMAIL]: this.EMPTY_STRING,
     [LOGIN_FIELDS.PASSWORD]: this.EMPTY_STRING
@@ -46,8 +48,6 @@ class LoginContainer extends Component {
         gotoSignUp={this.gotoSignUp}
         orderAsAGuest={this.orderAsAGuest}
         gotoRecoverPassword={this.gotoRecoverPassword}
-        gotoGoogleLogIn={this.gotoGoogleLogIn}
-        gotoFacebookLogin={this.gotoFacebookLogin}
         initialValues={this.initialValues}
         validationSchema={this.validationSchema}
         credentialsError={credentialsError}
@@ -60,7 +60,6 @@ class LoginContainer extends Component {
 LoginContainer.propTypes = {
   loading: PropTypes.bool,
   login: PropTypes.func.isRequired,
-  socialLogin: PropTypes.func.isRequired,
   error: PropTypes.shape({
     code: PropTypes.string
   }),

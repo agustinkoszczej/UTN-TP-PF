@@ -8,12 +8,15 @@ import thunk from 'redux-thunk';
 import Navigator from '@app/screens';
 import reactotron from '@config/ReactotronConfig';
 
+import auth from './auth/reducer';
+
 const nav = createNavigationReducer(Navigator);
 
 configureMergeState((state, newContent) => state.merge(newContent));
 
 const reducers = {
-  nav
+  nav,
+  auth
 };
 
 const appReducer = combineReducers(reducers);

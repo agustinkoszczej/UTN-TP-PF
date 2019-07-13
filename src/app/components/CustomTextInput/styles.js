@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { alto, red, caribbeanGreen, transparent } from '@constants/colors';
+import { black, red, gray, transparent } from '@constants/colors';
 import { scale } from '@utils/scalingUtils';
 
 const ICON_SIZE = scale(18);
@@ -32,17 +32,17 @@ export default StyleSheet.create({
     tintColor: red
   },
   labelIconActive: {
-    tintColor: caribbeanGreen
+    tintColor: black
   },
   underline: {
     borderBottomWidth: 1,
-    borderBottomColor: alto
+    borderBottomColor: gray
   },
   underlineError: {
     borderBottomColor: red
   },
   underlineActive: {
-    borderBottomColor: caribbeanGreen
+    borderBottomColor: black
   },
   title: {
     marginTop: 5,
@@ -51,6 +51,7 @@ export default StyleSheet.create({
   errorMessage: {
     alignSelf: 'flex-start',
     marginTop: 4,
-    marginBottom: 10
+    marginBottom: 10,
+    color: red
   }
 });

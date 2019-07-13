@@ -3,7 +3,7 @@ export const strings = {
   facebookLogIn: 'Facebook',
   forgotPassword: 'Olvidé mi contraseña',
   googleLogIn: 'Google',
-  hasAccount: '¿Aún no tienes cuenta?',
+  hasAccount: '¿Aún no tenés cuenta?',
   loginMessage: 'Ingresar',
   orderWithoutRegister: 'Ordenar sin registrarse',
   orLogIn: 'O inicia sesión',

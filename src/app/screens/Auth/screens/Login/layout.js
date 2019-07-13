@@ -1,7 +1,7 @@
 import { withFormik } from 'formik';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Image, KeyboardAvoidingView, View } from 'react-native';
+import { Image, View } from 'react-native';
 import { compose } from 'recompose';
 import emailIcon from '@assets/ic_mail.png';
 import passwordIcon from '@assets/ic_password.png';
@@ -11,8 +11,7 @@ import CustomText from '@components/CustomText';
 import { FormField as CustomTextInput } from '@components/CustomTextInput';
 import Loadable from '@components/Loadable';
 import { transparent } from '@constants/colors';
-import { isIos } from '@constants/platform';
-import logo from '@assets/logo.png';
+import logo from '@assets/whiteLogo.png';
 
 import { strings, LOGIN_FIELDS } from './constants';
 import styles from './styles';
@@ -33,12 +32,12 @@ class Login extends Component {
   };
 
   render() {
-    const { handleSubmit, onInputChange, credentialsError } = this.props;
+    const { handleSubmit, onInputChange, credentialsError, gotoSignUp } = this.props;
     return (
-      <BaseForm showButton borderless link onSubmit={handleSubmit} buttonTitle={strings.orderWithoutRegister}>
-        <KeyboardAvoidingView behavior="padding" enabled={isIos}>
-          <View style={styles.container}>
-            <Image source={logo} style={styles.logo} resizeMode="contain" />
+      <BaseForm link onSubmit={handleSubmit}>
+        <View style={styles.container}>
+          <Image source={logo} style={styles.logo} resizeMode="contain" />
+          <View>
             <CustomTextInput
               name={LOGIN_FIELDS.EMAIL}
               underlineColorAndroid={transparent}
@@ -74,37 +73,31 @@ class Login extends Component {
               borderless
               link
               onPress={this.handleRecoverPassword}
-              title={strings.FORGOT_PASSWORD()}
-              textStyle={styles.greenText}
+              title={strings.forgotPassword}
+              textStyle={styles.blackText}
               style={styles.forgotPasswordBtn}
             />
             <CustomButton
               primaryBtn
               onPress={handleSubmit}
-              title={strings.LOGIN_MESSAGE().toUpperCase()}
+              title={strings.loginMessage.toUpperCase()}
               style={styles.loginBtn}
+              textStyle={styles.whiteText}
             />
-            <View style={styles.separatorContainer}>
-              <View style={styles.graySeparator} />
-              <CustomText secondary style={styles.separatorText}>
-                {strings.OR_LOG_IN()}
+            <View style={styles.registerAccount}>
+              <CustomText secondary style={styles.signUpTxt}>
+                {strings.hasAccount}
               </CustomText>
-              <View style={styles.graySeparator} />
+              <CustomButton
+                borderless
+                link
+                onPress={gotoSignUp}
+                title={strings.signUp}
+                textStyle={styles.blackText}
+              />
             </View>
-            {/* <View style={styles.registerAccount}>
-                <CustomText secondary style={styles.signUpTxt}>
-                  {strings.HAS_ACCOUNT()}
-                </CustomText>
-                <CustomButton
-                  borderless
-                  link
-                  onPress={gotoSignUp}
-                  title={strings.SIGN_UP()}
-                  textStyle={styles.greenText}
-                />
-              </View> */}
           </View>
-        </KeyboardAvoidingView>
+        </View>
       </BaseForm>
     );
   }
@@ -115,7 +108,8 @@ Login.propTypes = {
   onInputChange: PropTypes.func.isRequired,
   gotoRecoverPassword: PropTypes.func.isRequired,
   credentialsError: PropTypes.string,
-  values: PropTypes.shape({ email: PropTypes.string, password: PropTypes.string })
+  values: PropTypes.shape({ email: PropTypes.string, password: PropTypes.string }),
+  gotoSignUp: PropTypes.func.isRequired
 };
 
 const enhancer = compose(

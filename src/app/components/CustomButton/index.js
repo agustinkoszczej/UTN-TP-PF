@@ -3,7 +3,7 @@ import { TouchableOpacity, Image, ViewPropTypes, View, Text, ActivityIndicator }
 import PropTypes from 'prop-types';
 import { getCustomStyles } from '@utils/styleUtils';
 import CustomText from '@components/CustomText';
-import { white, oceanGreen } from '@constants/colors';
+import { white, black } from '@constants/colors';
 
 import styles from './styles';
 
@@ -71,7 +71,7 @@ class CustomButton extends PureComponent {
         disabled={disabled || loading || hidden}
       >
         {hidden ? null : loading ? (
-          <ActivityIndicator size="small" color={primaryBtn ? white : oceanGreen} />
+          <ActivityIndicator size="small" color={primaryBtn ? white : black} />
         ) : (
           <>
             <View style={(leftComponent || rightComponent) && styles.leftComponent}>{leftComponent}</View>

@@ -9,12 +9,16 @@ import BaseForm from '@components/BaseForm';
 import CustomButton from '@components/CustomButton';
 import CustomText from '@components/CustomText';
 import { FormField as CustomTextInput } from '@components/CustomTextInput';
+import KeyboardAware from '@components/KeyboardAware';
 import Loadable from '@components/Loadable';
 import { transparent } from '@constants/colors';
 import logo from '@assets/whiteLogo.png';
 
 import { strings, LOGIN_FIELDS } from './constants';
 import styles from './styles';
+
+const KeyboardAwareImage = KeyboardAware(Image);
+const KeyboardAwareView = KeyboardAware(View);
 
 class Login extends Component {
   [LOGIN_FIELDS.PASSWORD] = React.createRef();
@@ -35,8 +39,17 @@ class Login extends Component {
     const { handleSubmit, onInputChange, credentialsError, gotoSignUp } = this.props;
     return (
       <BaseForm link onSubmit={handleSubmit}>
-        <View style={styles.container}>
-          <Image source={logo} style={styles.logo} resizeMode="contain" />
+        <KeyboardAwareView
+          behavior="padding"
+          style={styles.container}
+          styleDuringKeyboardShow={styles.hiddenLogoView}
+        >
+          <KeyboardAwareImage
+            source={logo}
+            style={styles.logo}
+            styleDuringKeyboardShow={styles.hiddenLogo}
+            noAnimation
+          />
           <View>
             <CustomTextInput
               name={LOGIN_FIELDS.EMAIL}
@@ -97,7 +110,7 @@ class Login extends Component {
               />
             </View>
           </View>
-        </View>
+        </KeyboardAwareView>
       </BaseForm>
     );
   }

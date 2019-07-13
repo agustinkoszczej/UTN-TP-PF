@@ -1,7 +1,8 @@
-import { Text } from "react-native";
+import React from 'react';
+import { Text } from 'react-native';
 
 function RecoverPasswordSuccess() {
-    return <Text>Hola</Text>
+  return <Text>Hola</Text>;
 }
 
 export default RecoverPasswordSuccess;

@@ -12,6 +12,10 @@ export default StyleSheet.create({
     height: '100%',
     justifyContent: 'space-around'
   },
+  hiddenLogoView: {
+    paddingVertical: scale(100),
+    justifyContent: 'flex-start'
+  },
   forgotPasswordBtn: {
     alignSelf: 'flex-end'
   },
@@ -25,8 +29,8 @@ export default StyleSheet.create({
     alignSelf: 'center',
     marginTop: verticalScale(40),
     marginBottom: verticalScale(25),
-    height: scale(200),
-    width: scale(400)
+    height: scale(150),
+    width: scale(300)
   },
   logInOptionBtn: {
     padding: scale(10),
@@ -61,5 +65,10 @@ export default StyleSheet.create({
   },
   whiteText: {
     color: white
+  },
+  hiddenLogo: {
+    width: 0,
+    height: 0,
+    marginBottom: 0
   }
 });

@@ -24,30 +24,30 @@ import InitialLoading from './screens/InitialLoading';
 
 export default createStackNavigator(
   {
-    ...inferRoute({ Login })
-    // ...inferRoute({ InitialLoading }),
-    // ...inferRoute({ SignUp }),
-    // ...inferRoute({ RecoverPassword }),
-    //   ...inferRoute({ RecoverPasswordSuccess }),
-    //   [Routes.Home]: {
-    //     screen: createBottomTabNavigator(
-    //       {
-    //         [Routes.Orders]: {
-    //           screen: createMaterialTopTabNavigator(
-    //             {
-    //               ...inferRoute({ ActualOrders }),
-    //               ...inferRoute({ PastOrders })
-    //             },
-    //             topTabNavConfig
-    //           ),
-    //           navigationOptions: screensNavOptions[Routes.Orders]
-    //         },
-    //         ...inferRoute({ Profile })
-    //       },
-    //       tabNavConfig
-    //     ),
-    //     navigationOptions: childTabsNavigationOptions
-    //   }
+    ...inferRoute({ Login }),
+    ...inferRoute({ InitialLoading }),
+    ...inferRoute({ SignUp }),
+    ...inferRoute({ RecoverPassword }),
+    ...inferRoute({ RecoverPasswordSuccess }),
+    [Routes.Home]: {
+      screen: createBottomTabNavigator(
+        {
+          [Routes.Orders]: {
+            screen: createMaterialTopTabNavigator(
+              {
+                ...inferRoute({ ActualOrders }),
+                ...inferRoute({ PastOrders })
+              },
+              topTabNavConfig
+            ),
+            navigationOptions: screensNavOptions[Routes.Orders]
+          },
+          ...inferRoute({ Profile })
+        },
+        tabNavConfig
+      ),
+      navigationOptions: childTabsNavigationOptions
+    }
   },
   stackNavConfig
 );

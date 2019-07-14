@@ -5,6 +5,14 @@ const login = authData => {
   };
 };
 
+const recoverPassword = email => {
+  return {
+    ok: true,
+    status: 200
+  };
+};
+
 export default {
-  login
+  login,
+  recoverPassword
 };

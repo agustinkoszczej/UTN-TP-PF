@@ -4,13 +4,14 @@ import Immutable from 'seamless-immutable';
 import { actions } from './actions';
 
 const stateDescription = {
-  currentUser: null
+  currentUser: null,
+  recoverPassword: null
 };
 
 const initialState = completeState(stateDescription, ['initialLoading']);
 
 const reducerDescription = {
-  primaryActions: [actions.LOGIN],
+  primaryActions: [actions.LOGIN, actions.RECOVER_PASSWORD],
   override: {}
 };
 

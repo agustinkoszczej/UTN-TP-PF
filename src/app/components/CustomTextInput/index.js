@@ -157,7 +157,7 @@ CustomTextInput.propTypes = {
   labelIcon: PropTypes.number,
   deactivateIconColor: PropTypes.bool,
   invalid: PropTypes.bool,
-  error: PropTypes.bool
+  error: PropTypes.string
 };
 
 export const FormField = withForm(CustomTextInput);

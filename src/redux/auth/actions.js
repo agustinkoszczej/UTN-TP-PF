@@ -6,7 +6,8 @@ import Routes from '@constants/routes';
 export const actions = createTypes(completeTypes(['LOGIN', 'RECOVER_PASSWORD'], []), '@@AUTH');
 
 export const targets = {
-  user: 'currentUser'
+  user: 'currentUser',
+  recoverPassword: 'recoverPassword'
 };
 
 export const actionCreators = {
@@ -30,6 +31,7 @@ export const actionCreators = {
     type: actions.RECOVER_PASSWORD,
     service: AuthService.recoverPassword,
     payload: email,
+    target: targets.recoverPassword,
     injections: [
       withPostSuccess(dispatch => {
         dispatch(

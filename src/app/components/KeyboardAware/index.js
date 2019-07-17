@@ -22,7 +22,7 @@ const KeyboardAwareWrapper = WrappedComponent =>
       );
     }
 
-    componentWillUpdate() {
+    componentDidUpdate() {
       const { noAnimation } = this.props;
       if (noAnimation) LayoutAnimation.easeInEaseOut();
     }

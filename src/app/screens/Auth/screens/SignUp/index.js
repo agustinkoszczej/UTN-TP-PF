@@ -1,10 +1,10 @@
-import { Text } from 'react-native';
 import React from 'react';
 
 import QRStep from './components/QRStep';
+import DataStep from './components/DataStep';
 
 function SignUp() {
-  return <QRStep />;
+  return <DataStep />;
 }
 
 export default SignUp;

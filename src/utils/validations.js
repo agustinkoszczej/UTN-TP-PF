@@ -6,7 +6,8 @@ import {
   emailRegex,
   passwordRegex,
   phoneRegex,
-  phoneStartsWithCodeRegex
+  phoneStartsWithCodeRegex,
+  cuitRegex
 } from '@constants/validations';
 
 export const validationInputs = FIELDS => field =>
@@ -27,8 +28,15 @@ export const validationInputs = FIELDS => field =>
     [FIELDS.PASSWORD]: string()
       .required(strings.requiredValidation)
       .min(8, strings.invalidPasswordMin)
-      .matches(passwordRegex, strings.invalidPasswordMsg)
+      .matches(passwordRegex, strings.invalidPasswordMsg),
+    [FIELDS.CUIT]: string()
+      .required(strings.requiredValidation)
+      .length(11, strings.invalidCUITLength)
+      .matches(cuitRegex, strings.invalidPasswordMsg)
   }[field]);
 
-export const fieldsValidation = arrayInputs =>
-  arrayInputs.reduce((fields, nameField) => ({ ...fields, [nameField]: validationInputs(nameField) }), {});
+export const fieldsValidation = (arrayInputs, FIELDS) =>
+  arrayInputs.reduce(
+    (fields, nameField) => ({ ...fields, [nameField]: validationInputs(FIELDS)(nameField) }),
+    {}
+  );

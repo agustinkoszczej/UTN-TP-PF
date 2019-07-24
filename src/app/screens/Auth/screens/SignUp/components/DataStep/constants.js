@@ -12,19 +12,23 @@ export const strings = {
   signUpTitle: 'Soy Nuevo',
   signUpFacebook: 'Suscribirse con Facebook',
   signUpGoogle: 'Suscribirse con Google',
-  usernameExists: 'Ya existe una cuenta con el email ingresado.'
+  usernameExists: 'Ya existe una cuenta con el email ingresado.',
+  next: 'Siguiente',
+  cuit: 'CUIT'
 };
 
 export const SIGN_UP_FIELDS = {
   NAME: 'name',
   EMAIL: 'email',
   PHONE: 'phone',
-  PASSWORD: 'password'
+  PASSWORD: 'password',
+  CUIT: 'cuit'
 };
 
 export const inputFieldsSignUp = [
   SIGN_UP_FIELDS.NAME,
   SIGN_UP_FIELDS.EMAIL,
   SIGN_UP_FIELDS.PHONE,
-  SIGN_UP_FIELDS.PASSWORD
+  SIGN_UP_FIELDS.PASSWORD,
+  SIGN_UP_FIELDS.CUIT
 ];

@@ -11,16 +11,17 @@ import SignUp from './layout';
 import { SIGN_UP_FIELDS, inputFieldsSignUp } from './constants';
 
 class SignUpContainer extends Component {
-  state = { emailError: '' };
+  state = { emailError: '', cuitError: '' };
 
   initialValues = {
     [SIGN_UP_FIELDS.NAME]: '',
     [SIGN_UP_FIELDS.EMAIL]: '',
     [SIGN_UP_FIELDS.PHONE]: COUNTRY_CODE,
-    [SIGN_UP_FIELDS.PASSWORD]: ''
+    [SIGN_UP_FIELDS.PASSWORD]: '',
+    [SIGN_UP_FIELDS.CUIT]: ''
   };
 
-  formValidationSchema = object().shape(fieldsValidation(inputFieldsSignUp));
+  formValidationSchema = object().shape(fieldsValidation(inputFieldsSignUp, SIGN_UP_FIELDS));
 
   componentDidUpdate(prevProps) {
     const { error } = this.props;
@@ -34,14 +35,14 @@ class SignUpContainer extends Component {
     if (emailError) this.clearError();
   };
 
+  handleCUITChange = () => {
+    const { cuitError } = this.state;
+    if (cuitError) this.clearError();
+  };
+
   gotoLogIn = () => {
     const { navigation } = this.props;
     navigation.navigate(Routes.Login);
-  };
-
-  handleOrderAsAGuest = () => {
-    const { navigation } = this.props;
-    navigation.navigate({ routeName: Routes.EnterAddress });
   };
 
   handleSignUp = values => {
@@ -50,17 +51,17 @@ class SignUpContainer extends Component {
   };
 
   render() {
-    const { emailError, otherError } = this.state;
+    const { emailError, cuitError } = this.state;
     return (
       <SignUp
         initialValues={this.initialValues}
         gotoLogIn={this.gotoLogIn}
-        onOrderAsAGuest={this.handleOrderAsAGuest}
         onSignUp={this.handleSignUp}
         onEmailChange={this.handleEmailChange}
+        onCUITChange={this.handleCUITChange}
         validationSchema={this.formValidationSchema}
         emailError={emailError}
-        otherError={otherError}
+        cuitError={cuitError}
         {...this.props}
       />
     );

@@ -4,14 +4,13 @@ import { View } from 'react-native';
 import { withFormik } from 'formik';
 import { compose } from 'recompose';
 import { FormField as CustomTextInput } from '@components/CustomTextInput';
-import CustomButton from '@components/CustomButton';
-import CustomText from '@components/CustomText';
 import Loadable from '@components/Loadable';
 import { PHONE_LENGTH, NAME_LENGTH, PASSWORD_LENGTH } from '@constants/user';
 import emailIcon from '@assets/ic_mail.png';
 import passwordIcon from '@assets/ic_password.png';
 import phoneIcon from '@assets/ic_phone.png';
 import userIcon from '@assets/ic_user.png';
+import noteIcon from '@assets/ic_note.png';
 import { handlePhoneFormatChange } from '@utils/phoneUtils';
 
 import { strings, SIGN_UP_FIELDS } from './constants';
@@ -20,12 +19,18 @@ import styles from './styles';
 class SignUp extends Component {
   [SIGN_UP_FIELDS.EMAIL] = React.createRef();
 
+  [SIGN_UP_FIELDS.CUIT] = React.createRef();
+
   [SIGN_UP_FIELDS.PHONE] = React.createRef();
 
   [SIGN_UP_FIELDS.PASSWORD] = React.createRef();
 
   handleNameSubmitting = () => {
     this[SIGN_UP_FIELDS.EMAIL].current.focus();
+  };
+
+  handleCUITSubmitting = () => {
+    this[SIGN_UP_FIELDS.CUIT].current.focus();
   };
 
   handleEmailSubmitting = () => {
@@ -45,7 +50,7 @@ class SignUp extends Component {
   };
 
   render() {
-    const { gotoLogIn, handleSubmit, onEmailChange, emailError } = this.props;
+    const { gotoLogIn, handleSubmit, onEmailChange, emailError, onCUITChange, cuitError } = this.props;
     const commonProps = {
       underline: true,
       returnKeyType: 'next',
@@ -80,6 +85,19 @@ class SignUp extends Component {
         <CustomTextInput
           {...commonProps}
           keyboardType="phone-pad"
+          labelIcon={noteIcon}
+          name={SIGN_UP_FIELDS.CUIT}
+          placeholder={strings.cuit}
+          textRef={this[SIGN_UP_FIELDS.CUIT]}
+          onTextSubmitEditing={this.handleCUITSubmitting}
+          invalid={!!cuitError}
+          error={cuitError}
+          onChange={onCUITChange}
+          applyTrim
+        />
+        <CustomTextInput
+          {...commonProps}
+          keyboardType="phone-pad"
           labelIcon={phoneIcon}
           name={SIGN_UP_FIELDS.PHONE}
           placeholder={strings.phone}
@@ -101,18 +119,6 @@ class SignUp extends Component {
           maxLength={PASSWORD_LENGTH}
           avoidSpaces
         />
-        <CustomButton
-          primaryBtn
-          onPress={handleSubmit}
-          title={strings.signUpButton}
-          style={styles.signUpBtn}
-        />
-        <View style={styles.accountExistsContainer}>
-          <CustomText secondary style={styles.hasAccountTxt}>
-            {strings.hasAccount}
-          </CustomText>
-          <CustomButton link borderless onPress={gotoLogIn} title={strings.logIn} style={styles.logInBtn} />
-        </View>
       </View>
     );
   }

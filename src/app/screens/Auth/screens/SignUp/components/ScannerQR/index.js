@@ -53,12 +53,12 @@ class ScannerQR extends Component {
     const { barcodeReaderEnabled } = this.state;
     return (
       <View style={styles.container}>
-        <RNCamera
+        {/* <RNCamera
           barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
           style={styles.preview}
           onBarCodeRead={barcodeReaderEnabled && this.onBarCodeRead}
           ref={this.camRef}
-        />
+        /> */}
       </View>
     );
   }

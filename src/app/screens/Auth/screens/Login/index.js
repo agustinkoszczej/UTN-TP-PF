@@ -46,7 +46,6 @@ class LoginContainer extends Component {
       <Login
         onLogin={this.handleLogin}
         gotoSignUp={this.gotoSignUp}
-        orderAsAGuest={this.orderAsAGuest}
         gotoRecoverPassword={this.gotoRecoverPassword}
         initialValues={this.initialValues}
         validationSchema={this.validationSchema}

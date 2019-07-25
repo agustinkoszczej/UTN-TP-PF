@@ -37,18 +37,12 @@ const alertBlockedPermission = () => {
   Alert.alert(strings.cameraBlockedAlertTitle, strings.cameraBlockedAlertContent);
 };
 
-const requestCameraPermission = (navigateToCamera, checkCamera) => {
+const requestCameraPermission = async (navigateToCamera, checkCamera) => {
   if (checkCamera === PERMISSION_STATUS.AUTHORIZED) {
-    Permissions.request('microphone').then(responseMicrophone => {
-      if (responseMicrophone === PERMISSION_STATUS.AUTHORIZED) navigateToCamera();
-    });
+    navigateToCamera();
   } else {
     Permissions.request('camera').then(responseCamera => {
-      if (responseCamera === PERMISSION_STATUS.AUTHORIZED) {
-        Permissions.request('microphone').then(responseMicrophone => {
-          if (responseMicrophone === PERMISSION_STATUS.AUTHORIZED) navigateToCamera();
-        });
-      }
+      if (responseCamera === PERMISSION_STATUS.AUTHORIZED) navigateToCamera();
     });
   }
 };

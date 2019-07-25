@@ -13,10 +13,11 @@ import userIcon from '@assets/ic_user.png';
 import noteIcon from '@assets/ic_note.png';
 import { handlePhoneFormatChange } from '@utils/phoneUtils';
 
-import { strings, SIGN_UP_FIELDS } from './constants';
+import { strings, SIGN_UP_FIELDS } from '../../constants';
+
 import styles from './styles';
 
-class SignUp extends Component {
+class DataStep extends Component {
   [SIGN_UP_FIELDS.EMAIL] = React.createRef();
 
   [SIGN_UP_FIELDS.CUIT] = React.createRef();
@@ -50,7 +51,7 @@ class SignUp extends Component {
   };
 
   render() {
-    const { gotoLogIn, handleSubmit, onEmailChange, emailError, onCUITChange, cuitError } = this.props;
+    const { handleSubmit, onEmailChange, emailError, onCUITChange, cuitError } = this.props;
     const commonProps = {
       underline: true,
       returnKeyType: 'next',
@@ -94,6 +95,7 @@ class SignUp extends Component {
           error={cuitError}
           onChange={onCUITChange}
           applyTrim
+          maxLength={11}
         />
         <CustomTextInput
           {...commonProps}
@@ -124,9 +126,8 @@ class SignUp extends Component {
   }
 }
 
-SignUp.propTypes = {
+DataStep.propTypes = {
   gotoLogIn: PropTypes.func.isRequired,
-  onOrderAsAGuest: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   onEmailChange: PropTypes.func.isRequired,
   emailError: PropTypes.string,
@@ -139,10 +140,8 @@ SignUp.propTypes = {
 const enhancer = compose(
   withFormik({
     mapPropsToValues: ({ initialValues }) => initialValues,
-    validationSchema: ({ validationSchema }) => validationSchema,
-    handleSubmit: (values, { props }) => props.onSignUp(values)
-  }),
-  Loadable(props => props.loading, true)
+    validationSchema: ({ validationSchema }) => validationSchema
+  })
 );
 
-export default enhancer(SignUp);
+export default enhancer(DataStep);

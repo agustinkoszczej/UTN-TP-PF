@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import { withNavigation } from 'react-navigation';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import CustomButton from '@components/CustomButton';
 import Routes from '@constants/routes';
 import { safeCameraRequest } from '@utils/cameraPermission';
+import QRAsset from '@assets/qr.png';
 
 import styles from './styles';
 
-class RedeemCoupon extends Component {
+class QRStep extends Component {
   navigateToCamera = () => {
     const { navigation, handleSubmit, setFieldValue } = this.props;
-    navigation.navigate(Routes.ScannerQrCode, { handleSubmit, setFieldValue });
+    navigation.navigate(Routes.ScannerQR, { handleSubmit, setFieldValue });
   };
 
   handleScanQrCode = () => {
@@ -22,9 +23,8 @@ class RedeemCoupon extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.scannerButton}>
-          <CustomButton  title="Escanear" onPress={this.handleScanQrCode} />
-        </View>
+        <Image source={QRAsset} style={styles.qr} />
+        <CustomButton title="Escanear" onPress={this.handleScanQrCode} />
       </View>
     );
   }
@@ -32,7 +32,7 @@ class RedeemCoupon extends Component {
 
 const enhancer = compose(withNavigation);
 
-RedeemCoupon.propTypes = {
+QRStep.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired
@@ -40,4 +40,4 @@ RedeemCoupon.propTypes = {
   setFieldValue: PropTypes.func.isRequired
 };
 
-export default enhancer(RedeemCoupon);
+export default enhancer(QRStep);

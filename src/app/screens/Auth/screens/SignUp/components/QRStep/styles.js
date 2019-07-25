@@ -1,41 +1,16 @@
 import { StyleSheet } from 'react-native';
-import { alto, white } from '@constants/colors';
+import { verticalScale } from '@utils/scalingUtils';
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 120
+    marginVertical: 75,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  inputTitle: {
-    marginBottom: 4
-  },
-  formContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 5,
-    borderColor: alto,
-    borderRadius: 4,
-    borderWidth: 1,
-    height: 35
-  },
-  errorStyle: {
-    position: 'absolute',
-    bottom: -30
-  },
-  couponInput: {
-    flex: 0.8
-  },
-  couponSubmit: {
-    flex: 0.2
-  },
-  disabled: {
-    backgroundColor: white
-  },
-  disabledText: {
-    color: alto
-  },
-  scannerButton: {
-    alignItems: 'flex-start',
-    marginTop: 10
+  qr: {
+    height: verticalScale(200),
+    width: verticalScale(200)
   }
 });
 

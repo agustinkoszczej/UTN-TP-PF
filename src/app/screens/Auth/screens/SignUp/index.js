@@ -1,63 +1,47 @@
-import React from 'react';
-import { View, Image } from 'react-native';
-import StepIndicator from '@components/CustomStepper';
-import KeyboardAware from '@components/KeyboardAware';
-import logo from '@assets/whiteLogo.png';
-import CustomButton from '@components/CustomButton';
-import CustomText from '@components/CustomText';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { object } from 'yup';
+import { fieldsValidation } from '@utils/validations';
+import Routes from '@constants/routes';
 
-import { strings } from './components/DataStep/constants';
-import QRStep from './components/QRStep';
-import DataStep from './components/DataStep';
-import styles, { stepIndicatorStyles } from './styles';
-import { STEP_INDICATOR_LABELS, STEP_INDICATOR_STEPS } from './constants';
+import { SIGN_UP_FIELDS, inputFieldsSignUp } from './constants';
+import SignUp from './layout';
 
-const KeyboardAwareImage = KeyboardAware(Image);
-const KeyboardAwareView = KeyboardAware(View);
+class SignUpContainer extends Component {
+  state = {
+    currentStep: 0
+  };
 
-function SignUp() {
-  return (
-    <KeyboardAwareView
-      behavior="padding"
-      style={styles.container}
-      styleDuringKeyboardShow={styles.hiddenLogoView}
-    >
-      <KeyboardAwareImage
-        source={logo}
-        style={styles.logo}
-        styleDuringKeyboardShow={styles.hiddenLogo}
-        noAnimation
+  formValidationSchema = object().shape(fieldsValidation(inputFieldsSignUp, SIGN_UP_FIELDS));
+
+  handleGotoLogIn = () => {
+    const { navigation } = this.props;
+    navigation.navigate(Routes.Login);
+  };
+
+  handleNext = () => this.setState(prevState => ({ currentStep: prevState.currentStep + 1 }));
+
+  render() {
+    const { currentStep } = this.state;
+    return (
+      <SignUp
+        currentStep={currentStep}
+        onNext={this.handleNext}
+        onGoToLogin={this.handleGotoLogIn}
+        validationSchema={this.formValidationSchema}
       />
-      <StepIndicator
-        customStyles={stepIndicatorStyles}
-        currentPosition={0}
-        stepCount={STEP_INDICATOR_STEPS}
-        labels={STEP_INDICATOR_LABELS}
-        currentStepCompleted={1}
-      />
-      <DataStep />
-      <CustomButton
-        primaryBtn
-        onPress={() => {}}
-        title={true ? strings.next : strings.signUpButton}
-        textStyle={styles.whiteText}
-        style={styles.signUpBtn}
-      />
-      <View style={styles.accountExistsContainer}>
-        <CustomText secondary style={styles.hasAccountTxt}>
-          {strings.hasAccount}
-        </CustomText>
-        <CustomButton
-          link
-          borderless
-          onPress={() => {}}
-          title={strings.logIn}
-          textStyle={styles.blackText}
-          style={styles.logInBtn}
-        />
-      </View>
-    </KeyboardAwareView>
-  );
+    );
+  }
 }
 
-export default SignUp;
+SignUpContainer.propTypes = {
+  signUp: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired
+  }).isRequired,
+  error: PropTypes.shape({
+    code: PropTypes.string.isRequired
+  })
+};
+
+export default SignUpContainer;

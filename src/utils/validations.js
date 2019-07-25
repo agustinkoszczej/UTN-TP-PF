@@ -9,8 +9,9 @@ import {
   phoneStartsWithCodeRegex,
   cuitRegex
 } from '@constants/validations';
+import { SIGN_UP_FIELDS as FIELDS } from '@screens/Auth/screens/SignUp/constants';
 
-export const validationInputs = FIELDS => field =>
+export const validationInputs = field =>
   ({
     [FIELDS.NAME]: string()
       .required(strings.requiredValidation)
@@ -32,11 +33,7 @@ export const validationInputs = FIELDS => field =>
     [FIELDS.CUIT]: string()
       .required(strings.requiredValidation)
       .length(11, strings.invalidCUITLength)
-      .matches(cuitRegex, strings.invalidPasswordMsg)
   }[field]);
 
-export const fieldsValidation = (arrayInputs, FIELDS) =>
-  arrayInputs.reduce(
-    (fields, nameField) => ({ ...fields, [nameField]: validationInputs(FIELDS)(nameField) }),
-    {}
-  );
+export const fieldsValidation = arrayInputs =>
+  arrayInputs.reduce((fields, nameField) => ({ ...fields, [nameField]: validationInputs(nameField) }), {});

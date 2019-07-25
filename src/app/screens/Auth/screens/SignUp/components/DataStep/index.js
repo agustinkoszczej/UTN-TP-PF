@@ -1,16 +1,14 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { object } from 'yup';
 import { COUNTRY_CODE } from '@constants/user';
-import Routes from '@constants/routes';
-import AuthActions from '@redux/auth/actions';
+import { object } from 'yup';
 import { fieldsValidation } from '@utils/validations';
 
-import SignUp from './layout';
-import { SIGN_UP_FIELDS, inputFieldsSignUp } from './constants';
+import { SIGN_UP_FIELDS, inputFieldsSignUp } from '../../constants';
 
-class SignUpContainer extends Component {
+import DataStep from './layout';
+
+class DataStepContainer extends Component {
   state = { emailError: '', cuitError: '' };
 
   initialValues = {
@@ -23,13 +21,6 @@ class SignUpContainer extends Component {
 
   formValidationSchema = object().shape(fieldsValidation(inputFieldsSignUp, SIGN_UP_FIELDS));
 
-  componentDidUpdate(prevProps) {
-    const { error } = this.props;
-    if (error !== prevProps.error) {
-      this.showError(error);
-    }
-  }
-
   handleEmailChange = () => {
     const { emailError } = this.state;
     if (emailError) this.clearError();
@@ -40,53 +31,24 @@ class SignUpContainer extends Component {
     if (cuitError) this.clearError();
   };
 
-  gotoLogIn = () => {
-    const { navigation } = this.props;
-    navigation.navigate(Routes.Login);
-  };
-
-  handleSignUp = values => {
-    const { signUp } = this.props;
-    signUp(values);
-  };
-
   render() {
     const { emailError, cuitError } = this.state;
     return (
-      <SignUp
-        initialValues={this.initialValues}
-        gotoLogIn={this.gotoLogIn}
-        onSignUp={this.handleSignUp}
+      <DataStep
         onEmailChange={this.handleEmailChange}
         onCUITChange={this.handleCUITChange}
-        validationSchema={this.formValidationSchema}
         emailError={emailError}
         cuitError={cuitError}
+        validationSchema={this.formValidationSchema}
+        initialValues={this.initialValues}
         {...this.props}
       />
     );
   }
 }
-const mapStateToProps = state => ({
-  loading: state.auth.registeredUserLoading,
-  error: state.auth.registeredUserError
-});
 
-const mapDispatchToProps = dispatch => ({
-  signUp: values => dispatch(AuthActions.signUp(values))
-});
-
-SignUpContainer.propTypes = {
-  signUp: PropTypes.func.isRequired,
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired
-  }).isRequired,
-  error: PropTypes.shape({
-    code: PropTypes.string.isRequired
-  })
+DataStepContainer.propTypes = {
+  handleSubmit: PropTypes.func.isRequired
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SignUpContainer);
+export default DataStepContainer;

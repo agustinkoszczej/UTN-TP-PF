@@ -29,7 +29,21 @@ function LocationStep({
         onPress={onAddressChange}
         displayList={displayList}
         textInputProps={{ onFocus: onShowList, onSubmitEditing: onHideList }}
-       />
+      >
+        <View style={styles.mapContainer}>
+          {region && coordinate && (
+            <MapView
+              style={styles.map}
+              region={region}
+              onRegionChange={onRegionChange}
+              scrollEnabled={false}
+              pitchEnabled={false}
+            >
+              <Marker coordinate={coordinate} />
+            </MapView>
+          )}
+        </View>
+      </Autocomplete>
     </View>
   );
 }

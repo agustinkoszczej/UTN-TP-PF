@@ -21,7 +21,7 @@ const KeyboardAwareImage = KeyboardAware(Image);
 const KeyboardAwareView = KeyboardAware(View);
 
 function SignUp({ currentStep, onGoToLogin, handleSubmit, values }) {
-  const finalStep = currentStep === STEP_INDICATOR_STEPS.length;
+  const finalStep = currentStep === 2;
   return (
     <BaseForm link onSubmit={handleSubmit}>
       <KeyboardAwareView

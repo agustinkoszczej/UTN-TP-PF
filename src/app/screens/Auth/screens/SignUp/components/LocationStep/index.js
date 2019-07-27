@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { formatLocation } from '@constants/geolocation';
 
-import FixLocation from './layout';
+import LocationStep from './layout';
 
 class LocationStepContainer extends Component {
   state = { displayList: false, region: null, coordinate: null };
@@ -27,7 +27,7 @@ class LocationStepContainer extends Component {
   render() {
     const { address, region, coordinate, displayList } = this.state;
     return (
-      <FixLocation
+      <LocationStep
         {...this.props}
         displayList={displayList}
         onShowList={this.handleShowList}

@@ -12,7 +12,7 @@ export const IOS_GOOGLE_SCHEMA = 'comgooglemapsurl:';
 
 const placesAutocompleteCfg = {
   query: {
-    key: 'AIzaSyC4ltSC7u0txxUthfzxB4kx7DaVECqyFUs',
+    key: 'AIzaSyBshEErhUfMRfpA5qkQbSHs3TuXvln2X1M',
     language: 'es',
     components: `country:ar`
   },

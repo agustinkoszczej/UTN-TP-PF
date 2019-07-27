@@ -34,6 +34,10 @@ target 'selly' do
 
   pod 'ReactNativePermissions', :path => '../node_modules/react-native-permissions'
 
+  pod 'GoogleMaps'  # Remove this line if you don't want to support GoogleMaps on iOS
+    pod 'react-native-maps', path: '../node_modules/react-native-maps'
+    pod 'react-native-google-maps', path: '../node_modules/react-native-maps'  # If you need GoogleMaps support on iOS
+
   target 'sellyTests' do
     inherit! :search_paths
     # Pods for testing

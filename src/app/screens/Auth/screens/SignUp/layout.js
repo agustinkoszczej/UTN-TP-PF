@@ -12,6 +12,7 @@ import Loadable from '@components/Loadable';
 import BaseForm from '@components/BaseForm';
 
 import QRStep from './components/QRStep';
+import LocationStep from './components/LocationStep';
 import DataStep from './components/DataStep';
 import styles, { stepIndicatorStyles } from './styles';
 import { STEP_INDICATOR_LABELS, STEP_INDICATOR_STEPS, strings } from './constants';
@@ -19,7 +20,7 @@ import { STEP_INDICATOR_LABELS, STEP_INDICATOR_STEPS, strings } from './constant
 const KeyboardAwareImage = KeyboardAware(Image);
 const KeyboardAwareView = KeyboardAware(View);
 
-function SignUp({ currentStep, onNext, onGoToLogin, handleSubmit, values }) {
+function SignUp({ currentStep, onGoToLogin, handleSubmit, values }) {
   const finalStep = currentStep === STEP_INDICATOR_STEPS.length;
   return (
     <BaseForm link onSubmit={handleSubmit}>
@@ -41,7 +42,11 @@ function SignUp({ currentStep, onNext, onGoToLogin, handleSubmit, values }) {
           labels={STEP_INDICATOR_LABELS}
           currentStepCompleted
         />
-        {{ 1: <DataStep onNext={onNext} values={values} />, 2: <QRStep /> }[currentStep + 1]}
+        {
+          { 0: <DataStep handleSubmit={handleSubmit} values={values} />, 1: <QRStep />, 2: <LocationStep /> }[
+            currentStep
+          ]
+        }
 
         <CustomButton
           primaryBtn
@@ -78,7 +83,7 @@ const enhancer = compose(
   withFormik({
     mapPropsToValues: ({ initialValues, currentStep }) => initialValues[currentStep],
     validationSchema: ({ validationSchema, currentStep }) => validationSchema[currentStep],
-    handleSubmit: (values, { props }) => (props.currentStep === 3 ? props.onSignUp(values) : props.onNext())
+    handleSubmit: (values, { props }) => (props.currentStep === 2 ? props.onSignUp(values) : props.onNext())
   }),
   Loadable(props => props.loading)
 );

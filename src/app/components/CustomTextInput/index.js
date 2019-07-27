@@ -156,7 +156,7 @@ CustomTextInput.propTypes = {
   onTextSubmitEditing: PropTypes.func,
   labelIcon: PropTypes.number,
   deactivateIconColor: PropTypes.bool,
-  invalid: PropTypes.bool,
+  invalid: PropTypes.string,
   error: PropTypes.string
 };
 

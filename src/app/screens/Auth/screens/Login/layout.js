@@ -118,7 +118,7 @@ class Login extends Component {
 
 Login.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  onInputChange: PropTypes.func.isRequired,
+  onInputChange: PropTypes.func,
   gotoRecoverPassword: PropTypes.func.isRequired,
   credentialsError: PropTypes.string,
   values: PropTypes.shape({ email: PropTypes.string, password: PropTypes.string }),

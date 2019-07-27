@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { object } from 'yup';
 import { fieldsValidation } from '@utils/validations';
 import Routes from '@constants/routes';
+import { COUNTRY_CODE } from '@constants/user';
 
 import { SIGN_UP_FIELDS, inputFieldsSignUp } from './constants';
 import SignUp from './layout';
@@ -12,7 +13,19 @@ class SignUpContainer extends Component {
     currentStep: 0
   };
 
-  formValidationSchema = object().shape(fieldsValidation(inputFieldsSignUp, SIGN_UP_FIELDS));
+  initialValues = {
+    0: {
+      [SIGN_UP_FIELDS.NAME]: '',
+      [SIGN_UP_FIELDS.EMAIL]: '',
+      [SIGN_UP_FIELDS.PHONE]: COUNTRY_CODE,
+      [SIGN_UP_FIELDS.PASSWORD]: '',
+      [SIGN_UP_FIELDS.CUIT]: ''
+    }
+  };
+
+  formValidationSchema = {
+    0: object().shape(fieldsValidation(inputFieldsSignUp, SIGN_UP_FIELDS))
+  };
 
   handleGotoLogIn = () => {
     const { navigation } = this.props;
@@ -29,13 +42,13 @@ class SignUpContainer extends Component {
         onNext={this.handleNext}
         onGoToLogin={this.handleGotoLogIn}
         validationSchema={this.formValidationSchema}
+        initialValues={this.initialValues}
       />
     );
   }
 }
 
 SignUpContainer.propTypes = {
-  signUp: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired
   }).isRequired,

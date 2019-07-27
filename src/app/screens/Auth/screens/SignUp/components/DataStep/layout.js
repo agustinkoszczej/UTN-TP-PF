@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
-import { withFormik } from 'formik';
-import { compose } from 'recompose';
 import { FormField as CustomTextInput } from '@components/CustomTextInput';
-import Loadable from '@components/Loadable';
 import { PHONE_LENGTH, NAME_LENGTH, PASSWORD_LENGTH } from '@constants/user';
 import emailIcon from '@assets/ic_mail.png';
 import passwordIcon from '@assets/ic_password.png';
@@ -137,11 +134,4 @@ DataStep.propTypes = {
   }).isRequired
 };
 
-const enhancer = compose(
-  withFormik({
-    mapPropsToValues: ({ initialValues }) => initialValues,
-    validationSchema: ({ validationSchema }) => validationSchema
-  })
-);
-
-export default enhancer(DataStep);
+export default DataStep;

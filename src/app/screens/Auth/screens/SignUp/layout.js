@@ -19,7 +19,7 @@ import { STEP_INDICATOR_LABELS, STEP_INDICATOR_STEPS, strings } from './constant
 const KeyboardAwareImage = KeyboardAware(Image);
 const KeyboardAwareView = KeyboardAware(View);
 
-function SignUp({ currentStep, handleSubmit, onGoToLogin }) {
+function SignUp({ currentStep, onNext, onGoToLogin, handleSubmit, values }) {
   const finalStep = currentStep === STEP_INDICATOR_STEPS.length;
   return (
     <BaseForm link onSubmit={handleSubmit}>
@@ -41,7 +41,7 @@ function SignUp({ currentStep, handleSubmit, onGoToLogin }) {
           labels={STEP_INDICATOR_LABELS}
           currentStepCompleted
         />
-        {{ 1: <DataStep handleSubmit={handleSubmit} />, 2: <QRStep /> }[currentStep + 1]}
+        {{ 1: <DataStep onNext={onNext} values={values} />, 2: <QRStep /> }[currentStep + 1]}
 
         <CustomButton
           primaryBtn
@@ -76,7 +76,8 @@ SignUp.propTypes = {
 
 const enhancer = compose(
   withFormik({
-    validationSchema: ({ validationSchema }) => validationSchema,
+    mapPropsToValues: ({ initialValues, currentStep }) => initialValues[currentStep],
+    validationSchema: ({ validationSchema, currentStep }) => validationSchema[currentStep],
     handleSubmit: (values, { props }) => (props.currentStep === 3 ? props.onSignUp(values) : props.onNext())
   }),
   Loadable(props => props.loading)

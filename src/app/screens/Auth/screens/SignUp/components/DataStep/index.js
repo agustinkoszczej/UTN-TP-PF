@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { COUNTRY_CODE } from '@constants/user';
 import { object } from 'yup';
 import { fieldsValidation } from '@utils/validations';
 
@@ -10,14 +9,6 @@ import DataStep from './layout';
 
 class DataStepContainer extends Component {
   state = { emailError: '', cuitError: '' };
-
-  initialValues = {
-    [SIGN_UP_FIELDS.NAME]: '',
-    [SIGN_UP_FIELDS.EMAIL]: '',
-    [SIGN_UP_FIELDS.PHONE]: COUNTRY_CODE,
-    [SIGN_UP_FIELDS.PASSWORD]: '',
-    [SIGN_UP_FIELDS.CUIT]: ''
-  };
 
   formValidationSchema = object().shape(fieldsValidation(inputFieldsSignUp, SIGN_UP_FIELDS));
 

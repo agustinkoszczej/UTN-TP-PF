@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { withNavigation } from 'react-navigation';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
+import LottieView from 'lottie-react-native';
 import CustomButton from '@components/CustomButton';
 import Routes from '@constants/routes';
 import { safeCameraRequest } from '@utils/cameraPermission';
-import QRAsset from '@assets/qr.png';
+import QRAsset from '@lottieAssets/qr-code-scanner.json';
 
 import styles from './styles';
 
@@ -23,7 +24,7 @@ class QRStep extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image source={QRAsset} style={styles.qr} />
+        <LottieView autoPlay loop source={QRAsset} style={styles.qr} />
         <CustomButton title="Escanear" onPress={this.handleScanQrCode} />
       </View>
     );

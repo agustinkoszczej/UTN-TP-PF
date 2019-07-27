@@ -24,6 +24,7 @@
     "eslint-plugin-react-native": "^3.7.0",
     "formik": "^1.5.7",
     "jetifier": "^1.6.1",
+    "lottie-react-native": "2.6.1",
     "prettier": "^1.18.2",
     "prettier-eslint": "^9.0.0",
     "prop-types": "^15.7.2",

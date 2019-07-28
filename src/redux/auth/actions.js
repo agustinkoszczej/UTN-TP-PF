@@ -3,11 +3,12 @@ import { NavigationActions, StackActions } from 'react-navigation';
 import AuthService from '@services/AuthService';
 import Routes from '@constants/routes';
 
-export const actions = createTypes(completeTypes(['LOGIN', 'RECOVER_PASSWORD'], []), '@@AUTH');
+export const actions = createTypes(completeTypes(['LOGIN', 'RECOVER_PASSWORD', 'SIGN_UP'], []), '@@AUTH');
 
 export const targets = {
   user: 'currentUser',
-  recoverPassword: 'recoverPassword'
+  recoverPassword: 'recoverPassword',
+  signUpUser: 'signUpUser'
 };
 
 export const actionCreators = {
@@ -38,6 +39,22 @@ export const actionCreators = {
           StackActions.reset({
             index: 0,
             actions: [NavigationActions.navigate({ routeName: Routes.Login })]
+          })
+        );
+      })
+    ]
+  }),
+  signUp: signUpData => ({
+    type: actions.SIGN_UP,
+    target: targets.signUpUser,
+    service: AuthService.signUp,
+    payload: signUpData,
+    injections: [
+      withPostSuccess(dispatch => {
+        dispatch(
+          StackActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: Routes.Home })]
           })
         );
       })

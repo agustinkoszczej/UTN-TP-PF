@@ -1,11 +1,18 @@
-const login = authData => {
+const login = () => {
   return {
     ok: true,
     status: 200
   };
 };
 
-const recoverPassword = email => {
+const recoverPassword = () => {
+  return {
+    ok: true,
+    status: 200
+  };
+};
+
+const signUp = () => {
   return {
     ok: true,
     status: 200
@@ -14,5 +21,6 @@ const recoverPassword = email => {
 
 export default {
   login,
-  recoverPassword
+  recoverPassword,
+  signUp
 };

@@ -15,12 +15,18 @@ import QRStep from './components/QRStep';
 import LocationStep from './components/LocationStep';
 import DataStep from './components/DataStep';
 import styles, { stepIndicatorStyles } from './styles';
-import { STEP_INDICATOR_LABELS, STEP_INDICATOR_STEPS, strings } from './constants';
+import {
+  STEP_INDICATOR_LABELS,
+  STEP_INDICATOR_STEPS,
+  strings,
+  SIGN_UP_FIELDS,
+  LOCATION_FIELDS
+} from './constants';
 
 const KeyboardAwareImage = KeyboardAware(Image);
 const KeyboardAwareView = KeyboardAware(View);
 
-function SignUp({ currentStep, onGoToLogin, handleSubmit, values }) {
+function SignUp({ currentStep, onGoToLogin, handleSubmit, values, setFieldValue }) {
   const finalStep = currentStep === 2;
   return (
     <BaseForm link onSubmit={handleSubmit}>
@@ -43,9 +49,11 @@ function SignUp({ currentStep, onGoToLogin, handleSubmit, values }) {
           currentStepCompleted
         />
         {
-          { 0: <DataStep handleSubmit={handleSubmit} values={values} />, 1: <QRStep />, 2: <LocationStep /> }[
-            currentStep
-          ]
+          {
+            0: <DataStep handleSubmit={handleSubmit} values={values} />,
+            1: <QRStep setFieldValue={setFieldValue} handleSubmit={handleSubmit} />,
+            2: <LocationStep setFieldValue={setFieldValue} />
+          }[currentStep]
         }
 
         <CustomButton
@@ -76,7 +84,20 @@ function SignUp({ currentStep, onGoToLogin, handleSubmit, values }) {
 SignUp.propTypes = {
   currentStep: PropTypes.number.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  onGoToLogin: PropTypes.func.isRequired
+  onGoToLogin: PropTypes.func.isRequired,
+  setFieldValue: PropTypes.func.isRequired,
+  values: PropTypes.shape({
+    [SIGN_UP_FIELDS.NAME]: PropTypes.string,
+    [SIGN_UP_FIELDS.EMAIL]: PropTypes.string,
+    [SIGN_UP_FIELDS.PHONE]: PropTypes.string,
+    [SIGN_UP_FIELDS.CUIT]: PropTypes.string,
+    [SIGN_UP_FIELDS.LOCATION]: PropTypes.shape({
+      [LOCATION_FIELDS.LONGITUDE]: PropTypes.number,
+      [LOCATION_FIELDS.STREET_NUMBER]: PropTypes.number,
+      [LOCATION_FIELDS.LATITUDE]: PropTypes.number,
+      [LOCATION_FIELDS.ADDRESS]: PropTypes.string
+    })
+  })
 };
 
 const enhancer = compose(

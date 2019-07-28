@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { object } from 'yup';
+import { object, string, number } from 'yup';
 import { connect } from 'react-redux';
 import { fieldsValidation } from '@utils/validations';
 import Routes from '@constants/routes';
 import { COUNTRY_CODE } from '@constants/user';
 import AuthActions from '@redux/auth/actions';
 
-import { SIGN_UP_FIELDS, inputFieldsSignUp } from './constants';
+import { SIGN_UP_FIELDS, inputFieldsSignUp, LOCATION_FIELDS } from './constants';
 import SignUp from './layout';
 
 class SignUpContainer extends Component {
@@ -22,13 +22,26 @@ class SignUpContainer extends Component {
       [SIGN_UP_FIELDS.PHONE]: COUNTRY_CODE,
       [SIGN_UP_FIELDS.PASSWORD]: '',
       [SIGN_UP_FIELDS.CUIT]: ''
+    },
+    2: {
+      [SIGN_UP_FIELDS.LOCATION]: {
+        [LOCATION_FIELDS.LATITUDE]: '',
+        [LOCATION_FIELDS.LONGITUDE]: '',
+        [LOCATION_FIELDS.ADDRESS]: '',
+        [LOCATION_FIELDS.STREET_NUMBER]: ''
+      }
     }
   };
 
   formValidationSchema = {
     0: object().shape(fieldsValidation(inputFieldsSignUp, SIGN_UP_FIELDS)),
     1: {},
-    2: {}
+    2: {
+      [SIGN_UP_FIELDS.LOCATION]: object().shape({
+        [LOCATION_FIELDS.ADDRESS]: string().required('Campo requerido'),
+        [LOCATION_FIELDS.STREET_NUMBER]: number().required('Debe seleccionar una dirección fija')
+      })
+    }
   };
 
   handleGotoLogIn = () => {
@@ -37,6 +50,11 @@ class SignUpContainer extends Component {
   };
 
   handleNext = () => this.setState(prevState => ({ currentStep: prevState.currentStep + 1 }));
+
+  handleSignUp = values => {
+    const { signUp } = this.props;
+    signUp(values);
+  };
 
   render() {
     const { currentStep } = this.state;
@@ -47,6 +65,7 @@ class SignUpContainer extends Component {
         onGoToLogin={this.handleGotoLogIn}
         validationSchema={this.formValidationSchema}
         initialValues={this.initialValues}
+        onSignUp={this.handleSignUp}
       />
     );
   }
@@ -58,7 +77,8 @@ SignUpContainer.propTypes = {
   }).isRequired,
   error: PropTypes.shape({
     code: PropTypes.string.isRequired
-  })
+  }),
+  signUp: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({

@@ -5,13 +5,14 @@ import { actions } from './actions';
 
 const stateDescription = {
   currentUser: null,
-  recoverPassword: null
+  recoverPassword: null,
+  signUpUser: null
 };
 
 const initialState = completeState(stateDescription, ['initialLoading']);
 
 const reducerDescription = {
-  primaryActions: [actions.LOGIN, actions.RECOVER_PASSWORD],
+  primaryActions: [actions.LOGIN, actions.RECOVER_PASSWORD, actions.SIGN_UP],
   override: {}
 };
 

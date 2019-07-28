@@ -26,7 +26,8 @@ export const SIGN_UP_FIELDS = {
   PHONE: 'phone',
   PASSWORD: 'password',
   CUIT: 'cuit',
-  QR_URL: 'qrUrl'
+  QR_URL: 'qrUrl',
+  LOCATION: 'location'
 };
 
 export const inputFieldsSignUp = [
@@ -36,3 +37,10 @@ export const inputFieldsSignUp = [
   SIGN_UP_FIELDS.PASSWORD,
   SIGN_UP_FIELDS.CUIT
 ];
+
+export const LOCATION_FIELDS = {
+  ADDRESS: 'address',
+  LATITUDE: 'latitude',
+  LONGITUDE: 'longitude',
+  STREET_NUMBER: 'stretNumber'
+};

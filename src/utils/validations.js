@@ -6,34 +6,40 @@ import {
   emailRegex,
   passwordRegex,
   phoneRegex,
-  phoneStartsWithCodeRegex,
-  cuitRegex
+  phoneStartsWithCodeRegex
 } from '@constants/validations';
 import { SIGN_UP_FIELDS as FIELDS } from '@screens/Auth/screens/SignUp/constants';
 
-export const validationInputs = field =>
+export const authInputs = field =>
+  ({
+    [FIELDS.EMAIL]: string()
+      .matches(emailRegex, strings.invalidEmailMsg)
+      .required(strings.requiredValidation),
+    [FIELDS.PASSWORD]: string()
+      .required(strings.requiredValidation)
+      .min(8, strings.invalidPasswordMin)
+      .matches(passwordRegex, strings.invalidPasswordMsg)
+  }[field]);
+
+export const dataInputs = field =>
   ({
     [FIELDS.NAME]: string()
       .required(strings.requiredValidation)
       .min(3, strings.invalidNameMsg)
       .matches(nameRegex, strings.invalidSpecialCharacters),
-    [FIELDS.EMAIL]: string()
-      .matches(emailRegex, strings.invalidEmailMsg)
-      .required(strings.requiredValidation),
     [FIELDS.PHONE]: string()
       .required(strings.requiredValidation)
-      .min(COUNTRY_CODE.length + 1, strings.requiredValidation)
+      .min(COUNTRY_CODE.length + 2, strings.requiredValidation)
       .matches(phoneRegex, strings.invalidPhoneMsg)
       .matches(phoneStartsWithCodeRegex, strings.invalidPhoneLengthMsg(COUNTRY_CODE))
       .length(PHONE_LENGTH, strings.invalidPhoneLengthMsg(PHONE_LENGTH - 1)),
-    [FIELDS.PASSWORD]: string()
-      .required(strings.requiredValidation)
-      .min(8, strings.invalidPasswordMin)
-      .matches(passwordRegex, strings.invalidPasswordMsg),
     [FIELDS.CUIT]: string()
       .required(strings.requiredValidation)
       .length(11, strings.invalidCUITLength)
   }[field]);
 
-export const fieldsValidation = arrayInputs =>
-  arrayInputs.reduce((fields, nameField) => ({ ...fields, [nameField]: validationInputs(nameField) }), {});
+export const authValidation = arrayInputs =>
+  arrayInputs.reduce((fields, nameField) => ({ ...fields, [nameField]: authInputs(nameField) }), {});
+
+export const dataValidation = arrayInputs =>
+  arrayInputs.reduce((fields, nameField) => ({ ...fields, [nameField]: dataInputs(nameField) }), {});

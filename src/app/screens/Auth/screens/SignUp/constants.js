@@ -1,5 +1,5 @@
-export const STEP_INDICATOR_LABELS = ['Datos personales', 'QR', 'Ubicación'];
-export const STEP_INDICATOR_STEPS = 3;
+export const STEP_INDICATOR_LABELS = ['Usuario y contraseña', 'Datos empresa', 'Ubicación', 'QR'];
+export const STEP_INDICATOR_STEPS = 4;
 
 export const strings = {
   defaultRegisterError: 'Hubo un error al registrarse. Vuelva a intentarlo',
@@ -8,13 +8,10 @@ export const strings = {
   hasAccount: '¿Ya tienes cuenta?',
   logIn: 'Inicia Sesión',
   name: 'Nombre',
-  orderWithoutRegister: 'Ordenar sin registrarse',
   password: 'Contraseña',
   phone: 'Teléfono',
   signUpButton: 'Crear Cuenta',
   signUpTitle: 'Soy Nuevo',
-  signUpFacebook: 'Suscribirse con Facebook',
-  signUpGoogle: 'Suscribirse con Google',
   usernameExists: 'Ya existe una cuenta con el email ingresado.',
   next: 'Siguiente',
   cuit: 'CUIT'
@@ -30,13 +27,9 @@ export const SIGN_UP_FIELDS = {
   LOCATION: 'location'
 };
 
-export const inputFieldsSignUp = [
-  SIGN_UP_FIELDS.NAME,
-  SIGN_UP_FIELDS.EMAIL,
-  SIGN_UP_FIELDS.PHONE,
-  SIGN_UP_FIELDS.PASSWORD,
-  SIGN_UP_FIELDS.CUIT
-];
+export const inputFieldsSignUp = [SIGN_UP_FIELDS.NAME, SIGN_UP_FIELDS.PHONE, SIGN_UP_FIELDS.CUIT];
+
+export const authFieldsSignUp = [SIGN_UP_FIELDS.EMAIL, SIGN_UP_FIELDS.PASSWORD];
 
 export const LOCATION_FIELDS = {
   ADDRESS: 'address',

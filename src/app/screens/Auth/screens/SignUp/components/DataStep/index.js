@@ -4,12 +4,7 @@ import React, { Component } from 'react';
 import DataStep from './layout';
 
 class DataStepContainer extends Component {
-  state = { emailError: '', cuitError: '' };
-
-  handleEmailChange = () => {
-    const { emailError } = this.state;
-    if (emailError) this.clearError();
-  };
+  state = { cuitError: '' };
 
   handleCUITChange = () => {
     const { cuitError } = this.state;
@@ -17,16 +12,8 @@ class DataStepContainer extends Component {
   };
 
   render() {
-    const { emailError, cuitError } = this.state;
-    return (
-      <DataStep
-        onEmailChange={this.handleEmailChange}
-        onCUITChange={this.handleCUITChange}
-        emailError={emailError}
-        cuitError={cuitError}
-        {...this.props}
-      />
-    );
+    const { cuitError } = this.state;
+    return <DataStep onCUITChange={this.handleCUITChange} cuitError={cuitError} {...this.props} />;
   }
 }
 

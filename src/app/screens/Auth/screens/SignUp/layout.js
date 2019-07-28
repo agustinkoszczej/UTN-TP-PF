@@ -22,12 +22,13 @@ import {
   SIGN_UP_FIELDS,
   LOCATION_FIELDS
 } from './constants';
+import UsernameStep from './components/UsernameSteps/layout';
 
 const KeyboardAwareImage = KeyboardAware(Image);
 const KeyboardAwareView = KeyboardAware(View);
 
 function SignUp({ currentStep, onGoToLogin, handleSubmit, values, setFieldValue }) {
-  const finalStep = currentStep === 2;
+  const finalStep = currentStep === 3;
   return (
     <BaseForm link onSubmit={handleSubmit}>
       <KeyboardAwareView
@@ -50,9 +51,10 @@ function SignUp({ currentStep, onGoToLogin, handleSubmit, values, setFieldValue 
         />
         {
           {
-            0: <DataStep handleSubmit={handleSubmit} values={values} />,
-            1: <QRStep setFieldValue={setFieldValue} handleSubmit={handleSubmit} />,
-            2: <LocationStep setFieldValue={setFieldValue} />
+            0: <UsernameStep handleSubmit={handleSubmit} values={values} />,
+            1: <DataStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />,
+            2: <LocationStep setFieldValue={setFieldValue} />,
+            3: <QRStep setFieldValue={setFieldValue} handleSubmit={handleSubmit} />
           }[currentStep]
         }
 
@@ -104,7 +106,7 @@ const enhancer = compose(
   withFormik({
     mapPropsToValues: ({ initialValues, currentStep }) => initialValues[currentStep],
     validationSchema: ({ validationSchema, currentStep }) => validationSchema[currentStep],
-    handleSubmit: (values, { props }) => (props.currentStep === 2 ? props.onSignUp(values) : props.onNext())
+    handleSubmit: (values, { props }) => (props.currentStep === 3 ? props.onSignUp(values) : props.onNext())
   }),
   Loadable(props => props.loading)
 );

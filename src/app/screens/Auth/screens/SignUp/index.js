@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { object, string, number } from 'yup';
 import { connect } from 'react-redux';
-import { fieldsValidation } from '@utils/validations';
+import { dataValidation, authValidation } from '@utils/validations';
 import Routes from '@constants/routes';
 import { COUNTRY_CODE } from '@constants/user';
 import AuthActions from '@redux/auth/actions';
 
-import { SIGN_UP_FIELDS, inputFieldsSignUp, LOCATION_FIELDS } from './constants';
+import { SIGN_UP_FIELDS, authFieldsSignUp, inputFieldsSignUp, LOCATION_FIELDS } from './constants';
 import SignUp from './layout';
 
 class SignUpContainer extends Component {
@@ -17,10 +17,12 @@ class SignUpContainer extends Component {
 
   initialValues = {
     0: {
-      [SIGN_UP_FIELDS.NAME]: '',
       [SIGN_UP_FIELDS.EMAIL]: '',
+      [SIGN_UP_FIELDS.PASSWORD]: ''
+    },
+    1: {
+      [SIGN_UP_FIELDS.NAME]: '',
       [SIGN_UP_FIELDS.PHONE]: COUNTRY_CODE,
-      [SIGN_UP_FIELDS.PASSWORD]: '',
       [SIGN_UP_FIELDS.CUIT]: ''
     },
     2: {
@@ -34,14 +36,15 @@ class SignUpContainer extends Component {
   };
 
   formValidationSchema = {
-    0: object().shape(fieldsValidation(inputFieldsSignUp, SIGN_UP_FIELDS)),
-    1: {},
-    2: {
+    0: object().shape(authValidation(authFieldsSignUp, SIGN_UP_FIELDS)),
+    1: object().shape(dataValidation(inputFieldsSignUp, SIGN_UP_FIELDS)),
+    2: object().shape({
       [SIGN_UP_FIELDS.LOCATION]: object().shape({
         [LOCATION_FIELDS.ADDRESS]: string().required('Campo requerido'),
         [LOCATION_FIELDS.STREET_NUMBER]: number().required('Debe seleccionar una dirección fija')
       })
-    }
+    }),
+    3: {}
   };
 
   handleGotoLogIn = () => {

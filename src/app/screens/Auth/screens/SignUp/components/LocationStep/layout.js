@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import PropTypes from 'prop-types';
 import CustomText from '@components/CustomText';
 import Autocomplete from '@components/Autocomplete';
@@ -61,7 +61,7 @@ LocationStep.propTypes = {
   }),
   onRegionChange: PropTypes.func.isRequired,
   onAddressChange: PropTypes.func.isRequired,
-  currentAddress: PropTypes.string.isRequired,
+  currentAddress: PropTypes.string,
   displayList: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   onShowList: PropTypes.func,
   onHideList: PropTypes.func

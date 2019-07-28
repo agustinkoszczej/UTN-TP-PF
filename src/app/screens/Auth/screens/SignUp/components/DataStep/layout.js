@@ -77,6 +77,7 @@ class DataStep extends Component {
           onTextSubmitEditing={handleSubmit}
           maxLength={PHONE_LENGTH}
           onBlur={this.handlePhoneOnBlur}
+          returnKeyType="go"
         />
       </View>
     );
@@ -84,9 +85,7 @@ class DataStep extends Component {
 }
 
 DataStep.propTypes = {
-  gotoLogIn: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  onEmailChange: PropTypes.func.isRequired,
   emailError: PropTypes.string,
   setFieldValue: PropTypes.func.isRequired,
   values: PropTypes.shape({

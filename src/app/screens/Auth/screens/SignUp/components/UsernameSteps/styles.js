@@ -5,8 +5,7 @@ import { verticalScale } from '@utils/scalingUtils';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    height: '100%',
-    justifyContent: 'space-around'
+    height: '100%'
   },
   formElement: {
     backgroundColor: transparent,

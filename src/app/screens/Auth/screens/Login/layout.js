@@ -63,7 +63,7 @@ class Login extends Component {
               onTextSubmitEditing={this.handleEmailSubmitting}
               underline
               onChange={onInputChange}
-              invalid={credentialsError}
+              invalid={!!credentialsError}
             />
             <CustomTextInput
               name={LOGIN_FIELDS.PASSWORD}
@@ -79,7 +79,7 @@ class Login extends Component {
               returnKeyType="go"
               underline
               onChange={onInputChange}
-              invalid={credentialsError}
+              invalid={!!credentialsError}
               error={credentialsError}
             />
             <CustomButton

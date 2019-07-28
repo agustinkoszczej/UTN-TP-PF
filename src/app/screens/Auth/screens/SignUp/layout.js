@@ -104,7 +104,7 @@ SignUp.propTypes = {
 
 const enhancer = compose(
   withFormik({
-    mapPropsToValues: ({ initialValues, currentStep }) => initialValues[currentStep],
+    mapPropsToValues: ({ initialValues }) => initialValues,
     validationSchema: ({ validationSchema, currentStep }) => validationSchema[currentStep],
     handleSubmit: (values, { props }) => (props.currentStep === 3 ? props.onSignUp(values) : props.onNext())
   }),

@@ -33,7 +33,6 @@ class UsernameStep extends Component {
           labelIcon={emailIcon}
           name={SIGN_UP_FIELDS.EMAIL}
           placeholder={strings.email}
-          textRef={this[SIGN_UP_FIELDS.EMAIL]}
           onTextSubmitEditing={this.handleEmailSubmitting}
           invalid={!!emailError}
           error={emailError}
@@ -60,7 +59,7 @@ class UsernameStep extends Component {
 
 UsernameStep.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  onEmailChange: PropTypes.func.isRequired,
+  onEmailChange: PropTypes.func,
   emailError: PropTypes.string,
   values: PropTypes.shape({
     phone: PropTypes.string

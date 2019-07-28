@@ -16,22 +16,16 @@ class SignUpContainer extends Component {
   };
 
   initialValues = {
-    0: {
-      [SIGN_UP_FIELDS.EMAIL]: '',
-      [SIGN_UP_FIELDS.PASSWORD]: ''
-    },
-    1: {
-      [SIGN_UP_FIELDS.NAME]: '',
-      [SIGN_UP_FIELDS.PHONE]: COUNTRY_CODE,
-      [SIGN_UP_FIELDS.CUIT]: ''
-    },
-    2: {
-      [SIGN_UP_FIELDS.LOCATION]: {
-        [LOCATION_FIELDS.LATITUDE]: '',
-        [LOCATION_FIELDS.LONGITUDE]: '',
-        [LOCATION_FIELDS.ADDRESS]: '',
-        [LOCATION_FIELDS.STREET_NUMBER]: ''
-      }
+    [SIGN_UP_FIELDS.EMAIL]: '',
+    [SIGN_UP_FIELDS.PASSWORD]: '',
+    [SIGN_UP_FIELDS.NAME]: '',
+    [SIGN_UP_FIELDS.PHONE]: COUNTRY_CODE,
+    [SIGN_UP_FIELDS.CUIT]: '',
+    [SIGN_UP_FIELDS.LOCATION]: {
+      [LOCATION_FIELDS.LATITUDE]: null,
+      [LOCATION_FIELDS.LONGITUDE]: null,
+      [LOCATION_FIELDS.ADDRESS]: '',
+      [LOCATION_FIELDS.STREET_NUMBER]: null
     }
   };
 

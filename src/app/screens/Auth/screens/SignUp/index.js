@@ -25,7 +25,7 @@ class SignUpContainer extends Component {
       [LOCATION_FIELDS.LATITUDE]: null,
       [LOCATION_FIELDS.LONGITUDE]: null,
       [LOCATION_FIELDS.ADDRESS]: '',
-      [LOCATION_FIELDS.STREET_NUMBER]: null
+      [LOCATION_FIELDS.STREET_NUMBER]: ''
     }
   };
 

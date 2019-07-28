@@ -95,7 +95,7 @@ SignUp.propTypes = {
     [SIGN_UP_FIELDS.CUIT]: PropTypes.string,
     [SIGN_UP_FIELDS.LOCATION]: PropTypes.shape({
       [LOCATION_FIELDS.LONGITUDE]: PropTypes.number,
-      [LOCATION_FIELDS.STREET_NUMBER]: PropTypes.number,
+      [LOCATION_FIELDS.STREET_NUMBER]: PropTypes.string,
       [LOCATION_FIELDS.LATITUDE]: PropTypes.number,
       [LOCATION_FIELDS.ADDRESS]: PropTypes.string
     })

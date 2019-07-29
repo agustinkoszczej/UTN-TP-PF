@@ -4,5 +4,6 @@ export const strings = {
   [Routes.Profile]: 'Perfil',
   [Routes.Orders]: 'Pedidos',
   [Routes.CurrentOrders]: 'Pedidos Actuales',
-  [Routes.PastOrders]: 'Pedidos Pasados'
+  [Routes.PastOrders]: 'Pedidos Pasados',
+  [Routes.Configuration]: 'Configuración'
 };

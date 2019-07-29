@@ -1,8 +1,40 @@
 import { View } from 'react-native';
 import React from 'react';
+import { withFormik } from 'formik';
+import PropTypes from 'prop-types';
+import { compose } from 'recompose';
+import BaseForm from '@components/BaseForm';
+import DataStep from '@screens/Auth/screens/SignUp/components/DataStep';
+import { SIGN_UP_FIELDS } from '@screens/Auth/screens/SignUp/constants';
 
-function Configuration() {
-  return <View />;
+import styles from './styles';
+
+function Configuration({ handleSubmit, values, setFieldValue }) {
+  return (
+    <View style={styles.container}>
+      <BaseForm showButton onSubmit={handleSubmit}>
+        <DataStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />
+      </BaseForm>
+    </View>
+  );
 }
 
-export default Configuration;
+Configuration.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  setFieldValue: PropTypes.func.isRequired,
+  values: PropTypes.shape({
+    [SIGN_UP_FIELDS.NAME]: PropTypes.string,
+    [SIGN_UP_FIELDS.PHONE]: PropTypes.string,
+    [SIGN_UP_FIELDS.CUIT]: PropTypes.string
+  })
+};
+
+const enhancer = compose(
+  withFormik({
+    mapPropsToValues: ({ initialValues }) => initialValues,
+    validationSchema: ({ validationSchema }) => validationSchema,
+    handleSubmit: (values, { props }) => props.onUpdate(values)
+  })
+);
+
+export default enhancer(Configuration);

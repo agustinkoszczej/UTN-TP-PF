@@ -19,8 +19,16 @@ const signUp = () => {
   };
 };
 
+const update = () => {
+  return {
+    ok: true,
+    status: 200
+  };
+};
+
 export default {
   login,
   recoverPassword,
-  signUp
+  signUp,
+  update
 };

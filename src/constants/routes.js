@@ -3,16 +3,14 @@ const routes = {
   Login: 'Login',
   Home: 'Home',
   SignUp: 'SignUp',
-  Menu: 'Menu',
   Points: 'Points',
   Orders: 'Orders',
-  CurrentOrder: 'CurrentOrder',
+  CurrentOrders: 'CurrentOrders',
   PastOrders: 'PastOrders',
   Profile: 'Profile',
   RecoverPassword: 'RecoverPassword',
-  RecoverPasswordCodeVerification: 'RecoverPasswordCodeVerification',
-  PasswordRecoverySuccess: 'PasswordRecoverySuccess',
-  ScannerQR: 'ScannerQR'
+  ScannerQR: 'ScannerQR',
+  Configuration: 'Configuration'
 };
 
 export default routes;

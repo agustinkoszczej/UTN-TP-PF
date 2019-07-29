@@ -17,8 +17,9 @@ import Login from './screens/Auth/screens/Login';
 import RecoverPassword from './screens/Auth/screens/RecoverPassword';
 import SignUp from './screens/Auth/screens/SignUp';
 import ScannerQR from './components/ScannerQR';
-import ActualOrders from './screens/Home/screens/Orders/screens/ActualOrders';
+import CurrentOrders from './screens/Home/screens/Orders/screens/CurrentOrders';
 import PastOrders from './screens/Home/screens/Orders/screens/PastOrders';
+import Configuration from './screens/Home/screens/Profile/screens/Configuration';
 import Profile from './screens/Home/screens/Profile';
 import InitialLoading from './screens/InitialLoading';
 
@@ -29,13 +30,14 @@ export default createStackNavigator(
     ...inferRoute({ SignUp }),
     ...inferRoute({ RecoverPassword }),
     ...inferRoute({ ScannerQR }),
+    ...inferRoute({ Configuration }),
     [Routes.Home]: {
       screen: createBottomTabNavigator(
         {
           [Routes.Orders]: {
             screen: createMaterialTopTabNavigator(
               {
-                ...inferRoute({ ActualOrders }),
+                ...inferRoute({ CurrentOrders }),
                 ...inferRoute({ PastOrders })
               },
               topTabNavConfig

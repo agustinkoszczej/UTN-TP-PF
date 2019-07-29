@@ -1,8 +1,9 @@
 import { getActiveChildNavigationOptions, HeaderBackButton } from 'react-navigation';
 import TabBarIcon from '@components/TabBarIcon';
-import { black, boulder, dustyGray, oceanGreen, thunderbird, white } from '@constants/colors';
+import { black, boulder, dustyGray, white } from '@constants/colors';
 import Routes from '@constants/routes';
 import statusBarConfig from '@constants/statusBar';
+import { strings } from '@constants/screenStrings';
 
 const homeScreensHeaderTitleStyle = {
   alignSelf: 'center',
@@ -22,7 +23,7 @@ const emptyTitleHeader = {
 
 // Default nav options for all screens
 const defaultNavOptions = ({ navigation }) => ({
-  title: navigation.state.routeName,
+  title: strings[navigation.state.routeName],
   headerStyle: {
     backgroundColor: white
   },
@@ -35,11 +36,11 @@ const defaultNavOptions = ({ navigation }) => ({
 const defaultTabOptions = ({ navigation }) => ({
   tabBarOptions: {
     style: { backgroundColor: white, paddingVertical: 5 },
-    activeTintColor: thunderbird,
+    activeTintColor: black,
     inactiveTintColor: boulder
   },
   headerLeft: null,
-  title: navigation.state.routeName,
+  headerTitle: strings[navigation.state.routeName],
   tabBarIcon: props => TabBarIcon({ route: navigation.state.routeName, ...props })
 });
 
@@ -49,7 +50,7 @@ const topTabOptions = ({ navigation }) => ({
     style: {
       backgroundColor: white,
       borderBottomWidth: 1,
-      borderBottomColor: oceanGreen,
+      borderBottomColor: black,
       paddingTop: 10,
       shadowColor: black,
       shadowOffset: { width: 0, height: 1 },
@@ -57,11 +58,11 @@ const topTabOptions = ({ navigation }) => ({
       shadowRadius: 4,
       elevation: 4
     },
-    activeTintColor: oceanGreen,
+    activeTintColor: black,
     inactiveTintColor: boulder,
     upperCaseLabel: false,
     indicatorStyle: {
-      backgroundColor: oceanGreen,
+      backgroundColor: black,
       height: 4
     },
     tabStyle: {
@@ -70,30 +71,22 @@ const topTabOptions = ({ navigation }) => ({
     }
   },
   headerLeft: null,
-  title: navigation.state.routeName
+  title: strings[navigation.state.routeName]
 });
 
 export const screensNavOptions = {
-  [Routes.Menu]: {
-    gesturesEnabled: false,
-    headerStyle: {
-      backgroundColor: oceanGreen,
-      elevation: 0
-    }
-  },
   [Routes.Login]: { header: null },
   [Routes.InitialLoading]: { header: null },
   [Routes.SignUp]: { header: null },
   [Routes.RecoverPassword]: emptyTitleHeader,
-  [Routes.PasswordRecoverySuccess]: { header: null },
   [Routes.Orders]: {
     gesturesEnabled: false,
-    tabBarLabel: 'Pedidos',
+    tabBarLabel: strings[Routes.Orders],
     headerTitleStyle: homeScreensHeaderTitleStyle
   },
   [Routes.Profile]: {
     gesturesEnabled: false,
-    tabBarLabel: 'Perfil',
+    tabBarLabel: strings[Routes.Profile],
     headerTitleStyle: homeScreensHeaderTitleStyle
   }
 };
@@ -116,8 +109,7 @@ export const topTabNavConfig = {
 };
 
 export const statusBarStyles = {
-  [Routes.Home]: statusBarConfig.greenStatusBar,
-  [Routes.Menu]: statusBarConfig.greenStatusBar,
   [Routes.Orders]: statusBarConfig.whiteStatusBar,
+  [Routes.Profile]: statusBarConfig.whiteStatusBar,
   default: statusBarConfig.whiteStatusBar
 };

@@ -14,12 +14,12 @@ class LoginContainer extends Component {
   state = { credentialsError: this.EMPTY_STRING };
 
   initialValues = {
-    [LOGIN_FIELDS.EMAIL]: this.EMPTY_STRING,
+    [LOGIN_FIELDS.USERNAME]: this.EMPTY_STRING,
     [LOGIN_FIELDS.PASSWORD]: this.EMPTY_STRING
   };
 
   validationSchema = object().shape({
-    [LOGIN_FIELDS.EMAIL]: string()
+    [LOGIN_FIELDS.USERNAME]: string()
       .email('Email invalido')
       .required('Campo requerido'),
     [LOGIN_FIELDS.PASSWORD]: string().required('Campo requerido')

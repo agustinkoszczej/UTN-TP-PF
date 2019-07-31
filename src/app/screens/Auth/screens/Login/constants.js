@@ -16,6 +16,6 @@ export const strings = {
 };
 
 export const LOGIN_FIELDS = {
-  EMAIL: 'email',
+  USERNAME: 'username',
   PASSWORD: 'password'
 };

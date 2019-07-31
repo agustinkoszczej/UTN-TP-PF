@@ -11,10 +11,14 @@ const styles = StyleSheet.create({
     width: verticalScale(75)
   },
   name: {
-    fontSize: 20
+    fontSize: 24
+  },
+  direction: {
+    fontSize: 16
   },
   button: {
-    width: scale(250)
+    width: scale(250),
+    marginVertical: 10
   }
 });
 export default styles;

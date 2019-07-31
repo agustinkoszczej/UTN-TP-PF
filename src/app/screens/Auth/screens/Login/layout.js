@@ -52,7 +52,7 @@ class Login extends Component {
           />
           <View>
             <CustomTextInput
-              name={LOGIN_FIELDS.EMAIL}
+              name={LOGIN_FIELDS.USERNAME}
               underlineColorAndroid={transparent}
               placeholder={strings.email}
               style={styles.formElement}

@@ -29,13 +29,14 @@ class HeaderSectionContainer extends Component {
         <CustomText bold style={styles.name}>
           Juan Perez S.A.
         </CustomText>
+        <CustomText style={styles.direction}>Medrano 851</CustomText>
+        <AirbnbRating selectedColor={black} defaultRating={2.25} isDisabled />
         <CustomButton
           secondaryBtn
           title={strings.edit}
           style={styles.button}
           onPress={this.navigateToConfiguration}
         />
-        <AirbnbRating selectedColor={black} defaultRating={2.25} isDisabled style={{ paddingVertical: 10 }} />
       </View>
     );
   }

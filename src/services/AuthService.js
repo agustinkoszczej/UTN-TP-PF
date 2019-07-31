@@ -1,9 +1,6 @@
-const login = () => {
-  return {
-    ok: true,
-    status: 200
-  };
-};
+import api from '@config/api';
+
+const login = authData => api.post('/sign_in', authData);
 
 const recoverPassword = () => {
   return {

@@ -21,6 +21,7 @@ export const actionCreators = {
     target: targets.user,
     service: AuthService.login,
     payload: authData,
+    failureSelector: response => response.data,
     injections: [
       withPostSuccess(dispatch => {
         dispatch(

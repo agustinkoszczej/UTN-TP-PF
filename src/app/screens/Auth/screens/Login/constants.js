@@ -19,3 +19,8 @@ export const LOGIN_FIELDS = {
   USERNAME: 'username',
   PASSWORD: 'password'
 };
+
+export const apiErrors = error =>
+  ({
+    invalid_grant: strings.notAuthorized
+  }[error] || (error ? strings.defaultLoginError : null));

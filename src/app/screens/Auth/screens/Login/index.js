@@ -5,7 +5,7 @@ import { object, string } from 'yup';
 import Routes from '@constants/routes';
 import AuthActions from '@redux/auth/actions';
 
-import { LOGIN_FIELDS } from './constants';
+import { LOGIN_FIELDS, apiErrors } from './constants';
 import Login from './layout';
 
 class LoginContainer extends Component {
@@ -25,9 +25,26 @@ class LoginContainer extends Component {
     [LOGIN_FIELDS.PASSWORD]: string().required('Campo requerido')
   });
 
+  componentDidUpdate(prevProps) {
+    const { error } = this.props;
+    if (error !== prevProps.error) {
+      this.showError(error);
+    }
+  }
+
+  showError = error => {
+    const errorMessage = apiErrors(error?.internalCode);
+    this.setState({ credentialsError: errorMessage });
+  };
+
   handleLogin = values => {
     const { login } = this.props;
     login(values);
+  };
+
+  handleInputChange = () => {
+    const { credentialsError } = this.state;
+    if (credentialsError) this.clearError();
   };
 
   gotoSignUp = () => {
@@ -40,6 +57,10 @@ class LoginContainer extends Component {
     navigation.navigate(Routes.RecoverPassword, { email });
   };
 
+  clearError = () => {
+    this.setState({ credentialsError: this.EMPTY_STRING });
+  };
+
   render() {
     const { credentialsError } = this.state;
     return (
@@ -50,6 +71,7 @@ class LoginContainer extends Component {
         initialValues={this.initialValues}
         validationSchema={this.validationSchema}
         credentialsError={credentialsError}
+        onInputChange={this.handleInputChange}
         {...this.props}
       />
     );

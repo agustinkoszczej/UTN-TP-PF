@@ -36,7 +36,7 @@ export const actionCreators = {
   recoverPassword: email => ({
     type: actions.RECOVER_PASSWORD,
     service: AuthService.recoverPassword,
-    payload: email,
+    payload: { email },
     target: targets.recoverPassword,
     injections: [
       withPostSuccess(dispatch => {

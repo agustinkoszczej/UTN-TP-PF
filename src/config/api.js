@@ -1,7 +1,7 @@
 import Reactotron from 'reactotron-react-native';
 import { create } from 'apisauce';
 
-const baseURL = 'https://sellyapi-env.9ust4eptpw.us-east-1.elasticbeanstalk.com/merchants/';
+const baseURL = 'https://sellyapi-env.9ust4eptpw.us-east-1.elasticbeanstalk.com/';
 
 const api = create({
   baseURL,

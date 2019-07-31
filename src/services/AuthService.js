@@ -1,13 +1,8 @@
 import api from '@config/api';
 
-const login = authData => api.post('/sign_in', authData);
+const login = authData => api.post('/merchants/sign_in', authData);
 
-const recoverPassword = () => {
-  return {
-    ok: true,
-    status: 200
-  };
-};
+const recoverPassword = email => api.post('/reset_password', email);
 
 const signUp = () => {
   return {

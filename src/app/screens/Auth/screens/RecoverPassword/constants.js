@@ -12,3 +12,5 @@ export const RECOVER_PASSWORD_FIELDS = {
   EMAIL: 'email',
   PASSWORD: 'password'
 };
+
+export const apiErrors = strings.defaultRecoverPasswordError;

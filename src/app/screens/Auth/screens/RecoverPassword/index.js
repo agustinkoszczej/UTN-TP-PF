@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import AuthActions from '@redux/auth/actions';
 
 import RecoverPassword from './layout';
-import { strings, RECOVER_PASSWORD_FIELDS } from './constants';
+import { strings, RECOVER_PASSWORD_FIELDS, apiErrors } from './constants';
 
 class RecoverPasswordContainer extends Component {
   EMPTY_STRING = '';
@@ -21,6 +21,18 @@ class RecoverPasswordContainer extends Component {
       .email(strings.emailValidation)
       .required('Campo requerido')
   });
+
+  componentDidUpdate(prevProps) {
+    const { error } = this.props;
+    if (error !== prevProps.error) {
+      this.showError(error);
+    }
+  }
+
+  showError = () => {
+    const errorMessage = apiErrors();
+    this.setState({ emailError: errorMessage });
+  };
 
   handleInputChange = () => {
     const { emailError } = this.state;

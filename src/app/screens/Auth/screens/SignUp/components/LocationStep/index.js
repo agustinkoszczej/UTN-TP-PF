@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { formatLocation } from '@constants/geolocation';
 
-import { SIGN_UP_FIELDS, LOCATION_FIELDS } from '../../constants';
+import { SIGN_UP_FIELDS } from '../../constants';
 
 import LocationStep from './layout';
 
@@ -11,12 +11,9 @@ class LocationStepContainer extends Component {
 
   handleAddressChange = values => {
     const { setFieldValue } = this.props;
-    setFieldValue(SIGN_UP_FIELDS.LOCATION, {
-      [LOCATION_FIELDS.ADDRESS]: values.address,
-      [LOCATION_FIELDS.STREET_NUMBER]: values.streetNumber,
-      [LOCATION_FIELDS.LATITUDE]: values.latitude,
-      [LOCATION_FIELDS.LONGITUDE]: values.longitude
-    });
+    setFieldValue(SIGN_UP_FIELDS.ADDRESS, values.address);
+    setFieldValue(SIGN_UP_FIELDS.LOCATION, `${values.latitude}, ${values.longitude}`);
+    setFieldValue(SIGN_UP_FIELDS.STREET_NUMBER, values.streetNumber);
     this.setState({
       ...formatLocation(values),
       address: values.address,

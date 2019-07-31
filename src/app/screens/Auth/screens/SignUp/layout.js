@@ -85,7 +85,7 @@ SignUp.propTypes = {
   values: PropTypes.shape({
     [SIGN_UP_FIELDS.ADDRESS]: PropTypes.string,
     [SIGN_UP_FIELDS.COMPANY_NAME]: PropTypes.string,
-    [SIGN_UP_FIELDS.CUIT]: PropTypes.number,
+    [SIGN_UP_FIELDS.CUIT]: PropTypes.string,
     [SIGN_UP_FIELDS.EMAIL]: PropTypes.string,
     [SIGN_UP_FIELDS.LOCATION]: PropTypes.string,
     [SIGN_UP_FIELDS.NAME]: PropTypes.string,

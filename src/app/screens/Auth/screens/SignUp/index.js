@@ -20,10 +20,10 @@ class SignUpContainer extends Component {
     [SIGN_UP_FIELDS.PASSWORD]: '',
     [SIGN_UP_FIELDS.NAME]: '',
     [SIGN_UP_FIELDS.PHONE]: COUNTRY_CODE,
-    [SIGN_UP_FIELDS.CUIT]: null,
+    [SIGN_UP_FIELDS.CUIT]: '',
     [SIGN_UP_FIELDS.ADDRESS]: '',
     [SIGN_UP_FIELDS.STREET_NUMBER]: null,
-    [SIGN_UP_FIELDS.QR_URL]: '',
+    [SIGN_UP_FIELDS.QR_URL]: 'http://qr.afip.gob.ar/?qr=7ynzfbEsT3bJi2hL6MRo6w,,',
     [SIGN_UP_FIELDS.COMPANY_NAME]: '',
     [SIGN_UP_FIELDS.LOCATION]: ''
   };

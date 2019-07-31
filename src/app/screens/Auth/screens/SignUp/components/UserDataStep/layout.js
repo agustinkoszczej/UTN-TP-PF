@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import { FormField as CustomTextInput } from '@components/CustomTextInput';
-import { PASSWORD_LENGTH } from '@constants/user';
+import { PASSWORD_LENGTH, NAME_LENGTH } from '@constants/user';
 import emailIcon from '@assets/ic_mail.png';
+import userIcon from '@assets/ic_user.png';
 import passwordIcon from '@assets/ic_password.png';
 
 import { strings, SIGN_UP_FIELDS } from '../../constants';
 
 import styles from './styles';
 
-class UsernameStep extends Component {
+class UserDataStep extends Component {
   [SIGN_UP_FIELDS.PASSWORD] = React.createRef();
 
   handleEmailSubmitting = () => {
@@ -27,6 +28,16 @@ class UsernameStep extends Component {
     };
     return (
       <View style={styles.container}>
+        <CustomTextInput
+          {...commonProps}
+          autoCapitalize="words"
+          labelIcon={userIcon}
+          name={SIGN_UP_FIELDS.NAME}
+          placeholder={strings.name}
+          onTextSubmitEditing={this.handleNameSubmitting}
+          maxLength={NAME_LENGTH}
+          applyTrim
+        />
         <CustomTextInput
           {...commonProps}
           keyboardType="email-address"
@@ -57,7 +68,7 @@ class UsernameStep extends Component {
   }
 }
 
-UsernameStep.propTypes = {
+UserDataStep.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   onEmailChange: PropTypes.func,
   emailError: PropTypes.string,
@@ -66,4 +77,4 @@ UsernameStep.propTypes = {
   }).isRequired
 };
 
-export default UsernameStep;
+export default UserDataStep;

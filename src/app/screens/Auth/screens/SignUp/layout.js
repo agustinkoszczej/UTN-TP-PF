@@ -13,16 +13,10 @@ import BaseForm from '@components/BaseForm';
 
 import QRStep from './components/QRStep';
 import LocationStep from './components/LocationStep';
-import DataStep from './components/DataStep';
+import CompanyDataStep from './components/CompanyDataStep';
+import UserDataStep from './components/UserDataStep';
 import styles, { stepIndicatorStyles } from './styles';
-import {
-  STEP_INDICATOR_LABELS,
-  STEP_INDICATOR_STEPS,
-  strings,
-  SIGN_UP_FIELDS,
-  LOCATION_FIELDS
-} from './constants';
-import UsernameStep from './components/UsernameSteps/layout';
+import { STEP_INDICATOR_LABELS, STEP_INDICATOR_STEPS, strings, SIGN_UP_FIELDS } from './constants';
 
 const KeyboardAwareImage = KeyboardAware(Image);
 const KeyboardAwareView = KeyboardAware(View);
@@ -51,8 +45,8 @@ function SignUp({ currentStep, onGoToLogin, handleSubmit, values, setFieldValue 
         />
         {
           {
-            0: <UsernameStep handleSubmit={handleSubmit} values={values} />,
-            1: <DataStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />,
+            0: <UserDataStep handleSubmit={handleSubmit} values={values} />,
+            1: <CompanyDataStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />,
             2: <LocationStep setFieldValue={setFieldValue} />,
             3: <QRStep setFieldValue={setFieldValue} handleSubmit={handleSubmit} />
           }[currentStep]
@@ -89,16 +83,16 @@ SignUp.propTypes = {
   onGoToLogin: PropTypes.func.isRequired,
   setFieldValue: PropTypes.func.isRequired,
   values: PropTypes.shape({
-    [SIGN_UP_FIELDS.NAME]: PropTypes.string,
+    [SIGN_UP_FIELDS.ADDRESS]: PropTypes.string,
+    [SIGN_UP_FIELDS.COMPANY_NAME]: PropTypes.string,
+    [SIGN_UP_FIELDS.CUIT]: PropTypes.number,
     [SIGN_UP_FIELDS.EMAIL]: PropTypes.string,
+    [SIGN_UP_FIELDS.LOCATION]: PropTypes.string,
+    [SIGN_UP_FIELDS.NAME]: PropTypes.string,
+    [SIGN_UP_FIELDS.PASSWORD]: PropTypes.string,
     [SIGN_UP_FIELDS.PHONE]: PropTypes.string,
-    [SIGN_UP_FIELDS.CUIT]: PropTypes.string,
-    [SIGN_UP_FIELDS.LOCATION]: PropTypes.shape({
-      [LOCATION_FIELDS.LONGITUDE]: PropTypes.number,
-      [LOCATION_FIELDS.STREET_NUMBER]: PropTypes.string,
-      [LOCATION_FIELDS.LATITUDE]: PropTypes.number,
-      [LOCATION_FIELDS.ADDRESS]: PropTypes.string
-    })
+    [SIGN_UP_FIELDS.QR_URL]: PropTypes.string,
+    [SIGN_UP_FIELDS.STREET_NUMBER]: PropTypes.number
   })
 };
 

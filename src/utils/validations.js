@@ -6,7 +6,8 @@ import {
   emailRegex,
   passwordRegex,
   phoneRegex,
-  phoneStartsWithCodeRegex
+  phoneStartsWithCodeRegex,
+  cuitRegex
 } from '@constants/validations';
 import { SIGN_UP_FIELDS as FIELDS } from '@screens/Auth/screens/SignUp/constants';
 
@@ -18,12 +19,16 @@ export const authInputs = field =>
     [FIELDS.PASSWORD]: string()
       .required(strings.requiredValidation)
       .min(8, strings.invalidPasswordMin)
-      .matches(passwordRegex, strings.invalidPasswordMsg)
+      .matches(passwordRegex, strings.invalidPasswordMsg),
+    [FIELDS.NAME]: string()
+      .required(strings.requiredValidation)
+      .min(3, strings.invalidNameMsg)
+      .matches(nameRegex, strings.invalidSpecialCharacters)
   }[field]);
 
 export const dataInputs = field =>
   ({
-    [FIELDS.NAME]: string()
+    [FIELDS.COMPANY_NAME]: string()
       .required(strings.requiredValidation)
       .min(3, strings.invalidNameMsg)
       .matches(nameRegex, strings.invalidSpecialCharacters),

@@ -1,4 +1,4 @@
-export const STEP_INDICATOR_LABELS = ['Usuario y contraseña', 'Datos empresa', 'Ubicación', 'QR'];
+export const STEP_INDICATOR_LABELS = ['Datos personales', 'Datos empresariales', 'Ubicación', 'QR'];
 export const STEP_INDICATOR_STEPS = 4;
 
 export const strings = {
@@ -18,22 +18,18 @@ export const strings = {
 };
 
 export const SIGN_UP_FIELDS = {
-  NAME: 'name',
-  EMAIL: 'email',
-  PHONE: 'phone',
-  PASSWORD: 'password',
+  ADDRESS: 'streetAddress',
+  COMPANY_NAME: 'companyName',
   CUIT: 'cuit',
+  EMAIL: 'email',
+  LOCATION: 'location',
+  NAME: 'fullName',
+  PASSWORD: 'password',
+  PHONE: 'contactNumber',
   QR_URL: 'qrUrl',
-  LOCATION: 'location'
+  STREET_NUMBER: 'streetNumber'
 };
 
-export const inputFieldsSignUp = [SIGN_UP_FIELDS.NAME, SIGN_UP_FIELDS.PHONE, SIGN_UP_FIELDS.CUIT];
+export const inputFieldsSignUp = [SIGN_UP_FIELDS.COMPANY_NAME, SIGN_UP_FIELDS.CUIT, SIGN_UP_FIELDS.PHONE];
 
-export const authFieldsSignUp = [SIGN_UP_FIELDS.EMAIL, SIGN_UP_FIELDS.PASSWORD];
-
-export const LOCATION_FIELDS = {
-  ADDRESS: 'address',
-  LATITUDE: 'latitude',
-  LONGITUDE: 'longitude',
-  STREET_NUMBER: 'stretNumber'
-};
+export const authFieldsSignUp = [SIGN_UP_FIELDS.NAME, SIGN_UP_FIELDS.EMAIL, SIGN_UP_FIELDS.PASSWORD];

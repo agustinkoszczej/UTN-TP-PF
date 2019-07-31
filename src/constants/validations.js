@@ -7,4 +7,4 @@ export const nameRegex = /^([a-z A-Z ÑñáÁéÉíÍóÓúÚäëïöüÿÄËÏ�
 export const passwordRegex = new RegExp(
   '(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-z\\d^$*.:;?"!|@#%&><_~\\\\/-\\{}()]*$'
 );
-export const cuitRegex = '\b(20|23|24|27|30|33|34)(D)?[0-9]{8}(D)?[0-9]';
+export const cuitRegex = '/^d{2}-d{8}-d{1}$/';

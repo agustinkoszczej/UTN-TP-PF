@@ -7,7 +7,7 @@ import Routes from '@constants/routes';
 import { COUNTRY_CODE } from '@constants/user';
 import AuthActions from '@redux/auth/actions';
 
-import { SIGN_UP_FIELDS, authFieldsSignUp, inputFieldsSignUp, LOCATION_FIELDS } from './constants';
+import { SIGN_UP_FIELDS, authFieldsSignUp, inputFieldsSignUp } from './constants';
 import SignUp from './layout';
 
 class SignUpContainer extends Component {
@@ -20,23 +20,21 @@ class SignUpContainer extends Component {
     [SIGN_UP_FIELDS.PASSWORD]: '',
     [SIGN_UP_FIELDS.NAME]: '',
     [SIGN_UP_FIELDS.PHONE]: COUNTRY_CODE,
-    [SIGN_UP_FIELDS.CUIT]: '',
-    [SIGN_UP_FIELDS.LOCATION]: {
-      [LOCATION_FIELDS.LATITUDE]: null,
-      [LOCATION_FIELDS.LONGITUDE]: null,
-      [LOCATION_FIELDS.ADDRESS]: '',
-      [LOCATION_FIELDS.STREET_NUMBER]: ''
-    }
+    [SIGN_UP_FIELDS.CUIT]: null,
+    [SIGN_UP_FIELDS.ADDRESS]: '',
+    [SIGN_UP_FIELDS.STREET_NUMBER]: null,
+    [SIGN_UP_FIELDS.QR_URL]: '',
+    [SIGN_UP_FIELDS.COMPANY_NAME]: '',
+    [SIGN_UP_FIELDS.LOCATION]: ''
   };
 
   formValidationSchema = {
     0: object().shape(authValidation(authFieldsSignUp, SIGN_UP_FIELDS)),
     1: object().shape(dataValidation(inputFieldsSignUp, SIGN_UP_FIELDS)),
     2: object().shape({
-      [SIGN_UP_FIELDS.LOCATION]: object().shape({
-        [LOCATION_FIELDS.ADDRESS]: string().required('Campo requerido'),
-        [LOCATION_FIELDS.STREET_NUMBER]: number().required('Debe seleccionar una dirección fija')
-      })
+      [SIGN_UP_FIELDS.LOCATION]: string().required('Campo requerido'),
+      [SIGN_UP_FIELDS.ADDRESS]: string().required('Campo requerido'),
+      [SIGN_UP_FIELDS.STREET_NUMBER]: number().required('Debe seleccionar una dirección fija')
     }),
     3: {}
   };

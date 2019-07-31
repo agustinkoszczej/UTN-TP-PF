@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import DataStep from './layout';
+import CompanyDataStep from './layout';
 
-class DataStepContainer extends Component {
+class CompanyDataStepContainer extends Component {
   state = { cuitError: '' };
 
   handleCUITChange = () => {
@@ -13,12 +13,12 @@ class DataStepContainer extends Component {
 
   render() {
     const { cuitError } = this.state;
-    return <DataStep onCUITChange={this.handleCUITChange} cuitError={cuitError} {...this.props} />;
+    return <CompanyDataStep onCUITChange={this.handleCUITChange} cuitError={cuitError} {...this.props} />;
   }
 }
 
-DataStepContainer.propTypes = {
+CompanyDataStepContainer.propTypes = {
   handleSubmit: PropTypes.func.isRequired
 };
 
-export default DataStepContainer;
+export default CompanyDataStepContainer;

@@ -4,7 +4,8 @@ import { withFormik } from 'formik';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import BaseForm from '@components/BaseForm';
-import DataStep from '@screens/Auth/screens/SignUp/components/DataStep';
+import CompanyDataStep from '@screens/Auth/screens/SignUp/components/CompanyDataStep';
+import UserDataStep from '@screens/Auth/screens/SignUp/components/UserDataStep';
 import { SIGN_UP_FIELDS } from '@screens/Auth/screens/SignUp/constants';
 
 import styles from './styles';
@@ -13,7 +14,8 @@ function Configuration({ handleSubmit, values, setFieldValue }) {
   return (
     <View style={styles.container}>
       <BaseForm showButton onSubmit={handleSubmit}>
-        <DataStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />
+        <CompanyDataStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />
+        <UserDataStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />
       </BaseForm>
     </View>
   );

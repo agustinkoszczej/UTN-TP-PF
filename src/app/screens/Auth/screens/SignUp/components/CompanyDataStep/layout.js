@@ -12,7 +12,7 @@ import { strings, SIGN_UP_FIELDS } from '../../constants';
 
 import styles from './styles';
 
-class DataStep extends Component {
+class CompanyDataStep extends Component {
   [SIGN_UP_FIELDS.CUIT] = React.createRef();
 
   [SIGN_UP_FIELDS.PHONE] = React.createRef();
@@ -47,7 +47,7 @@ class DataStep extends Component {
           {...commonProps}
           autoCapitalize="words"
           labelIcon={userIcon}
-          name={SIGN_UP_FIELDS.NAME}
+          name={SIGN_UP_FIELDS.COMPANY_NAME}
           placeholder={strings.name}
           onTextSubmitEditing={this.handleNameSubmitting}
           maxLength={NAME_LENGTH}
@@ -84,7 +84,7 @@ class DataStep extends Component {
   }
 }
 
-DataStep.propTypes = {
+CompanyDataStep.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   emailError: PropTypes.string,
   setFieldValue: PropTypes.func.isRequired,
@@ -95,4 +95,4 @@ DataStep.propTypes = {
   cuitError: PropTypes.string.isRequired
 };
 
-export default DataStep;
+export default CompanyDataStep;

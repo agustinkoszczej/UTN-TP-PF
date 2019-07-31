@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import UsernameStep from './layout';
+import UserDataStep from './layout';
 
-class UsernameStepContainer extends Component {
+class UserDataStepContainer extends Component {
   state = { emailError: '' };
 
   handleEmailChange = () => {
@@ -13,12 +13,12 @@ class UsernameStepContainer extends Component {
 
   render() {
     const { emailError } = this.state;
-    return <UsernameStep onEmailChange={this.handleEmailChange} emailError={emailError} {...this.props} />;
+    return <UserDataStep onEmailChange={this.handleEmailChange} emailError={emailError} {...this.props} />;
   }
 }
 
-UsernameStepContainer.propTypes = {
+UserDataStepContainer.propTypes = {
   handleSubmit: PropTypes.func.isRequired
 };
 
-export default UsernameStepContainer;
+export default UserDataStepContainer;

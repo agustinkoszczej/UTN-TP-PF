@@ -10,7 +10,11 @@ const routes = {
   Profile: 'Profile',
   RecoverPassword: 'RecoverPassword',
   ScannerQR: 'ScannerQR',
-  Configuration: 'Configuration'
+  Configuration: 'Configuration',
+  PastAuctions: 'PastAuctions',
+  Auctions: 'Auctions',
+  CurrentAuctions: 'CurrentAuctions',
+  HomeMenu: 'HomeMenu'
 };
 
 export default routes;

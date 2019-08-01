@@ -21,7 +21,11 @@ import CurrentOrders from './screens/Home/screens/Orders/screens/CurrentOrders';
 import PastOrders from './screens/Home/screens/Orders/screens/PastOrders';
 import Configuration from './screens/Home/screens/Profile/screens/Configuration';
 import Profile from './screens/Home/screens/Profile';
+import HomeMenu from './screens/Home/screens/HomeMenu';
+import Chats from './screens/Home/screens/Chats';
 import InitialLoading from './screens/InitialLoading';
+import CurrentAuctions from './screens/Home/screens/Auctions/screens/CurrentAuctions';
+import PastAuctions from './screens/Home/screens/Auctions/screens/PastAuctions';
 
 export default createStackNavigator(
   {
@@ -34,6 +38,17 @@ export default createStackNavigator(
     [Routes.Home]: {
       screen: createBottomTabNavigator(
         {
+          ...inferRoute({ Chats }),
+          [Routes.Auctions]: {
+            screen: createMaterialTopTabNavigator(
+              {
+                ...inferRoute({ CurrentAuctions }),
+                ...inferRoute({ PastAuctions })
+              },
+              topTabNavConfig
+            )
+          },
+          ...inferRoute({ HomeMenu }),
           [Routes.Orders]: {
             screen: createMaterialTopTabNavigator(
               {

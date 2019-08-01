@@ -88,6 +88,21 @@ export const screensNavOptions = {
     gesturesEnabled: false,
     tabBarLabel: strings[Routes.Profile],
     headerTitleStyle: homeScreensHeaderTitleStyle
+  },
+  [Routes.Chats]: {
+    gesturesEnabled: false,
+    tabBarLabel: strings[Routes.Chats],
+    headerTitleStyle: homeScreensHeaderTitleStyle
+  },
+  [Routes.Auctions]: {
+    gesturesEnabled: false,
+    tabBarLabel: strings[Routes.Auctions],
+    headerTitleStyle: homeScreensHeaderTitleStyle
+  },
+  [Routes.HomeMenu]: {
+    gesturesEnabled: false,
+    tabBarLabel: strings[Routes.HomeMenu],
+    headerTitleStyle: homeScreensHeaderTitleStyle
   }
 };
 

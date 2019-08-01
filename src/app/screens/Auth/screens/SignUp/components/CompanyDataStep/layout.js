@@ -6,7 +6,6 @@ import { PHONE_LENGTH, NAME_LENGTH } from '@constants/user';
 import phoneIcon from '@assets/ic_phone.png';
 import userIcon from '@assets/ic_user.png';
 import noteIcon from '@assets/ic_note.png';
-import { handlePhoneFormatChange } from '@utils/phoneUtils';
 
 import { strings, SIGN_UP_FIELDS } from '../../constants';
 
@@ -23,14 +22,6 @@ class CompanyDataStep extends Component {
 
   handleNameSubmitting = () => {
     this[SIGN_UP_FIELDS.CUIT].current.focus();
-  };
-
-  handlePhoneOnBlur = () => {
-    const {
-      values: { phone },
-      setFieldValue
-    } = this.props;
-    handlePhoneFormatChange(phone, setFieldValue);
   };
 
   render() {
@@ -76,7 +67,6 @@ class CompanyDataStep extends Component {
           textRef={this[SIGN_UP_FIELDS.PHONE]}
           onTextSubmitEditing={handleSubmit}
           maxLength={PHONE_LENGTH}
-          onBlur={this.handlePhoneOnBlur}
           returnKeyType="go"
         />
       </View>

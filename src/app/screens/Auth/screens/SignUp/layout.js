@@ -23,6 +23,7 @@ const KeyboardAwareView = KeyboardAware(View);
 
 function SignUp({ currentStep, onGoToLogin, handleSubmit, values, setFieldValue }) {
   const finalStep = currentStep === 3;
+  debugger
   return (
     <BaseForm link onSubmit={handleSubmit}>
       <KeyboardAwareView

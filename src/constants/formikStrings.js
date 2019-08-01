@@ -3,7 +3,7 @@ export const strings = {
   invalidNameMsg: 'El nombre debe tener al menos 3 caracteres',
   invalidEmailMsg: 'El email es inválido',
   invalidSpecialCharacters: 'Caracteres no válidos',
-  invalidPhoneMsg: 'Formato incorrecto. Debe ser numérico',
+  invalidPhoneMsg: 'Formato incorrecto',
   invalidPhoneCodeMsg: code => `Formato incorrecto. Debe empezar con ${code}`,
   invalidPhoneLengthMsg: length => `Formato incorrecto. Debe tener ${length} números`,
   invalidPasswordMin: 'Debe tener al menos 8 caracteres',

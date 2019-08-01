@@ -12,7 +12,13 @@ import { strings, SIGN_UP_FIELDS } from '../../constants';
 import styles from './styles';
 
 class UserDataStep extends Component {
+  [SIGN_UP_FIELDS.EMAIL] = React.createRef();
+
   [SIGN_UP_FIELDS.PASSWORD] = React.createRef();
+
+  handleNameSubmitting = () => {
+    this[SIGN_UP_FIELDS.EMAIL].current.focus();
+  };
 
   handleEmailSubmitting = () => {
     this[SIGN_UP_FIELDS.PASSWORD].current.focus();
@@ -48,6 +54,7 @@ class UserDataStep extends Component {
           invalid={!!emailError}
           error={emailError}
           onChange={onEmailChange}
+          textRef={this[SIGN_UP_FIELDS.EMAIL]}
           applyTrim
         />
         <CustomTextInput

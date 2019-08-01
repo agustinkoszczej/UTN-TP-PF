@@ -34,13 +34,13 @@ export const dataInputs = field =>
       .matches(nameRegex, strings.invalidSpecialCharacters),
     [FIELDS.PHONE]: string()
       .required(strings.requiredValidation)
-      .min(COUNTRY_CODE.length + 2, strings.requiredValidation)
       .matches(phoneRegex, strings.invalidPhoneMsg)
       .matches(phoneStartsWithCodeRegex, strings.invalidPhoneLengthMsg(COUNTRY_CODE))
       .length(PHONE_LENGTH, strings.invalidPhoneLengthMsg(PHONE_LENGTH - 1)),
     [FIELDS.CUIT]: string()
       .required(strings.requiredValidation)
       .length(11, strings.invalidCUITLength)
+      .matches(cuitRegex, strings.invalidCUIT)
   }[field]);
 
 export const authValidation = arrayInputs =>

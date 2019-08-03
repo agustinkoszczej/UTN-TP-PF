@@ -4,7 +4,7 @@ import AuthService from '@services/AuthService';
 import Routes from '@constants/routes';
 
 export const actions = createTypes(
-  completeTypes(['LOGIN', 'RECOVER_PASSWORD', 'SIGN_UP', 'UPDATE_USER'], []),
+  completeTypes(['LOGIN', 'RECOVER_PASSWORD', 'SIGN_UP', 'UPDATE_USER', 'GET_USER_INFO'], []),
   '@@AUTH'
 );
 
@@ -23,13 +23,15 @@ export const actionCreators = {
     payload: authData,
     failureSelector: response => response.data,
     injections: [
-      withPostSuccess(dispatch => {
+      withPostSuccess(async (dispatch, response) => {
         dispatch(
           StackActions.reset({
             index: 0,
             actions: [NavigationActions.navigate({ routeName: Routes.Home })]
           })
         );
+        await AuthService.setTokens(response.data);
+        dispatch(actionCreators.getUserInfo())
       })
     ]
   }),
@@ -75,6 +77,11 @@ export const actionCreators = {
         dispatch(NavigationActions.back());
       })
     ]
+  }),
+  getUserInfo: () => ({
+    type: actions.GET_USER_INFO,
+    target: targets.user,
+    service: AuthService.getUserInfo
   })
 };
 

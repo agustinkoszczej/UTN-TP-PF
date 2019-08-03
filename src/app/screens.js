@@ -29,8 +29,8 @@ import PastAuctions from './screens/Home/screens/Auctions/screens/PastAuctions';
 
 export default createStackNavigator(
   {
-    ...inferRoute({ Login }),
     ...inferRoute({ InitialLoading }),
+    ...inferRoute({ Login }),
     ...inferRoute({ SignUp }),
     ...inferRoute({ RecoverPassword }),
     ...inferRoute({ ScannerQR }),

@@ -8,13 +8,16 @@ const setTokens = ({ access_token: accessToken }) => {
   AsyncStorage.setItem(TOKEN_STORAGE_KEY, JSON.stringify(accessToken));
 };
 
+const getToken = () => AsyncStorage.getItem(TOKEN_STORAGE_KEY).then(JSON.parse);
+const removeTokens = () => AsyncStorage.removeItem(TOKEN_STORAGE_KEY).then(JSON.parse);
+
 const login = authData => api.post('/merchants/sign_in', authData);
 
 const recoverPassword = email => api.post('/reset_password', email);
 
 const signUp = authData => api.post('/merchants/sign_up', authData);
 
-const getUserInfo = authData => api.get('/users/profile');
+const getUserInfo = () => api.get('/users/profile');
 
 const update = () => {
   return {
@@ -29,5 +32,6 @@ export default {
   signUp,
   update,
   setTokens,
-  getUserInfo
+  getUserInfo,
+  getToken
 };

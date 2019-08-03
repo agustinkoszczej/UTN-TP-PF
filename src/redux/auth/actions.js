@@ -5,7 +5,7 @@ import { apiSetup, setAuthHeader } from '@config/api';
 import Routes from '@constants/routes';
 
 export const actions = createTypes(
-  completeTypes(['LOGIN', 'RECOVER_PASSWORD', 'SIGN_UP', 'UPDATE_USER', 'GET_USER_INFO'], []),
+  completeTypes(['LOGIN', 'RECOVER_PASSWORD', 'SIGN_UP', 'UPDATE_USER', 'GET_USER_INFO', 'LOG_OUT'], []),
   '@@AUTH'
 );
 
@@ -21,6 +21,7 @@ export const actionCreators = {
     await apiSetup(dispatch);
     const token = await AuthService.getToken();
     if (token) {
+      await AuthService.setTokens(token);
       dispatch(
         StackActions.reset({
           index: 0,
@@ -51,7 +52,7 @@ export const actionCreators = {
             actions: [NavigationActions.navigate({ routeName: Routes.Home })]
           })
         );
-        await AuthService.setTokens(response.data);
+        await AuthService.setTokens(response.data.access_token);
         dispatch(actionCreators.getUserInfo())
       })
     ]
@@ -103,6 +104,21 @@ export const actionCreators = {
     type: actions.GET_USER_INFO,
     target: targets.user,
     service: AuthService.getUserInfo
+  }), 
+  logOut: () => ({
+    type: actions.LOG_OUT,
+    target: targets.user,
+    service: AuthService.logOut,
+    injections: [
+      withPostSuccess(dispatch => {
+        dispatch(
+          StackActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: Routes.Login })]
+          })
+        );
+      })
+    ]
   })
 };
 

@@ -1,3 +1,4 @@
 export const strings = {
-  edit: 'Editar perfil'
+  edit: 'Editar perfil',
+  closeSession: 'Cerrar sesión'
 };

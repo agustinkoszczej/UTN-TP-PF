@@ -3,7 +3,7 @@ import api, { setAuthHeader } from '@config/api';
 
 const TOKEN_STORAGE_KEY = '@Auth:token';
 
-const setTokens = ({ access_token: accessToken }) => {
+const setTokens =  accessToken => {
   setAuthHeader(accessToken);
   AsyncStorage.setItem(TOKEN_STORAGE_KEY, JSON.stringify(accessToken));
 };
@@ -19,6 +19,11 @@ const signUp = authData => api.post('/merchants/sign_up', authData);
 
 const getUserInfo = () => api.get('/users/profile');
 
+const logOut = async () => {
+  await removeTokens();
+  return { ok: true }
+}
+
 const update = () => {
   return {
     ok: true,
@@ -33,5 +38,6 @@ export default {
   update,
   setTokens,
   getUserInfo,
-  getToken
+  getToken,
+  logOut
 };

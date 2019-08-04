@@ -23,7 +23,6 @@ const KeyboardAwareView = KeyboardAware(View);
 
 function SignUp({ currentStep, onGoToLogin, handleSubmit, values, setFieldValue }) {
   const finalStep = currentStep === 3;
-  debugger
   return (
     <BaseForm link onSubmit={handleSubmit}>
       <KeyboardAwareView
@@ -48,7 +47,7 @@ function SignUp({ currentStep, onGoToLogin, handleSubmit, values, setFieldValue 
           {
             0: <UserDataStep handleSubmit={handleSubmit} values={values} />,
             1: <CompanyDataStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />,
-            2: <LocationStep setFieldValue={setFieldValue} />,
+            2: <LocationStep setFieldValue={setFieldValue} values={values} />,
             3: <QRStep setFieldValue={setFieldValue} handleSubmit={handleSubmit} />
           }[currentStep]
         }

@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import CustomText from '@components/CustomText';
 import Autocomplete from '@components/Autocomplete';
 
+import { SIGN_UP_FIELDS } from '../../constants';
+
 import { strings } from './constants';
 import styles from './styles';
 
@@ -16,12 +18,18 @@ function LocationStep({
   onAddressChange,
   displayList,
   onShowList,
-  onHideList
+  onHideList,
+  values,
+  clicked
 }) {
   return (
     <View style={styles.container}>
       <CustomText center style={styles.header}>
-        {strings.fixDirection}
+        {values[SIGN_UP_FIELDS.STREET_NUMBER] || !clicked
+          ? strings.fixDirection
+          : values[SIGN_UP_FIELDS.ADDRESS]
+          ? strings.missingWholeAddress
+          : strings.missingAddress}
       </CustomText>
       <Autocomplete
         defaultValue={currentAddress}
@@ -64,7 +72,12 @@ LocationStep.propTypes = {
   currentAddress: PropTypes.string,
   displayList: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   onShowList: PropTypes.func,
-  onHideList: PropTypes.func
+  onHideList: PropTypes.func,
+  clicked: PropTypes.bool.isRequired,
+  values: PropTypes.shape({
+    [SIGN_UP_FIELDS.ADDRESS]: PropTypes.string,
+    [SIGN_UP_FIELDS.STREET_NUMBER]: PropTypes.oneOf(PropTypes.number || PropTypes.string)
+  })
 };
 
 export default LocationStep;

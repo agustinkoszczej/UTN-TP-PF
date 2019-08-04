@@ -15,7 +15,6 @@ import auctionIconOn from './assets/ic_auction_on.png';
 import chatIconOff from './assets/ic_chat_off.png';
 import chatIconOn from './assets/ic_chat_on.png';
 
-
 const tabIconsOn = {
   [Routes.Profile]: userIconOn,
   [Routes.Auctions]: auctionIconOn,
@@ -33,7 +32,6 @@ const tabIconsOff = {
 };
 
 function TabBarIcon({ tintColor, route, focused }) {
-  debugger
   return (
     <Image
       source={focused ? tabIconsOn[route] : tabIconsOff[route]}

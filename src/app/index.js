@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SplashScreen from 'react-native-splash-screen';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AppNavigator from '@components/AppNavigator';
 import AuthActions from '@redux/auth/actions';
@@ -7,7 +8,7 @@ import AuthActions from '@redux/auth/actions';
 class App extends Component {
   componentDidMount() {
     SplashScreen.hide();
-    const { setUp } = this.props
+    const { setUp } = this.props;
     setUp();
   }
 
@@ -16,8 +17,15 @@ class App extends Component {
   }
 }
 
+App.propTypes = {
+  setUp: PropTypes.func.isRequired
+};
+
 const mapDispatchToProps = dispatch => ({
   setUp: () => dispatch(AuthActions.setUp())
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(
+  null,
+  mapDispatchToProps
+)(App);

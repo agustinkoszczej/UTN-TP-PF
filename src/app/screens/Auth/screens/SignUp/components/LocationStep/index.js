@@ -7,7 +7,7 @@ import { SIGN_UP_FIELDS } from '../../constants';
 import LocationStep from './layout';
 
 class LocationStepContainer extends Component {
-  state = { displayList: false, region: null, coordinate: null };
+  state = { displayList: false, region: null, coordinate: null, clicked: false };
 
   handleAddressChange = values => {
     const { setFieldValue } = this.props;
@@ -17,7 +17,8 @@ class LocationStepContainer extends Component {
     this.setState({
       ...formatLocation(values),
       address: values.address,
-      displayList: false
+      displayList: false,
+      clicked: !!values.address
     });
   };
 
@@ -30,7 +31,7 @@ class LocationStepContainer extends Component {
   handleHideList = () => this.setState({ displayList: false });
 
   render() {
-    const { address, region, coordinate, displayList } = this.state;
+    const { address, region, coordinate, displayList, clicked } = this.state;
     return (
       <LocationStep
         {...this.props}
@@ -42,6 +43,7 @@ class LocationStepContainer extends Component {
         onAddressChange={this.handleAddressChange}
         coordinate={coordinate}
         currentAddress={address}
+        clicked={clicked}
       />
     );
   }

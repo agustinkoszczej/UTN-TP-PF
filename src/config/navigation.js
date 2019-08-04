@@ -33,7 +33,7 @@ const defaultNavOptions = ({ navigation }) => ({
 });
 
 // Default tab options for all tabs
-const defaultTabOptions = ({ navigation }) => ({
+const defaultTabOptions = () => ({
   tabBarOptions: {
     style: { backgroundColor: white, paddingVertical: 5 },
     activeTintColor: black,
@@ -81,7 +81,7 @@ export const screensNavOptions = {
     tabBarLabel: strings[Routes.Orders],
     headerTitleStyle: homeScreensHeaderTitleStyle,
     tabBarIcon: props => TabBarIcon({ route: Routes.Orders, ...props }),
-    headerTitle:strings[Routes.Orders],
+    headerTitle: strings[Routes.Orders],
     tabBarOptions: {
       style: { backgroundColor: white, paddingVertical: 5 },
       activeTintColor: black,
@@ -111,7 +111,6 @@ export const screensNavOptions = {
       activeTintColor: black,
       inactiveTintColor: boulder
     }
-    
   },
   [Routes.Auctions]: {
     gesturesEnabled: false,

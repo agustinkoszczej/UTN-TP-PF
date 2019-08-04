@@ -2,7 +2,7 @@ import { completeTypes, createTypes, withPostSuccess } from 'redux-recompose';
 import { NavigationActions, StackActions } from 'react-navigation';
 import AuthService from '@services/AuthService';
 import { redirectToEspecificTab } from '@utils/navUtils';
-import { apiSetup, setAuthHeader } from '@config/api';
+import { apiSetup } from '@config/api';
 import Routes from '@constants/routes';
 
 export const actions = createTypes(
@@ -23,15 +23,15 @@ export const actionCreators = {
     const token = await AuthService.getToken();
     if (token) {
       await AuthService.setTokens(token);
-      redirectToEspecificTab(dispatch, Routes.HomeMenu)
-        dispatch(actionCreators.getUserInfo())
+      redirectToEspecificTab(dispatch, Routes.HomeMenu);
+      dispatch(actionCreators.getUserInfo());
     } else {
       dispatch(
         StackActions.reset({
           index: 0,
           actions: [NavigationActions.navigate({ routeName: Routes.Login })]
         })
-        );
+      );
     }
   },
   login: authData => ({
@@ -42,9 +42,9 @@ export const actionCreators = {
     failureSelector: response => response.data,
     injections: [
       withPostSuccess(async (dispatch, response) => {
-        redirectToEspecificTab(dispatch, Routes.HomeMenu)
+        redirectToEspecificTab(dispatch, Routes.HomeMenu);
         await AuthService.setTokens(response.data.access_token);
-        dispatch(actionCreators.getUserInfo())
+        dispatch(actionCreators.getUserInfo());
       })
     ]
   }),
@@ -95,7 +95,7 @@ export const actionCreators = {
     type: actions.GET_USER_INFO,
     target: targets.user,
     service: AuthService.getUserInfo
-  }), 
+  }),
   logOut: () => ({
     type: actions.LOG_OUT,
     target: targets.user,

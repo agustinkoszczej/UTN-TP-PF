@@ -3,7 +3,7 @@ import api, { setAuthHeader } from '@config/api';
 
 const TOKEN_STORAGE_KEY = '@Auth:token';
 
-const setTokens =  accessToken => {
+const setTokens = accessToken => {
   setAuthHeader(accessToken);
   AsyncStorage.setItem(TOKEN_STORAGE_KEY, JSON.stringify(accessToken));
 };
@@ -21,8 +21,8 @@ const getUserInfo = () => api.get('/users/profile');
 
 const logOut = async () => {
   await removeTokens();
-  return { ok: true }
-}
+  return { ok: true };
+};
 
 const update = () => {
   return {

@@ -41,7 +41,10 @@ CustomText.defaultProps = {
 CustomText.propTypes = {
   children: PropTypes.node,
   textProps: PropTypes.shape({ ...Text.propTypes }),
-  onPress: PropTypes.func
+  onPress: PropTypes.func,
+  animated: PropTypes.bool,
+  capitalize: PropTypes.bool,
+  uppercase: PropTypes.bool
 };
 
 export default CustomText;

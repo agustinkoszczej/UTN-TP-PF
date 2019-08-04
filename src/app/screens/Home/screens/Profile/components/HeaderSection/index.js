@@ -3,8 +3,8 @@ import LottieView from 'lottie-react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { AirbnbRating } from 'react-native-ratings';
-import { withNavigation } from 'react-navigation'
-import { compose } from 'recompose';;
+import { withNavigation } from 'react-navigation';
+import { compose } from 'recompose';
 import { View } from 'react-native';
 import AuthActions from '@redux/auth/actions';
 import iconAsset from '@lottieAssets/profile.json';
@@ -28,7 +28,7 @@ class HeaderSectionContainer extends Component {
   handleLogOut = () => {
     const { logOut } = this.props;
     logOut();
-  }
+  };
 
   render() {
     return (
@@ -45,18 +45,15 @@ class HeaderSectionContainer extends Component {
           style={styles.button}
           onPress={this.navigateToConfiguration}
         />
-        <CustomButton
-          title={strings.closeSession}
-          style={styles.button}
-          onPress={this.handleLogOut}
-        />
+        <CustomButton title={strings.closeSession} style={styles.button} onPress={this.handleLogOut} />
       </View>
     );
   }
 }
 
 HeaderSectionContainer.propTypes = {
-  navigation: PropTypes.shape(navigationModel).isRequired
+  navigation: PropTypes.shape(navigationModel).isRequired,
+  logOut: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -67,13 +64,12 @@ const mapDispatchToProps = dispatch => ({
   logOut: () => dispatch(AuthActions.logOut())
 });
 
-
 const enhance = compose(
   withNavigation,
   connect(
     mapStateToProps,
     mapDispatchToProps
-    )
-    );
+  )
+);
 
-    export default enhance(HeaderSectionContainer);
+export default enhance(HeaderSectionContainer);

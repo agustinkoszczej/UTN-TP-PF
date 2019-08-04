@@ -9,6 +9,6 @@ export const strings = {
   [Routes.CurrentAuctions]: 'Subastas Actuales',
   [Routes.Auctions]: 'Subastas',
   [Routes.PastAuctions]: 'Subastas Pasadas',
-  [Routes.Chat]: 'Chat',
+  [Routes.Chats]: 'Chats',
   [Routes.HomeMenu]: 'Inicio'
 };

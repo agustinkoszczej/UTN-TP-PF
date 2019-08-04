@@ -39,9 +39,7 @@ const defaultTabOptions = ({ navigation }) => ({
     activeTintColor: black,
     inactiveTintColor: boulder
   },
-  headerLeft: null,
-  headerTitle: strings[navigation.state.routeName],
-  tabBarIcon: props => TabBarIcon({ route: navigation.state.routeName, ...props })
+  headerLeft: null
 });
 
 // Default tab options for all tabs
@@ -82,27 +80,38 @@ export const screensNavOptions = {
   [Routes.Orders]: {
     gesturesEnabled: false,
     tabBarLabel: strings[Routes.Orders],
-    headerTitleStyle: homeScreensHeaderTitleStyle
+    headerTitleStyle: homeScreensHeaderTitleStyle,
+    tabBarIcon: props => TabBarIcon({ route: Routes.Orders, ...props }),
+    headerTitle:strings[Routes.Orders]
   },
   [Routes.Profile]: {
     gesturesEnabled: false,
     tabBarLabel: strings[Routes.Profile],
-    headerTitleStyle: homeScreensHeaderTitleStyle
+    headerTitleStyle: homeScreensHeaderTitleStyle,
+    tabBarIcon: props => TabBarIcon({ route: Routes.Profile, ...props }),
+    headerTitle: strings[Routes.Profile]
   },
   [Routes.Chats]: {
     gesturesEnabled: false,
     tabBarLabel: strings[Routes.Chats],
-    headerTitleStyle: homeScreensHeaderTitleStyle
+    headerTitleStyle: homeScreensHeaderTitleStyle,
+    tabBarIcon: props => TabBarIcon({ route: Routes.Chats, ...props }),
+    headerTitle: strings[Routes.Chats]
+    
   },
   [Routes.Auctions]: {
     gesturesEnabled: false,
     tabBarLabel: strings[Routes.Auctions],
-    headerTitleStyle: homeScreensHeaderTitleStyle
+    headerTitleStyle: homeScreensHeaderTitleStyle,
+    tabBarIcon: props => TabBarIcon({ route: Routes.Auctions, ...props }),
+    headerTitle: strings[Routes.Auctions]
   },
   [Routes.HomeMenu]: {
     gesturesEnabled: false,
     tabBarLabel: strings[Routes.HomeMenu],
-    headerTitleStyle: homeScreensHeaderTitleStyle
+    headerTitleStyle: homeScreensHeaderTitleStyle,
+    tabBarIcon: props => TabBarIcon({ route: Routes.HomeMenu, ...props }),
+    headerTitle: strings[Routes.HomeMenu]
   }
 };
 

@@ -46,7 +46,8 @@ export default createStackNavigator(
                 ...inferRoute({ PastAuctions })
               },
               topTabNavConfig
-            )
+            ),
+            navigationOptions: screensNavOptions[Routes.Auctions]
           },
           ...inferRoute({ HomeMenu }),
           [Routes.Orders]: {

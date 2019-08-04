@@ -38,8 +38,7 @@ const defaultTabOptions = ({ navigation }) => ({
     style: { backgroundColor: white, paddingVertical: 5 },
     activeTintColor: black,
     inactiveTintColor: boulder
-  },
-  headerLeft: null
+  }
 });
 
 // Default tab options for all tabs
@@ -54,7 +53,10 @@ const topTabOptions = ({ navigation }) => ({
       shadowOffset: { width: 0, height: 1 },
       shadowOpacity: 0.3,
       shadowRadius: 4,
-      elevation: 4
+      elevation: 4,
+      style: { backgroundColor: white, paddingVertical: 5 },
+    activeTintColor: black,
+    inactiveTintColor: boulder
     },
     activeTintColor: black,
     inactiveTintColor: boulder,
@@ -82,21 +84,36 @@ export const screensNavOptions = {
     tabBarLabel: strings[Routes.Orders],
     headerTitleStyle: homeScreensHeaderTitleStyle,
     tabBarIcon: props => TabBarIcon({ route: Routes.Orders, ...props }),
-    headerTitle:strings[Routes.Orders]
+    headerTitle:strings[Routes.Orders],
+    tabBarOptions: {
+      style: { backgroundColor: white, paddingVertical: 5 },
+      activeTintColor: black,
+      inactiveTintColor: boulder
+    }
   },
   [Routes.Profile]: {
     gesturesEnabled: false,
     tabBarLabel: strings[Routes.Profile],
     headerTitleStyle: homeScreensHeaderTitleStyle,
     tabBarIcon: props => TabBarIcon({ route: Routes.Profile, ...props }),
-    headerTitle: strings[Routes.Profile]
+    headerTitle: strings[Routes.Profile],
+    tabBarOptions: {
+      style: { backgroundColor: white, paddingVertical: 5 },
+      activeTintColor: black,
+      inactiveTintColor: boulder
+    }
   },
   [Routes.Chats]: {
     gesturesEnabled: false,
     tabBarLabel: strings[Routes.Chats],
     headerTitleStyle: homeScreensHeaderTitleStyle,
     tabBarIcon: props => TabBarIcon({ route: Routes.Chats, ...props }),
-    headerTitle: strings[Routes.Chats]
+    headerTitle: strings[Routes.Chats],
+    tabBarOptions: {
+      style: { backgroundColor: white, paddingVertical: 5 },
+      activeTintColor: black,
+      inactiveTintColor: boulder
+    }
     
   },
   [Routes.Auctions]: {
@@ -104,14 +121,24 @@ export const screensNavOptions = {
     tabBarLabel: strings[Routes.Auctions],
     headerTitleStyle: homeScreensHeaderTitleStyle,
     tabBarIcon: props => TabBarIcon({ route: Routes.Auctions, ...props }),
-    headerTitle: strings[Routes.Auctions]
+    headerTitle: strings[Routes.Auctions],
+    tabBarOptions: {
+      style: { backgroundColor: white, paddingVertical: 5 },
+      activeTintColor: black,
+      inactiveTintColor: boulder
+    }
   },
   [Routes.HomeMenu]: {
     gesturesEnabled: false,
     tabBarLabel: strings[Routes.HomeMenu],
     headerTitleStyle: homeScreensHeaderTitleStyle,
     tabBarIcon: props => TabBarIcon({ route: Routes.HomeMenu, ...props }),
-    headerTitle: strings[Routes.HomeMenu]
+    headerTitle: strings[Routes.HomeMenu],
+    tabBarOptions: {
+      style: { backgroundColor: white, paddingVertical: 5 },
+      activeTintColor: black,
+      inactiveTintColor: boulder
+    }
   }
 };
 

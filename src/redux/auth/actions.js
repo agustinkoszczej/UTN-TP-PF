@@ -1,6 +1,7 @@
 import { completeTypes, createTypes, withPostSuccess } from 'redux-recompose';
 import { NavigationActions, StackActions } from 'react-navigation';
 import AuthService from '@services/AuthService';
+import { redirectToEspecificTab } from '@utils/navUtils';
 import { apiSetup, setAuthHeader } from '@config/api';
 import Routes from '@constants/routes';
 
@@ -22,12 +23,7 @@ export const actionCreators = {
     const token = await AuthService.getToken();
     if (token) {
       await AuthService.setTokens(token);
-      dispatch(
-        StackActions.reset({
-          index: 0,
-          actions: [NavigationActions.navigate({ routeName: Routes.Home })]
-        })
-        );
+      redirectToEspecificTab(dispatch, Routes.HomeMenu)
         dispatch(actionCreators.getUserInfo())
     } else {
       dispatch(
@@ -46,12 +42,7 @@ export const actionCreators = {
     failureSelector: response => response.data,
     injections: [
       withPostSuccess(async (dispatch, response) => {
-        dispatch(
-          StackActions.reset({
-            index: 0,
-            actions: [NavigationActions.navigate({ routeName: Routes.Home })]
-          })
-        );
+        redirectToEspecificTab(dispatch, Routes.HomeMenu)
         await AuthService.setTokens(response.data.access_token);
         dispatch(actionCreators.getUserInfo())
       })

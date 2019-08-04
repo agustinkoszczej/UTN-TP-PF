@@ -1,3 +1,4 @@
+import { NavigationActions, StackActions } from 'react-navigation';
 import { screensNavOptions } from '@config/navigation';
 import Routes from '@constants/routes';
 
@@ -21,3 +22,18 @@ export function inferRoute(screenObj) {
     }
   };
 }
+
+export const redirectToEspecificTab = (dispatch, route, params = null) =>
+  Promise.all([
+    dispatch(
+      StackActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({
+            routeName: Routes.Home,
+            params
+          })
+        ]
+      })
+    )
+  ]).then(() => dispatch(NavigationActions.navigate({ routeName: route })));

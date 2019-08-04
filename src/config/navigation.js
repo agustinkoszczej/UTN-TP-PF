@@ -53,10 +53,7 @@ const topTabOptions = ({ navigation }) => ({
       shadowOffset: { width: 0, height: 1 },
       shadowOpacity: 0.3,
       shadowRadius: 4,
-      elevation: 4,
-      style: { backgroundColor: white, paddingVertical: 5 },
-    activeTintColor: black,
-    inactiveTintColor: boulder
+      elevation: 4
     },
     activeTintColor: black,
     inactiveTintColor: boulder,

@@ -15,7 +15,7 @@ class HeaderSectionContainer extends Component {
     const {
       navigation: { navigate }
     } = this.props;
-    navigate(Routes.Configuration);
+    navigate(Routes.ChooseConfiguration);
   };
 
   handleLogOut = () => {

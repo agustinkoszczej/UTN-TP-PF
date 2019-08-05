@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { View } from 'react-native';
 
 import styles from './styles';
 import HeaderSection from './components/HeaderSection';
@@ -7,10 +7,10 @@ import InfoSection from './components/InfoSection';
 
 function Profile() {
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <HeaderSection />
       <InfoSection />
-    </ScrollView>
+    </View>
   );
 }
 

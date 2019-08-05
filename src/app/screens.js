@@ -20,6 +20,7 @@ import ScannerQR from './components/ScannerQR';
 import CurrentOrders from './screens/Home/screens/Orders/screens/CurrentOrders';
 import PastOrders from './screens/Home/screens/Orders/screens/PastOrders';
 import Configuration from './screens/Home/screens/Profile/screens/Configuration';
+import ChooseConfiguration from './screens/Home/screens/Profile/screens/ChooseConfiguration';
 import Profile from './screens/Home/screens/Profile';
 import HomeMenu from './screens/Home/screens/HomeMenu';
 import Chats from './screens/Home/screens/Chats';
@@ -35,6 +36,7 @@ export default createStackNavigator(
     ...inferRoute({ RecoverPassword }),
     ...inferRoute({ ScannerQR }),
     ...inferRoute({ Configuration }),
+    ...inferRoute({ ChooseConfiguration }),
     [Routes.Home]: {
       screen: createBottomTabNavigator(
         {

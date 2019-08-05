@@ -11,6 +11,7 @@ const routes = {
   RecoverPassword: 'RecoverPassword',
   ScannerQR: 'ScannerQR',
   Configuration: 'Configuration',
+  ChooseConfiguration: 'ChooseConfiguration',
   PastAuctions: 'PastAuctions',
   Auctions: 'Auctions',
   CurrentAuctions: 'CurrentAuctions',

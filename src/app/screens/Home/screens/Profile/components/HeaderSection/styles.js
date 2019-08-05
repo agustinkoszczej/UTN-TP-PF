@@ -8,7 +8,9 @@ const styles = StyleSheet.create({
   },
   icon: {
     height: verticalScale(75),
-    width: verticalScale(75)
+    width: verticalScale(75),
+    borderRadius: 50,
+    marginRight: 20
   },
   name: {
     fontSize: 24
@@ -18,7 +20,14 @@ const styles = StyleSheet.create({
   },
   button: {
     width: scale(250),
-    marginVertical: 10
+    marginTop: 20
+  },
+  userSection: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  nameSection: {
+    justifyContent: 'space-evenly'
   }
 });
 export default styles;

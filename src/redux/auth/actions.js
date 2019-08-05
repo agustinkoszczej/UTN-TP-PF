@@ -5,6 +5,8 @@ import { redirectToEspecificTab } from '@utils/navUtils';
 import { apiSetup } from '@config/api';
 import Routes from '@constants/routes';
 
+import { userSerializer } from './utils';
+
 export const actions = createTypes(
   completeTypes(['LOGIN', 'RECOVER_PASSWORD', 'SIGN_UP', 'UPDATE_USER', 'GET_USER_INFO', 'LOG_OUT'], []),
   '@@AUTH'
@@ -94,7 +96,8 @@ export const actionCreators = {
   getUserInfo: () => ({
     type: actions.GET_USER_INFO,
     target: targets.user,
-    service: AuthService.getUserInfo
+    service: AuthService.getUserInfo,
+    successSelector: response => userSerializer(response.data)
   }),
   logOut: () => ({
     type: actions.LOG_OUT,

@@ -48,12 +48,12 @@ class SignUpContainer extends Component {
 
   handleSignUp = values => {
     const { signUp } = this.props;
-    debugger;
     signUp(values);
   };
 
   render() {
     const { currentStep } = this.state;
+    const { loading } = this.props;
     return (
       <SignUp
         currentStep={currentStep}
@@ -62,10 +62,16 @@ class SignUpContainer extends Component {
         validationSchema={this.formValidationSchema}
         initialValues={this.initialValues}
         onSignUp={this.handleSignUp}
+        loading={loading}
       />
     );
   }
 }
+
+const mapStateToProps = state => ({
+  loading: state.auth.signUpUserLoading,
+  error: state.auth.signUpUserError
+});
 
 SignUpContainer.propTypes = {
   navigation: PropTypes.shape({
@@ -74,7 +80,8 @@ SignUpContainer.propTypes = {
   error: PropTypes.shape({
     code: PropTypes.string.isRequired
   }),
-  signUp: PropTypes.func.isRequired
+  signUp: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -82,6 +89,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SignUpContainer);

@@ -1,4 +1,6 @@
 import dialogTypes from '@components/ConnectedDialog/dialogTypes';
+import store from '@redux/store';
+import AuthActions from '@redux/auth/actions';
 
 import { strings } from './constants';
 
@@ -8,12 +10,13 @@ export const authDialogNames = {
 
 export const getAuthDialog = dialogType =>
   ({
-    [authDialogNames.ONBOARDING_USER]: name => ({
-      dialogType: dialogTypes.FINISH_SIGN_UP,
+    [authDialogNames.FINISH_SIGN_UP]: (name, username, password) => ({
+      dialogType: dialogTypes.SIMPLE_DIALOG,
       dialogContent: {
-        title: strings.welcome(name),
+        title: strings.hello(name),
         message: strings.welcomeMessage,
-        acceptText: strings.start
+        acceptText: strings.start,
+        onAcceptDialog: () => store.dispatch(AuthActions.login({ username, password }))
       }
     })
   }[dialogType]);

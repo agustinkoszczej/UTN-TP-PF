@@ -102,7 +102,7 @@ SignUp.propTypes = {
     [SIGN_UP_FIELDS.PASSWORD]: PropTypes.string,
     [SIGN_UP_FIELDS.PHONE]: PropTypes.string,
     [SIGN_UP_FIELDS.QR_URL]: PropTypes.string,
-    [SIGN_UP_FIELDS.STREET_NUMBER]: PropTypes.number
+    [SIGN_UP_FIELDS.STREET_NUMBER]: PropTypes.string
   })
 };
 

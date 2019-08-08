@@ -1,13 +1,14 @@
 import React from 'react';
-import { View, ActivityIndicator } from 'react-native';
-import { oceanGreen } from '@constants/colors';
+import { View } from 'react-native';
+import LottieView from 'lottie-react-native';
+import loading from '@lottieAssets/loading.json';
 
 import styles from './styles';
 
 function Loading() {
   return (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color={oceanGreen} />
+      <LottieView autoPlay source={loading} style={styles.icon} />
     </View>
   );
 }

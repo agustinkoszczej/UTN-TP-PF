@@ -63,13 +63,19 @@ export const actionCreators = {
     target: targets.signUpUser,
     service: AuthService.signUp,
     payload: signUpData,
+    failureSelector: response => response.data,
     injections: [
-      withPostSuccess(async dispatch => {
-        dispatch(actionCreators.login({ username: signUpData.email, password: signUpData.password }));
+      withPostSuccess(async dispatch =>
         dispatch(
-          DialogActions.showDialog(getAuthDialog(authDialogNames.ONBOARDING_USER)(signUpData.fullName))
-        );
-      })
+          DialogActions.showDialog(
+            getAuthDialog(authDialogNames.FINISH_SIGN_UP)(
+              signUpData.fullName,
+              signUpData.email,
+              signUpData.password
+            )
+          )
+        )
+      )
     ]
   }),
   updateUser: updateUpData => ({

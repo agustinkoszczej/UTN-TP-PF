@@ -1,4 +1,4 @@
-import { completeTypes, createTypes, withPostSuccess } from 'redux-recompose';
+import { completeTypes, createTypes, withPostSuccess, withPostFailure } from 'redux-recompose';
 import { NavigationActions, StackActions } from 'react-navigation';
 import AuthService from '@services/AuthService';
 import { redirectToEspecificTab } from '@utils/navUtils';
@@ -93,7 +93,19 @@ export const actionCreators = {
     type: actions.GET_USER_INFO,
     target: targets.user,
     service: AuthService.getUserInfo,
-    successSelector: response => userSerializer(response.data)
+    successSelector: response => userSerializer(response.data),
+    failureSelector: response => response.data,
+    injections: [
+      withPostFailure(async dispatch => {
+        await AuthService.logOut();
+        dispatch(
+          StackActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: Routes.Login })]
+          })
+        );
+      })
+    ]
   }),
   logOut: () => ({
     type: actions.LOG_OUT,

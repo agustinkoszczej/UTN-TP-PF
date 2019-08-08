@@ -1,5 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
+import Loadable from '@components/Loadable';
 
 import styles from './styles';
 import HeaderSection from './components/HeaderSection';
@@ -7,11 +10,20 @@ import InfoSection from './components/InfoSection';
 
 function Profile() {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <HeaderSection />
       <InfoSection />
-    </View>
+    </ScrollView>
   );
 }
 
-export default Profile;
+const mapStateToProps = state => ({
+  loading: state.auth.currentUserLoading
+});
+
+const enhance = compose(
+  Loadable(props => props.loading),
+  connect(mapStateToProps)
+);
+
+export default enhance(Profile);

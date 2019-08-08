@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withNavigation } from 'react-navigation';
+import { NavigationActions, StackActions, withNavigation } from 'react-navigation';
 import { compose } from 'recompose';
 import AuthActions from '@redux/auth/actions';
 import Routes from '@constants/routes';
@@ -19,7 +19,8 @@ class HeaderSectionContainer extends Component {
   };
 
   handleLogOut = () => {
-    const { logOut } = this.props;
+    const { logOut, redictToLogin } = this.props;
+    redictToLogin();
     logOut();
   };
 
@@ -45,7 +46,8 @@ HeaderSectionContainer.propTypes = {
   navigation: PropTypes.shape(navigationModel).isRequired,
   logOut: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  currentUser: PropTypes.shape(userModel).isRequired
+  currentUser: PropTypes.shape(userModel).isRequired,
+  redictToLogin: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -54,7 +56,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  logOut: () => dispatch(AuthActions.logOut())
+  logOut: () => dispatch(AuthActions.logOut()),
+  redictToLogin: () =>
+    dispatch(
+      StackActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: Routes.Login })]
+      })
+    )
 });
 
 const enhance = compose(

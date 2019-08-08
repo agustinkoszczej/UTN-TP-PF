@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { FormField as CustomTextInput } from '@components/CustomTextInput';
 import { PHONE_LENGTH, NAME_LENGTH } from '@constants/user';
 import phoneIcon from '@assets/ic_phone.png';
-import userIcon from '@assets/ic_user.png';
+import aptIcon from '@assets/ic_apt.png';
 import noteIcon from '@assets/ic_note.png';
 
 import { strings, SIGN_UP_FIELDS } from '../../constants';
@@ -37,9 +37,9 @@ class CompanyDataStep extends Component {
         <CustomTextInput
           {...commonProps}
           autoCapitalize="words"
-          labelIcon={userIcon}
+          labelIcon={aptIcon}
           name={SIGN_UP_FIELDS.COMPANY_NAME}
-          placeholder={strings.name}
+          placeholder={strings.companyName}
           onTextSubmitEditing={this.handleNameSubmitting}
           maxLength={NAME_LENGTH}
           applyTrim

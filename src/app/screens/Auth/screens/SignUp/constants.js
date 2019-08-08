@@ -8,6 +8,7 @@ export const strings = {
   hasAccount: '¿Ya tienes cuenta?',
   logIn: 'Inicia Sesión',
   name: 'Nombre',
+  companyName: 'Nombre compañia',
   password: 'Contraseña',
   phone: 'Teléfono',
   signUpButton: 'Crear Cuenta',

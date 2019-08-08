@@ -39,5 +39,6 @@ export default {
   setTokens,
   getUserInfo,
   getToken,
-  logOut
+  logOut,
+  removeTokens
 };

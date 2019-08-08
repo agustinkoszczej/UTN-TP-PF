@@ -4,6 +4,8 @@ import AuthService from '@services/AuthService';
 import { redirectToEspecificTab } from '@utils/navUtils';
 import { apiSetup } from '@config/api';
 import Routes from '@constants/routes';
+import DialogActions from '@redux/dialog/actions';
+import { getAuthDialog, authDialogNames } from '@screens/Auth/dialogs';
 
 import { userSerializer } from './utils';
 
@@ -44,9 +46,9 @@ export const actionCreators = {
     failureSelector: response => response.data,
     injections: [
       withPostSuccess(async (dispatch, response) => {
-        redirectToEspecificTab(dispatch, Routes.HomeMenu);
         await AuthService.setTokens(response.data.access_token);
         dispatch(actionCreators.getUserInfo());
+        redirectToEspecificTab(dispatch, Routes.HomeMenu);
       })
     ]
   }),
@@ -54,17 +56,7 @@ export const actionCreators = {
     type: actions.RECOVER_PASSWORD,
     service: AuthService.recoverPassword,
     payload: { email },
-    target: targets.recoverPassword,
-    injections: [
-      withPostSuccess(dispatch => {
-        dispatch(
-          StackActions.reset({
-            index: 0,
-            actions: [NavigationActions.navigate({ routeName: Routes.Login })]
-          })
-        );
-      })
-    ]
+    target: targets.recoverPassword
   }),
   signUp: signUpData => ({
     type: actions.SIGN_UP,
@@ -72,12 +64,10 @@ export const actionCreators = {
     service: AuthService.signUp,
     payload: signUpData,
     injections: [
-      withPostSuccess(dispatch => {
+      withPostSuccess(async dispatch => {
+        dispatch(actionCreators.login({ username: signUpData.email, password: signUpData.password }));
         dispatch(
-          StackActions.reset({
-            index: 0,
-            actions: [NavigationActions.navigate({ routeName: Routes.Home })]
-          })
+          DialogActions.showDialog(getAuthDialog(authDialogNames.ONBOARDING_USER)(signUpData.fullName))
         );
       })
     ]

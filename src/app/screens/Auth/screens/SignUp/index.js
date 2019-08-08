@@ -48,6 +48,7 @@ class SignUpContainer extends Component {
 
   handleSignUp = values => {
     const { signUp } = this.props;
+    debugger;
     signUp(values);
   };
 

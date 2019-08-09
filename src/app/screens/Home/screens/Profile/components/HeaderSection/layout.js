@@ -1,28 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AirbnbRating } from 'react-native-ratings';
-import { View, Image } from 'react-native';
-import { black } from '@constants/colors';
+import { View, Image, ImageBackground } from 'react-native';
+import { white } from '@constants/colors';
 import CustomText from '@components/CustomText';
 import Loadable from '@components/Loadable';
 import CustomButton from '@components/CustomButton';
+
+import background from '../../assets/background.jpg';
 
 import { strings } from './constants';
 import styles from './styles';
 
 function HeaderSection({ fullName, email, handleLogOut, navigateToConfiguration, picture }) {
   return (
-    <View style={styles.container}>
+    <ImageBackground source={background} style={styles.container}>
       <View style={styles.userSection}>
         <Image source={{ uri: picture }} style={styles.icon} />
         <View style={styles.nameSection}>
-          <CustomText bold style={styles.name}>
+          <CustomText bold style={styles.name} ellipsisMode="tail">
             {fullName}
           </CustomText>
-          <CustomText style={styles.direction}>{email}</CustomText>
+          <CustomText style={styles.email} ellipsisMode="tail">
+            {email}
+          </CustomText>
         </View>
       </View>
-      <AirbnbRating selectedColor={black} defaultRating={2.25} isDisabled />
+      <AirbnbRating selectedColor={white} defaultRating={2.25} isDisabled />
       <CustomButton
         secondaryBtn
         title={strings.edit}
@@ -30,7 +34,7 @@ function HeaderSection({ fullName, email, handleLogOut, navigateToConfiguration,
         onPress={navigateToConfiguration}
       />
       <CustomButton title={strings.closeSession} style={styles.button} onPress={handleLogOut} />
-    </View>
+    </ImageBackground>
   );
 }
 

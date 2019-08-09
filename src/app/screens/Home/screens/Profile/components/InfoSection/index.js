@@ -1,23 +1,30 @@
+/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import PropTypes from 'prop-types';
+import { View } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { connect } from 'react-redux';
 import { WIDTH } from '@constants/platform';
 import { formatLocation } from '@constants/geolocation';
+import { userModel } from '@propTypes/userModel';
 
 import LocationSection from './components/LocationSection';
+import { routes } from './constants';
+import styles from './styles';
 
 const FirstRoute = () => <View style={[styles.scene, { backgroundColor: '#FFFFFF' }]} />;
 
 class InfoSection extends Component {
   state = {
     index: 0,
-    routes: [{ key: 'company', title: 'Compañía' }, { key: 'location', title: 'Ubicación' }]
+    routes
   };
 
-  renderTabBar = props => <TabBar {...props} scrollEnabled />;
+  renderTabBar = props => <TabBar {...props} style={styles.tabBar} scrollEnabled />;
 
   renderLocation = () => <LocationSection {...formatLocation(this.props.currentUser)} />;
+
+  handleIndexChange = index => this.setState({ index });
 
   render() {
     return (
@@ -28,18 +35,17 @@ class InfoSection extends Component {
           location: this.renderLocation
         })}
         renderTabBar={this.renderTabBar}
-        onIndexChange={index => this.setState({ index })}
+        onIndexChange={this.handleIndexChange}
         initialLayout={WIDTH}
+        style={styles.tabView}
       />
     );
   }
 }
 
-const styles = StyleSheet.create({
-  scene: {
-    flex: 1
-  }
-});
+InfoSection.propTypes = {
+  currentUser: PropTypes.shape(userModel).isRequired
+};
 
 const mapStateToProps = state => ({
   currentUser: state.auth.currentUser

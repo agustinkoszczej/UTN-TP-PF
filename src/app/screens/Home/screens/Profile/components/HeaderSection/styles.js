@@ -1,10 +1,12 @@
 import { StyleSheet } from 'react-native';
 import { verticalScale, scale } from '@utils/scalingUtils';
+import { white } from '@constants/colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingTop: 25
   },
   icon: {
     height: verticalScale(75),
@@ -13,10 +15,12 @@ const styles = StyleSheet.create({
     marginRight: 20
   },
   name: {
-    fontSize: 24
+    fontSize: 24,
+    color: white
   },
-  direction: {
-    fontSize: 16
+  email: {
+    fontSize: 16,
+    color: white
   },
   button: {
     width: scale(250),

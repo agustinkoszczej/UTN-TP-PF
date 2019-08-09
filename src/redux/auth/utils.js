@@ -4,7 +4,7 @@ export const userSerializer = ({
   picture,
   user_metadata: { fullName, companyName, contactNumber, streetAddress, cuit, qrUrl, location }
 }) => {
-  const locations = location.split(',').map(loc => parseInt(loc, 10));
+  const locations = location.split(',');
   return {
     email,
     id,

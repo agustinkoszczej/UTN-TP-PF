@@ -22,7 +22,12 @@ class InfoSection extends Component {
 
   renderTabBar = props => <TabBar {...props} style={styles.tabBar} scrollEnabled />;
 
-  renderLocation = () => <LocationSection {...formatLocation(this.props.currentUser)} />;
+  renderLocation = () => {
+    const {
+      currentUser: { streetAddress, latitude, longitude }
+    } = this.props;
+    return <LocationSection {...formatLocation({ longitude, latitude })} streetAddress={streetAddress} />;
+  };
 
   handleIndexChange = index => this.setState({ index });
 
@@ -36,7 +41,7 @@ class InfoSection extends Component {
         })}
         renderTabBar={this.renderTabBar}
         onIndexChange={this.handleIndexChange}
-        initialLayout={WIDTH}
+        initialLayout={WIDTH * 0.9}
         style={styles.tabView}
       />
     );

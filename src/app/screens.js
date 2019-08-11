@@ -19,6 +19,7 @@ import SignUp from './screens/Auth/screens/SignUp';
 import ScannerQR from './components/ScannerQR';
 import CurrentOrders from './screens/Home/screens/Orders/screens/CurrentOrders';
 import PastOrders from './screens/Home/screens/Orders/screens/PastOrders';
+import CreateOrder from './screens/Home/screens/Orders/screens/CreateOrder';
 import Configuration from './screens/Home/screens/Profile/screens/Configuration';
 import ChooseConfiguration from './screens/Home/screens/Profile/screens/ChooseConfiguration';
 import Profile from './screens/Home/screens/Profile';
@@ -27,6 +28,7 @@ import Chats from './screens/Home/screens/Chats';
 import InitialLoading from './screens/InitialLoading';
 import CurrentAuctions from './screens/Home/screens/Auctions/screens/CurrentAuctions';
 import PastAuctions from './screens/Home/screens/Auctions/screens/PastAuctions';
+import CreateAuction from './screens/Home/screens/Auctions/screens/CreateAuction';
 
 export default createStackNavigator(
   {
@@ -37,6 +39,8 @@ export default createStackNavigator(
     ...inferRoute({ ScannerQR }),
     ...inferRoute({ Configuration }),
     ...inferRoute({ ChooseConfiguration }),
+    ...inferRoute({ CreateOrder }),
+    ...inferRoute({ CreateAuction }),
     [Routes.Home]: {
       screen: createBottomTabNavigator(
         {

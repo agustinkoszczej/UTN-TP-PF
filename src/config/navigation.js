@@ -223,6 +223,18 @@ export const screensNavOptions = {
         height: 4
       }
     }
+  },
+  [Routes.CreateAuction]: {
+    title: strings[Routes.CreateAuction]
+  },
+  [Routes.CreateOrder]: {
+    title: strings[Routes.CreateOrder]
+  },
+  [Routes.Configuration]: {
+    title: strings[Routes.Configuration]
+  },
+  [Routes.ChooseConfiguration]: {
+    title: strings[Routes.ChooseConfiguration]
   }
 };
 

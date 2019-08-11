@@ -11,5 +11,7 @@ export const strings = {
   [Routes.Orders]: 'Pedidos',
   [Routes.PastOrders]: 'Pedidos Pasados',
   [Routes.Profile]: 'Perfil',
-  [Routes.PastAuctions]: 'Subastas Pasadas'
+  [Routes.PastAuctions]: 'Subastas Pasadas',
+  [Routes.CreateAuction]: 'Crear Subasta',
+  [Routes.CreateOrder]: 'Crear Pedido'
 };

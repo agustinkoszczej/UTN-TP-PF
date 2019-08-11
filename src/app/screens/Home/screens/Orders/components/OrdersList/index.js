@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, Image } from 'react-native';
+import { FlatList, Image, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { withNavigation } from 'react-navigation';
 import { compose } from 'recompose';
@@ -8,25 +8,39 @@ import WithError from '@components/WithError';
 import { ordersModel } from '@propTypes/ordersModel';
 import CustomText from '@components/CustomText';
 import CustomButton from '@components/CustomButton';
+import StatusTag from '@components/StatusTag';
 import Card from '@components/Card';
 import { navigationModel } from '@propTypes/navigationModel';
 import Routes from '@constants/routes';
+import { dateFormat } from '@utils/timeUtils';
 
 import styles from './styles';
 
 class OrdersList extends Component {
-  renderItem = ({ item: { receiverName, receiverPicture, amount, id } }) => (
+  renderItem = ({ item: { receiverName, receiverPicture, amount, id, status, deliveryDate } }) => (
     <Card style={styles.orderContainer}>
-      <Image source={{ uri: receiverPicture }} style={styles.userPicture} />
-      <CustomText>{receiverName}</CustomText>
-      <CustomText>{amount}</CustomText>
-      <CustomButton
-        primaryBtn
-        style={styles.seeButton}
-        textStyle={styles.white}
-        onPress={this.goToOrderDetail(id)}
-        title="Ver"
-      />
+      <View style={styles.orderHeader}>
+        <View style={styles.orderName}>
+          <Image source={{ uri: receiverPicture }} style={styles.userPicture} />
+          <CustomText style={styles.name} title bold>
+            {receiverName}
+          </CustomText>
+        </View>
+        <StatusTag status={status} />
+      </View>
+      <View style={styles.bottomOrder}>
+        <View>
+          <CustomText>{`Precio: ${amount}`}</CustomText>
+          <CustomText>{`Fecha de entrega: ${dateFormat(deliveryDate)}`}</CustomText>
+        </View>
+        <CustomButton
+          primaryBtn
+          style={styles.seeButton}
+          textStyle={styles.white}
+          onPress={this.goToOrderDetail(id)}
+          title="Ver"
+        />
+      </View>
     </Card>
   );
 

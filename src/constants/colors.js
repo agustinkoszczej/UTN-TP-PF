@@ -4,6 +4,7 @@ export const thunderbird = '#BA151A';
 
 // Secondary color scheme
 export const red = '#FF0003';
+export const green = '#32CD32';
 export const black = '#000505';
 export const dodgerBlue = '#1e90ff';
 export const amber = '#ffbf00';

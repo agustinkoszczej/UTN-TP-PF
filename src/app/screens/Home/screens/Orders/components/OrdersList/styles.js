@@ -7,21 +7,44 @@ const styles = StyleSheet.create({
   },
   orderContainer: {
     flex: 1,
-    flexDirection: 'row',
     marginVertical: 15,
+    padding: 20,
     height: 150
   },
   userPicture: {
     width: 50,
     height: 50,
-    borderRadius: 25
+    borderRadius: 25,
+    marginRight: 15
   },
   white: {
     color: white
   },
   seeButton: {
     width: 50,
-    height: 50
+    height: 50,
+    alignSelf: 'flex-end'
+  },
+  orderHeader: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  orderName: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  bottomOrder: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginLeft: 65,
+    alignItems: 'center'
+  },
+  name: {
+    fontSize: 18
   }
 });
 export default styles;

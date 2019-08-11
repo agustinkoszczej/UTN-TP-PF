@@ -5,13 +5,14 @@ import { actions } from './actions';
 
 const stateDescription = {
   activeOrders: [],
-  pastOrders: []
+  pastOrders: [],
+  currentOrder: null
 };
 
 const initialState = completeState(stateDescription);
 
 const reducerDescription = {
-  primaryActions: [actions.GET_ACTIVE_ORDERS, actions.GET_PAST_ORDERS],
+  primaryActions: [actions.GET_ACTIVE_ORDERS, actions.GET_PAST_ORDERS, actions.GET_ORDER_BY_ID],
   override: {}
 };
 

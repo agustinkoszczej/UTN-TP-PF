@@ -1,5 +1,7 @@
+import React from 'react';
 import { getActiveChildNavigationOptions, HeaderBackButton } from 'react-navigation';
 import TabBarIcon from '@components/TabBarIcon';
+import AddButton from '@components/AddButton';
 import { black, boulder, dustyGray, white } from '@constants/colors';
 import Routes from '@constants/routes';
 import statusBarConfig from '@constants/statusBar';
@@ -86,7 +88,8 @@ export const screensNavOptions = {
       style: { backgroundColor: white, paddingVertical: 5 },
       activeTintColor: black,
       inactiveTintColor: boulder
-    }
+    },
+    headerRight: <AddButton />
   },
   [Routes.Profile]: {
     gesturesEnabled: false,
@@ -122,7 +125,8 @@ export const screensNavOptions = {
       style: { backgroundColor: white, paddingVertical: 5 },
       activeTintColor: black,
       inactiveTintColor: boulder
-    }
+    },
+    headerRight: <AddButton />
   },
   [Routes.HomeMenu]: {
     gesturesEnabled: false,

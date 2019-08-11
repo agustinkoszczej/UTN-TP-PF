@@ -1,41 +1,63 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { ImageBackground } from 'react-native';
+import PropTypes from 'prop-types';
+import { withNavigation } from 'react-navigation';
 import CustomButton from '@components/CustomButton';
 import CustomText from '@components/CustomText';
+import Routes from '@constants/routes';
+import { navigationModel } from '@propTypes/navigationModel';
+
+import background from '../../assets/background.jpg';
+import { TYPES } from '../../constants';
 
 import { strings } from './constants';
 import styles from './styles';
 
 class ChooseConfiguration extends Component {
-  handleClick = () => {};
+  handleClick = type => () => {
+    const {
+      navigation: { navigate }
+    } = this.props;
+    navigate(Routes.Configuration, { type });
+  };
 
   render() {
     return (
-      <View style={styles.container}>
-        <CustomText bold>{strings.choose}</CustomText>
-
+      <ImageBackground source={background} style={styles.container}>
+        <CustomText bold style={styles.white}>
+          {strings.choose}
+        </CustomText>
         <CustomButton
           secondaryBtn
           title={strings.editUserData}
           style={styles.button}
-          onPress={this.handleClick}
+          onPress={this.handleClick(TYPES.USER)}
         />
         <CustomButton
           secondaryBtn
           title={strings.editCompanyData}
           style={styles.button}
-          onPress={this.handleClick}
+          onPress={this.handleClick(TYPES.COMPANY)}
         />
         <CustomButton
           secondaryBtn
           title={strings.editLocation}
           style={styles.button}
-          onPress={this.handleClick}
+          onPress={this.handleClick(TYPES.LOCATION)}
         />
-        <CustomButton secondaryBtn title={strings.editQR} style={styles.button} onPress={this.handleClick} />
-      </View>
+        <CustomButton
+          secondaryBtn
+          title={strings.editQR}
+          style={styles.button}
+          onPress={this.handleClick(TYPES.QR)}
+        />
+      </ImageBackground>
     );
   }
 }
 
-export default ChooseConfiguration;
+ChooseConfiguration.propTypes = {
+  navigation: PropTypes.shape(navigationModel).isRequired
+};
+
+export default withNavigation(ChooseConfiguration);

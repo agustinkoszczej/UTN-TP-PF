@@ -24,12 +24,7 @@ const logOut = async () => {
   return { ok: true };
 };
 
-const update = () => {
-  return {
-    ok: true,
-    status: 200
-  };
-};
+const update = values => api.put('/users/profile', values);
 
 export default {
   login,

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { formatLocation } from '@constants/geolocation';
+import { userModel } from '@propTypes/userModel';
 
 import { SIGN_UP_FIELDS } from '../../constants';
 
@@ -8,6 +10,19 @@ import LocationStep from './layout';
 
 class LocationStepContainer extends Component {
   state = { displayList: false, region: null, coordinate: null, clicked: false };
+
+  componentDidMount() {
+    const { currentUser } = this.props;
+    if (currentUser) {
+      const { streetAddress } = currentUser;
+      this.setState({
+        ...formatLocation(currentUser),
+        address: streetAddress,
+        displayList: false,
+        clicked: true
+      });
+    }
+  }
 
   handleAddressChange = values => {
     const { setFieldValue } = this.props;
@@ -53,7 +68,12 @@ LocationStepContainer.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired
   }),
-  setFieldValue: PropTypes.func.isRequired
+  setFieldValue: PropTypes.func.isRequired,
+  currentUser: PropTypes.shape(userModel)
 };
 
-export default LocationStepContainer;
+const mapStateToProps = state => ({
+  currentUser: state.auth.currentUser
+});
+
+export default connect(mapStateToProps)(LocationStepContainer);

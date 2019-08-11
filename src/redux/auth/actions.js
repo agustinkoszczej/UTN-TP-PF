@@ -85,6 +85,7 @@ export const actionCreators = {
     payload: updateUpData,
     injections: [
       withPostSuccess(dispatch => {
+        dispatch(actionCreators.getUserInfo());
         dispatch(NavigationActions.back());
       })
     ]

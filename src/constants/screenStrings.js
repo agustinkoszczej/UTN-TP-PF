@@ -1,14 +1,15 @@
 import Routes from '@constants/routes';
 
 export const strings = {
-  [Routes.Profile]: 'Perfil',
-  [Routes.Orders]: 'Pedidos',
-  [Routes.CurrentOrders]: 'Pedidos Actuales',
-  [Routes.PastOrders]: 'Pedidos Pasados',
-  [Routes.Configuration]: 'Configuración',
-  [Routes.CurrentAuctions]: 'Subastas Actuales',
   [Routes.Auctions]: 'Subastas',
-  [Routes.PastAuctions]: 'Subastas Pasadas',
   [Routes.Chats]: 'Chats',
-  [Routes.HomeMenu]: 'Inicio'
+  [Routes.ChooseConfiguration]: 'Configuración',
+  [Routes.CurrentAuctions]: 'Subastas Actuales',
+  [Routes.CurrentOrders]: 'Pedidos Actuales',
+  [Routes.Configuration]: 'Configuración',
+  [Routes.HomeMenu]: 'Inicio',
+  [Routes.Orders]: 'Pedidos',
+  [Routes.PastOrders]: 'Pedidos Pasados',
+  [Routes.Profile]: 'Perfil',
+  [Routes.PastAuctions]: 'Subastas Pasadas'
 };

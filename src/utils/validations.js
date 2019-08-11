@@ -26,6 +26,17 @@ export const authInputs = field =>
       .matches(nameRegex, strings.invalidSpecialCharacters)
   }[field]);
 
+export const updateInputs = field =>
+  ({
+    [FIELDS.EMAIL]: string()
+      .matches(emailRegex, strings.invalidEmailMsg)
+      .required(strings.requiredValidation),
+    [FIELDS.NAME]: string()
+      .required(strings.requiredValidation)
+      .min(3, strings.invalidNameMsg)
+      .matches(nameRegex, strings.invalidSpecialCharacters)
+  }[field]);
+
 export const dataInputs = field =>
   ({
     [FIELDS.COMPANY_NAME]: string()
@@ -45,6 +56,9 @@ export const dataInputs = field =>
 
 export const authValidation = arrayInputs =>
   arrayInputs.reduce((fields, nameField) => ({ ...fields, [nameField]: authInputs(nameField) }), {});
+
+export const updateValidation = arrayInputs =>
+  arrayInputs.reduce((fields, nameField) => ({ ...fields, [nameField]: updateInputs(nameField) }), {});
 
 export const dataValidation = arrayInputs =>
   arrayInputs.reduce((fields, nameField) => ({ ...fields, [nameField]: dataInputs(nameField) }), {});

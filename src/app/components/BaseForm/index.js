@@ -59,6 +59,7 @@ class BaseForm extends Component {
       priority,
       icon,
       defaultImage,
+      textStyle,
       ...buttonProps
     } = this.props;
     const Container = scrolleable ? ScrollView : View;
@@ -92,6 +93,7 @@ class BaseForm extends Component {
               title={buttonTitle}
               style={[styles.button, !primaryBtn && styles.footerBtn, buttonStyle]}
               rightComponent={buttonRightComponent}
+              textStyle={textStyle}
               {...buttonProps}
             />
           )}
@@ -123,6 +125,7 @@ BaseForm.propTypes = {
   }).isRequired,
   defaultImage: PropTypes.number,
   backgroundStyle: ViewPropTypes.style,
+  textStyle: ViewPropTypes.style,
   backgroundColor: PropTypes.string,
   pictures: PropTypes.arrayOf(PropTypes.string.isRequired),
   uri: PropTypes.string,

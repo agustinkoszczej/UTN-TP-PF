@@ -25,7 +25,7 @@ class UserDataStep extends Component {
   };
 
   render() {
-    const { handleSubmit, onEmailChange, emailError } = this.props;
+    const { handleSubmit, onEmailChange, emailError, update } = this.props;
     const commonProps = {
       underline: true,
       returnKeyType: 'next',
@@ -57,19 +57,21 @@ class UserDataStep extends Component {
           textRef={this[SIGN_UP_FIELDS.EMAIL]}
           applyTrim
         />
-        <CustomTextInput
-          {...commonProps}
-          labelIcon={passwordIcon}
-          name={SIGN_UP_FIELDS.PASSWORD}
-          placeholder={strings.password}
-          showEye
-          returnKeyType="go"
-          secureTextEntry
-          textRef={this[SIGN_UP_FIELDS.PASSWORD]}
-          onTextSubmitEditing={handleSubmit}
-          maxLength={PASSWORD_LENGTH}
-          avoidSpaces
-        />
+        {!update && (
+          <CustomTextInput
+            {...commonProps}
+            labelIcon={passwordIcon}
+            name={SIGN_UP_FIELDS.PASSWORD}
+            placeholder={strings.password}
+            showEye
+            returnKeyType="go"
+            secureTextEntry
+            textRef={this[SIGN_UP_FIELDS.PASSWORD]}
+            onTextSubmitEditing={handleSubmit}
+            maxLength={PASSWORD_LENGTH}
+            avoidSpaces
+          />
+        )}
       </View>
     );
   }
@@ -81,7 +83,8 @@ UserDataStep.propTypes = {
   emailError: PropTypes.string,
   values: PropTypes.shape({
     phone: PropTypes.string
-  }).isRequired
+  }).isRequired,
+  update: PropTypes.bool
 };
 
 export default UserDataStep;

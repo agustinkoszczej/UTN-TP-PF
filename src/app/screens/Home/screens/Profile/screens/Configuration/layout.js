@@ -6,16 +6,28 @@ import { compose } from 'recompose';
 import BaseForm from '@components/BaseForm';
 import CompanyDataStep from '@screens/Auth/screens/SignUp/components/CompanyDataStep';
 import UserDataStep from '@screens/Auth/screens/SignUp/components/UserDataStep';
+import LocationStep from '@screens/Auth/screens/SignUp/components/LocationStep';
+import QRStep from '@screens/Auth/screens/SignUp/components/QRStep';
 import { SIGN_UP_FIELDS } from '@screens/Auth/screens/SignUp/constants';
+
+import { TYPES } from '../../constants';
 
 import styles from './styles';
 
-function Configuration({ handleSubmit, values, setFieldValue }) {
+function Configuration({ handleSubmit, values, setFieldValue, type }) {
   return (
     <View style={styles.container}>
-      <BaseForm showButton onSubmit={handleSubmit}>
-        <CompanyDataStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />
-        <UserDataStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />
+      <BaseForm showButton primaryBtn textStyle={styles.white} onSubmit={handleSubmit}>
+        {
+          {
+            [TYPES.COMPANY]: (
+              <CompanyDataStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />
+            ),
+            [TYPES.USER]: <UserDataStep handleSubmit={handleSubmit} values={values} update />,
+            [TYPES.QR]: <QRStep setFieldValue={setFieldValue} handleSubmit={handleSubmit} />,
+            [TYPES.LOCATION]: <LocationStep setFieldValue={setFieldValue} values={values} />
+          }[type]
+        }
       </BaseForm>
     </View>
   );
@@ -28,7 +40,8 @@ Configuration.propTypes = {
     [SIGN_UP_FIELDS.NAME]: PropTypes.string,
     [SIGN_UP_FIELDS.PHONE]: PropTypes.string,
     [SIGN_UP_FIELDS.CUIT]: PropTypes.string
-  })
+  }),
+  type: PropTypes.string.isRequired
 };
 
 const enhancer = compose(

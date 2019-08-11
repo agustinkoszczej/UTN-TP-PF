@@ -135,6 +135,90 @@ export const screensNavOptions = {
       activeTintColor: black,
       inactiveTintColor: boulder
     }
+  },
+  [Routes.CurrentOrders]: {
+    tabBarLabel: strings[Routes.CurrentOrders],
+    tabBarOptions: {
+      style: {
+        backgroundColor: white,
+        borderBottomWidth: 1,
+        borderBottomColor: black,
+        shadowColor: black,
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 4
+      },
+      activeTintColor: black,
+      inactiveTintColor: black,
+      indicatorStyle: {
+        backgroundColor: black,
+        height: 4
+      }
+    }
+  },
+  [Routes.PastOrders]: {
+    tabBarLabel: strings[Routes.PastOrders],
+    tabBarOptions: {
+      style: {
+        backgroundColor: white,
+        borderBottomWidth: 1,
+        borderBottomColor: black,
+        shadowColor: black,
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 4
+      },
+      activeTintColor: black,
+      inactiveTintColor: black,
+      indicatorStyle: {
+        backgroundColor: black,
+        height: 4
+      }
+    }
+  },
+  [Routes.PastAuctions]: {
+    tabBarLabel: strings[Routes.PastAuctions],
+    tabBarOptions: {
+      style: {
+        backgroundColor: white,
+        borderBottomWidth: 1,
+        borderBottomColor: black,
+        shadowColor: black,
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 4
+      },
+      activeTintColor: black,
+      inactiveTintColor: black,
+      indicatorStyle: {
+        backgroundColor: black,
+        height: 4
+      }
+    }
+  },
+  [Routes.CurrentAuctions]: {
+    tabBarLabel: strings[Routes.CurrentAuctions],
+    tabBarOptions: {
+      style: {
+        backgroundColor: white,
+        borderBottomWidth: 1,
+        borderBottomColor: black,
+        shadowColor: black,
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 4
+      },
+      activeTintColor: black,
+      inactiveTintColor: black,
+      indicatorStyle: {
+        backgroundColor: black,
+        height: 4
+      }
+    }
   }
 };
 

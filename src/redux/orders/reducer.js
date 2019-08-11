@@ -4,13 +4,14 @@ import Immutable from 'seamless-immutable';
 import { actions } from './actions';
 
 const stateDescription = {
-  currentOrders: []
+  currentOrders: [],
+  pastOrders: []
 };
 
 const initialState = completeState(stateDescription);
 
 const reducerDescription = {
-  primaryActions: [actions.GET_CURRENT_ORDERS],
+  primaryActions: [actions.GET_CURRENT_ORDERS, actions.GET_PAST_ORDERS],
   override: {}
 };
 

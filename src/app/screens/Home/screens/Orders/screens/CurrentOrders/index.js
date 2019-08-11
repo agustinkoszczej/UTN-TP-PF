@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import OrdersActions from '@redux/orders/actions';
 import { ordersModel } from '@propTypes/ordersModel';
 
-import CurrentOrders from './layout';
+import OrdersList from '../../components/OrdersList';
 
 class CurrentOrdersContainer extends Component {
   componentDidMount() {
@@ -18,20 +18,13 @@ class CurrentOrdersContainer extends Component {
   };
 
   render() {
-    const { currentOrders, error, loading } = this.props;
-    return (
-      <CurrentOrders
-        currentOrders={currentOrders}
-        error={error}
-        loading={loading}
-        getOrders={this.getOrders}
-      />
-    );
+    const { orders, error, loading } = this.props;
+    return <OrdersList orders={orders} error={error} loading={loading} getOrders={this.getOrders} />;
   }
 }
 
 const mapStateToProps = state => ({
-  currentOrders: state.orders.currentOrders.orders,
+  orders: state.orders.currentOrders.orders,
   error: state.orders.currentOrdersError,
   loading: state.orders.currentOrdersLoading
 });
@@ -44,7 +37,7 @@ CurrentOrdersContainer.propTypes = {
   getCurrentOrders: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.string,
-  currentOrders: PropTypes.arrayOf(PropTypes.shape(ordersModel))
+  orders: PropTypes.arrayOf(PropTypes.shape(ordersModel))
 };
 
 const enhance = compose(

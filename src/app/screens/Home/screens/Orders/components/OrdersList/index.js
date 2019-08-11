@@ -5,21 +5,26 @@ import { compose } from 'recompose';
 import Loadable from '@components/Loadable';
 import WithError from '@components/WithError';
 
-function CurrentOrders() {
+function OrdersList() {
   return <Text>Hola</Text>;
 }
 
 const enhance = compose(
   WithError(
-    ({ error, currentOrders }) => error || currentOrders?.length === 0,
-    ({ currentOrders, loading, getOrders, error }) => ({
-      asset: currentOrders?.length === 0 ? worried : undefined,
+    ({ error, orders }) => error || orders?.length === 0,
+    ({ orders, loading, getOrders, error, current }) => ({
+      asset: orders?.length === 0 ? worried : undefined,
       handleError: error && getOrders,
-      title: currentOrders?.length === 0 ? 'No tenes pedidos actuales' : undefined,
+      title:
+        orders?.length === 0
+          ? current
+            ? 'No tenes pedidos actuales'
+            : 'No tenes pedidos pasados'
+          : undefined,
       loading
     })
   ),
   Loadable(props => props.loading, true)
 );
 
-export default enhance(CurrentOrders);
+export default enhance(OrdersList);

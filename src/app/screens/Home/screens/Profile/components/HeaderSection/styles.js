@@ -32,6 +32,9 @@ const styles = StyleSheet.create({
   },
   nameSection: {
     justifyContent: 'space-evenly'
+  },
+  white: {
+    color: white
   }
 });
 export default styles;

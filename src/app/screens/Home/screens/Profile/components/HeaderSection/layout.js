@@ -33,7 +33,12 @@ function HeaderSection({ fullName, email, handleLogOut, navigateToConfiguration,
         style={styles.button}
         onPress={navigateToConfiguration}
       />
-      <CustomButton title={strings.closeSession} style={styles.button} onPress={handleLogOut} />
+      <CustomButton
+        title={strings.closeSession}
+        style={styles.button}
+        onPress={handleLogOut}
+        textStyle={styles.white}
+      />
     </ImageBackground>
   );
 }

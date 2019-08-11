@@ -22,8 +22,8 @@ const mapStateToProps = state => ({
 });
 
 const enhance = compose(
-  Loadable(props => props.loading),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
+  Loadable(props => props.loading)
 );
 
 export default enhance(Profile);

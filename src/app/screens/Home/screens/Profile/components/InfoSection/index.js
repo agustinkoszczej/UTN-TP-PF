@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { connect } from 'react-redux';
 import { WIDTH } from '@constants/platform';
@@ -9,10 +8,9 @@ import { formatLocation } from '@constants/geolocation';
 import { userModel } from '@propTypes/userModel';
 
 import LocationSection from './components/LocationSection';
+import CompanySection from './components/CompanySection';
 import { routes } from './constants';
 import styles from './styles';
-
-const FirstRoute = () => <View style={[styles.scene, { backgroundColor: '#FFFFFF' }]} />;
 
 class InfoSection extends Component {
   state = {
@@ -29,6 +27,13 @@ class InfoSection extends Component {
     return <LocationSection {...formatLocation({ longitude, latitude })} streetAddress={streetAddress} />;
   };
 
+  renderCompany = () => {
+    const {
+      currentUser: { cuit, companyName, contactNumber }
+    } = this.props;
+    return <CompanySection cuit={cuit} companyName={companyName} contactNumber={contactNumber} />;
+  };
+
   handleIndexChange = index => this.setState({ index });
 
   render() {
@@ -36,7 +41,7 @@ class InfoSection extends Component {
       <TabView
         navigationState={this.state}
         renderScene={SceneMap({
-          company: FirstRoute,
+          company: this.renderCompany,
           location: this.renderLocation
         })}
         renderTabBar={this.renderTabBar}

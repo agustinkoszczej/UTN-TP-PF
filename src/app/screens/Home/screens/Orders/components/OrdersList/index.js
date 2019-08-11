@@ -1,36 +1,68 @@
 import React, { Component } from 'react';
-import { FlatList, View, Image } from 'react-native';
+import { FlatList, Image } from 'react-native';
 import PropTypes from 'prop-types';
-import worried from '@assets/worried.png';
+import { withNavigation } from 'react-navigation';
 import { compose } from 'recompose';
-import Loadable from '@components/Loadable';
+import worried from '@assets/worried.png';
 import WithError from '@components/WithError';
 import { ordersModel } from '@propTypes/ordersModel';
 import CustomText from '@components/CustomText';
+import CustomButton from '@components/CustomButton';
+import Card from '@components/Card';
+import { navigationModel } from '@propTypes/navigationModel';
+import Routes from '@constants/routes';
 
 import styles from './styles';
 
 class OrdersList extends Component {
-  renderItem = ({ item: { receiverName, receiverPicture } }) => (
-    <View style={styles.orderContainer}>
+  renderItem = ({ item: { receiverName, receiverPicture, amount, id } }) => (
+    <Card style={styles.orderContainer}>
       <Image source={{ uri: receiverPicture }} style={styles.userPicture} />
       <CustomText>{receiverName}</CustomText>
-    </View>
+      <CustomText>{amount}</CustomText>
+      <CustomButton
+        primaryBtn
+        style={styles.seeButton}
+        textStyle={styles.white}
+        onPress={this.goToOrderDetail(id)}
+        title="Ver"
+      />
+    </Card>
   );
+
+  goToOrderDetail = id => () => {
+    const {
+      navigation: { navigate }
+    } = this.props;
+    navigate(Routes.OrderDetail, { id });
+  };
 
   keyExtractor = ({ id }) => `${id}`;
 
   render() {
-    const { orders } = this.props;
-    return <FlatList data={orders} keyExtractor={this.keyExtractor} renderItem={this.renderItem} />;
+    const { orders, getOrders, loading } = this.props;
+    return (
+      <FlatList
+        data={orders}
+        style={styles.container}
+        keyExtractor={this.keyExtractor}
+        renderItem={this.renderItem}
+        onRefresh={getOrders}
+        refreshing={loading}
+      />
+    );
   }
 }
 
 OrdersList.propTypes = {
-  orders: PropTypes.arrayOf(PropTypes.shape(ordersModel))
+  orders: PropTypes.arrayOf(PropTypes.shape(ordersModel)),
+  getOrders: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  navigation: PropTypes.shape(navigationModel).isRequired
 };
 
 const enhance = compose(
+  withNavigation,
   WithError(
     ({ error, orders }) => error || orders?.length === 0,
     ({ orders, loading, getOrders, error, active }) => ({
@@ -40,8 +72,7 @@ const enhance = compose(
         orders?.length === 0 ? (active ? 'No tenes pedidos activos' : 'No tenes pedidos pasados') : undefined,
       loading
     })
-  ),
-  Loadable(props => props.loading, true)
+  )
 );
 
 export default enhance(OrdersList);

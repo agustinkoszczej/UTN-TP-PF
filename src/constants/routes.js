@@ -18,7 +18,8 @@ const routes = {
   HomeMenu: 'HomeMenu',
   Chats: 'Chats',
   CreateOrder: 'CreateOrder',
-  CreateAuction: 'CreateAuction'
+  CreateAuction: 'CreateAuction',
+  OrderDetail: 'OrderDetail'
 };
 
 export default routes;

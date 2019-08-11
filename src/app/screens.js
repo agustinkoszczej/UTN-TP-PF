@@ -13,19 +13,26 @@ import {
   createStackNavigator
 } from 'react-navigation';
 
+// Auth
 import Login from './screens/Auth/screens/Login';
 import RecoverPassword from './screens/Auth/screens/RecoverPassword';
 import SignUp from './screens/Auth/screens/SignUp';
 import ScannerQR from './components/ScannerQR';
+import InitialLoading from './screens/InitialLoading';
+// Orders
 import ActiveOrders from './screens/Home/screens/Orders/screens/ActiveOrders';
 import PastOrders from './screens/Home/screens/Orders/screens/PastOrders';
 import CreateOrder from './screens/Home/screens/Orders/screens/CreateOrder';
+import OrderDetail from './screens/Home/screens/Orders/screens/OrderDetail';
+// Profile
 import Configuration from './screens/Home/screens/Profile/screens/Configuration';
 import ChooseConfiguration from './screens/Home/screens/Profile/screens/ChooseConfiguration';
 import Profile from './screens/Home/screens/Profile';
+// Menu
 import HomeMenu from './screens/Home/screens/HomeMenu';
+// Chats
 import Chats from './screens/Home/screens/Chats';
-import InitialLoading from './screens/InitialLoading';
+// Auctions
 import ActiveAuctions from './screens/Home/screens/Auctions/screens/ActiveAuctions';
 import PastAuctions from './screens/Home/screens/Auctions/screens/PastAuctions';
 import CreateAuction from './screens/Home/screens/Auctions/screens/CreateAuction';
@@ -41,6 +48,7 @@ export default createStackNavigator(
     ...inferRoute({ ChooseConfiguration }),
     ...inferRoute({ CreateOrder }),
     ...inferRoute({ CreateAuction }),
+    ...inferRoute({ OrderDetail }),
     [Routes.Home]: {
       screen: createBottomTabNavigator(
         {

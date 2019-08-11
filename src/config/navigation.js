@@ -235,6 +235,9 @@ export const screensNavOptions = {
   },
   [Routes.ChooseConfiguration]: {
     title: strings[Routes.ChooseConfiguration]
+  },
+  [Routes.OrderDetail]: {
+    title: strings[Routes.OrderDetail]
   }
 };
 

@@ -140,8 +140,8 @@ export const screensNavOptions = {
       inactiveTintColor: boulder
     }
   },
-  [Routes.CurrentOrders]: {
-    tabBarLabel: strings[Routes.CurrentOrders],
+  [Routes.ActiveOrders]: {
+    tabBarLabel: strings[Routes.ActiveOrders],
     tabBarOptions: {
       style: {
         backgroundColor: white,
@@ -203,8 +203,8 @@ export const screensNavOptions = {
       }
     }
   },
-  [Routes.CurrentAuctions]: {
-    tabBarLabel: strings[Routes.CurrentAuctions],
+  [Routes.ActiveAuctions]: {
+    tabBarLabel: strings[Routes.ActiveAuctions],
     tabBarOptions: {
       style: {
         backgroundColor: white,

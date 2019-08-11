@@ -1,23 +1,27 @@
 import { completeTypes, createTypes } from 'redux-recompose';
 import OrdersService from '@services/OrdersService';
 
-export const actions = createTypes(completeTypes(['GET_CURRENT_ORDERS', 'GET_PAST_ORDERS'], []), '@@ORDERS');
+import { ordersSerialiazer } from './utils';
+
+export const actions = createTypes(completeTypes(['GET_ACTIVE_ORDERS', 'GET_PAST_ORDERS'], []), '@@ORDERS');
 
 const targets = {
-  currentOrders: 'currentOrders',
+  activeOrders: 'activeOrders',
   pastOrders: 'pastOrders'
 };
 
 export const actionCreators = {
-  getCurrentOrders: () => ({
-    type: actions.GET_CURRENT_ORDERS,
-    target: targets.currentOrders,
-    service: OrdersService.getCurrentOrders
+  getActiveOrders: () => ({
+    type: actions.GET_ACTIVE_ORDERS,
+    target: targets.activeOrders,
+    service: OrdersService.getActiveOrders,
+    successSelector: response => ordersSerialiazer(response.data)
   }),
   getPastOrders: () => ({
     type: actions.GET_PAST_ORDERS,
     target: targets.pastOrders,
-    service: OrdersService.getPastOrders
+    service: OrdersService.getPastOrders,
+    successSelector: response => ordersSerialiazer(response.data)
   })
 };
 

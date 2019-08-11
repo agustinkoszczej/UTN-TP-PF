@@ -7,34 +7,34 @@ import { ordersModel } from '@propTypes/ordersModel';
 
 import OrdersList from '../../components/OrdersList';
 
-class CurrentOrdersContainer extends Component {
+class ActiveOrdersContainer extends Component {
   componentDidMount() {
     this.getOrders();
   }
 
   getOrders = () => {
-    const { getCurrentOrders } = this.props;
-    getCurrentOrders();
+    const { getActiveOrders } = this.props;
+    getActiveOrders();
   };
 
   render() {
     const { orders, error, loading } = this.props;
-    return <OrdersList orders={orders} error={error} loading={loading} getOrders={this.getOrders} />;
+    return <OrdersList orders={orders} error={error} loading={loading} getOrders={this.getOrders} active />;
   }
 }
 
 const mapStateToProps = state => ({
-  orders: state.orders.currentOrders.orders,
-  error: state.orders.currentOrdersError,
-  loading: state.orders.currentOrdersLoading
+  orders: state.orders.activeOrders.orders,
+  error: state.orders.activeOrdersError,
+  loading: state.orders.activeOrdersLoading
 });
 
 const mapDispatchToProps = dispatch => ({
-  getCurrentOrders: () => dispatch(OrdersActions.getCurrentOrders())
+  getActiveOrders: () => dispatch(OrdersActions.getActiveOrders())
 });
 
-CurrentOrdersContainer.propTypes = {
-  getCurrentOrders: PropTypes.func.isRequired,
+ActiveOrdersContainer.propTypes = {
+  getActiveOrders: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.string,
   orders: PropTypes.arrayOf(PropTypes.shape(ordersModel))
@@ -47,4 +47,4 @@ const enhance = compose(
   )
 );
 
-export default enhance(CurrentOrdersContainer);
+export default enhance(ActiveOrdersContainer);

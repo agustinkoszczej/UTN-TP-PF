@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text } from 'react-native';
 
-function CurrentAuctions() {
+function ActiveAuctions() {
   return <Text>Hola</Text>;
 }
 
-export default CurrentAuctions;
+export default ActiveAuctions;

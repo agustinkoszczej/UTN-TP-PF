@@ -17,7 +17,7 @@ import Login from './screens/Auth/screens/Login';
 import RecoverPassword from './screens/Auth/screens/RecoverPassword';
 import SignUp from './screens/Auth/screens/SignUp';
 import ScannerQR from './components/ScannerQR';
-import CurrentOrders from './screens/Home/screens/Orders/screens/CurrentOrders';
+import ActiveOrders from './screens/Home/screens/Orders/screens/ActiveOrders';
 import PastOrders from './screens/Home/screens/Orders/screens/PastOrders';
 import CreateOrder from './screens/Home/screens/Orders/screens/CreateOrder';
 import Configuration from './screens/Home/screens/Profile/screens/Configuration';
@@ -26,7 +26,7 @@ import Profile from './screens/Home/screens/Profile';
 import HomeMenu from './screens/Home/screens/HomeMenu';
 import Chats from './screens/Home/screens/Chats';
 import InitialLoading from './screens/InitialLoading';
-import CurrentAuctions from './screens/Home/screens/Auctions/screens/CurrentAuctions';
+import ActiveAuctions from './screens/Home/screens/Auctions/screens/ActiveAuctions';
 import PastAuctions from './screens/Home/screens/Auctions/screens/PastAuctions';
 import CreateAuction from './screens/Home/screens/Auctions/screens/CreateAuction';
 
@@ -48,7 +48,7 @@ export default createStackNavigator(
           [Routes.Auctions]: {
             screen: createMaterialTopTabNavigator(
               {
-                ...inferRoute({ CurrentAuctions }),
+                ...inferRoute({ ActiveAuctions }),
                 ...inferRoute({ PastAuctions })
               },
               topTabNavConfig
@@ -59,7 +59,7 @@ export default createStackNavigator(
           [Routes.Orders]: {
             screen: createMaterialTopTabNavigator(
               {
-                ...inferRoute({ CurrentOrders }),
+                ...inferRoute({ ActiveOrders }),
                 ...inferRoute({ PastOrders })
               },
               topTabNavConfig

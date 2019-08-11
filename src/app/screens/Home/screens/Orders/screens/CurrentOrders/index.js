@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import OrdersActions from '@redux/orders/actions';
+import { ordersModel } from '@propTypes/ordersModel';
 
 import CurrentOrders from './layout';
 
@@ -40,7 +41,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 CurrentOrdersContainer.propTypes = {
-  getCurrentOrders: PropTypes.func.isRequired
+  getCurrentOrders: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+  currentOrders: PropTypes.arrayOf(PropTypes.shape(ordersModel))
 };
 
 const enhance = compose(

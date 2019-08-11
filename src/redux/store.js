@@ -10,6 +10,7 @@ import reactotron from '@config/ReactotronConfig';
 
 import auth from './auth/reducer';
 import dialog from './dialog/reducer';
+import orders from './orders/reducer';
 
 const nav = createNavigationReducer(Navigator);
 
@@ -18,7 +19,8 @@ configureMergeState((state, newContent) => state.merge(newContent));
 const reducers = {
   nav,
   auth,
-  dialog
+  dialog,
+  orders
 };
 
 const appReducer = combineReducers(reducers);

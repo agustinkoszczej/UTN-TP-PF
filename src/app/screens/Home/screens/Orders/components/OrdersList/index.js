@@ -3,6 +3,7 @@ import { FlatList, Image, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { withNavigation } from 'react-navigation';
 import { compose } from 'recompose';
+import { connect } from 'react-redux';
 import worried from '@assets/worried.png';
 import WithError from '@components/WithError';
 import { ordersModel } from '@propTypes/ordersModel';
@@ -13,6 +14,7 @@ import Card from '@components/Card';
 import { navigationModel } from '@propTypes/navigationModel';
 import Routes from '@constants/routes';
 import { dateFormat } from '@utils/timeUtils';
+import OrdersActions from '@redux/orders/actions';
 
 import styles from './styles';
 
@@ -46,9 +48,11 @@ class OrdersList extends Component {
 
   goToOrderDetail = id => () => {
     const {
-      navigation: { navigate }
+      navigation: { navigate },
+      getOrderById
     } = this.props;
     navigate(Routes.OrderDetail, { id });
+    getOrderById(id);
   };
 
   keyExtractor = ({ id }) => `${id}`;
@@ -72,11 +76,20 @@ OrdersList.propTypes = {
   orders: PropTypes.arrayOf(PropTypes.shape(ordersModel)),
   getOrders: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  navigation: PropTypes.shape(navigationModel).isRequired
+  navigation: PropTypes.shape(navigationModel).isRequired,
+  getOrderById: PropTypes.func.isRequired
 };
+
+const mapDispatchToProps = dispatch => ({
+  getOrderById: id => dispatch(OrdersActions.getOrderById(id))
+});
 
 const enhance = compose(
   withNavigation,
+  connect(
+    null,
+    mapDispatchToProps
+  ),
   WithError(
     ({ error, orders }) => error || orders?.length === 0,
     ({ orders, loading, getOrders, error, active }) => ({

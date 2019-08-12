@@ -1,50 +1,36 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-import { withNavigation } from 'react-navigation';
-import OrdersActions from '@redux/orders/actions';
-import { navigationModel } from '@propTypes/navigationModel';
 
-class OrderDetail extends Component {
-  componentDidMount() {
-    const {
-      getOrderById,
-      navigation: {
-        state: {
-          params: { id }
-        }
-      }
-    } = this.props;
-    getOrderById(id);
-  }
+import OrderDetail from './layout';
 
+class OrderDetailContainer extends Component {
   render() {
-    return <Text>Hola</Text>;
+    const { order, loading } = this.props;
+    return <OrderDetail order={order} loading={loading} />;
   }
 }
 
-OrderDetail.propTypes = {
-  navigation: PropTypes.shape(navigationModel).isRequired,
-  getOrderById: PropTypes.func.isRequired
+OrderDetailContainer.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  order: PropTypes.shape({
+    supplier: PropTypes.shape({
+      picture: PropTypes.string.isRequired,
+      fullName: PropTypes.string.isRequired
+    }).isRequired,
+    deliveryDate: PropTypes.string.isRequired,
+    amount: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    comment: PropTypes.string.isRequired
+  }).isRequired
 };
 
 const mapStateToProps = state => ({
-  currentOrder: state.orders.currentOrder,
+  order: state.orders.currentOrder,
   loading: state.orders.currentOrderLoading
 });
 
-const mapDispatchToProps = dispatch => ({
-  getOrderById: id => dispatch(OrdersActions.getOrderById(id))
-});
+const enhance = compose(connect(mapStateToProps));
 
-const enhance = compose(
-  withNavigation,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-);
-
-export default enhance(OrderDetail);
+export default enhance(OrderDetailContainer);

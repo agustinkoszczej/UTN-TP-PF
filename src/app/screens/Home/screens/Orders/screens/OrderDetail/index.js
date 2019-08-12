@@ -22,8 +22,19 @@ OrderDetailContainer.propTypes = {
     deliveryDate: PropTypes.string.isRequired,
     amount: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
-    comment: PropTypes.string.isRequired
-  }).isRequired
+    comment: PropTypes.string.isRequired,
+    products: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        quantity: PropTypes.number.isRequired,
+        product: PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          descrption: PropTypes.string.isRequired,
+          imageUrl: PropTypes.string.isRequired
+        })
+      })
+    ).isRequired
+  })
 };
 
 const mapStateToProps = state => ({

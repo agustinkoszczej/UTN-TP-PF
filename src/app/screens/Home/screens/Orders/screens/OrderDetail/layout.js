@@ -5,11 +5,14 @@ import Loadable from '@components/Loadable';
 
 import styles from './styles';
 import OrderHeader from './components/OrderHeader';
+import OrderProducts from './components/OrderProducts';
 
 function OrderDetail({ order }) {
+  const { products } = order;
   return (
     <ScrollView style={styles.container}>
       <OrderHeader {...order} />
+      <OrderProducts products={products} />
     </ScrollView>
   );
 }

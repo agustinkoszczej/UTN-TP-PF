@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import CustomText from '@components/CustomText';
 import StatusTag from '@components/StatusTag';
@@ -8,12 +8,11 @@ import { dateFormat } from '@utils/timeUtils';
 
 import styles from './styles';
 
-function OrderHeader({ supplier: { picture, fullName }, comment, amount, deliveryDate, status }) {
+function OrderHeader({ supplier: { fullName }, comment, amount, deliveryDate, status }) {
   return (
     <Card style={styles.cardContainer}>
       <View style={styles.section}>
         <CustomText style={styles.placeholder}>Distribuidor:</CustomText>
-        <Image style={styles.userPicture} source={{ uri: picture }} />
         <CustomText bold>{fullName}</CustomText>
       </View>
       <View style={styles.section}>
@@ -35,7 +34,6 @@ function OrderHeader({ supplier: { picture, fullName }, comment, amount, deliver
 
 OrderHeader.propTypes = {
   supplier: PropTypes.shape({
-    picture: PropTypes.string.isRequired,
     fullName: PropTypes.string.isRequired
   }).isRequired,
   deliveryDate: PropTypes.string.isRequired,

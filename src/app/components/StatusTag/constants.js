@@ -1,13 +1,6 @@
-import styles from './styles';
+import { ORDER_STATUS } from '@constants/orderStatus';
 
-export const ORDER_STATUS = {
-  PENDING: 'PENDING',
-  CONFIRMED: 'CONFIRMED',
-  ON_WAY: 'ON_WAY',
-  DELIVERED: 'DELIVERED',
-  CANCELLED: 'CANCELLED',
-  REJECTED: 'REJECTED'
-};
+import styles from './styles';
 
 export const ORDER_STYLES = {
   [ORDER_STATUS.CANCELLED]: styles.redTag,

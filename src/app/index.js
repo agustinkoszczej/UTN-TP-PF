@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import AppNavigator from '@components/AppNavigator';
 import AuthActions from '@redux/auth/actions';
 
+import ConnectedDialog from './components/ConnectedDialog';
+
 class App extends Component {
   componentDidMount() {
     SplashScreen.hide();
@@ -13,7 +15,12 @@ class App extends Component {
   }
 
   render() {
-    return <AppNavigator />;
+    return (
+      <>
+        <AppNavigator />
+        <ConnectedDialog />
+      </>
+    );
   }
 }
 

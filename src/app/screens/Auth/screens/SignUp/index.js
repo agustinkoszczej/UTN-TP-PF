@@ -36,7 +36,9 @@ class SignUpContainer extends Component {
       [SIGN_UP_FIELDS.ADDRESS]: string().required('Campo requerido'),
       [SIGN_UP_FIELDS.STREET_NUMBER]: number().required('Debe seleccionar una dirección fija')
     }),
-    3: {}
+    3: object().shape({
+      [SIGN_UP_FIELDS.QR_URL]: string().required('Campo requerido')
+    })
   };
 
   handleGotoLogIn = () => {

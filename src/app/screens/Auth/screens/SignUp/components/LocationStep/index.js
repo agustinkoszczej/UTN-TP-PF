@@ -47,6 +47,8 @@ class LocationStepContainer extends Component {
 
   render() {
     const { address, region, coordinate, displayList, clicked } = this.state;
+    const { currentUser } = this.props;
+    const defaultValue = currentUser?.streetAddress;
     return (
       <LocationStep
         {...this.props}
@@ -59,6 +61,7 @@ class LocationStepContainer extends Component {
         coordinate={coordinate}
         currentAddress={address}
         clicked={clicked}
+        defaultValue={defaultValue}
       />
     );
   }

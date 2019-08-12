@@ -5,6 +5,7 @@ import CustomText from '@components/CustomText';
 import CustomButton from '@components/CustomButton';
 import CustomModal from '@components/CustomModal';
 import { isIos } from '@constants/platform';
+import { white } from '@constants/colors';
 
 import styles from './styles';
 
@@ -41,6 +42,7 @@ function CustomDialog({
               primaryBtn
               title={acceptTitle}
               onPress={onAcceptDialog}
+              textStyle={{ color: white }}
               style={[styles.acceptButton, acceptButtonStyles]}
             />
             {!singleAction && (
@@ -70,7 +72,7 @@ CustomDialog.propTypes = {
   denyTitle: PropTypes.string,
   background: Image.propTypes.source,
   onAcceptDialog: PropTypes.func.isRequired,
-  onRejectDialog: PropTypes.func.isRequired,
+  onRejectDialog: PropTypes.func,
   onRequestClose: PropTypes.func,
   singleAction: PropTypes.bool,
   title: PropTypes.string,

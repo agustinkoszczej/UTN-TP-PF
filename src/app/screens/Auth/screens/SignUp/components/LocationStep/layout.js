@@ -13,14 +13,14 @@ import styles from './styles';
 function LocationStep({
   region,
   coordinate,
-  currentAddress,
   onRegionChange,
   onAddressChange,
   displayList,
   onShowList,
   onHideList,
   values,
-  clicked
+  clicked,
+  defaultValue
 }) {
   return (
     <View style={styles.container}>
@@ -32,7 +32,7 @@ function LocationStep({
           : strings.missingAddress}
       </CustomText>
       <Autocomplete
-        defaultValue={currentAddress}
+        defaultValue={defaultValue}
         placeholder={strings.placeholder}
         onPress={onAddressChange}
         displayList={displayList}
@@ -69,7 +69,7 @@ LocationStep.propTypes = {
   }),
   onRegionChange: PropTypes.func.isRequired,
   onAddressChange: PropTypes.func.isRequired,
-  currentAddress: PropTypes.string,
+  defaultValue: PropTypes.string,
   displayList: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   onShowList: PropTypes.func,
   onHideList: PropTypes.func,

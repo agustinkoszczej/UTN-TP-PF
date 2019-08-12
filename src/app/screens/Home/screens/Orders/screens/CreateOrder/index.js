@@ -1,29 +1,45 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import CustomDropdown from '@components/CustomDropdown';
-import { PAYMENT_METHODS } from '@constants/paymentMethods';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import OrdersActions from '@redux/orders/actions';
+
+import CreateOrder from './layout';
 
 class CreateOrderContainer extends Component {
-  state = { selectedOption: PAYMENT_METHODS[0].text };
+  state = { currentStep: 0 };
 
-  handleSelectItem = item => this.setState({ selectedOption: item.text });
+  handleNext = () => this.setState(prevState => ({ currentStep: prevState.currentStep + 1 }));
 
-  nameSelector = item => item.text;
+  handleCreateOrder = values => {
+    const { createOrder } = this.props;
+    createOrder(values);
+  };
 
   render() {
-    const { selectedOption } = this.state;
+    const { currentStep } = this.state;
     return (
-      <View>
-        <CustomDropdown
-          selectedOption={selectedOption}
-          onSelectItem={this.handleSelectItem}
-          items={PAYMENT_METHODS}
-          itemNameSelector={this.nameSelector}
-          closeOnOverlayPress
-        />
-      </View>
+      <CreateOrder
+        currentStep={currentStep}
+        onCreateOrder={this.handleCreateOrder}
+        onNext={this.handleNext}
+      />
     );
   }
 }
 
-export default CreateOrderContainer;
+CreateOrderContainer.propTypes = {
+  createOrder: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  orders: state.orders.pastOrders.orders
+});
+
+const mapDispatchToProps = dispatch => ({
+  createOrder: values => dispatch(OrdersActions.createOrder(values))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateOrderContainer);

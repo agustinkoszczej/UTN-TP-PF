@@ -39,7 +39,7 @@ class OrderProducts extends Component {
     return (
       <Card style={styles.cardContainer}>
         <FlatList
-          data={[...products, ...products, ...products, ...products]}
+          data={products}
           renderItem={this.renderItem}
           ListHeaderComponent={this.renderSeparator}
           keyExtractor={this.keyExtractor}
@@ -53,10 +53,10 @@ OrderProducts.propTypes = {
   products: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      quantity: PropTypes.number.isRequired,
+      quantity: PropTypes.string.isRequired,
       product: PropTypes.shape({
         id: PropTypes.number.isRequired,
-        descrption: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
         imageUrl: PropTypes.string.isRequired
       })
     })

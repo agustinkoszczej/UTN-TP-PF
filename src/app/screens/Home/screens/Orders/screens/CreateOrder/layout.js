@@ -16,7 +16,7 @@ import OrderStep from './components/OrderStep';
 import ProductStep from './components/ProductStep';
 import DetailStep from './components/DetailStep';
 
-function CreateOrder({ currentStep, handleSubmit, values }) {
+function CreateOrder({ currentStep, handleSubmit, values, setFieldValue }) {
   const finalStep = currentStep === 2;
   return (
     <BaseForm>
@@ -30,7 +30,7 @@ function CreateOrder({ currentStep, handleSubmit, values }) {
         />
         {
           {
-            0: <OrderStep handleSubmit={handleSubmit} values={values} />,
+            0: <OrderStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />,
             1: <ProductStep handleSubmit={handleSubmit} values={values} />,
             2: <DetailStep handleSubmit={handleSubmit} values={values} />
           }[currentStep]
@@ -50,12 +50,13 @@ function CreateOrder({ currentStep, handleSubmit, values }) {
 CreateOrder.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   values: PropTypes.shape({}).isRequired,
-  currentStep: PropTypes.number.isRequired
+  currentStep: PropTypes.number.isRequired,
+  setFieldValue: PropTypes.func.isRequired
 };
 
 const enhancer = compose(
   withFormik({
-    // mapPropsToValues: ({ initialValues }) => initialValues,
+    mapPropsToValues: ({ initialValues }) => initialValues,
     // validationSchema: ({ validationSchema, currentStep }) => validationSchema[currentStep],
     handleSubmit: (values, { props }) =>
       props.currentStep === 3 ? props.onCreateOrder(values) : props.onNext()

@@ -41,7 +41,7 @@ export const dataInputs = field =>
   ({
     [FIELDS.COMPANY_NAME]: string()
       .required(strings.requiredValidation)
-      .min(3, strings.invalidNameMsg)
+      .min(3, strings.invalidNameMsg),
     [FIELDS.PHONE]: string()
       .required(strings.requiredValidation)
       .matches(phoneRegex, strings.invalidPhoneMsg)

@@ -23,7 +23,7 @@ class SignUpContainer extends Component {
     [SIGN_UP_FIELDS.CUIT]: '',
     [SIGN_UP_FIELDS.ADDRESS]: '',
     [SIGN_UP_FIELDS.STREET_NUMBER]: null,
-    [SIGN_UP_FIELDS.QR_URL]: 'http://qr.afip.gob.ar/?qr=7ynzfbEsT3bJi2hL6MRo6w,,',
+    [SIGN_UP_FIELDS.QR_URL]: 'http://qr.afip.gob.ar/?qrdadsaholaaaa=7ynzfbEsT3bJi2hL6MRo6w,,',
     [SIGN_UP_FIELDS.COMPANY_NAME]: '',
     [SIGN_UP_FIELDS.LOCATION]: ''
   };
@@ -41,12 +41,25 @@ class SignUpContainer extends Component {
     })
   };
 
+  static getDerivedStateFromProps(props) {
+    if (props.error) {
+      return { currentStep: 0 };
+    }
+    return null;
+  }
+
   handleGotoLogIn = () => {
     const { navigation } = this.props;
     navigation.navigate(Routes.Login);
   };
 
-  handleNext = () => this.setState(prevState => ({ currentStep: prevState.currentStep + 1 }));
+  handleNext = () => {
+    const { error, cleanSignUpError } = this.props;
+    if (error) cleanSignUpError();
+    this.setState(prevState => ({ currentStep: prevState.currentStep + 1 }));
+  };
+
+  handleBack = () => this.setState(prevState => ({ currentStep: prevState.currentStep - 1 }));
 
   handleSignUp = values => {
     const { signUp } = this.props;
@@ -60,6 +73,7 @@ class SignUpContainer extends Component {
       <SignUp
         currentStep={currentStep}
         onNext={this.handleNext}
+        onBack={this.handleBack}
         onGoToLogin={this.handleGotoLogIn}
         validationSchema={this.formValidationSchema}
         initialValues={this.initialValues}
@@ -80,14 +94,16 @@ SignUpContainer.propTypes = {
     navigate: PropTypes.func.isRequired
   }).isRequired,
   error: PropTypes.shape({
-    code: PropTypes.string.isRequired
+    internalCode: PropTypes.string.isRequired
   }),
   signUp: PropTypes.func.isRequired,
+  cleanSignUpError: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({
-  signUp: values => dispatch(AuthActions.signUp(values))
+  signUp: values => dispatch(AuthActions.signUp(values)),
+  cleanSignUpError: () => dispatch(AuthActions.cleanSignUpError())
 });
 
 export default connect(

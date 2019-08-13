@@ -10,7 +10,10 @@ import { getAuthDialog, authDialogNames } from '@screens/Auth/dialogs';
 import { userSerializer } from './utils';
 
 export const actions = createTypes(
-  completeTypes(['LOGIN', 'RECOVER_PASSWORD', 'SIGN_UP', 'UPDATE_USER', 'GET_USER_INFO', 'LOG_OUT'], []),
+  completeTypes(
+    ['LOGIN', 'RECOVER_PASSWORD', 'SIGN_UP', 'UPDATE_USER', 'GET_USER_INFO', 'LOG_OUT'],
+    ['CLEAN_SIGN_UP_ERROR']
+  ),
   '@@AUTH'
 );
 
@@ -18,6 +21,7 @@ export const targets = {
   user: 'currentUser',
   recoverPassword: 'recoverPassword',
   signUpUser: 'signUpUser',
+  signUpUserError: 'signUpUserError',
   updateUser: 'updateUser'
 };
 
@@ -75,7 +79,14 @@ export const actionCreators = {
             )
           )
         )
-      )
+      ),
+      withPostFailure(async (dispatch, response) => {
+        dispatch(
+          DialogActions.showDialog(
+            getAuthDialog(authDialogNames.FINISH_SIGN_UP_FAILURE)(response?.data?.internalCode)
+          )
+        );
+      })
     ]
   }),
   updateUser: updateUpData => ({
@@ -122,6 +133,10 @@ export const actionCreators = {
         );
       })
     ]
+  }),
+  cleanSignUpError: () => ({
+    type: actions.CLEAN_SIGN_UP_ERROR,
+    target: targets.signUpUserError
   })
 };
 

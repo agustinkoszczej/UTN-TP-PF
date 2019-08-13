@@ -13,7 +13,7 @@ const initialState = completeState(stateDescription, ['initialLoading']);
 
 const reducerDescription = {
   primaryActions: [actions.LOGIN, actions.RECOVER_PASSWORD, actions.SIGN_UP, actions.GET_USER_INFO],
-  override: { [actions.LOG_OUT]: onSetValue(null) }
+  override: { [actions.LOG_OUT]: onSetValue(null), [actions.CLEAN_SIGN_UP_ERROR]: onSetValue(null) }
 };
 
 export default createReducer(Immutable(initialState), completeReducer(reducerDescription));

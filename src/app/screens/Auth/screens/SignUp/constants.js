@@ -15,7 +15,8 @@ export const strings = {
   signUpTitle: 'Soy Nuevo',
   usernameExists: 'Ya existe una cuenta con el email ingresado.',
   next: 'Siguiente',
-  cuit: 'CUIT'
+  cuit: 'CUIT',
+  back: 'Volver'
 };
 
 export const SIGN_UP_FIELDS = {
@@ -28,7 +29,9 @@ export const SIGN_UP_FIELDS = {
   PASSWORD: 'password',
   PHONE: 'contactNumber',
   QR_URL: 'qrUrl',
-  STREET_NUMBER: 'streetNumber'
+  STREET_NUMBER: 'streetNumber',
+  LATITUDE: 'longitude',
+  LONGITUDE: 'latitude'
 };
 
 export const inputFieldsSignUp = [SIGN_UP_FIELDS.COMPANY_NAME, SIGN_UP_FIELDS.CUIT, SIGN_UP_FIELDS.PHONE];

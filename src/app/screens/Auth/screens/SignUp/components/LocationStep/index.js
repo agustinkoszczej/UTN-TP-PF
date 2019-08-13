@@ -12,11 +12,12 @@ class LocationStepContainer extends Component {
   state = { displayList: false, region: null, coordinate: null, clicked: false };
 
   componentDidMount() {
-    const { currentUser } = this.props;
-    if (currentUser) {
-      const { streetAddress } = currentUser;
+    const { currentUser, values } = this.props;
+    const value = currentUser || values;
+    if (value.streetAddress) {
+      const { streetAddress } = value;
       this.setState({
-        ...formatLocation(currentUser),
+        ...formatLocation(value),
         address: streetAddress,
         displayList: false,
         clicked: true
@@ -27,6 +28,8 @@ class LocationStepContainer extends Component {
   handleAddressChange = values => {
     const { setFieldValue } = this.props;
     setFieldValue(SIGN_UP_FIELDS.ADDRESS, values.address);
+    setFieldValue(SIGN_UP_FIELDS.LONGITUDE, values.latitude);
+    setFieldValue(SIGN_UP_FIELDS.LATITUDE, values.longitude);
     setFieldValue(SIGN_UP_FIELDS.LOCATION, `${values.latitude}, ${values.longitude}`);
     setFieldValue(SIGN_UP_FIELDS.STREET_NUMBER, values.streetNumber);
     this.setState({
@@ -47,8 +50,8 @@ class LocationStepContainer extends Component {
 
   render() {
     const { address, region, coordinate, displayList, clicked } = this.state;
-    const { currentUser } = this.props;
-    const defaultValue = currentUser?.streetAddress;
+    const { currentUser, values } = this.props;
+    const defaultValue = currentUser?.streetAddress || values?.streetAddress;
     return (
       <LocationStep
         {...this.props}
@@ -72,7 +75,19 @@ LocationStepContainer.propTypes = {
     navigate: PropTypes.func.isRequired
   }),
   setFieldValue: PropTypes.func.isRequired,
-  currentUser: PropTypes.shape(userModel)
+  currentUser: PropTypes.shape(userModel),
+  values: PropTypes.shape({
+    [SIGN_UP_FIELDS.ADDRESS]: PropTypes.string,
+    [SIGN_UP_FIELDS.COMPANY_NAME]: PropTypes.string,
+    [SIGN_UP_FIELDS.CUIT]: PropTypes.string,
+    [SIGN_UP_FIELDS.EMAIL]: PropTypes.string,
+    [SIGN_UP_FIELDS.LOCATION]: PropTypes.string,
+    [SIGN_UP_FIELDS.NAME]: PropTypes.string,
+    [SIGN_UP_FIELDS.PASSWORD]: PropTypes.string,
+    [SIGN_UP_FIELDS.PHONE]: PropTypes.string,
+    [SIGN_UP_FIELDS.QR_URL]: PropTypes.string,
+    [SIGN_UP_FIELDS.STREET_NUMBER]: PropTypes.string
+  })
 };
 
 const mapStateToProps = state => ({

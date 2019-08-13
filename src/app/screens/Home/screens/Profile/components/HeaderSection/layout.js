@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AirbnbRating } from 'react-native-ratings';
 import { View, Image, ImageBackground } from 'react-native';
-import { white } from '@constants/colors';
 import CustomText from '@components/CustomText';
 import Loadable from '@components/Loadable';
 import CustomButton from '@components/CustomButton';
@@ -26,7 +24,6 @@ function HeaderSection({ fullName, email, handleLogOut, navigateToConfiguration,
           </CustomText>
         </View>
       </View>
-      <AirbnbRating selectedColor={white} defaultRating={2.25} isDisabled />
       <CustomButton
         secondaryBtn
         title={strings.edit}

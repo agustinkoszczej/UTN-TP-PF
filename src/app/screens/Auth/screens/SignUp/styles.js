@@ -72,6 +72,11 @@ const styles = StyleSheet.create({
   signUpBtn: {
     borderRadius: 5,
     width: '100%'
+  },
+  backButton: {
+    borderRadius: 5,
+    width: '100%',
+    marginBottom: 10
   }
 });
 

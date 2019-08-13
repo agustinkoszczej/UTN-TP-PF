@@ -28,7 +28,7 @@ class SignUp extends Component {
   }
 
   render() {
-    const { currentStep, onGoToLogin, handleSubmit, values, setFieldValue } = this.props;
+    const { currentStep, onGoToLogin, handleSubmit, values, setFieldValue, onBack } = this.props;
     const finalStep = currentStep === 3;
     return (
       <BaseForm link onSubmit={handleSubmit}>
@@ -60,6 +60,15 @@ class SignUp extends Component {
               3: <QRStep setFieldValue={setFieldValue} handleSubmit={handleSubmit} />
             }[currentStep]
           }
+          {currentStep > 0 && (
+            <CustomButton
+              primaryBtn
+              onPress={onBack}
+              title={strings.back}
+              textStyle={styles.whiteText}
+              style={styles.backButton}
+            />
+          )}
           <CustomButton
             primaryBtn
             onPress={handleSubmit}
@@ -103,7 +112,8 @@ SignUp.propTypes = {
     [SIGN_UP_FIELDS.PHONE]: PropTypes.string,
     [SIGN_UP_FIELDS.QR_URL]: PropTypes.string,
     [SIGN_UP_FIELDS.STREET_NUMBER]: PropTypes.string
-  })
+  }),
+  onBack: PropTypes.func.isRequired
 };
 
 const enhancer = compose(

@@ -58,15 +58,16 @@ class OrdersList extends Component {
   keyExtractor = ({ id }) => `${id}`;
 
   render() {
-    const { orders, getOrders, loading } = this.props;
+    const { orders, getOrders, loading, onRefresh } = this.props;
     return (
       <FlatList
         data={orders}
         style={styles.container}
         keyExtractor={this.keyExtractor}
         renderItem={this.renderItem}
-        onRefresh={getOrders}
+        onRefresh={onRefresh}
         refreshing={loading}
+        onEndReached={getOrders}
       />
     );
   }
@@ -77,7 +78,8 @@ OrdersList.propTypes = {
   getOrders: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   navigation: PropTypes.shape(navigationModel).isRequired,
-  getOrderById: PropTypes.func.isRequired
+  getOrderById: PropTypes.func.isRequired,
+  onRefresh: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({

@@ -2,7 +2,6 @@ import React from 'react';
 import { View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import PropTypes from 'prop-types';
-import CustomText from '@components/CustomText';
 import Autocomplete from '@components/Autocomplete';
 
 import { SIGN_UP_FIELDS } from '../../constants';
@@ -18,19 +17,10 @@ function LocationStep({
   displayList,
   onShowList,
   onHideList,
-  values,
-  clicked,
   defaultValue
 }) {
   return (
     <View style={styles.container}>
-      <CustomText center style={styles.header}>
-        {values[SIGN_UP_FIELDS.STREET_NUMBER] || !clicked
-          ? strings.fixDirection
-          : values[SIGN_UP_FIELDS.ADDRESS]
-          ? strings.missingWholeAddress
-          : strings.missingAddress}
-      </CustomText>
       <Autocomplete
         defaultValue={defaultValue}
         placeholder={strings.placeholder}
@@ -73,7 +63,6 @@ LocationStep.propTypes = {
   displayList: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   onShowList: PropTypes.func,
   onHideList: PropTypes.func,
-  clicked: PropTypes.bool.isRequired,
   values: PropTypes.shape({
     [SIGN_UP_FIELDS.ADDRESS]: PropTypes.string,
     [SIGN_UP_FIELDS.STREET_NUMBER]: PropTypes.oneOf(PropTypes.number || PropTypes.string)

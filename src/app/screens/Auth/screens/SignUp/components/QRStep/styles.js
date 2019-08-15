@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   qr: {
-    height: verticalScale(200),
-    width: verticalScale(200)
+    height: verticalScale(150),
+    width: verticalScale(150)
   }
 });
 

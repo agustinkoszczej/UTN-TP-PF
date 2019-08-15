@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     alignSelf: 'center',
-    marginVertical: verticalScale(20),
+    marginTop: verticalScale(10),
     height: scale(150),
     width: scale(300)
   },
@@ -71,12 +71,16 @@ const styles = StyleSheet.create({
   },
   signUpBtn: {
     borderRadius: 5,
-    width: '100%'
+    width: '45%'
   },
   backButton: {
     borderRadius: 5,
-    width: '100%',
-    marginBottom: 10
+    width: '45%',
+    marginRight: '5%'
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'center'
   }
 });
 

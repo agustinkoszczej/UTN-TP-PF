@@ -60,22 +60,24 @@ class SignUp extends Component {
               3: <QRStep setFieldValue={setFieldValue} handleSubmit={handleSubmit} />
             }[currentStep]
           }
-          {currentStep > 0 && (
+          <View style={styles.buttons}>
+            {currentStep > 0 && (
+              <CustomButton
+                primaryBtn
+                onPress={onBack}
+                title={strings.back}
+                textStyle={styles.whiteText}
+                style={styles.backButton}
+              />
+            )}
             <CustomButton
               primaryBtn
-              onPress={onBack}
-              title={strings.back}
+              onPress={handleSubmit}
+              title={!finalStep ? strings.next : strings.signUpButton}
               textStyle={styles.whiteText}
-              style={styles.backButton}
+              style={[styles.signUpBtn, currentStep === 0 && { width: '100%' }]}
             />
-          )}
-          <CustomButton
-            primaryBtn
-            onPress={handleSubmit}
-            title={!finalStep ? strings.next : strings.signUpButton}
-            textStyle={styles.whiteText}
-            style={styles.signUpBtn}
-          />
+          </View>
           <View style={styles.accountExistsContainer}>
             <CustomText secondary style={styles.hasAccountTxt}>
               {strings.hasAccount}

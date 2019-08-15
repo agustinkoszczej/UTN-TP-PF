@@ -11,7 +11,10 @@ class CreateOrderContainer extends Component {
   state = { currentStep: 0 };
 
   initialValues = {
-    [CREATE_ORDER_FIELDS.PAYMENT_METHOD]: PAYMENT_METHODS[0].text
+    [CREATE_ORDER_FIELDS.PAYMENT_METHOD]: PAYMENT_METHODS[0].text,
+    [CREATE_ORDER_FIELDS.DELIVERY_DATE]: new Date(),
+    [CREATE_ORDER_FIELDS.COMMENT]: '',
+    [CREATE_ORDER_FIELDS.AMOUNT]: ''
   };
 
   handleNext = () => this.setState(prevState => ({ currentStep: prevState.currentStep + 1 }));
@@ -38,15 +41,11 @@ CreateOrderContainer.propTypes = {
   createOrder: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
-  orders: state.orders.pastOrders.orders
-});
-
 const mapDispatchToProps = dispatch => ({
   createOrder: values => dispatch(OrdersActions.createOrder(values))
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(CreateOrderContainer);

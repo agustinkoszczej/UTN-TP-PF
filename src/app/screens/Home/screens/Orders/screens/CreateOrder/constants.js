@@ -9,5 +9,6 @@ export const STEP_INDICATOR_STEPS = 3;
 export const CREATE_ORDER_FIELDS = {
   PAYMENT_METHOD: 'paymentMethod',
   AMOUNT: 'amount',
-  COMMENT: 'comment'
+  COMMENT: 'comment',
+  DELIVERY_DATE: 'deliveryDate'
 };

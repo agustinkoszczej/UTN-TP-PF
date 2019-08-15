@@ -4,17 +4,27 @@ import PropTypes from 'prop-types';
 import CustomDropdown from '@components/CustomDropdown';
 import CustomText from '@components/CustomText';
 import CustomTextInput from '@components/CustomTextInput';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { PAYMENT_METHODS } from '@constants/paymentMethods';
+import { dateFormat } from '@utils/timeUtils';
 
 import { CREATE_ORDER_FIELDS } from '../../constants';
 
 import styles from './styles';
 
 class OrderStep extends Component {
+  state = { date: this.props.values[CREATE_ORDER_FIELDS.DELIVERY_DATE] };
+
   [CREATE_ORDER_FIELDS.COMMENT] = React.createRef();
 
   handleAmountChange = () => {
     this[CREATE_ORDER_FIELDS.COMMENT].current.focus();
+  };
+
+  handleDateChange = (_, date) => {
+    const { setFieldValue } = this.props;
+    this.setState({ date });
+    setFieldValue(CREATE_ORDER_FIELDS.DELIVERY_DATE, dateFormat(date));
   };
 
   paymentMethodSelector = method => method.text;
@@ -26,6 +36,7 @@ class OrderStep extends Component {
 
   render() {
     const { values, handleSubmit } = this.props;
+    const { date } = this.state;
     const paymentMethod = values[CREATE_ORDER_FIELDS.PAYMENT_METHOD];
     const commonProps = {
       underline: true,
@@ -35,6 +46,30 @@ class OrderStep extends Component {
     };
     return (
       <View style={styles.container}>
+        <CustomTextInput
+          {...commonProps}
+          keyboardType="phone-pad"
+          name={CREATE_ORDER_FIELDS.AMOUNT}
+          placeholder="Precio"
+          onTextSubmitEditing={this.handleAmountChange}
+          maxLength={9}
+        />
+        <CustomTextInput
+          {...commonProps}
+          name={CREATE_ORDER_FIELDS.COMPANY_NAME}
+          textRef={this[CREATE_ORDER_FIELDS.COMMENT]}
+          placeholder="Comentario"
+          maxLength={150}
+          applyTrim
+        />
+        <CustomText>Fecha de entrega:</CustomText>
+        <DateTimePicker
+          value={date}
+          minimumDate={new Date()}
+          mode="date"
+          display="default"
+          onChange={this.handleDateChange}
+        />
         <View>
           <CustomText>Método de pago:</CustomText>
           <CustomDropdown
@@ -46,24 +81,6 @@ class OrderStep extends Component {
             style={styles.paymentMethod}
           />
         </View>
-        <CustomTextInput
-          {...commonProps}
-          keyboardType="phone-pad"
-          name={CREATE_ORDER_FIELDS.AMOUNT}
-          placeholder="Precio"
-          textRef={this[CREATE_ORDER_FIELDS.AMOUNT]}
-          onTextSubmitEditing={this.handleAmountChange}
-          maxLength={9}
-        />
-        <CustomTextInput
-          {...commonProps}
-          name={CREATE_ORDER_FIELDS.COMPANY_NAME}
-          placeholder="Comentario"
-          onTextSubmitEditing={handleSubmit}
-          maxLength={150}
-          applyTrim
-          returnKeyType="go"
-        />
       </View>
     );
   }
@@ -73,7 +90,7 @@ OrderStep.propTypes = {
   setFieldValue: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   values: PropTypes.shape({
-    [CREATE_ORDER_FIELDS.AMOUNT]: PropTypes.number,
+    [CREATE_ORDER_FIELDS.AMOUNT]: PropTypes.string,
     [CREATE_ORDER_FIELDS.PAYMENT_METHOD]: PropTypes.string,
     [CREATE_ORDER_FIELDS.COMMENT]: PropTypes.string
   })

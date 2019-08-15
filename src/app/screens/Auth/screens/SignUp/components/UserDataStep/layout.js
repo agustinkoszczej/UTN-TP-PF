@@ -50,12 +50,13 @@ class UserDataStep extends Component {
           labelIcon={emailIcon}
           name={SIGN_UP_FIELDS.EMAIL}
           placeholder={strings.email}
-          onTextSubmitEditing={this.handleEmailSubmitting}
+          onTextSubmitEditing={update ? handleSubmit : this.handleEmailSubmitting}
           invalid={!!emailError}
           error={emailError}
           onChange={onEmailChange}
           textRef={this[SIGN_UP_FIELDS.EMAIL]}
           applyTrim
+          {...(update && { returnKeyType: 'go' })}
         />
         {!update && (
           <CustomTextInput

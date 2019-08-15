@@ -14,10 +14,10 @@ import { TYPES } from '../../constants';
 
 import styles from './styles';
 
-function Configuration({ handleSubmit, values, setFieldValue, type }) {
+function Configuration({ handleSubmit, values, setFieldValue, type, loading }) {
   return (
     <View style={styles.container}>
-      <BaseForm showButton primaryBtn textStyle={styles.white} onSubmit={handleSubmit}>
+      <BaseForm showButton primaryBtn textStyle={styles.white} onSubmit={handleSubmit} loading={loading}>
         {
           {
             [TYPES.COMPANY]: (
@@ -41,7 +41,8 @@ Configuration.propTypes = {
     [SIGN_UP_FIELDS.PHONE]: PropTypes.string,
     [SIGN_UP_FIELDS.CUIT]: PropTypes.string
   }),
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
 const enhancer = compose(

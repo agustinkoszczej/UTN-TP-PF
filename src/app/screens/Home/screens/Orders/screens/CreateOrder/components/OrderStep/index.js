@@ -35,7 +35,7 @@ class OrderStep extends Component {
   };
 
   render() {
-    const { values, handleSubmit } = this.props;
+    const { values } = this.props;
     const { date } = this.state;
     const paymentMethod = values[CREATE_ORDER_FIELDS.PAYMENT_METHOD];
     const commonProps = {

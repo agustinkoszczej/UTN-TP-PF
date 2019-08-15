@@ -60,6 +60,7 @@ class BaseForm extends Component {
       icon,
       defaultImage,
       textStyle,
+      loading,
       ...buttonProps
     } = this.props;
     const Container = scrolleable ? ScrollView : View;
@@ -94,6 +95,7 @@ class BaseForm extends Component {
               style={[styles.button, !primaryBtn && styles.footerBtn, buttonStyle]}
               rightComponent={buttonRightComponent}
               textStyle={textStyle}
+              loading={loading}
               {...buttonProps}
             />
           )}
@@ -116,6 +118,7 @@ BaseForm.propTypes = {
   customStyle: ViewPropTypes.style,
   disabled: PropTypes.bool,
   primaryBtn: PropTypes.bool,
+  loading: PropTypes.bool,
   onSubmit: PropTypes.func,
   buttonLeftComponent: PropTypes.node,
   buttonRightComponent: PropTypes.node,

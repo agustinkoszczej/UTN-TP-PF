@@ -36,7 +36,8 @@ class CongigurationContainer extends Component {
           params: { type }
         }
       },
-      currentUser
+      currentUser,
+      loading
     } = this.props;
     return (
       <Configuration
@@ -44,6 +45,7 @@ class CongigurationContainer extends Component {
         initialValues={currentUser}
         validationSchema={this.formValidationSchema[type]}
         type={type}
+        loading={loading}
       />
     );
   }
@@ -51,12 +53,14 @@ class CongigurationContainer extends Component {
 
 CongigurationContainer.propTypes = {
   updateUser: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
   navigation: PropTypes.shape(navigationModel).isRequired,
   currentUser: PropTypes.shape(userModel).isRequired
 };
 
 const mapStateToProps = state => ({
-  currentUser: state.auth.currentUser
+  currentUser: state.auth.currentUser,
+  loading: state.auth.updateUserLoading
 });
 
 const mapDispatchToProps = dispatch => ({

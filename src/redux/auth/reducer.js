@@ -7,7 +7,8 @@ const stateDescription = {
   currentUser: null,
   recoverPassword: null,
   signUpUser: null,
-  updateUser: null
+  updateUser: null,
+  agenda: []
 };
 
 const initialState = completeState(stateDescription, ['initialLoading']);
@@ -18,7 +19,8 @@ const reducerDescription = {
     actions.RECOVER_PASSWORD,
     actions.SIGN_UP,
     actions.GET_USER_INFO,
-    actions.UPDATE_USER
+    actions.UPDATE_USER,
+    actions.GET_AGENDA
   ],
   override: { [actions.LOG_OUT]: onSetValue(null), [actions.CLEAN_SIGN_UP_ERROR]: onSetValue(null) }
 };

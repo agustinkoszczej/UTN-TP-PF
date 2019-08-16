@@ -13,7 +13,7 @@ import { CREATE_ORDER_FIELDS } from '../../constants';
 import styles from './styles';
 
 class OrderStep extends Component {
-  state = { date: this.props.values[CREATE_ORDER_FIELDS.DELIVERY_DATE] };
+  state = { date: new Date() };
 
   [CREATE_ORDER_FIELDS.COMMENT] = React.createRef();
 

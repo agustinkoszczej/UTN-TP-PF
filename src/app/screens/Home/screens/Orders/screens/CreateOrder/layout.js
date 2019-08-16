@@ -13,11 +13,12 @@ import Loadable from '@components/Loadable';
 import { STEP_INDICATOR_LABELS, STEP_INDICATOR_STEPS, strings } from './constants';
 import styles, { stepIndicatorStyles } from './styles';
 import OrderStep from './components/OrderStep';
+import SupplierStep from './components/SupplierStep';
 import ProductStep from './components/ProductStep';
 import DetailStep from './components/DetailStep';
 
-function CreateOrder({ currentStep, handleSubmit, values, setFieldValue }) {
-  const finalStep = currentStep === 2;
+function CreateOrder({ currentStep, handleSubmit, values, setFieldValue, onBack }) {
+  const finalStep = currentStep === 3;
   return (
     <BaseForm>
       <View style={styles.container}>
@@ -30,18 +31,30 @@ function CreateOrder({ currentStep, handleSubmit, values, setFieldValue }) {
         />
         {
           {
-            0: <OrderStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />,
-            1: <ProductStep handleSubmit={handleSubmit} values={values} />,
-            2: <DetailStep handleSubmit={handleSubmit} values={values} />
+            0: <SupplierStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />,
+            1: <OrderStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />,
+            2: <ProductStep handleSubmit={handleSubmit} values={values} />,
+            3: <DetailStep handleSubmit={handleSubmit} values={values} />
           }[currentStep]
         }
-        <CustomButton
-          primaryBtn
-          onPress={handleSubmit}
-          title={!finalStep ? strings.next : strings.createButton}
-          textStyle={styles.whiteText}
-          style={styles.signUpBtn}
-        />
+        <View style={styles.buttons}>
+          {currentStep > 0 && (
+            <CustomButton
+              primaryBtn
+              onPress={onBack}
+              title={strings.back}
+              textStyle={styles.whiteText}
+              style={styles.backButton}
+            />
+          )}
+          <CustomButton
+            primaryBtn
+            onPress={handleSubmit}
+            title={!finalStep ? strings.next : strings.createButton}
+            textStyle={styles.whiteText}
+            style={[styles.createButton, currentStep === 0 && { width: '100%' }]}
+          />
+        </View>
       </View>
     </BaseForm>
   );
@@ -51,7 +64,8 @@ CreateOrder.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   values: PropTypes.shape({}).isRequired,
   currentStep: PropTypes.number.isRequired,
-  setFieldValue: PropTypes.func.isRequired
+  setFieldValue: PropTypes.func.isRequired,
+  onBack: PropTypes.func.isRequired
 };
 
 const enhancer = compose(

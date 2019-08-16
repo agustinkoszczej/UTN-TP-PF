@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { object, string } from 'yup';
 import { connect } from 'react-redux';
 import OrdersActions from '@redux/orders/actions';
 import { PAYMENT_METHODS } from '@constants/paymentMethods';
@@ -12,12 +13,25 @@ class CreateOrderContainer extends Component {
 
   initialValues = {
     [CREATE_ORDER_FIELDS.PAYMENT_METHOD]: PAYMENT_METHODS[0].text,
-    [CREATE_ORDER_FIELDS.DELIVERY_DATE]: new Date(),
     [CREATE_ORDER_FIELDS.COMMENT]: '',
     [CREATE_ORDER_FIELDS.AMOUNT]: ''
   };
 
+  formValidationSchema = {
+    0: object().shape({}),
+    1: object().shape({
+      [CREATE_ORDER_FIELDS.PAYMENT_METHOD]: string().required('Campo requerido'),
+      [CREATE_ORDER_FIELDS.DELIVERY_DATE]: string().required('Campo requerido'),
+      [CREATE_ORDER_FIELDS.COMMENT]: string().required('Campo requerido'),
+      [CREATE_ORDER_FIELDS.AMOUNT]: string().required('Campo requerido')
+    }),
+    2: object().shape({}),
+    3: object().shape({})
+  };
+
   handleNext = () => this.setState(prevState => ({ currentStep: prevState.currentStep + 1 }));
+
+  handleBack = () => this.setState(prevState => ({ currentStep: prevState.currentStep - 1 }));
 
   handleCreateOrder = values => {
     const { createOrder } = this.props;
@@ -32,6 +46,7 @@ class CreateOrderContainer extends Component {
         onCreateOrder={this.handleCreateOrder}
         onNext={this.handleNext}
         initialValues={this.initialValues}
+        onBack={this.handleBack}
       />
     );
   }

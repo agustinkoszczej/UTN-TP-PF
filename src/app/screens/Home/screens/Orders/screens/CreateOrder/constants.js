@@ -1,14 +1,20 @@
 export const strings = {
   next: 'Continuar',
-  createButton: 'Crear pedido'
+  createButton: 'Crear pedido',
+  back: 'Volver'
 };
 
-export const STEP_INDICATOR_LABELS = ['Datos generales', 'Productos', 'Detalle'];
-export const STEP_INDICATOR_STEPS = 3;
+export const STEP_INDICATOR_LABELS = ['Distribuidor', 'Datos generales', 'Productos', 'Detalle'];
+export const STEP_INDICATOR_STEPS = 4;
 
 export const CREATE_ORDER_FIELDS = {
-  PAYMENT_METHOD: 'paymentMethod',
+  PAYMENT_METHOD: 'paymentOptionId',
   AMOUNT: 'amount',
   COMMENT: 'comment',
-  DELIVERY_DATE: 'deliveryDate'
+  DELIVERY_DATE: 'deliveryDate',
+  RECEIVER_NAME: 'receiverName',
+  SUPPLIER_ID: 'supplierId',
+  PRODUCTS: 'products',
+  SUPPLIER_PICTURE: 'supplierPictire',
+  COMPANY_NAME: 'companyName'
 };

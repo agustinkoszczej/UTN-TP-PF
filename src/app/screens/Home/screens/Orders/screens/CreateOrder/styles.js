@@ -8,6 +8,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  backButton: {
+    borderRadius: 5,
+    width: '45%',
+    marginRight: '5%'
+  },
+  createButton: {
+    borderRadius: 5,
+    width: '45%'
   }
 });
 export default styles;

@@ -20,7 +20,8 @@ const reducerDescription = {
     actions.SIGN_UP,
     actions.GET_USER_INFO,
     actions.UPDATE_USER,
-    actions.GET_AGENDA
+    actions.GET_AGENDA,
+    actions.GET_SUPPLIER_PRODUCTS
   ],
   override: { [actions.LOG_OUT]: onSetValue(null), [actions.CLEAN_SIGN_UP_ERROR]: onSetValue(null) }
 };

@@ -113,7 +113,8 @@ export const screensNavOptions = {
       style: { backgroundColor: white, paddingVertical: 5 },
       activeTintColor: black,
       inactiveTintColor: boulder
-    }
+    },
+    lazy: true
   },
   [Routes.Auctions]: {
     gesturesEnabled: false,
@@ -126,7 +127,8 @@ export const screensNavOptions = {
       activeTintColor: black,
       inactiveTintColor: boulder
     },
-    headerRight: <AddButton />
+    headerRight: <AddButton />,
+    lazy: true
   },
   [Routes.HomeMenu]: {
     gesturesEnabled: false,

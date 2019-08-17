@@ -67,7 +67,7 @@ class OrdersList extends Component {
         renderItem={this.renderItem}
         onRefresh={onRefresh}
         refreshing={loading}
-        onEndReached={getOrders}
+        // onEndReached={getOrders}
       />
     );
   }

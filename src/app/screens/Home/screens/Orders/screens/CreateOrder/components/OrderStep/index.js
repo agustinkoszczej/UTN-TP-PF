@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import CustomDropdown from '@components/CustomDropdown';
+import Collapsible from '@components/Collapsible';
 import CustomText from '@components/CustomText';
 import CustomTextInput from '@components/CustomTextInput';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { PAYMENT_METHODS } from '@constants/paymentMethods';
 import { dateFormat } from '@utils/timeUtils';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { CREATE_ORDER_FIELDS } from '../../constants';
 
 import styles from './styles';
 
 class OrderStep extends Component {
-  state = { date: new Date() };
+  state = {
+    date: dateFormat(this.props.values[CREATE_ORDER_FIELDS.DELIVERY_DATE]),
+    show: false
+  };
 
   [CREATE_ORDER_FIELDS.COMMENT] = React.createRef();
 
@@ -23,9 +28,11 @@ class OrderStep extends Component {
 
   handleDateChange = (_, date) => {
     const { setFieldValue } = this.props;
-    this.setState({ date });
-    setFieldValue(CREATE_ORDER_FIELDS.DELIVERY_DATE, dateFormat(date));
+    this.setState({ date: dateFormat(date) });
+    setFieldValue(CREATE_ORDER_FIELDS.DELIVERY_DATE, date);
   };
+
+  hideOrShowCalendar = show => () => this.setState({ show });
 
   paymentMethodSelector = method => method.text;
 
@@ -36,7 +43,7 @@ class OrderStep extends Component {
 
   render() {
     const { values } = this.props;
-    const { date } = this.state;
+    const { date, show } = this.state;
     const paymentMethod = values[CREATE_ORDER_FIELDS.PAYMENT_METHOD];
     const commonProps = {
       underline: true,
@@ -45,43 +52,51 @@ class OrderStep extends Component {
       style: styles.formElement
     };
     return (
-      <View style={styles.container}>
-        <CustomTextInput
-          {...commonProps}
-          keyboardType="phone-pad"
-          name={CREATE_ORDER_FIELDS.AMOUNT}
-          placeholder="Precio"
-          onTextSubmitEditing={this.handleAmountChange}
-          maxLength={9}
-        />
-        <CustomTextInput
-          {...commonProps}
-          name={CREATE_ORDER_FIELDS.COMPANY_NAME}
-          textRef={this[CREATE_ORDER_FIELDS.COMMENT]}
-          placeholder="Comentario"
-          maxLength={150}
-          applyTrim
-        />
-        <CustomText>Fecha de entrega:</CustomText>
-        <DateTimePicker
-          value={date}
-          minimumDate={new Date()}
-          mode="date"
-          display="default"
-          onChange={this.handleDateChange}
-        />
-        <View>
-          <CustomText>Método de pago:</CustomText>
-          <CustomDropdown
-            closeOnOverlayPress
-            items={PAYMENT_METHODS}
-            itemNameSelector={this.paymentMethodSelector}
-            selectedOption={paymentMethod}
-            onSelectItem={this.handlePaymentMethodChange}
-            style={styles.paymentMethod}
+      <TouchableWithoutFeedback onPress={this.hideOrShowCalendar(false)}>
+        <View style={styles.container}>
+          <CustomTextInput
+            {...commonProps}
+            keyboardType="phone-pad"
+            name={CREATE_ORDER_FIELDS.AMOUNT}
+            placeholder="Precio"
+            onTextSubmitEditing={this.handleAmountChange}
+            maxLength={9}
           />
+          <CustomTextInput
+            {...commonProps}
+            name={CREATE_ORDER_FIELDS.COMPANY_NAME}
+            textRef={this[CREATE_ORDER_FIELDS.COMMENT]}
+            placeholder="Comentario"
+            maxLength={150}
+            applyTrim
+          />
+          <TouchableOpacity style={styles.inputDateBirthday} onPress={this.hideOrShowCalendar(true)}>
+            <View pointerEvents="none">
+              <CustomTextInput {...commonProps} value={date} placeholder="Fecha de entrega" />
+            </View>
+          </TouchableOpacity>
+          <Collapsible collapsed={!show}>
+            <DateTimePicker
+              value={values[CREATE_ORDER_FIELDS.DELIVERY_DATE]}
+              minimumDate={new Date()}
+              mode="date"
+              display="default"
+              onChange={this.handleDateChange}
+            />
+          </Collapsible>
+          <View>
+            <CustomText>Método de pago:</CustomText>
+            <CustomDropdown
+              closeOnOverlayPress
+              items={PAYMENT_METHODS}
+              itemNameSelector={this.paymentMethodSelector}
+              selectedOption={paymentMethod}
+              onSelectItem={this.handlePaymentMethodChange}
+              style={styles.paymentMethod}
+            />
+          </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

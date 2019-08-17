@@ -16,6 +16,6 @@ export default StyleSheet.create({
     paddingVertical: 15,
     borderColor: black,
     borderWidth: 0.2,
-    marginVertical: 15
+    marginVertical: 10
   }
 });

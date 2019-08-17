@@ -14,6 +14,7 @@ export const CREATE_ORDER_FIELDS = {
   DELIVERY_DATE: 'deliveryDate',
   RECEIVER_NAME: 'receiverName',
   SUPPLIER_ID: 'supplierId',
+  MERCHANT_ID: 'merchantId',
   PRODUCTS: 'products',
   SUPPLIER_PICTURE: 'supplierPictire',
   COMPANY_NAME: 'companyName'

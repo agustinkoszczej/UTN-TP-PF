@@ -15,19 +15,24 @@ class CreateOrderContainer extends Component {
     [CREATE_ORDER_FIELDS.PAYMENT_METHOD]: PAYMENT_METHODS[0].text,
     [CREATE_ORDER_FIELDS.COMMENT]: '',
     [CREATE_ORDER_FIELDS.AMOUNT]: '',
-    [CREATE_ORDER_FIELDS.DELIVERY_DATE]: new Date()
+    [CREATE_ORDER_FIELDS.DELIVERY_DATE]: new Date(),
+    [CREATE_ORDER_FIELDS.MERCHANT_ID]: this.props.currentUserId
   };
 
   formValidationSchema = {
-    0: object().shape({}),
+    0: object().shape({
+      [CREATE_ORDER_FIELDS.SUPPLIER_ID]: string().required('Campo requerido')
+    }),
     1: object().shape({
-      [CREATE_ORDER_FIELDS.PAYMENT_METHOD]: string().required('Campo requerido'),
-      [CREATE_ORDER_FIELDS.DELIVERY_DATE]: string().required('Campo requerido'),
       [CREATE_ORDER_FIELDS.COMMENT]: string().required('Campo requerido'),
       [CREATE_ORDER_FIELDS.AMOUNT]: string().required('Campo requerido')
     }),
-    2: object().shape({}),
-    3: object().shape({})
+    2: object().shape({
+      [CREATE_ORDER_FIELDS.SUPPLIER_ID]: string().required('Campo requerido')
+    }),
+    3: object().shape({
+      [CREATE_ORDER_FIELDS.SUPPLIER_ID]: string().required('Campo requerido')
+    })
   };
 
   handleNext = () => this.setState(prevState => ({ currentStep: prevState.currentStep + 1 }));
@@ -45,6 +50,7 @@ class CreateOrderContainer extends Component {
       <CreateOrder
         currentStep={currentStep}
         onCreateOrder={this.handleCreateOrder}
+        validationSchema={this.formValidationSchema}
         onNext={this.handleNext}
         initialValues={this.initialValues}
         onBack={this.handleBack}
@@ -54,14 +60,19 @@ class CreateOrderContainer extends Component {
 }
 
 CreateOrderContainer.propTypes = {
-  createOrder: PropTypes.func.isRequired
+  createOrder: PropTypes.func.isRequired,
+  currentUserId: PropTypes.string.isRequired
 };
+
+const mapStateToProps = state => ({
+  currentUserId: state.auth.currentUser.id
+});
 
 const mapDispatchToProps = dispatch => ({
   createOrder: values => dispatch(OrdersActions.createOrder(values))
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(CreateOrderContainer);

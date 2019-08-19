@@ -25,7 +25,7 @@ class CreateOrder extends Component {
     const { currentStep, handleSubmit, values, setFieldValue, onBack } = this.props;
     const finalStep = currentStep === 3;
     return (
-      <BaseForm link onSubmit={handleSubmit}>
+      <BaseForm link onSubmit={handleSubmit} scrollable>
         <View style={styles.container}>
           <StepIndicator
             customStyles={stepIndicatorStyles}
@@ -92,10 +92,9 @@ CreateOrder.propTypes = {
 const enhancer = compose(
   withFormik({
     mapPropsToValues: ({ initialValues }) => initialValues,
-    // validationSchema: ({ validationSchema, currentStep }) => validationSchema[currentStep],
+    validationSchema: ({ validationSchema, currentStep }) => validationSchema[currentStep],
     handleSubmit: (values, { props }) =>
-      props.currentStep === 3 ? props.onCreateOrder(values) : props.onNext(),
-    enableReinitialize: true
+      props.currentStep === 3 ? props.onCreateOrder(values) : props.onNext()
   }),
   Loadable(props => props.loading)
 );

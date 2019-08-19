@@ -20,10 +20,10 @@ function OrderDetail({ order, creation }) {
 OrderDetail.propTypes = {
   order: PropTypes.shape({
     supplier: PropTypes.shape({
-      picture: PropTypes.string.isRequired,
-      fullName: PropTypes.string.isRequired
+      picture: PropTypes.string,
+      fullName: PropTypes.string
     }),
-    deliveryDate: PropTypes.string.isRequired,
+    deliveryDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]).isRequired,
     amount: PropTypes.string.isRequired,
     status: PropTypes.string,
     comment: PropTypes.string.isRequired,

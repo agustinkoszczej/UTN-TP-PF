@@ -6,8 +6,11 @@ const getPastOrders = page => api.get('/merchants/orders', { active: false, page
 
 const getOrderById = id => api.get(`/merchants/orders/${id}`);
 
+const createOrder = order => api.post('/merchants/orders', order);
+
 export default {
   getActiveOrders,
   getPastOrders,
-  getOrderById
+  getOrderById,
+  createOrder
 };

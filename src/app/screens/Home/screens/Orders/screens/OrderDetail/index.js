@@ -16,10 +16,9 @@ OrderDetailContainer.propTypes = {
   loading: PropTypes.bool.isRequired,
   order: PropTypes.shape({
     supplier: PropTypes.shape({
-      picture: PropTypes.string.isRequired,
-      fullName: PropTypes.string.isRequired
-    }).isRequired,
-    deliveryDate: PropTypes.string.isRequired,
+      fullName: PropTypes.string
+    }),
+    deliveryDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]).isRequired,
     amount: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
     comment: PropTypes.string.isRequired,

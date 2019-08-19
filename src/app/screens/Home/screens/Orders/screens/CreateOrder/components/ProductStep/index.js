@@ -23,7 +23,9 @@ class ProductStep extends Component {
     let products = values[CREATE_ORDER_FIELDS.PRODUCTS];
     const product = products.find(prod => prod.id === id);
     if (!product) {
-      if (add) products.push({ id, quantity: 1, product: { imageUrl, description } });
+      if (add) {
+        products = [{ id, quantity: 1, product: { imageUrl, description } }];
+      }
     } else {
       const quantity = add ? product.quantity + 1 : product.quantity - 1;
       if (!quantity) {
@@ -66,9 +68,18 @@ class ProductStep extends Component {
     );
   };
 
+  keyExtractor = ({ product: { id } }) => `${id}`;
+
   render() {
     const { catalog } = this.props;
-    return <FlatList data={catalog} renderItem={this.renderItem} extraData={this.props} />;
+    return (
+      <FlatList
+        data={catalog}
+        renderItem={this.renderItem}
+        keyExtractor={this.keyExtractor}
+        extraData={this.props}
+      />
+    );
   }
 }
 

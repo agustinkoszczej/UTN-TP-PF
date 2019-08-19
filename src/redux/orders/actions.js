@@ -10,7 +10,8 @@ export const actions = createTypes(
       'GET_PAST_ORDERS',
       'REFRESH_ACTIVE_ORDERS',
       'REFRESH_PAST_ORDERS',
-      'GET_ORDER_BY_ID'
+      'GET_ORDER_BY_ID',
+      'CREATE_ORDER'
     ],
     []
   ),
@@ -20,7 +21,8 @@ export const actions = createTypes(
 const targets = {
   activeOrders: 'activeOrders',
   pastOrders: 'pastOrders',
-  currentOrder: 'currentOrder'
+  currentOrder: 'currentOrder',
+  createOrder: 'createOrder'
 };
 
 export const actionCreators = {
@@ -55,6 +57,12 @@ export const actionCreators = {
     target: targets.currentOrder,
     service: OrdersService.getOrderById,
     payload: id
+  }),
+  createOrder: order => ({
+    type: actions.CREATE_ORDER,
+    target: targets.createOrder,
+    service: OrdersService.createOrder,
+    payload: order
   })
 };
 

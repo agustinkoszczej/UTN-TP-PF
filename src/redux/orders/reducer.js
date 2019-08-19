@@ -17,7 +17,8 @@ const ordersSelector = (action, state) => {
 const stateDescription = {
   activeOrders: null,
   pastOrders: null,
-  currentOrder: null
+  currentOrder: null,
+  createOrder: null
 };
 
 const initialState = completeState(stateDescription);
@@ -28,7 +29,8 @@ const reducerDescription = {
     actions.GET_PAST_ORDERS,
     actions.GET_ORDER_BY_ID,
     actions.REFRESH_ACTIVE_ORDERS,
-    actions.REFRESH_PAST_ORDERS
+    actions.REFRESH_PAST_ORDERS,
+    actions.CREATE_ORDER
   ],
   override: {
     [actions.GET_ACTIVE_ORDERS_SUCCESS]: onSuccess(ordersSelector),

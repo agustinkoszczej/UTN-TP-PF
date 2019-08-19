@@ -35,12 +35,12 @@ function OrderHeader({ supplier, receiverName, comment, amount, deliveryDate, st
 
 OrderHeader.propTypes = {
   supplier: PropTypes.shape({
-    fullName: PropTypes.string.isRequired
-  }).isRequired,
-  deliveryDate: PropTypes.string.isRequired,
+    fullName: PropTypes.string
+  }),
+  deliveryDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]).isRequired,
   amount: PropTypes.string.isRequired,
   receiverName: PropTypes.string.isRequired,
-  status: PropTypes.string.isRequired,
+  status: PropTypes.string,
   comment: PropTypes.string.isRequired
 };
 

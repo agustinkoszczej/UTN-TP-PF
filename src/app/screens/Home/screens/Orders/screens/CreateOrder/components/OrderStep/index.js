@@ -24,7 +24,7 @@ class OrderStepContainer extends Component {
 
   handlePaymentMethodChange = method => {
     const { setFieldValue } = this.props;
-    setFieldValue(CREATE_ORDER_FIELDS.PAYMENT_METHOD, method.text);
+    setFieldValue(CREATE_ORDER_FIELDS.PAYMENT_METHOD, method.id);
   };
 
   render() {

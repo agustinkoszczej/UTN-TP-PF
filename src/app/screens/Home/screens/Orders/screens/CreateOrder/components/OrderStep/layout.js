@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import CustomDropdown from '@components/CustomDropdown';
 import Collapsible from '@components/Collapsible';
 import CustomText from '@components/CustomText';
-import CustomTextInput from '@components/CustomTextInput';
+import TextInput, { FormField as CustomTextInput } from '@components/CustomTextInput';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { PAYMENT_METHODS } from '@constants/paymentMethods';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -24,11 +24,11 @@ class OrderStep extends Component {
     const {
       values,
       hideOrShowCalendar,
-      date,
       show,
       handlePaymentMethodChange,
       paymentMethodSelector,
-      handleDateChange
+      handleDateChange,
+      date
     } = this.props;
     const paymentMethod = values[CREATE_ORDER_FIELDS.PAYMENT_METHOD];
     const commonProps = {
@@ -40,6 +40,7 @@ class OrderStep extends Component {
     return (
       <TouchableWithoutFeedback onPress={hideOrShowCalendar(false)}>
         <View style={styles.container}>
+          <CustomText>Precio:</CustomText>
           <CustomTextInput
             name={CREATE_ORDER_FIELDS.AMOUNT}
             {...commonProps}
@@ -48,6 +49,7 @@ class OrderStep extends Component {
             onTextSubmitEditing={this.handleAmountChange}
             maxLength={9}
           />
+          <CustomText>Comentario:</CustomText>
           <CustomTextInput
             name={CREATE_ORDER_FIELDS.COMMENT}
             {...commonProps}
@@ -59,7 +61,7 @@ class OrderStep extends Component {
           <TouchableOpacity style={styles.inputDateBirthday} onPress={hideOrShowCalendar(true)}>
             <View pointerEvents="none">
               <CustomText>Fecha de entrega:</CustomText>
-              <CustomTextInput {...commonProps} value={date} placeholder="Fecha de entrega" />
+              <TextInput {...commonProps} value={date} />
             </View>
           </TouchableOpacity>
           <Collapsible collapsed={!show}>

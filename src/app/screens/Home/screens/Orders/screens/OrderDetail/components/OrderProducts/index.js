@@ -53,9 +53,8 @@ OrderProducts.propTypes = {
   products: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      quantity: PropTypes.string.isRequired,
+      quantity: PropTypes.oneOf(PropTypes.string, PropTypes.number).isRequired,
       product: PropTypes.shape({
-        id: PropTypes.number.isRequired,
         description: PropTypes.string.isRequired,
         imageUrl: PropTypes.string.isRequired
       })

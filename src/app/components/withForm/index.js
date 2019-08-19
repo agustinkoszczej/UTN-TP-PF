@@ -11,6 +11,7 @@ import { connect } from 'formik';
 const withForm = WrappedComponent => {
   class formikFormProps extends Component {
     handleChange = value => {
+      debugger
       const { formik, onChange, name } = this.props;
       if (formik.handleChange) formik.handleChange(name)(value);
       if (onChange) onChange(value);
@@ -24,6 +25,7 @@ const withForm = WrappedComponent => {
 
     render() {
       const { formik, name, error, invalid, ...props } = this.props;
+      debugger
       return (
         <WrappedComponent
           {...props}

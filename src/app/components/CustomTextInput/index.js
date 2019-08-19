@@ -99,7 +99,6 @@ class CustomTextInput extends PureComponent {
             style={[styles.inputStyle, multiline ? styles.multilineInput : styles.singleInput, textStyles]}
             placeholderTextColor={alto}
             secureTextEntry={secureTextEntry && !showPassword}
-            autoComplete={!secureTextEntry}
             ref={textRef}
             onSubmitEditing={onTextSubmitEditing}
             multiline={multiline}

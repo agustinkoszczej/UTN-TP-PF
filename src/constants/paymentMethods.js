@@ -1,10 +1,10 @@
 export const PAYMENT_METHODS = [
   {
-    id: '0',
+    id: 1,
     text: 'Efectivo'
   },
   {
-    id: '1',
+    id: 2,
     text: 'Mercado Pago'
   }
 ];

@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { Text } from 'react-native';
+import { FlatList, View, Image } from 'react-native';
 import AuthActions from '@redux/auth/actions';
+import CustomText from '@components/CustomText';
+import CustomButton from '@components/CustomButton';
+import Card from '@components/Card';
 
 import { CREATE_ORDER_FIELDS } from '../../constants';
+
+import styles from './styles';
 
 class ProductStep extends Component {
   componentDidMount() {
@@ -13,19 +18,81 @@ class ProductStep extends Component {
     getSupplierProducts(values[CREATE_ORDER_FIELDS.SUPPLIER_ID]);
   }
 
+  handleProductChange = (id, add) => () => {
+    const { setFieldValue, values } = this.props;
+    let products = values[CREATE_ORDER_FIELDS.PRODUCTS];
+    const product = products.find(prod => prod.id === id);
+    if (!product) {
+      if (add) products.push({ id, quantity: 1 });
+    } else {
+      const quantity = add ? product.quantity + 1 : product.quantity - 1;
+      if (!quantity) {
+        products = products.filter(prod => prod.id !== id);
+      } else {
+        products = products.map(prod => (prod.id === id ? { id, quantity } : prod));
+      }
+    }
+    setFieldValue(CREATE_ORDER_FIELDS.PRODUCTS, products);
+  };
+
+  renderItem = ({
+    item: {
+      product: { id, imageUrl, description }
+    }
+  }) => {
+    const { values } = this.props;
+    const quantity = values[CREATE_ORDER_FIELDS.PRODUCTS].find(prod => prod.id === id)?.quantity || 0;
+    return (
+      <Card style={styles.productContainer}>
+        <View style={styles.row}>
+          <Image source={{ uri: imageUrl }} style={styles.productImage} />
+          <CustomText>{description}</CustomText>
+        </View>
+        <View style={styles.row}>
+          <CustomText>{quantity}</CustomText>
+          <CustomButton
+            style={styles.rightButton}
+            textStyle={styles.buttonFont}
+            title="+"
+            onPress={this.handleProductChange(id, true)}
+          />
+          <CustomButton
+            style={styles.rightButton}
+            textStyle={styles.buttonFont}
+            title="-"
+            onPress={this.handleProductChange(id)}
+          />
+        </View>
+      </Card>
+    );
+  };
+
   render() {
-    return <Text>Hola</Text>;
+    const { catalog } = this.props;
+    return <FlatList data={catalog} renderItem={this.renderItem} extraData={this.props} />;
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  catalog: state.auth.catalog
+});
 
 const mapDispatchToProps = dispatch => ({
   getSupplierProducts: id => dispatch(AuthActions.getSupplierProducts(id))
 });
 
 ProductStep.propTypes = {
-  getSupplierProducts: PropTypes.func.isRequired
+  getSupplierProducts: PropTypes.func.isRequired,
+  setFieldValue: PropTypes.func.isRequired,
+  values: PropTypes.shape({
+    [CREATE_ORDER_FIELDS.PRODUCTS]: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        quantity: PropTypes.number.isRequired
+      })
+    )
+  }).isRequired,
+  catalog: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 const enhance = compose(

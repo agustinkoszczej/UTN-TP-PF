@@ -8,7 +8,8 @@ const stateDescription = {
   recoverPassword: null,
   signUpUser: null,
   updateUser: null,
-  agenda: []
+  agenda: [],
+  catalog: []
 };
 
 const initialState = completeState(stateDescription, ['initialLoading']);

@@ -38,7 +38,7 @@ class CreateOrder extends Component {
             {
               0: <SupplierStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />,
               1: <OrderStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />,
-              2: <ProductStep handleSubmit={handleSubmit} values={values} />,
+              2: <ProductStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />,
               3: <DetailStep handleSubmit={handleSubmit} values={values} />
             }[currentStep]
           }
@@ -75,7 +75,13 @@ CreateOrder.propTypes = {
     [CREATE_ORDER_FIELDS.SUPPLIER_ID]: PropTypes.string,
     [CREATE_ORDER_FIELDS.SUPPLIER_PICTURE]: PropTypes.string,
     [CREATE_ORDER_FIELDS.DELIVERY_DATE]: PropTypes.instanceOf(Date),
-    [CREATE_ORDER_FIELDS.RECEIVER_NAME]: PropTypes.string
+    [CREATE_ORDER_FIELDS.RECEIVER_NAME]: PropTypes.string,
+    [CREATE_ORDER_FIELDS.PRODUCTS]: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        quantity: PropTypes.number.isRequired
+      })
+    )
   }).isRequired,
   currentStep: PropTypes.number.isRequired,
   setFieldValue: PropTypes.func.isRequired,

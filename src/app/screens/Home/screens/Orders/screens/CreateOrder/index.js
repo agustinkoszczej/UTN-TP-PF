@@ -16,7 +16,8 @@ class CreateOrderContainer extends Component {
     [CREATE_ORDER_FIELDS.COMMENT]: '',
     [CREATE_ORDER_FIELDS.AMOUNT]: '',
     [CREATE_ORDER_FIELDS.DELIVERY_DATE]: new Date(),
-    [CREATE_ORDER_FIELDS.MERCHANT_ID]: this.props.currentUserId
+    [CREATE_ORDER_FIELDS.MERCHANT_ID]: this.props.currentUserId,
+    [CREATE_ORDER_FIELDS.PRODUCTS]: []
   };
 
   formValidationSchema = {

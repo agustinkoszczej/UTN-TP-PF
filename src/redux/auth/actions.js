@@ -33,7 +33,7 @@ export const targets = {
   signUpUserError: 'signUpUserError',
   updateUser: 'updateUser',
   agenda: 'agenda',
-  supplierProducts: 'supplierProducts'
+  catalog: 'catalog'
 };
 
 export const actionCreators = {
@@ -158,9 +158,10 @@ export const actionCreators = {
   }),
   getSupplierProducts: id => ({
     type: actions.GET_SUPPLIER_PRODUCTS,
-    target: targets.supplierProducts,
+    target: targets.catalog,
     payload: id,
-    service: AuthService.getSupplierProducts
+    service: AuthService.getSupplierProducts,
+    successSelector: response => response.data.products
   })
 };
 

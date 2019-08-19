@@ -6,7 +6,6 @@ import { compose } from 'recompose';
 import StepIndicator from '@components/CustomStepper';
 import CustomButton from '@components/CustomButton';
 import BaseForm from '@components/BaseForm';
-import Loadable from '@components/Loadable';
 
 import { STEP_INDICATOR_LABELS, STEP_INDICATOR_STEPS, strings, CREATE_ORDER_FIELDS } from './constants';
 import styles, { stepIndicatorStyles } from './styles';
@@ -22,7 +21,7 @@ class CreateOrder extends Component {
   }
 
   render() {
-    const { currentStep, handleSubmit, values, setFieldValue, onBack } = this.props;
+    const { currentStep, handleSubmit, values, setFieldValue, onBack, loading } = this.props;
     const finalStep = currentStep === 3;
     return (
       <BaseForm link onSubmit={handleSubmit} scrollable>
@@ -57,6 +56,7 @@ class CreateOrder extends Component {
               onPress={handleSubmit}
               title={!finalStep ? strings.next : strings.createButton}
               textStyle={styles.whiteText}
+              loading={loading}
               style={[styles.createButton, currentStep === 0 && { width: '100%' }]}
             />
           </View>
@@ -86,7 +86,8 @@ CreateOrder.propTypes = {
   currentStep: PropTypes.number.isRequired,
   setFieldValue: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
-  setTouched: PropTypes.func.isRequired
+  setTouched: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
 const enhancer = compose(
@@ -95,8 +96,7 @@ const enhancer = compose(
     validationSchema: ({ validationSchema, currentStep }) => validationSchema[currentStep],
     handleSubmit: (values, { props }) =>
       props.currentStep === 3 ? props.onCreateOrder(values) : props.onNext()
-  }),
-  Loadable(props => props.loading)
+  })
 );
 
 export default enhancer(CreateOrder);

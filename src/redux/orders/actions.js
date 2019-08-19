@@ -1,5 +1,7 @@
-import { completeTypes, createTypes } from 'redux-recompose';
+import { completeTypes, createTypes, withPostSuccess } from 'redux-recompose';
 import OrdersService from '@services/OrdersService';
+import DialogActions from '@redux/dialog/actions';
+import { getHomeDialog, homeDialogNames } from '@screens/Home/dialogs';
 
 import { ordersSerialiazer } from './utils';
 
@@ -62,7 +64,12 @@ export const actionCreators = {
     type: actions.CREATE_ORDER,
     target: targets.createOrder,
     service: OrdersService.createOrder,
-    payload: order
+    payload: order,
+    injections: [
+      withPostSuccess(async dispatch => {
+        dispatch(DialogActions.showDialog(getHomeDialog(homeDialogNames.FINISH_CREATE_ORDER)()));
+      })
+    ]
   })
 };
 

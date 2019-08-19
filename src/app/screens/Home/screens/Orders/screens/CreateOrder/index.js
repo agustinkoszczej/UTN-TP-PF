@@ -12,7 +12,7 @@ class CreateOrderContainer extends Component {
   state = { currentStep: 0 };
 
   initialValues = {
-    [CREATE_ORDER_FIELDS.PAYMENT_METHOD]: PAYMENT_METHODS[0].text,
+    [CREATE_ORDER_FIELDS.PAYMENT_METHOD]: PAYMENT_METHODS[0].id,
     [CREATE_ORDER_FIELDS.DELIVERY_DATE]: new Date(),
     [CREATE_ORDER_FIELDS.MERCHANT_ID]: this.props.currentUserId,
     [CREATE_ORDER_FIELDS.PRODUCTS]: []
@@ -45,6 +45,7 @@ class CreateOrderContainer extends Component {
 
   render() {
     const { currentStep } = this.state;
+    const { loading } = this.props;
     return (
       <CreateOrder
         currentStep={currentStep}
@@ -53,6 +54,7 @@ class CreateOrderContainer extends Component {
         onNext={this.handleNext}
         initialValues={this.initialValues}
         onBack={this.handleBack}
+        loading={loading}
       />
     );
   }
@@ -60,11 +62,13 @@ class CreateOrderContainer extends Component {
 
 CreateOrderContainer.propTypes = {
   createOrder: PropTypes.func.isRequired,
-  currentUserId: PropTypes.string.isRequired
+  currentUserId: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
-  currentUserId: state.auth.currentUser.id
+  currentUserId: state.auth.currentUser.id,
+  loading: state.orders.createOrderLoading
 });
 
 const mapDispatchToProps = dispatch => ({

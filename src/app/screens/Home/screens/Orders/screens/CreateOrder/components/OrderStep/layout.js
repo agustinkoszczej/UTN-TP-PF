@@ -30,7 +30,7 @@ class OrderStep extends Component {
       handleDateChange,
       date
     } = this.props;
-    const paymentMethod = values[CREATE_ORDER_FIELDS.PAYMENT_METHOD];
+    const paymentMethod = PAYMENT_METHODS[values[CREATE_ORDER_FIELDS.PAYMENT_METHOD]].text;
     const commonProps = {
       underline: true,
       returnKeyType: 'next',

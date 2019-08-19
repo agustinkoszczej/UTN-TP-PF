@@ -65,13 +65,15 @@ class OrderStep extends Component {
             </View>
           </TouchableOpacity>
           <Collapsible collapsed={!show}>
-            <DateTimePicker
-              value={values[CREATE_ORDER_FIELDS.DELIVERY_DATE]}
-              minimumDate={new Date()}
-              mode="date"
-              display="default"
-              onChange={handleDateChange}
-            />
+            {show && (
+              <DateTimePicker
+                value={values[CREATE_ORDER_FIELDS.DELIVERY_DATE]}
+                minimumDate={new Date()}
+                mode="date"
+                display="default"
+                onChange={handleDateChange}
+              />
+            )}
           </Collapsible>
 
           <CustomText>Método de pago:</CustomText>

@@ -8,7 +8,8 @@ import { dateFormat } from '@utils/timeUtils';
 
 import styles from './styles';
 
-function OrderHeader({ supplier: { fullName }, comment, amount, deliveryDate, status }) {
+function OrderHeader({ supplier, receiverName, comment, amount, deliveryDate, status }) {
+  const fullName = supplier?.fullName || receiverName;
   return (
     <Card style={styles.cardContainer}>
       <View style={styles.section}>
@@ -27,7 +28,7 @@ function OrderHeader({ supplier: { fullName }, comment, amount, deliveryDate, st
         <CustomText style={styles.placeholder}>Fecha de entrega:</CustomText>
         <CustomText bold>{dateFormat(deliveryDate)}</CustomText>
       </View>
-      <StatusTag status={status} />
+      {status && <StatusTag status={status} />}
     </Card>
   );
 }
@@ -38,6 +39,7 @@ OrderHeader.propTypes = {
   }).isRequired,
   deliveryDate: PropTypes.string.isRequired,
   amount: PropTypes.string.isRequired,
+  receiverName: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   comment: PropTypes.string.isRequired
 };

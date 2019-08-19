@@ -7,10 +7,10 @@ import styles from './styles';
 import OrderHeader from './components/OrderHeader';
 import OrderProducts from './components/OrderProducts';
 
-function OrderDetail({ order }) {
+function OrderDetail({ order, creation }) {
   const { products } = order;
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={!creation && styles.container}>
       <OrderHeader {...order} />
       <OrderProducts products={products} />
     </ScrollView>
@@ -22,13 +22,14 @@ OrderDetail.propTypes = {
     supplier: PropTypes.shape({
       picture: PropTypes.string.isRequired,
       fullName: PropTypes.string.isRequired
-    }).isRequired,
+    }),
     deliveryDate: PropTypes.string.isRequired,
     amount: PropTypes.string.isRequired,
-    status: PropTypes.string.isRequired,
+    status: PropTypes.string,
     comment: PropTypes.string.isRequired,
     products: PropTypes.arrayOf(PropTypes.shape({}))
-  }).isRequired
+  }).isRequired,
+  creation: PropTypes.bool
 };
 
 export default Loadable(props => props.loading)(OrderDetail);

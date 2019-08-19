@@ -18,29 +18,28 @@ class ProductStep extends Component {
     getSupplierProducts(values[CREATE_ORDER_FIELDS.SUPPLIER_ID]);
   }
 
-  handleProductChange = (id, add) => () => {
+  handleProductChange = ({ id, imageUrl, description }, add) => () => {
     const { setFieldValue, values } = this.props;
     let products = values[CREATE_ORDER_FIELDS.PRODUCTS];
     const product = products.find(prod => prod.id === id);
     if (!product) {
-      if (add) products.push({ id, quantity: 1 });
+      if (add) products.push({ id, quantity: 1, product: { imageUrl, description } });
     } else {
       const quantity = add ? product.quantity + 1 : product.quantity - 1;
       if (!quantity) {
         products = products.filter(prod => prod.id !== id);
       } else {
-        products = products.map(prod => (prod.id === id ? { id, quantity } : prod));
+        products = products.map(prod =>
+          prod.id === id ? { id, quantity, product: { imageUrl, description } } : prod
+        );
       }
     }
     setFieldValue(CREATE_ORDER_FIELDS.PRODUCTS, products);
   };
 
-  renderItem = ({
-    item: {
-      product: { id, imageUrl, description }
-    }
-  }) => {
+  renderItem = ({ item: { product } }) => {
     const { values } = this.props;
+    const { id, imageUrl, description } = product;
     const quantity = values[CREATE_ORDER_FIELDS.PRODUCTS].find(prod => prod.id === id)?.quantity || 0;
     return (
       <Card style={styles.productContainer}>
@@ -54,13 +53,13 @@ class ProductStep extends Component {
             style={styles.rightButton}
             textStyle={styles.buttonFont}
             title="+"
-            onPress={this.handleProductChange(id, true)}
+            onPress={this.handleProductChange(product, true)}
           />
           <CustomButton
             style={styles.rightButton}
             textStyle={styles.buttonFont}
             title="-"
-            onPress={this.handleProductChange(id)}
+            onPress={this.handleProductChange(product)}
           />
         </View>
       </Card>

@@ -13,8 +13,8 @@ class CreateOrderContainer extends Component {
 
   initialValues = {
     [CREATE_ORDER_FIELDS.PAYMENT_METHOD]: PAYMENT_METHODS[0].text,
-    [CREATE_ORDER_FIELDS.COMMENT]: '',
-    [CREATE_ORDER_FIELDS.AMOUNT]: '',
+    [CREATE_ORDER_FIELDS.COMMENT]: 'dasdasdsa',
+    [CREATE_ORDER_FIELDS.AMOUNT]: 'dsdasdsa',
     [CREATE_ORDER_FIELDS.DELIVERY_DATE]: new Date(),
     [CREATE_ORDER_FIELDS.MERCHANT_ID]: this.props.currentUserId,
     [CREATE_ORDER_FIELDS.PRODUCTS]: []
@@ -25,8 +25,8 @@ class CreateOrderContainer extends Component {
       [CREATE_ORDER_FIELDS.SUPPLIER_ID]: string().required('Campo requerido')
     }),
     1: object().shape({
-      [CREATE_ORDER_FIELDS.COMMENT]: string().required('Campo requerido'),
-      [CREATE_ORDER_FIELDS.AMOUNT]: string().required('Campo requerido')
+      // [CREATE_ORDER_FIELDS.COMMENT]: string().required('Campo requerido'),
+      // [CREATE_ORDER_FIELDS.AMOUNT]: string().required('Campo requerido')
     }),
     2: object().shape({
       [CREATE_ORDER_FIELDS.SUPPLIER_ID]: string().required('Campo requerido')

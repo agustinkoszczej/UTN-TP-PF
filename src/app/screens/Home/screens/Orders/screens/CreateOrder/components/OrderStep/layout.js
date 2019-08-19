@@ -27,7 +27,8 @@ class OrderStep extends Component {
       date,
       show,
       handlePaymentMethodChange,
-      paymentMethodSelector
+      paymentMethodSelector,
+      handleDateChange
     } = this.props;
     const paymentMethod = values[CREATE_ORDER_FIELDS.PAYMENT_METHOD];
     const commonProps = {
@@ -40,16 +41,16 @@ class OrderStep extends Component {
       <TouchableWithoutFeedback onPress={hideOrShowCalendar(false)}>
         <View style={styles.container}>
           <CustomTextInput
+            name={CREATE_ORDER_FIELDS.AMOUNT}
             {...commonProps}
             keyboardType="phone-pad"
-            name={CREATE_ORDER_FIELDS.AMOUNT}
             placeholder="Precio"
             onTextSubmitEditing={this.handleAmountChange}
             maxLength={9}
           />
           <CustomTextInput
-            {...commonProps}
             name={CREATE_ORDER_FIELDS.COMMENT}
+            {...commonProps}
             textRef={this[CREATE_ORDER_FIELDS.COMMENT]}
             placeholder="Comentario"
             maxLength={150}
@@ -57,6 +58,7 @@ class OrderStep extends Component {
           />
           <TouchableOpacity style={styles.inputDateBirthday} onPress={hideOrShowCalendar(true)}>
             <View pointerEvents="none">
+              <CustomText>Fecha de entrega:</CustomText>
               <CustomTextInput {...commonProps} value={date} placeholder="Fecha de entrega" />
             </View>
           </TouchableOpacity>
@@ -66,20 +68,19 @@ class OrderStep extends Component {
               minimumDate={new Date()}
               mode="date"
               display="default"
-              onChange={this.handleDateChange}
+              onChange={handleDateChange}
             />
           </Collapsible>
-          <View>
-            <CustomText>Método de pago:</CustomText>
-            <CustomDropdown
-              closeOnOverlayPress
-              items={PAYMENT_METHODS}
-              itemNameSelector={paymentMethodSelector}
-              selectedOption={paymentMethod}
-              onSelectItem={handlePaymentMethodChange}
-              style={styles.paymentMethod}
-            />
-          </View>
+
+          <CustomText>Método de pago:</CustomText>
+          <CustomDropdown
+            closeOnOverlayPress
+            items={PAYMENT_METHODS}
+            itemNameSelector={paymentMethodSelector}
+            selectedOption={paymentMethod}
+            onSelectItem={handlePaymentMethodChange}
+            style={styles.paymentMethod}
+          />
         </View>
       </TouchableWithoutFeedback>
     );

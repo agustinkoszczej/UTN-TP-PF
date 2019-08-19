@@ -25,7 +25,7 @@ class CreateOrder extends Component {
     const { currentStep, handleSubmit, values, setFieldValue, onBack } = this.props;
     const finalStep = currentStep === 3;
     return (
-      <BaseForm>
+      <BaseForm link onSubmit={handleSubmit}>
         <View style={styles.container}>
           <StepIndicator
             customStyles={stepIndicatorStyles}
@@ -94,7 +94,8 @@ const enhancer = compose(
     mapPropsToValues: ({ initialValues }) => initialValues,
     // validationSchema: ({ validationSchema, currentStep }) => validationSchema[currentStep],
     handleSubmit: (values, { props }) =>
-      props.currentStep === 3 ? props.onCreateOrder(values) : props.onNext()
+      props.currentStep === 3 ? props.onCreateOrder(values) : props.onNext(),
+    enableReinitialize: true
   }),
   Loadable(props => props.loading)
 );

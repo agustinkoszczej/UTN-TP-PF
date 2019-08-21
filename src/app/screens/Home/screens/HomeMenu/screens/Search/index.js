@@ -1,8 +1,11 @@
-import React from 'react';
-import { Text } from 'react-native';
+import React, { Component } from 'react';
 
-function Search() {
-  return <Text>Hola</Text>;
+import SearchHeader from './components/SearchHeader';
+
+class SearchContainer extends Component {
+  render() {
+    return <SearchHeader />;
+  }
 }
 
-export default Search;
+export default SearchContainer;

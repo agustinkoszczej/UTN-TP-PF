@@ -19,7 +19,8 @@ const routes = {
   Chats: 'Chats',
   CreateOrder: 'CreateOrder',
   CreateAuction: 'CreateAuction',
-  OrderDetail: 'OrderDetail'
+  OrderDetail: 'OrderDetail',
+  Search: 'Search'
 };
 
 export default routes;

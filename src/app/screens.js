@@ -30,6 +30,7 @@ import ChooseConfiguration from './screens/Home/screens/Profile/screens/ChooseCo
 import Profile from './screens/Home/screens/Profile';
 // Menu
 import HomeMenu from './screens/Home/screens/HomeMenu';
+import Search from './screens/Home/screens/HomeMenu/screens/Search';
 // Chats
 import Chats from './screens/Home/screens/Chats';
 // Auctions
@@ -49,6 +50,7 @@ export default createStackNavigator(
     ...inferRoute({ CreateOrder }),
     ...inferRoute({ CreateAuction }),
     ...inferRoute({ OrderDetail }),
+    ...inferRoute({ Search }),
     [Routes.Home]: {
       screen: createBottomTabNavigator(
         {

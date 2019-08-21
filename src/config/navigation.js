@@ -2,6 +2,7 @@ import React from 'react';
 import { getActiveChildNavigationOptions, HeaderBackButton } from 'react-navigation';
 import TabBarIcon from '@components/TabBarIcon';
 import AddButton from '@components/AddButton';
+import SearchButton from '@components/SearchButton';
 import { black, boulder, dustyGray, white } from '@constants/colors';
 import Routes from '@constants/routes';
 import statusBarConfig from '@constants/statusBar';
@@ -140,7 +141,8 @@ export const screensNavOptions = {
       style: { backgroundColor: white, paddingVertical: 5 },
       activeTintColor: black,
       inactiveTintColor: boulder
-    }
+    },
+    headerRight: <SearchButton />
   },
   [Routes.ActiveOrders]: {
     tabBarLabel: strings[Routes.ActiveOrders],
@@ -240,6 +242,9 @@ export const screensNavOptions = {
   },
   [Routes.OrderDetail]: {
     title: strings[Routes.OrderDetail]
+  },
+  [Routes.Search]: {
+    title: strings[Routes.Search]
   }
 };
 

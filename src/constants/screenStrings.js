@@ -14,5 +14,6 @@ export const strings = {
   [Routes.PastAuctions]: 'Subastas Pasadas',
   [Routes.CreateAuction]: 'Crear Subasta',
   [Routes.CreateOrder]: 'Crear Pedido',
-  [Routes.OrderDetail]: 'Pedido'
+  [Routes.OrderDetail]: 'Pedido',
+  [Routes.Search]: 'Busqueda'
 };

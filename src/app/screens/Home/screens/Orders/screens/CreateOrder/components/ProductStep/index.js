@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { FlatList, View, Image } from 'react-native';
-import AuthActions from '@redux/auth/actions';
+import ProductsActions from '@redux/product/actions';
 import CustomText from '@components/CustomText';
 import CustomButton from '@components/CustomButton';
 import Card from '@components/Card';
@@ -84,11 +84,11 @@ class ProductStep extends Component {
 }
 
 const mapStateToProps = state => ({
-  catalog: state.auth.catalog
+  catalog: state.product.catalog
 });
 
 const mapDispatchToProps = dispatch => ({
-  getSupplierProducts: id => dispatch(AuthActions.getSupplierProducts(id))
+  getSupplierProducts: id => dispatch(ProductsActions.getSupplierProducts(id))
 });
 
 ProductStep.propTypes = {

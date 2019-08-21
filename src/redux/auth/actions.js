@@ -11,16 +11,7 @@ import { userSerializer } from './utils';
 
 export const actions = createTypes(
   completeTypes(
-    [
-      'LOGIN',
-      'RECOVER_PASSWORD',
-      'SIGN_UP',
-      'UPDATE_USER',
-      'GET_USER_INFO',
-      'LOG_OUT',
-      'GET_AGENDA',
-      'GET_SUPPLIER_PRODUCTS'
-    ],
+    ['LOGIN', 'RECOVER_PASSWORD', 'SIGN_UP', 'UPDATE_USER', 'GET_USER_INFO', 'LOG_OUT', 'GET_AGENDA'],
     ['CLEAN_SIGN_UP_ERROR']
   ),
   '@@AUTH'
@@ -32,8 +23,7 @@ export const targets = {
   signUpUser: 'signUpUser',
   signUpUserError: 'signUpUserError',
   updateUser: 'updateUser',
-  agenda: 'agenda',
-  catalog: 'catalog'
+  agenda: 'agenda'
 };
 
 export const actionCreators = {
@@ -155,13 +145,6 @@ export const actionCreators = {
     payload: name,
     service: AuthService.getAgenda,
     successSelector: response => response.data.users
-  }),
-  getSupplierProducts: id => ({
-    type: actions.GET_SUPPLIER_PRODUCTS,
-    target: targets.catalog,
-    payload: id,
-    service: AuthService.getSupplierProducts,
-    successSelector: response => response.data.products
   })
 };
 

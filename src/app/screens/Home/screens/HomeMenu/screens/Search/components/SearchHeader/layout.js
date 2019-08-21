@@ -41,8 +41,6 @@ SearchHeader.propTypes = {
 
 const enhancer = compose(
   withFormik({
-    mapPropsToValues: ({ initialValues }) => initialValues,
-    validationSchema: ({ validationSchema }) => validationSchema,
     handleSubmit: (values, { props }) => props.onUpdate(values)
   })
 );

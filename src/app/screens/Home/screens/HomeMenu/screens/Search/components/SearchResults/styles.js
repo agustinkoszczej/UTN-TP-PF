@@ -9,14 +9,28 @@ const styles = StyleSheet.create({
   itemContainer: {
     height: 50,
     marginBottom: 20,
-    flexDirection: 'row'
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%'
   },
   white: {
     color: white
   },
   itemImage: {
-    width: 20,
-    height: 20
+    width: 30,
+    height: 30,
+    borderRadius: 20,
+    marginRight: 20
+  },
+  info: {
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  button: {
+    width: 40,
+    height: 35
   }
 });
 export default styles;

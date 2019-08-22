@@ -15,5 +15,6 @@ export const strings = {
   [Routes.CreateAuction]: 'Crear Subasta',
   [Routes.CreateOrder]: 'Crear Pedido',
   [Routes.OrderDetail]: 'Pedido',
-  [Routes.Search]: 'Busqueda'
+  [Routes.Search]: 'Busqueda',
+  [Routes.ProductDetail]: 'Producto'
 };

@@ -245,6 +245,9 @@ export const screensNavOptions = {
   },
   [Routes.Search]: {
     title: strings[Routes.Search]
+  },
+  [Routes.ProductDetail]: {
+    title: strings[Routes.ProductDetail]
   }
 };
 

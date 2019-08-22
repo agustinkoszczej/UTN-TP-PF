@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { withNavigation } from 'react-navigation';
-import { FlatList, Image } from 'react-native';
+import { FlatList, Image, View } from 'react-native';
 import ProductActions from '@redux/product/actions';
 import CustomText from '@components/CustomText';
 import CustomButton from '@components/CustomButton';
@@ -16,9 +16,17 @@ import styles from './styles';
 class SearchResults extends Component {
   renderItem = ({ item: { description, id, image_url: image } }) => (
     <Card style={styles.itemContainer}>
-      <Image source={{ uri: image }} style={styles.itemImage} />
-      <CustomText>{description}</CustomText>
-      <CustomButton title="Ver" primaryBtn onPress={this.handleItemPress(id)} textStyle={styles.white} />
+      <View style={styles.info}>
+        <Image source={{ uri: image }} style={styles.itemImage} />
+        <CustomText>{description}</CustomText>
+      </View>
+      <CustomButton
+        title="Ver"
+        primaryBtn
+        onPress={this.handleItemPress(id)}
+        style={styles.button}
+        textStyle={styles.white}
+      />
     </Card>
   );
 

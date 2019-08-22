@@ -20,7 +20,8 @@ const routes = {
   CreateOrder: 'CreateOrder',
   CreateAuction: 'CreateAuction',
   OrderDetail: 'OrderDetail',
-  Search: 'Search'
+  Search: 'Search',
+  ProductDetail: 'ProductDetail'
 };
 
 export default routes;

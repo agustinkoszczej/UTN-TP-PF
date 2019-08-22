@@ -10,7 +10,7 @@ const stateDescription = {
 const initialState = completeState(stateDescription);
 
 const reducerDescription = {
-  primaryActions: [actions.GET_SUPPLIER_PRODUCTS]
+  primaryActions: [actions.GET_SUPPLIER_PRODUCTS, actions.GET_PRODUCTS]
 };
 
 export default createReducer(Immutable(initialState), completeReducer(reducerDescription));

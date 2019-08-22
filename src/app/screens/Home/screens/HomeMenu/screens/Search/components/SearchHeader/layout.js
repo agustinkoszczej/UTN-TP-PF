@@ -2,7 +2,7 @@ import React from 'react';
 import { withFormik } from 'formik';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
-import CustomTextInput from '@components/CustomTextInput';
+import { FormField as CustomTextInput } from '@components/CustomTextInput';
 import CustomButton from '@components/CustomButton';
 import BaseForm from '@components/BaseForm';
 import { View } from 'react-native';
@@ -20,6 +20,7 @@ function SearchHeader({ handleSubmit }) {
             underline
             returnKeyType="go"
             autoCapitalize="none"
+            name="search"
             style={styles.input}
           />
           <CustomButton
@@ -41,7 +42,7 @@ SearchHeader.propTypes = {
 
 const enhancer = compose(
   withFormik({
-    handleSubmit: (values, { props }) => props.onUpdate(values)
+    handleSubmit: (values, { props }) => props.handleSearch(values)
   })
 );
 

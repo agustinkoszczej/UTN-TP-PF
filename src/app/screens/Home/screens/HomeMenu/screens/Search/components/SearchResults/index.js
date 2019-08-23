@@ -8,6 +8,7 @@ import CustomText from '@components/CustomText';
 import CustomButton from '@components/CustomButton';
 import Card from '@components/Card';
 import { navigationModel } from '@propTypes/navigationModel';
+import ProductActions from '@redux/product/actions';
 import Routes from '@constants/routes';
 import WithError from '@components/WithError';
 import worried from '@assets/worried.png';
@@ -38,7 +39,8 @@ class SearchResults extends Component {
   };
 
   handleItemPress = id => () => {
-    const { navigation } = this.props;
+    const { navigation, getProductById } = this.props;
+    getProductById(id);
     navigation.navigate(Routes.ProductDetail, { id });
   };
 
@@ -69,7 +71,8 @@ SearchResults.propTypes = {
     })
   ),
   selected: PropTypes.string.isRequired,
-  users: PropTypes.arrayOf(PropTypes.shape({}))
+  users: PropTypes.arrayOf(PropTypes.shape({})),
+  getProductById: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -78,9 +81,16 @@ const mapStateToProps = state => ({
   loading: state.product.catalogLoading || state.auth.agendaLoading
 });
 
+const mapDispatchToProps = dispatch => ({
+  getProductById: id => dispatch(ProductActions.getProductById(id))
+});
+
 const enhancer = compose(
   withNavigation,
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   WithError(
     ({ error, catalog, selected, users }) =>
       error || (selected === STATES_SELECTED.PRODUCT ? !catalog.length : !users.length),

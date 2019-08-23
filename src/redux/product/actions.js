@@ -29,7 +29,7 @@ export const actionCreators = {
     type: actions.GET_PRODUCT_BY_ID,
     target: targets.currentProduct,
     payload: id,
-    service: ProductService.getProductsById
+    service: ProductService.getProductById
   }),
   clearCatalog: () => ({
     type: actions.CLEAR_CATALOG,

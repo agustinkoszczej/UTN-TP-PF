@@ -1,47 +1,39 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
-import ProductActions from '@redux/product/actions';
-import { navigationModel } from '@propTypes/navigationModel';
+import Loadable from '@components/Loadable';
+
+import ProductDetailHeader from './components/ProductDetailHeader';
 
 class ProductDetail extends Component {
-  componentDidMount() {
-    const {
-      getProductById,
-      navigation: {
-        state: { id }
-      }
-    } = this.props;
-    getProductById(id);
-  }
-
   render() {
-    return <Text>Hola</Text>;
+    const {
+      product: { product }
+    } = this.props;
+    return <ProductDetailHeader product={product} />;
   }
 }
 
 ProductDetail.propTypes = {
-  getProductById: PropTypes.func.isRequired,
-  navigation: PropTypes.shape(navigationModel).isRequired
+  product: PropTypes.shape({
+    product: PropTypes.shape({
+      imageUrl: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired
+    })
+  })
 };
 
 const mapStateToProps = state => ({
-  product: state.product.currentProduct
-});
-
-const mapDispatchToProps = dispatch => ({
-  getProductById: id => dispatch(ProductActions.getProductById(id))
+  product: state.product.currentProduct,
+  loading: state.product.currentProductLoading
 });
 
 const enhance = compose(
   withNavigation,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+  connect(mapStateToProps),
+  Loadable(props => props.loading)
 );
 
 export default enhance(ProductDetail);

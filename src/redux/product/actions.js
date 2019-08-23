@@ -2,12 +2,13 @@ import { completeTypes, createTypes } from 'redux-recompose';
 import ProductService from '@services/ProductService';
 
 export const actions = createTypes(
-  completeTypes(['GET_SUPPLIER_PRODUCTS', 'GET_PRODUCTS'], []),
+  completeTypes(['GET_SUPPLIER_PRODUCTS', 'GET_PRODUCTS', 'GET_PRODUCT_BY_ID'], ['CLEAR_CATALOG']),
   '@@PRODUCTS'
 );
 
 const targets = {
-  catalog: 'catalog'
+  catalog: 'catalog',
+  currentProduct: 'currentProduct'
 };
 
 export const actionCreators = {
@@ -23,6 +24,16 @@ export const actionCreators = {
     target: targets.catalog,
     payload: search,
     service: ProductService.getProducts
+  }),
+  getProductById: id => ({
+    type: actions.GET_PRODUCT_BY_ID,
+    target: targets.currentProduct,
+    payload: id,
+    service: ProductService.getProductsById
+  }),
+  clearCatalog: () => ({
+    type: actions.CLEAR_CATALOG,
+    target: targets.catalog
   })
 };
 

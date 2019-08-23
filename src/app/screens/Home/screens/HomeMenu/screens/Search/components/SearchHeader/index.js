@@ -8,7 +8,7 @@ import SearchHeader from './layout';
 class SearchHeaderContainer extends Component {
   handleSearch = ({ search }) => {
     const { getProducts } = this.props;
-    getProducts(search);
+    if (search) getProducts(search);
   };
 
   render() {

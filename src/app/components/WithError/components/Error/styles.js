@@ -25,5 +25,8 @@ export default StyleSheet.create({
   modifyBtn: {
     marginTop: 32,
     width: '100%'
+  },
+  white: {
+    color: white
   }
 });

@@ -20,7 +20,13 @@ function WithError({ acceptText, asset, description, handleError, title }) {
         </CustomText>
       )}
       {handleError && (
-        <CustomButton primaryBtn style={styles.modifyBtn} title={acceptText} onPress={handleError} />
+        <CustomButton
+          primaryBtn
+          style={styles.modifyBtn}
+          textStyle={styles.white}
+          title={acceptText}
+          onPress={handleError}
+        />
       )}
     </View>
   );
@@ -28,7 +34,6 @@ function WithError({ acceptText, asset, description, handleError, title }) {
 
 WithError.defaultProps = {
   acceptText: 'Intente nuevamente',
-  handleError: () => {},
   title: 'Error'
 };
 

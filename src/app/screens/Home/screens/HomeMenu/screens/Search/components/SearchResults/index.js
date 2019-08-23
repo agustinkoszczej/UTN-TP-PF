@@ -10,10 +10,17 @@ import CustomButton from '@components/CustomButton';
 import Card from '@components/Card';
 import { navigationModel } from '@propTypes/navigationModel';
 import Routes from '@constants/routes';
+import WithError from '@components/WithError';
+import worried from '@assets/worried.png';
 
 import styles from './styles';
 
 class SearchResults extends Component {
+  componentWillUnmount() {
+    const { clearCatalog } = this.props;
+    clearCatalog();
+  }
+
   renderItem = ({ item: { description, id, image_url: image } }) => (
     <Card style={styles.itemContainer}>
       <View style={styles.info}>
@@ -60,7 +67,8 @@ SearchResults.propTypes = {
       description: PropTypes.string.isRequired,
       image_url: PropTypes.string.isRequired
     })
-  )
+  ),
+  clearCatalog: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -69,7 +77,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getProducts: values => dispatch(ProductActions.getProducts(values))
+  getProducts: values => dispatch(ProductActions.getProducts(values)),
+  clearCatalog: () => dispatch(ProductActions.clearCatalog())
 });
 
 const enhancer = compose(
@@ -77,6 +86,14 @@ const enhancer = compose(
   connect(
     mapStateToProps,
     mapDispatchToProps
+  ),
+  WithError(
+    ({ error, catalog }) => error || catalog?.length === 0,
+    ({ catalog, loading }) => ({
+      asset: catalog?.length === 0 ? worried : undefined,
+      title: catalog?.length === 0 ? 'Realice una busqueda para obtener resultados' : undefined,
+      loading
+    })
   )
 );
 

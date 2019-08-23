@@ -3,8 +3,7 @@ import { white } from '@constants/colors';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingHorizontal: 20
+    flex: 1
   },
   itemContainer: {
     height: 50,

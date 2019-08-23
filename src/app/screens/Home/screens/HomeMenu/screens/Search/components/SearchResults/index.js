@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { withNavigation } from 'react-navigation';
 import { FlatList, Image, View } from 'react-native';
-import ProductActions from '@redux/product/actions';
 import CustomText from '@components/CustomText';
 import CustomButton from '@components/CustomButton';
 import Card from '@components/Card';
@@ -13,14 +12,11 @@ import Routes from '@constants/routes';
 import WithError from '@components/WithError';
 import worried from '@assets/worried.png';
 
+import { STATES_SELECTED } from '../../constants';
+
 import styles from './styles';
 
 class SearchResults extends Component {
-  componentWillUnmount() {
-    const { clearCatalog } = this.props;
-    clearCatalog();
-  }
-
   renderItem = ({ item: { description, id, image_url: image } }) => (
     <Card style={styles.itemContainer}>
       <View style={styles.info}>
@@ -45,11 +41,11 @@ class SearchResults extends Component {
   keyExtractor = ({ id }) => `${id}`;
 
   render() {
-    const { catalog, loading } = this.props;
+    const { catalog, loading, selected, users } = this.props;
     return (
       <FlatList
         style={styles.container}
-        data={catalog}
+        data={selected === STATES_SELECTED.PRODUCT ? catalog : users}
         keyExtractor={this.keyExtractor}
         renderItem={this.renderItem}
         refreshing={loading}
@@ -68,33 +64,28 @@ SearchResults.propTypes = {
       image_url: PropTypes.string.isRequired
     })
   ),
-  clearCatalog: PropTypes.func.isRequired
+  selected: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
   catalog: state.product.catalog,
-  loading: state.product.catalogLoading
-});
-
-const mapDispatchToProps = dispatch => ({
-  getProducts: values => dispatch(ProductActions.getProducts(values)),
-  clearCatalog: () => dispatch(ProductActions.clearCatalog())
+  users: state.auth.agenda,
+  loading: state.product.catalogLoading || state.auth.agendaLoading
 });
 
 const enhancer = compose(
   withNavigation,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
+  connect(mapStateToProps),
   WithError(
-    ({ error, catalog }) => error || catalog?.length === 0,
-    ({ catalog, loading }) => ({
-      asset: catalog?.length === 0 ? worried : undefined,
-      title:
-        catalog?.length === 0
-          ? 'No se encuentran resultados que concuerden con la busqueda actual'
-          : undefined,
+    ({ error, catalog, selected, users }) =>
+      error || (selected === STATES_SELECTED.PRODUCT ? !catalog.length : !users.length),
+    ({ catalog, users, selected, loading }) => ({
+      asset: (selected === STATES_SELECTED.PRODUCT ? !catalog.length : !users.length) ? worried : undefined,
+      title: (selected === STATES_SELECTED.PRODUCT
+      ? !catalog.length
+      : !users.length)
+        ? 'No se encuentran resultados que concuerden con la busqueda actual'
+        : undefined,
       loading
     })
   )

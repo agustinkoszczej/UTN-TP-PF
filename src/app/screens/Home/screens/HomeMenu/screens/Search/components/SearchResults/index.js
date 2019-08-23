@@ -91,7 +91,10 @@ const enhancer = compose(
     ({ error, catalog }) => error || catalog?.length === 0,
     ({ catalog, loading }) => ({
       asset: catalog?.length === 0 ? worried : undefined,
-      title: catalog?.length === 0 ? 'Realice una busqueda para obtener resultados' : undefined,
+      title:
+        catalog?.length === 0
+          ? 'No se encuentran resultados que concuerden con la busqueda actual'
+          : undefined,
       loading
     })
   )

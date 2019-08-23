@@ -4,15 +4,32 @@ import PropTypes from 'prop-types';
 import ProductActions from '@redux/product/actions';
 
 import SearchHeader from './layout';
+import { STATES_SELECTED } from './constants';
 
 class SearchHeaderContainer extends Component {
+  state = { selected: STATES_SELECTED.SUPPLIER };
+
   handleSearch = ({ search }) => {
     const { getProducts } = this.props;
     if (search) getProducts(search);
   };
 
+  handleTypeChange = selected => () => {
+    const { selected: actualSelected } = this.state;
+    if (selected !== actualSelected) {
+      this.setState({ selected });
+    }
+  };
+
   render() {
-    return <SearchHeader handleSearch={this.handleSearch} />;
+    const { selected } = this.state;
+    return (
+      <SearchHeader
+        handleSearch={this.handleSearch}
+        selected={selected}
+        handleTypeChange={this.handleTypeChange}
+      />
+    );
   }
 }
 

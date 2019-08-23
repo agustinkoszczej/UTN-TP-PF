@@ -19,7 +19,7 @@ const signUp = authData => api.post('/merchants/sign_up', authData);
 
 const getUserInfo = () => api.get('/users/profile');
 
-const getAgenda = name => api.get('/merchants/agenda', { name });
+const getAgenda = fullName => api.get('/merchants/agenda', { fullName });
 
 const logOut = async () => {
   await removeTokens();

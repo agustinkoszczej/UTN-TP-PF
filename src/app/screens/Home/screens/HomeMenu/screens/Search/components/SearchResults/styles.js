@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%'
+    width: '90%',
+    marginHorizontal: '5%'
   },
   white: {
     color: white

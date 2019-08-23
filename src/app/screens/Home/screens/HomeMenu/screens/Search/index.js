@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ProductActions from '@redux/product/actions';
+import AuthActions from '@redux/auth/actions';
 
 import Search from './layout';
 import { STATES_SELECTED } from './constants';
@@ -15,8 +16,12 @@ class SearchContainer extends Component {
   }
 
   handleSearch = ({ search }) => {
-    const { getProducts } = this.props;
-    if (search) getProducts(search);
+    const { getProducts, getUsers } = this.props;
+    const { selected } = this.state;
+    if (search) {
+      if (selected === STATES_SELECTED.PRODUCT) getProducts(search);
+      else getUsers(search);
+    }
   };
 
   handleTypeChange = selected => () => {
@@ -36,7 +41,8 @@ class SearchContainer extends Component {
 
 SearchContainer.propTypes = {
   getProducts: PropTypes.func.isRequired,
-  clearCatalog: PropTypes.func.isRequired
+  clearCatalog: PropTypes.func.isRequired,
+  getUsers: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -45,7 +51,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getProducts: values => dispatch(ProductActions.getProducts(values)),
+  getProducts: search => dispatch(ProductActions.getProducts(search)),
+  getUsers: search => dispatch(AuthActions.getAgenda(search)),
   clearCatalog: () => dispatch(ProductActions.clearCatalog())
 });
 

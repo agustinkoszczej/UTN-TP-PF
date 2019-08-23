@@ -17,21 +17,25 @@ import { STATES_SELECTED } from '../../constants';
 import styles from './styles';
 
 class SearchResults extends Component {
-  renderItem = ({ item: { description, id, image_url: image } }) => (
-    <Card style={styles.itemContainer}>
-      <View style={styles.info}>
-        <Image source={{ uri: image }} style={styles.itemImage} />
-        <CustomText>{description}</CustomText>
-      </View>
-      <CustomButton
-        title="Ver"
-        primaryBtn
-        onPress={this.handleItemPress(id)}
-        style={styles.button}
-        textStyle={styles.white}
-      />
-    </Card>
-  );
+  renderItem = ({ item: { description, id, image_url: imageUrl, picture, fullName, companyName } }) => {
+    const image = imageUrl || picture;
+    const text = description || `${fullName} (${companyName})`;
+    return (
+      <Card style={styles.itemContainer}>
+        <View style={styles.info}>
+          <Image source={{ uri: image }} style={styles.itemImage} />
+          <CustomText>{text}</CustomText>
+        </View>
+        <CustomButton
+          title="Ver"
+          primaryBtn
+          onPress={this.handleItemPress(id)}
+          style={styles.button}
+          textStyle={styles.white}
+        />
+      </Card>
+    );
+  };
 
   handleItemPress = id => () => {
     const { navigation } = this.props;
@@ -64,7 +68,8 @@ SearchResults.propTypes = {
       image_url: PropTypes.string.isRequired
     })
   ),
-  selected: PropTypes.bool.isRequired
+  selected: PropTypes.string.isRequired,
+  users: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 const mapStateToProps = state => ({

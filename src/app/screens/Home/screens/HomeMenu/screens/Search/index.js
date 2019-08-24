@@ -16,11 +16,11 @@ class SearchContainer extends Component {
   }
 
   handleSearch = ({ search }) => {
-    const { getProducts, getUsers } = this.props;
+    const { getProducts, getSuppliers } = this.props;
     const { selected } = this.state;
     if (search) {
       if (selected === STATES_SELECTED.PRODUCT) getProducts(search);
-      else getUsers(search);
+      else getSuppliers(search);
     }
   };
 
@@ -42,7 +42,7 @@ class SearchContainer extends Component {
 SearchContainer.propTypes = {
   getProducts: PropTypes.func.isRequired,
   clearCatalog: PropTypes.func.isRequired,
-  getUsers: PropTypes.func.isRequired
+  getSuppliers: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -52,7 +52,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getProducts: search => dispatch(ProductActions.getProducts(search)),
-  getUsers: search => dispatch(AuthActions.getAgenda(search)),
+  getSuppliers: search => dispatch(AuthActions.getSuppliers(search)),
   clearCatalog: () => dispatch(ProductActions.clearCatalog())
 });
 

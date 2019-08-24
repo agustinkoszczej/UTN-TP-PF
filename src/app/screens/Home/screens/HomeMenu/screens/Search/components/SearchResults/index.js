@@ -39,9 +39,16 @@ class SearchResults extends Component {
   };
 
   handleItemPress = id => () => {
-    const { navigation, getProductById } = this.props;
-    getProductById(id);
-    navigation.navigate(Routes.ProductDetail, { id });
+    const { navigation, getProductById, selected } = this.props;
+    let route;
+    if (selected === STATES_SELECTED.PRODUCT) {
+      route = Routes.ProductDetail;
+      getProductById(id);
+    } else {
+      route = Routes.SupplierProfile;
+    }
+
+    navigation.navigate(route, { id });
   };
 
   keyExtractor = ({ id }) => `${id}`;
@@ -77,8 +84,8 @@ SearchResults.propTypes = {
 
 const mapStateToProps = state => ({
   catalog: state.product.catalog,
-  users: state.auth.agenda,
-  loading: state.product.catalogLoading || state.auth.agendaLoading
+  users: state.auth.suppliers,
+  loading: state.product.catalogLoading || state.auth.suppliersLoading
 });
 
 const mapDispatchToProps = dispatch => ({

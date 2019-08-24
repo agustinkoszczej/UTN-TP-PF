@@ -28,6 +28,8 @@ const logOut = async () => {
 
 const update = values => api.put('/users/profile', values);
 
+const getSuppliers = name => api.get('/merchants/suppliers', { name });
+
 export default {
   login,
   recoverPassword,
@@ -38,5 +40,6 @@ export default {
   getToken,
   logOut,
   removeTokens,
-  getAgenda
+  getAgenda,
+  getSuppliers
 };

@@ -30,6 +30,7 @@ function Search({ handleSubmit, selected, handleTypeChange }) {
               returnKeyType="go"
               autoCapitalize="none"
               name="search"
+              onTextSubmitEditing={handleSubmit}
               style={styles.input}
             />
             <CustomButton

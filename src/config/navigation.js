@@ -248,6 +248,9 @@ export const screensNavOptions = {
   },
   [Routes.ProductDetail]: {
     title: strings[Routes.ProductDetail]
+  },
+  [Routes.SupplierProfile]: {
+    title: strings[Routes.SupplierProfile]
   }
 };
 

@@ -16,5 +16,6 @@ export const strings = {
   [Routes.CreateOrder]: 'Crear Pedido',
   [Routes.OrderDetail]: 'Pedido',
   [Routes.Search]: 'Busqueda',
-  [Routes.ProductDetail]: 'Producto'
+  [Routes.ProductDetail]: 'Producto',
+  [Routes.SupplierProfile]: 'Distribuidor'
 };

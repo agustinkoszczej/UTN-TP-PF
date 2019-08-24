@@ -28,6 +28,7 @@ import OrderDetail from './screens/Home/screens/Orders/screens/OrderDetail';
 import Configuration from './screens/Home/screens/Profile/screens/Configuration';
 import ChooseConfiguration from './screens/Home/screens/Profile/screens/ChooseConfiguration';
 import Profile from './screens/Home/screens/Profile';
+import SupplierProfile from './screens/Home/screens/Profile/screens/SupplierProfile';
 // Menu
 import HomeMenu from './screens/Home/screens/HomeMenu';
 import Search from './screens/Home/screens/HomeMenu/screens/Search';
@@ -53,6 +54,7 @@ export default createStackNavigator(
     ...inferRoute({ OrderDetail }),
     ...inferRoute({ Search }),
     ...inferRoute({ ProductDetail }),
+    ...inferRoute({ SupplierProfile }),
     [Routes.Home]: {
       screen: createBottomTabNavigator(
         {

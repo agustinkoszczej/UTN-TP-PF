@@ -17,7 +17,13 @@ class ProductDetailSuppliers extends Component {
         <Image source={{ uri: picture }} style={styles.image} />
         <CustomText>{fullName}</CustomText>
       </View>
-      <CustomButton title="Ver" onPress={this.handleGoToProfile(id)} />
+      <CustomButton
+        primaryBtn
+        textStyle={styles.white}
+        style={styles.button}
+        title="Ver"
+        onPress={this.handleGoToProfile(id)}
+      />
     </Card>
   );
 
@@ -32,9 +38,7 @@ class ProductDetailSuppliers extends Component {
     const { suppliers } = this.props;
     return (
       <View style={styles.container}>
-        <CustomText center style={styles.title}>
-          Distribuidores
-        </CustomText>
+        <CustomText style={styles.title}>Distribuidores</CustomText>
         <FlatList data={suppliers} keyExtractor={this.keyExtractor} renderItem={this.renderItem} />
       </View>
     );

@@ -19,7 +19,8 @@ export const actions = createTypes(
       'GET_USER_INFO',
       'LOG_OUT',
       'GET_AGENDA',
-      'GET_SUPPLIERS'
+      'GET_SUPPLIERS',
+      'CLEAR_SUPPLIERS'
     ],
     ['CLEAN_SIGN_UP_ERROR']
   ),
@@ -162,6 +163,10 @@ export const actionCreators = {
     payload: name,
     service: AuthService.getSuppliers,
     successSelector: response => response.data.users
+  }),
+  clearSuppliers: () => ({
+    type: actions.CLEAR_SUPPLIERS,
+    target: targets.suppliers
   })
 };
 

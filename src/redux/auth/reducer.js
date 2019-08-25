@@ -24,7 +24,11 @@ const reducerDescription = {
     actions.GET_AGENDA,
     actions.GET_SUPPLIERS
   ],
-  override: { [actions.LOG_OUT]: onSetValue(null), [actions.CLEAN_SIGN_UP_ERROR]: onSetValue(null) }
+  override: {
+    [actions.LOG_OUT]: onSetValue(null),
+    [actions.CLEAN_SIGN_UP_ERROR]: onSetValue(null),
+    [actions.CLEAR_SUPPLIERS]: onSetValue([])
+  }
 };
 
 export default createReducer(Immutable(initialState), completeReducer(reducerDescription));

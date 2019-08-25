@@ -5,13 +5,25 @@ import CustomText from '@components/CustomText';
 
 import styles from './styles';
 
-function ProductDetailHeader({ product: { imageUrl, description } }) {
+function ProductDetailHeader({
+  product: {
+    imageUrl,
+    description,
+    category: { description: categoryDescription }
+  }
+}) {
   return (
     <View style={styles.container}>
-      <Image source={{ uri: imageUrl }} style={styles.image} />
-      <CustomText title style={styles.title}>
-        {description}
-      </CustomText>
+      <View style={styles.productHeader}>
+        <Image source={{ uri: imageUrl }} style={styles.image} />
+        <CustomText title style={styles.title}>
+          {description}
+        </CustomText>
+      </View>
+      <View style={styles.categorySection}>
+        <CustomText style={styles.categoryPlaceholder}>Categoria:</CustomText>
+        <CustomText style={styles.category}>{categoryDescription}</CustomText>
+      </View>
     </View>
   );
 }
@@ -19,7 +31,10 @@ function ProductDetailHeader({ product: { imageUrl, description } }) {
 ProductDetailHeader.propTypes = {
   product: PropTypes.shape({
     imageUrl: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired
+    description: PropTypes.string.isRequired,
+    category: PropTypes.shape({
+      description: PropTypes.string.isRequired
+    })
   })
 };
 

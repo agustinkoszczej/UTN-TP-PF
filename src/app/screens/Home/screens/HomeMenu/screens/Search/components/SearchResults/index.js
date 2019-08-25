@@ -51,7 +51,7 @@ class SearchResults extends Component {
     navigation.navigate(route, { id });
   };
 
-  keyExtractor = ({ id }) => `${id}`;
+  keyExtractor = ({ id, user_id: userId }) => `${id || userId}`;
 
   render() {
     const { catalog, loading, selected, users } = this.props;

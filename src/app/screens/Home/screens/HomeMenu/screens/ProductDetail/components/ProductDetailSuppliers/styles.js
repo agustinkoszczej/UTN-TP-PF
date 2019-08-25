@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { white } from '@constants/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -6,9 +7,11 @@ const styles = StyleSheet.create({
   },
   supplierContainer: {
     flexDirection: 'row',
-    height: 50,
+    height: 75,
     alignItems: 'center',
-    justifyContent: 'space-between'
+    paddingHorizontal: 20,
+    justifyContent: 'space-between',
+    marginBottom: 20
   },
   image: {
     height: 50,
@@ -21,7 +24,14 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   title: {
-    fontSize: 16
+    fontSize: 16,
+    marginBottom: 20
+  },
+  white: {
+    color: white
+  },
+  button: {
+    width: 50
   }
 });
 export default styles;

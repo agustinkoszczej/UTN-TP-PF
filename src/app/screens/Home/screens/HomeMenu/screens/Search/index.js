@@ -25,9 +25,12 @@ class SearchContainer extends Component {
   };
 
   handleTypeChange = selected => () => {
+    const { clearCatalog, clearSuppliers } = this.props;
     const { selected: actualSelected } = this.state;
     if (selected !== actualSelected) {
       this.setState({ selected });
+      if (selected === STATES_SELECTED.PRODUCT) clearCatalog();
+      else clearSuppliers();
     }
   };
 
@@ -42,7 +45,8 @@ class SearchContainer extends Component {
 SearchContainer.propTypes = {
   getProducts: PropTypes.func.isRequired,
   clearCatalog: PropTypes.func.isRequired,
-  getSuppliers: PropTypes.func.isRequired
+  getSuppliers: PropTypes.func.isRequired,
+  clearSuppliers: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -53,6 +57,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getProducts: search => dispatch(ProductActions.getProducts(search)),
   getSuppliers: search => dispatch(AuthActions.getSuppliers(search)),
+  clearSuppliers: () => dispatch(AuthActions.clearSuppliers()),
   clearCatalog: () => dispatch(ProductActions.clearCatalog())
 });
 

@@ -5,6 +5,7 @@ import CustomText from '@components/CustomText';
 import StatusTag from '@components/StatusTag';
 import Card from '@components/Card';
 import { dateFormat } from '@utils/timeUtils';
+import { formatMoney } from '@utils/numberUtils';
 
 import styles from './styles';
 
@@ -22,7 +23,7 @@ function OrderHeader({ supplier, receiverName, comment, amount, deliveryDate, st
       </View>
       <View style={styles.section}>
         <CustomText style={styles.placeholder}>Precio:</CustomText>
-        <CustomText bold>{amount}</CustomText>
+        <CustomText bold>{formatMoney(amount)}</CustomText>
       </View>
       <View style={styles.section}>
         <CustomText style={styles.placeholder}>Fecha de entrega:</CustomText>

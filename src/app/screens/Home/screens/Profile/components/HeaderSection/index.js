@@ -26,7 +26,7 @@ class HeaderSectionContainer extends Component {
 
   render() {
     const {
-      currentUser: { fullName, email, picture },
+      currentUser: { fullName, email, picture, rating },
       loading
     } = this.props;
     return (
@@ -37,6 +37,7 @@ class HeaderSectionContainer extends Component {
         navigateToConfiguration={this.navigateToConfiguration}
         handleLogOut={this.handleLogOut}
         picture={picture}
+        rating={rating}
       />
     );
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Image, ImageBackground } from 'react-native';
+import { AirbnbRating } from 'react-native-ratings';
 import CustomText from '@components/CustomText';
 import Loadable from '@components/Loadable';
 import CustomButton from '@components/CustomButton';
@@ -10,7 +11,7 @@ import background from '../../assets/background.jpg';
 import { strings } from './constants';
 import styles from './styles';
 
-function HeaderSection({ fullName, email, handleLogOut, navigateToConfiguration, picture }) {
+function HeaderSection({ fullName, email, handleLogOut, navigateToConfiguration, picture, rating }) {
   return (
     <ImageBackground source={background} style={styles.container}>
       <View style={styles.userSection}>
@@ -24,6 +25,7 @@ function HeaderSection({ fullName, email, handleLogOut, navigateToConfiguration,
           </CustomText>
         </View>
       </View>
+      <AirbnbRating defaultRating={rating} showRating={false} />
       <CustomButton
         secondaryBtn
         title={strings.edit}
@@ -45,7 +47,8 @@ HeaderSection.propTypes = {
   email: PropTypes.string.isRequired,
   picture: PropTypes.string.isRequired,
   handleLogOut: PropTypes.func.isRequired,
-  navigateToConfiguration: PropTypes.func.isRequired
+  navigateToConfiguration: PropTypes.func.isRequired,
+  rating: PropTypes.number.isRequired
 };
 
 export default Loadable(props => props.loading)(HeaderSection);

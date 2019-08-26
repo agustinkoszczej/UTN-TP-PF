@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
   },
   userSection: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginBottom: 20
   },
   nameSection: {
     justifyContent: 'space-evenly'

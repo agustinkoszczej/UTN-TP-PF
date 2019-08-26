@@ -29,7 +29,7 @@ class OrdersList extends Component {
   keyExtractor = ({ id }) => `${id}`;
 
   render() {
-    const { orders, getOrders, loading, onRefresh } = this.props;
+    const { orders, loading, onRefresh } = this.props;
     return (
       <FlatList
         data={orders}
@@ -46,7 +46,7 @@ class OrdersList extends Component {
 
 OrdersList.propTypes = {
   orders: PropTypes.arrayOf(PropTypes.shape(ordersModel)),
-  getOrders: PropTypes.func.isRequired,
+  // getOrders: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   navigation: PropTypes.shape(navigationModel).isRequired,
   getOrderById: PropTypes.func.isRequired,

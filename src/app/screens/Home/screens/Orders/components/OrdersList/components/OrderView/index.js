@@ -5,18 +5,26 @@ import CustomText from '@components/CustomText';
 import CustomButton from '@components/CustomButton';
 import StatusTag from '@components/StatusTag';
 import Card from '@components/Card';
+import Collapsible from '@components/Collapsible';
 import { dateFormat } from '@utils/timeUtils';
 import { formatMoney } from '@utils/numberUtils';
 import { ordersModel } from '@propTypes/ordersModel';
+import arrowUp from '@assets/ic_angle_up_grey.png';
+import arrowDown from '@assets/ic_angle_down_grey.png';
 
 import styles from '../../styles';
 
 class OrderView extends Component {
+  state = { collapsed: true };
+
+  handleToogle = () => this.setState(prevState => ({ collapsed: !prevState.collapsed }));
+
   render() {
     const {
       order: { receiverName, receiverPicture, amount, id, status, deliveryDate },
       goToOrderDetail
     } = this.props;
+    const { collapsed } = this.state;
     return (
       <Card style={styles.orderContainer}>
         <View style={styles.orderHeader}>
@@ -31,15 +39,20 @@ class OrderView extends Component {
         <View style={styles.bottomOrder}>
           <View>
             <CustomText>{`Precio: ${formatMoney(amount)}`}</CustomText>
-            <CustomText>{`Fecha de entrega: ${dateFormat(deliveryDate)}`}</CustomText>
+            <CustomText>{`Eentrega: ${dateFormat(deliveryDate)}`}</CustomText>
           </View>
-          <CustomButton
-            primaryBtn
-            style={styles.seeButton}
-            textStyle={styles.white}
-            onPress={goToOrderDetail(id)}
-            title="Ver"
-          />
+          <CustomButton onPress={this.handleToogle} icon={collapsed ? arrowDown : arrowUp} />
+        </View>
+        <View>
+          <Collapsible collapsed={collapsed}>
+            <CustomButton
+              primaryBtn
+              style={styles.seeButton}
+              textStyle={styles.white}
+              onPress={goToOrderDetail(id)}
+              title="Ver"
+            />
+          </Collapsible>
         </View>
       </Card>
     );

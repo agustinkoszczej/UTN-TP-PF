@@ -3,13 +3,14 @@ import { alto, white } from '@constants/colors';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: alto
+    backgroundColor: alto,
+    padding: 20
   },
   orderContainer: {
     flex: 1,
     marginVertical: 15,
     padding: 20,
-    height: 150
+    minHeight: 150
   },
   userPicture: {
     width: 50,
@@ -41,7 +42,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginLeft: 65,
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 60
   },
   name: {
     fontSize: 18

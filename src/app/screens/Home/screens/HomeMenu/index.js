@@ -51,11 +51,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const enhance = compose(
-  Loadable(props => props.loading),
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )
+  ),
+  Loadable(props => props.loading && !props.stats)
 );
 
 export default enhance(HomeMenuContainer);

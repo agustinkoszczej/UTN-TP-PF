@@ -27,20 +27,20 @@ class SupplierStep extends Component {
 
   handleInputChange = name => this.setState({ name });
 
-  selectSupplier = ({ fullName, user_id: id, picture, companyName }) => () => {
+  selectSupplier = ({ fullName, user_id: id, picture, companyName, name }) => () => {
     const { setFieldValue } = this.props;
     setFieldValue(CREATE_ORDER_FIELDS.SUPPLIER_ID, id);
-    setFieldValue(CREATE_ORDER_FIELDS.RECEIVER_NAME, fullName);
+    setFieldValue(CREATE_ORDER_FIELDS.RECEIVER_NAME, fullName || name);
     setFieldValue(CREATE_ORDER_FIELDS.SUPPLIER_PICTURE, picture);
     setFieldValue(CREATE_ORDER_FIELDS.COMPANY_NAME, companyName);
   };
 
   renderItem = ({ item }) => {
-    const { fullName, picture, companyName } = item;
+    const { fullName, picture, companyName, name } = item;
     return (
       <TouchableOpacity style={styles.supplierContainer} onPress={this.selectSupplier(item)}>
         <Image source={{ uri: picture }} style={styles.supplierPicture} />
-        <CustomText>{`${fullName} (${companyName})`}</CustomText>
+        <CustomText>{`${fullName || name} (${companyName})`}</CustomText>
       </TouchableOpacity>
     );
   };

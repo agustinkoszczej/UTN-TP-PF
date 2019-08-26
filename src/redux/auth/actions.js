@@ -20,7 +20,8 @@ export const actions = createTypes(
       'LOG_OUT',
       'GET_AGENDA',
       'GET_SUPPLIERS',
-      'CLEAR_SUPPLIERS'
+      'CLEAR_SUPPLIERS',
+      'GET_STATS'
     ],
     ['CLEAN_SIGN_UP_ERROR']
   ),
@@ -34,7 +35,8 @@ export const targets = {
   signUpUserError: 'signUpUserError',
   updateUser: 'updateUser',
   agenda: 'agenda',
-  suppliers: 'suppliers'
+  suppliers: 'suppliers',
+  stats: 'stats'
 };
 
 export const actionCreators = {
@@ -167,6 +169,11 @@ export const actionCreators = {
   clearSuppliers: () => ({
     type: actions.CLEAR_SUPPLIERS,
     target: targets.suppliers
+  }),
+  getStats: () => ({
+    type: actions.GET_STATS,
+    target: targets.stats,
+    service: AuthService.getStats
   })
 };
 

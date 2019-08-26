@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 
-function PastAuctions() {
+function AuctionsSection() {
   return <View />;
 }
 
-export default PastAuctions;
+export default AuctionsSection;

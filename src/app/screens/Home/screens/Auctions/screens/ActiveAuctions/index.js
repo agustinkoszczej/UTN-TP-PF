@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { View } from 'react-native';
 
 function ActiveAuctions() {
-  return <Text>Hola</Text>;
+  return <View />;
 }
 
 export default ActiveAuctions;

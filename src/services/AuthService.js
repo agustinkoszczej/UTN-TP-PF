@@ -30,6 +30,8 @@ const update = values => api.put('/users/profile', values);
 
 const getSuppliers = name => api.get('/merchants/suppliers', { name });
 
+const getStats = () => api.get('/merchants/stats');
+
 export default {
   login,
   recoverPassword,
@@ -41,5 +43,6 @@ export default {
   logOut,
   removeTokens,
   getAgenda,
-  getSuppliers
+  getSuppliers,
+  getStats
 };

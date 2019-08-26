@@ -9,7 +9,8 @@ const stateDescription = {
   signUpUser: null,
   updateUser: null,
   agenda: [],
-  suppliers: []
+  suppliers: [],
+  stats: null
 };
 
 const initialState = completeState(stateDescription, ['initialLoading']);
@@ -22,7 +23,8 @@ const reducerDescription = {
     actions.GET_USER_INFO,
     actions.UPDATE_USER,
     actions.GET_AGENDA,
-    actions.GET_SUPPLIERS
+    actions.GET_SUPPLIERS,
+    actions.GET_STATS
   ],
   override: {
     [actions.LOG_OUT]: onSetValue(null),

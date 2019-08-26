@@ -33,12 +33,12 @@ HomeMenuContainer.propTypes = {
   getStats: PropTypes.func.isRequired,
   stats: PropTypes.shape({
     orders: PropTypes.shape({
-      [ORDER_STATUS.DELIVERED]: PropTypes.number.isRequired,
-      [ORDER_STATUS.CONFIRMED]: PropTypes.number.isRequired,
-      [ORDER_STATUS.REJECTED]: PropTypes.number.isRequired,
-      [ORDER_STATUS.ON_WAY]: PropTypes.number.isRequired,
-      [ORDER_STATUS.PENDING]: PropTypes.number.isRequired,
-      [ORDER_STATUS.CANCELLED]: PropTypes.number.isRequired
+      [ORDER_STATUS.DELIVERED]: PropTypes.string,
+      [ORDER_STATUS.CONFIRMED]: PropTypes.string,
+      [ORDER_STATUS.REJECTED]: PropTypes.string,
+      [ORDER_STATUS.ON_WAY]: PropTypes.string,
+      [ORDER_STATUS.PENDING]: PropTypes.string,
+      [ORDER_STATUS.CANCELLED]: PropTypes.string
     })
   })
 };

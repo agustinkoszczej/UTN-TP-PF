@@ -42,7 +42,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  showRateModal: () => dispatch(DialogActions.showDialog(getHomeDialog(homeDialogNames.RATE_ORDER_MODAL)()))
+  showRateModal: () => dispatch(DialogActions.showDialog(getHomeDialog(homeDialogNames.RATE_ORDER)()))
 });
 
 const enhance = compose(

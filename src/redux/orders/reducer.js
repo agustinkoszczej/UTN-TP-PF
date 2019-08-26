@@ -18,7 +18,8 @@ const stateDescription = {
   activeOrders: null,
   pastOrders: null,
   currentOrder: null,
-  createOrder: null
+  createOrder: null,
+  rate: null
 };
 
 const initialState = completeState(stateDescription);

@@ -6,13 +6,13 @@ import OrdersActions from '@redux/orders/actions';
 import { strings } from './constants';
 
 export const homeDialogNames = {
-  FINISH_CREATION_RDER: 'finishCreationOrder',
-  RATE_ORDER_MODAL: 'RATE_ORDER_MODAL'
+  FINISH_CREATION_ORDER: 'finishCreationOrder',
+  RATE_ORDER: 'rateOrder'
 };
 
 export const getHomeDialog = dialogType =>
   ({
-    [homeDialogNames.FINISH_SIGN_UP]: () => ({
+    [homeDialogNames.FINISH_CREATION_ORDER]: () => ({
       dialogType: dialogTypes.SIMPLE_DIALOG,
       dialogContent: {
         title: strings.orderCreated,
@@ -23,5 +23,8 @@ export const getHomeDialog = dialogType =>
           store.dispatch(OrdersActions.refreshActiveOrders());
         }
       }
+    }),
+    [homeDialogNames.RATE_ORDER]: () => ({
+      dialogType: dialogTypes.RATE_DIALOG
     })
   }[dialogType]);

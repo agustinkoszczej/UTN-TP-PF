@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: PADDING
   },
   title: {
-    paddingVertical: PADDING
+    paddingVertical: PADDING,
+    fontSize: 20
   },
   content: {
     paddingTop: PADDING,
@@ -19,6 +20,11 @@ const styles = StyleSheet.create({
   },
   dataContainer: {
     paddingHorizontal: PADDING
+  },
+  image: {
+    width: 50,
+    height: 50,
+    borderRadius: 25
   }
 });
 

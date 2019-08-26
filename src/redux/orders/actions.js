@@ -13,7 +13,8 @@ export const actions = createTypes(
       'REFRESH_ACTIVE_ORDERS',
       'REFRESH_PAST_ORDERS',
       'GET_ORDER_BY_ID',
-      'CREATE_ORDER'
+      'CREATE_ORDER',
+      'RATE_ORDER'
     ],
     []
   ),
@@ -24,7 +25,8 @@ const targets = {
   activeOrders: 'activeOrders',
   pastOrders: 'pastOrders',
   currentOrder: 'currentOrder',
-  createOrder: 'createOrder'
+  createOrder: 'createOrder',
+  rate: 'rate'
 };
 
 export const actionCreators = {
@@ -68,6 +70,17 @@ export const actionCreators = {
     injections: [
       withPostSuccess(async dispatch => {
         dispatch(DialogActions.showDialog(getHomeDialog(homeDialogNames.FINISH_CREATE_ORDER)()));
+      })
+    ]
+  }),
+  rateOrder: rating => ({
+    type: actions.RATE_ORDER,
+    target: targets.rate,
+    service: OrdersService.rateOrder,
+    payload: rating,
+    injections: [
+      withPostSuccess(async dispatch => {
+        dispatch(DialogActions.closeDialog());
       })
     ]
   })

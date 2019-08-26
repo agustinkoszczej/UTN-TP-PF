@@ -7,11 +7,11 @@ import styles from './styles';
 import OrderHeader from './components/OrderHeader';
 import OrderProducts from './components/OrderProducts';
 
-function OrderDetail({ order, creation }) {
+function OrderDetail({ order, creation, showRateModal }) {
   const { products } = order;
   return (
     <ScrollView style={!creation && styles.container}>
-      <OrderHeader {...order} />
+      <OrderHeader {...order} showRateModal={showRateModal} />
       <OrderProducts products={products} />
     </ScrollView>
   );
@@ -29,7 +29,8 @@ OrderDetail.propTypes = {
     comment: PropTypes.string.isRequired,
     products: PropTypes.arrayOf(PropTypes.shape({}))
   }).isRequired,
-  creation: PropTypes.bool
+  creation: PropTypes.bool,
+  showRateModal: PropTypes.func.isRequired
 };
 
 export default Loadable(props => props.loading)(OrderDetail);

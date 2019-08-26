@@ -6,7 +6,8 @@ import OrdersActions from '@redux/orders/actions';
 import { strings } from './constants';
 
 export const homeDialogNames = {
-  FINISH_CREATION_RDER: 'finishCreationOrder'
+  FINISH_CREATION_RDER: 'finishCreationOrder',
+  RATE_ORDER_MODAL: 'RATE_ORDER_MODAL'
 };
 
 export const getHomeDialog = dialogType =>

@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
+import DialogActions from '@redux/dialog/actions';
+import { getHomeDialog, homeDialogNames } from '@screens/Home/dialogs';
 
 import OrderDetail from './layout';
 
-class OrderDetailContainer extends Component {
-  render() {
-    const { order, loading } = this.props;
-    return <OrderDetail order={order} loading={loading} />;
-  }
+function OrderDetailContainer({ order, loading, showRateModal }) {
+  return <OrderDetail order={order} loading={loading} showRateModal={showRateModal} />;
 }
 
 OrderDetailContainer.propTypes = {
   loading: PropTypes.bool.isRequired,
+  showRateModal: PropTypes.func.isRequired,
   order: PropTypes.shape({
     supplier: PropTypes.shape({
       fullName: PropTypes.string
@@ -41,6 +41,15 @@ const mapStateToProps = state => ({
   loading: state.orders.currentOrderLoading
 });
 
-const enhance = compose(connect(mapStateToProps));
+const mapDispatchToProps = dispatch => ({
+  showRateModal: () => dispatch(DialogActions.showDialog(getHomeDialog(homeDialogNames.RATE_ORDER_MODAL)()))
+});
+
+const enhance = compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+);
 
 export default enhance(OrderDetailContainer);

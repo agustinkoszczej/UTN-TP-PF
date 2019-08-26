@@ -6,7 +6,7 @@ export const ORDER_STYLES = {
   [ORDER_STATUS.CANCELLED]: styles.redTag,
   [ORDER_STATUS.REJECTED]: styles.redTag,
   [ORDER_STATUS.DELIVERED]: styles.greenTag,
-  [ORDER_STATUS.ON_WAY]: styles.greenTag,
+  [ORDER_STATUS.ON_WAY]: styles.yellowTag,
   [ORDER_STATUS.CONFIRMED]: styles.greenTag,
   [ORDER_STATUS.PENDING]: styles.yellowTag
 };

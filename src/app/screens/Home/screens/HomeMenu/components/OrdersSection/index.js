@@ -5,38 +5,45 @@ import Card from '@components/Card';
 import CustomText from '@components/CustomText';
 import { ORDER_STATUS } from '@constants/orderStatus';
 
+import styles from './styles';
+
 function OrdersSection({ orders }) {
   return (
-    <View>
-      <View>
-        <Card>
-          <CustomText>Pendiente</CustomText>
-          <CustomText>{orders?.[ORDER_STATUS.PENDING] || 0}</CustomText>
-        </Card>
-        <Card>
-          <CustomText>En camino</CustomText>
-          <CustomText>{orders?.[ORDER_STATUS.ON_WAY] || 0}</CustomText>
-        </Card>
-        <Card>
-          <CustomText>Confirmado</CustomText>
-          <CustomText>{orders?.[ORDER_STATUS.CONFIRMED] || 0}</CustomText>
-        </Card>
-      </View>
-      <View>
-        <Card>
-          <CustomText>Cancelado</CustomText>
-          <CustomText>{orders?.[ORDER_STATUS.CANCELLED] || 0}</CustomText>
-        </Card>
-        <Card>
-          <CustomText>Rechazado</CustomText>
-          <CustomText>{orders?.[ORDER_STATUS.REJECTED] || 0}</CustomText>
-        </Card>
-        <Card>
-          <CustomText>Entregado</CustomText>
-          <CustomText>{orders?.[ORDER_STATUS.DELIVERED] || 0}</CustomText>
-        </Card>
-      </View>
-    </View>
+    <>
+      <Card>
+        <CustomText center style={styles.title}>
+          Pedidos
+        </CustomText>
+      </Card>
+      <>
+        <View style={styles.cardsRow}>
+          <Card style={[styles.card, styles.yellow]}>
+            <CustomText style={styles.white}>Pendientes</CustomText>
+            <CustomText style={styles.white}>{orders?.[ORDER_STATUS.PENDING] || 0}</CustomText>
+          </Card>
+          <Card style={[styles.card, styles.yellow]}>
+            <CustomText style={styles.white}>En camino</CustomText>
+            <CustomText style={styles.white}>{orders?.[ORDER_STATUS.ON_WAY] || 0}</CustomText>
+          </Card>
+          <Card style={[styles.card, styles.green]}>
+            <CustomText style={styles.white}>Confirmados</CustomText>
+            <CustomText style={styles.white}>{orders?.[ORDER_STATUS.CONFIRMED] || 0}</CustomText>
+          </Card>
+          <Card style={[styles.card, styles.red]}>
+            <CustomText style={styles.white}>Cancelados</CustomText>
+            <CustomText style={styles.white}>{orders?.[ORDER_STATUS.CANCELLED] || 0}</CustomText>
+          </Card>
+          <Card style={[styles.card, styles.red]}>
+            <CustomText style={styles.white}>Rechazados</CustomText>
+            <CustomText style={styles.white}>{orders?.[ORDER_STATUS.REJECTED] || 0}</CustomText>
+          </Card>
+          <Card style={[styles.card, styles.green]}>
+            <CustomText style={styles.white}>Entregados</CustomText>
+            <CustomText style={styles.white}>{orders?.[ORDER_STATUS.DELIVERED] || 0}</CustomText>
+          </Card>
+        </View>
+      </>
+    </>
   );
 }
 

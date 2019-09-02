@@ -25,7 +25,7 @@ function HeaderSection({ fullName, email, handleLogOut, navigateToConfiguration,
           </CustomText>
         </View>
       </View>
-      <AirbnbRating defaultRating={rating} showRating={false} />
+      <AirbnbRating defaultRating={rating} isDisabled showRating={false} />
       <CustomButton
         secondaryBtn
         title={strings.edit}

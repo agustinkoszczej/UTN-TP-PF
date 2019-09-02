@@ -11,15 +11,17 @@ import { userModel } from '@propTypes/userModel';
 import styles from './styles';
 
 class RateDialog extends Component {
-  state = { rating: 0 };
+  state = { rating: 3 };
 
   handleAccept = () => {
-    const { rateOrder } = this.props;
+    const { rateOrder, id } = this.props;
     const { rating } = this.state;
-    rateOrder(rating);
+    rateOrder(id, rating);
   };
 
-  handleRatingChange = rating => this.setState({ rating });
+  handleRatingChange = rating => {
+    this.setState({ rating });
+  };
 
   render() {
     const {
@@ -55,16 +57,18 @@ class RateDialog extends Component {
 RateDialog.propTypes = {
   isVisible: PropTypes.bool.isRequired,
   rateOrder: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
   currentSupplier: PropTypes.shape(userModel).isRequired
 };
 
 const mapStateToProps = state => ({
-  currentSupplier: state.orders.currentOrder.supplier
+  currentSupplier: state.orders.currentOrder.supplier,
+  id: state.orders.currentOrder.id
 });
 
-const mapDispatchToProps = dispatch => ({
-  rateOrder: rating => dispatch(OrderActions.rateOrder(rating))
-});
+const mapDispatchToProps = {
+  rateOrder: OrderActions.rateOrder
+};
 
 export default connect(
   mapStateToProps,

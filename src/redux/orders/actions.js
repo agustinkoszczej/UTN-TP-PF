@@ -73,11 +73,11 @@ export const actionCreators = {
       })
     ]
   }),
-  rateOrder: rating => ({
+  rateOrder: (id, rating) => ({
     type: actions.RATE_ORDER,
     target: targets.rate,
     service: OrdersService.rateOrder,
-    payload: rating,
+    payload: { id, score: rating },
     injections: [
       withPostSuccess(async dispatch => {
         dispatch(DialogActions.closeDialog());

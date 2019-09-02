@@ -8,8 +8,7 @@ const getOrderById = id => api.get(`/merchants/orders/${id}`);
 
 const createOrder = order => api.post('/merchants/orders', order);
 
-const rateOrder = rating => ({ ok: true, status: 200, data: {} });
-
+const rateOrder = ({ id, ...score }) => api.post(`/merchants/orders/${id}/ratings`, { ...score });
 export default {
   getActiveOrders,
   getPastOrders,

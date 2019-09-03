@@ -5,12 +5,22 @@ import CustomText from '@components/CustomText';
 import CustomButton from '@components/CustomButton';
 import StatusTag from '@components/StatusTag';
 import Card from '@components/Card';
+import { IS_ACTIVE_STATUS } from '@constants/orderStatus';
 import { dateFormat } from '@utils/timeUtils';
 import { formatMoney } from '@utils/numberUtils';
 
 import styles from './styles';
 
-function OrderHeader({ supplier, receiverName, comment, amount, deliveryDate, status, showRateModal }) {
+function OrderHeader({
+  supplier,
+  receiverName,
+  comment,
+  amount,
+  deliveryDate,
+  status,
+  showRateModal,
+  rated
+}) {
   const fullName = supplier?.fullName || receiverName;
   return (
     <>
@@ -33,13 +43,18 @@ function OrderHeader({ supplier, receiverName, comment, amount, deliveryDate, st
         </View>
         {status && <StatusTag status={status} />}
       </Card>
-      <CustomButton title="Valorar" onPress={showRateModal} />
+      {!IS_ACTIVE_STATUS(status) && !rated && (
+        <Card style={styles.rateButton}>
+          <CustomButton title="Valorar" onPress={showRateModal} />
+        </Card>
+      )}
     </>
   );
 }
 
 OrderHeader.propTypes = {
   showRateModal: PropTypes.func.isRequired,
+  rated: PropTypes.bool.isRequired,
   supplier: PropTypes.shape({
     fullName: PropTypes.string
   }),

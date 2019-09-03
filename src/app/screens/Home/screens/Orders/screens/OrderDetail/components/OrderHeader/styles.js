@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
   },
   placeholder: {
     marginRight: 20
+  },
+  rateButton: {
+    marginHorizontal: 20
   }
 });
 export default styles;

@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 
-function FinishedAuctions() {
+function ClosedAuctions() {
   return <View />;
 }
 
-export default FinishedAuctions;
+export default ClosedAuctions;

@@ -23,7 +23,7 @@ const routes = {
   Search: 'Search',
   ProductDetail: 'ProductDetail',
   SupplierProfile: 'SupplierProfile',
-  FinishedAuctions: 'FinishedAuctions'
+  ClosedAuctions: 'ClosedAuctions'
 };
 
 export default routes;

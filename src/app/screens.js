@@ -38,7 +38,7 @@ import Chats from './screens/Home/screens/Chats';
 // Auctions
 import ActiveAuctions from './screens/Home/screens/Auctions/screens/ActiveAuctions';
 import ExpiredAuctions from './screens/Home/screens/Auctions/screens/ExpiredAuctions';
-import FinishedAuctions from './screens/Home/screens/Auctions/screens/FinishedAuctions';
+import ClosedAuctions from './screens/Home/screens/Auctions/screens/ClosedAuctions';
 import CreateAuction from './screens/Home/screens/Auctions/screens/CreateAuction';
 
 export default createStackNavigator(
@@ -64,7 +64,7 @@ export default createStackNavigator(
             screen: createMaterialTopTabNavigator(
               {
                 ...inferRoute({ ActiveAuctions }),
-                ...inferRoute({ FinishedAuctions }),
+                ...inferRoute({ ClosedAuctions }),
                 ...inferRoute({ ExpiredAuctions })
               },
               topTabNavConfig

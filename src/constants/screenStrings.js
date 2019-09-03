@@ -17,6 +17,6 @@ export const strings = {
   [Routes.Search]: 'Busqueda',
   [Routes.ProductDetail]: 'Producto',
   [Routes.SupplierProfile]: 'Distribuidor',
-  [Routes.FinishedAuctions]: 'Subastas Terminadas',
+  [Routes.ClosedAuctions]: 'Subastas Cerradas',
   [Routes.ExpiredAuctions]: 'Subastas Expiradas'
 };

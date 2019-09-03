@@ -1,8 +1,39 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View } from 'react-native';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import AuctionsActions from '@redux/auctions/actions';
 
-function ActiveAuctions() {
-  return <View />;
+class ActiveAuctionsContainer extends Component {
+  componentDidMount() {
+    const { getActiveAuctions } = this.props;
+    getActiveAuctions();
+  }
+
+  render() {
+    return <View />;
+  }
 }
 
-export default ActiveAuctions;
+ActiveAuctionsContainer.propTypes = {
+  getActiveAuctions: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  loading: state.auctions.activeAuctionsLoading,
+  activeAuctions: state.auctions.activeAuctions
+});
+
+const mapDispatchToProps = dispatch => ({
+  getActiveAuctions: () => dispatch(AuctionsActions.getActiveAuctions())
+});
+
+const enhance = compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+);
+
+export default enhance(ActiveAuctionsContainer);

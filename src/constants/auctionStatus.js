@@ -1,0 +1,5 @@
+export const AUCTION_STATUS = {
+  ACTIVE: 'ACTIVE',
+  EXPIRED: 'EXPIRED',
+  CLOSED: 'CLOSED'
+};

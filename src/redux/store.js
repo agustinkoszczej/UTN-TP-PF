@@ -12,6 +12,7 @@ import auth from './auth/reducer';
 import dialog from './dialog/reducer';
 import orders from './orders/reducer';
 import product from './product/reducer';
+import auctions from './auctions/reducer';
 
 const nav = createNavigationReducer(Navigator);
 
@@ -22,7 +23,8 @@ const reducers = {
   auth,
   dialog,
   orders,
-  product
+  product,
+  auctions
 };
 
 const appReducer = combineReducers(reducers);

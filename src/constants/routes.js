@@ -12,7 +12,7 @@ const routes = {
   ScannerQR: 'ScannerQR',
   Configuration: 'Configuration',
   ChooseConfiguration: 'ChooseConfiguration',
-  PastAuctions: 'PastAuctions',
+  ExpiredAuctions: 'ExpiredAuctions',
   Auctions: 'Auctions',
   ActiveAuctions: 'ActiveAuctions',
   HomeMenu: 'HomeMenu',
@@ -22,7 +22,8 @@ const routes = {
   OrderDetail: 'OrderDetail',
   Search: 'Search',
   ProductDetail: 'ProductDetail',
-  SupplierProfile: 'SupplierProfile'
+  SupplierProfile: 'SupplierProfile',
+  FinishedAuctions: 'FinishedAuctions'
 };
 
 export default routes;

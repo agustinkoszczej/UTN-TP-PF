@@ -11,11 +11,12 @@ export const strings = {
   [Routes.Orders]: 'Pedidos',
   [Routes.PastOrders]: 'Pedidos Pasados',
   [Routes.Profile]: 'Perfil',
-  [Routes.PastAuctions]: 'Subastas Pasadas',
   [Routes.CreateAuction]: 'Crear Subasta',
   [Routes.CreateOrder]: 'Crear Pedido',
   [Routes.OrderDetail]: 'Pedido',
   [Routes.Search]: 'Busqueda',
   [Routes.ProductDetail]: 'Producto',
-  [Routes.SupplierProfile]: 'Distribuidor'
+  [Routes.SupplierProfile]: 'Distribuidor',
+  [Routes.FinishedAuctions]: 'Subastas Terminadas',
+  [Routes.ExpiredAuctions]: 'Subastas Expiradas'
 };

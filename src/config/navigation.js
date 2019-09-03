@@ -186,8 +186,29 @@ export const screensNavOptions = {
       }
     }
   },
-  [Routes.PastAuctions]: {
-    tabBarLabel: strings[Routes.PastAuctions],
+  [Routes.ExpiredAuctions]: {
+    tabBarLabel: strings[Routes.ExpiredAuctions],
+    tabBarOptions: {
+      style: {
+        backgroundColor: white,
+        borderBottomWidth: 1,
+        borderBottomColor: black,
+        shadowColor: black,
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 4
+      },
+      activeTintColor: black,
+      inactiveTintColor: black,
+      indicatorStyle: {
+        backgroundColor: black,
+        height: 4
+      }
+    }
+  },
+  [Routes.FinishedAuctions]: {
+    tabBarLabel: strings[Routes.FinishedAuctions],
     tabBarOptions: {
       style: {
         backgroundColor: white,

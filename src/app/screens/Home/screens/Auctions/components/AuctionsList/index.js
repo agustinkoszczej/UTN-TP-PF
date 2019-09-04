@@ -6,33 +6,32 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import worried from '@assets/worried.png';
 import WithError from '@components/WithError';
-import { ordersModel } from '@propTypes/ordersModel';
 import { navigationModel } from '@propTypes/navigationModel';
 import Routes from '@constants/routes';
-import OrdersActions from '@redux/orders/actions';
+import AuctionsActions from '@redux/auctions/actions';
 
 import styles from './styles';
-import OrderView from './components/OrderView';
+import AuctionView from './components/AuctionView';
 
-class OrdersList extends Component {
-  renderItem = ({ item }) => <OrderView order={item} goToOrderDetail={this.goToOrderDetail} />;
+class AuctionsList extends Component {
+  renderItem = ({ item }) => <AuctionView auction={item} goToAuctionDetail={this.goToAuctionDetail} />;
 
-  goToOrderDetail = id => () => {
+  goToAuctionDetail = id => () => {
     const {
       navigation: { navigate },
-      getOrderById
+      getAuctionById
     } = this.props;
-    navigate(Routes.OrderDetail, { id });
-    getOrderById(id);
+    navigate(Routes.AuctionDetail, { id });
+    getAuctionById(id);
   };
 
   keyExtractor = ({ id }) => `${id}`;
 
   render() {
-    const { orders, loading, onRefresh } = this.props;
+    const { auctions, loading, onRefresh } = this.props;
     return (
       <FlatList
-        data={orders}
+        data={auctions}
         style={styles.container}
         keyExtractor={this.keyExtractor}
         renderItem={this.renderItem}
@@ -43,16 +42,16 @@ class OrdersList extends Component {
   }
 }
 
-OrdersList.propTypes = {
-  orders: PropTypes.arrayOf(PropTypes.shape(ordersModel)),
+AuctionsList.propTypes = {
+  auctions: PropTypes.arrayOf(PropTypes.shape({})),
   loading: PropTypes.bool.isRequired,
   navigation: PropTypes.shape(navigationModel).isRequired,
-  getOrderById: PropTypes.func.isRequired,
+  getAuctionById: PropTypes.func.isRequired,
   onRefresh: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({
-  getOrderById: id => dispatch(OrdersActions.getOrderById(id))
+  getAuctionById: id => dispatch(AuctionsActions.getAuctionById(id))
 });
 
 const enhance = compose(
@@ -62,19 +61,21 @@ const enhance = compose(
     mapDispatchToProps
   ),
   WithError(
-    ({ error, orders }) => error || orders?.length === 0,
-    ({ orders, loading, getOrders, error, active }) => ({
-      asset: orders?.length === 0 ? worried : undefined,
-      handleError: error && getOrders,
+    ({ error, auctions }) => error || auctions?.length === 0,
+    ({ auctions, loading, getAuctions, error, active, expired }) => ({
+      asset: auctions?.length === 0 ? worried : undefined,
+      handleError: error && getAuctions,
       title:
-        orders?.length === 0
+        auctions?.length === 0
           ? active
-            ? 'No posees pedidos activos'
-            : 'No posees pedidos pasados'
+            ? 'No posees subastas activas'
+            : expired
+            ? 'No posees subastas expiradas'
+            : 'No posees subastas cerradas'
           : undefined,
       loading
     })
   )
 );
 
-export default enhance(OrdersList);
+export default enhance(AuctionsList);

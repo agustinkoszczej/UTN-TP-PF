@@ -207,8 +207,8 @@ export const screensNavOptions = {
       }
     }
   },
-  [Routes.FinishedAuctions]: {
-    tabBarLabel: strings[Routes.FinishedAuctions],
+  [Routes.ClosedAuctions]: {
+    tabBarLabel: strings[Routes.ClosedAuctions],
     tabBarOptions: {
       style: {
         backgroundColor: white,

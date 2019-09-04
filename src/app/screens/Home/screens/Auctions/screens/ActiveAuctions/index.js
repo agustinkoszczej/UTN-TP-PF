@@ -1,28 +1,43 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import AuctionsActions from '@redux/auctions/actions';
 
-class ActiveAuctionsContainer extends Component {
+import AuctionsList from '../../components/AuctionsList';
+
+class ActiveAuctions extends Component {
   componentDidMount() {
     const { getActiveAuctions } = this.props;
     getActiveAuctions();
   }
 
   render() {
-    return <View />;
+    const { activeAuctions, loading, error, getActiveAuctions } = this.props;
+    return (
+      <AuctionsList
+        loading={loading}
+        error={error}
+        onRefresh={getActiveAuctions}
+        getAuctions={getActiveAuctions}
+        auctions={activeAuctions}
+        active
+      />
+    );
   }
 }
 
-ActiveAuctionsContainer.propTypes = {
-  getActiveAuctions: PropTypes.func.isRequired
+ActiveAuctions.propTypes = {
+  getActiveAuctions: PropTypes.func.isRequired,
+  activeAuctions: PropTypes.arrayOf(PropTypes.shape({})),
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.shape({})
 };
 
 const mapStateToProps = state => ({
   loading: state.auctions.activeAuctionsLoading,
-  activeAuctions: state.auctions.activeAuctions
+  error: state.auctions.activeAuctionsError,
+  activeAuctions: state.auctions.activeAuctions?.auctions
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -36,4 +51,4 @@ const enhance = compose(
   )
 );
 
-export default enhance(ActiveAuctionsContainer);
+export default enhance(ActiveAuctions);

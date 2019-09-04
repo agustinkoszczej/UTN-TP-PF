@@ -14,7 +14,9 @@ import styles from './styles';
 import AuctionView from './components/AuctionView';
 
 class AuctionsList extends Component {
-  renderItem = ({ item }) => <AuctionView auction={item} goToAuctionDetail={this.goToAuctionDetail} />;
+  renderItem = ({ item }) => (
+    <AuctionView auction={item} user={this.props.user} goToAuctionDetail={this.goToAuctionDetail} />
+  );
 
   goToAuctionDetail = id => () => {
     const {
@@ -46,9 +48,14 @@ AuctionsList.propTypes = {
   auctions: PropTypes.arrayOf(PropTypes.shape({})),
   loading: PropTypes.bool.isRequired,
   navigation: PropTypes.shape(navigationModel).isRequired,
+  user: PropTypes.shape({}),
   getAuctionById: PropTypes.func.isRequired,
   onRefresh: PropTypes.func.isRequired
 };
+
+const mapStateToProps = state => ({
+  user: state.auth.currentUser
+});
 
 const mapDispatchToProps = dispatch => ({
   getAuctionById: id => dispatch(AuctionsActions.getAuctionById(id))
@@ -57,7 +64,7 @@ const mapDispatchToProps = dispatch => ({
 const enhance = compose(
   withNavigation,
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   ),
   WithError(

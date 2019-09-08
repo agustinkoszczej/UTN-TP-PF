@@ -3,12 +3,12 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   cardContainer: {
     flex: 1,
-    padding: 30,
+    padding: 20,
     margin: 20
   },
   productImage: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
     marginRight: 20,
     borderRadius: 15
   },

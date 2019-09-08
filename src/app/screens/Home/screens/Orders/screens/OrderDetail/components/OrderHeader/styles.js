@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   section: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20
+    marginBottom: 15
   },
   placeholder: {
     marginRight: 20

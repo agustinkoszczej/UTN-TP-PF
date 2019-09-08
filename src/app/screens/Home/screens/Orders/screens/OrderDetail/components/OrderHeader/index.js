@@ -8,6 +8,7 @@ import Card from '@components/Card';
 import { IS_ACTIVE_STATUS } from '@constants/orderStatus';
 import { dateFormat } from '@utils/timeUtils';
 import { formatMoney } from '@utils/numberUtils';
+import SeparatorWithText from '@components/SeparatorWithText';
 
 import styles from './styles';
 
@@ -25,6 +26,7 @@ function OrderHeader({
   return (
     <>
       <Card style={styles.cardContainer}>
+        <SeparatorWithText text="Detalle de pedido" style={{ marginBottom: 15 }} />
         <View style={styles.section}>
           <CustomText style={styles.placeholder}>Distribuidor:</CustomText>
           <CustomText bold>{fullName}</CustomText>

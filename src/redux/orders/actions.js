@@ -3,8 +3,6 @@ import OrdersService from '@services/OrdersService';
 import DialogActions from '@redux/dialog/actions';
 import { getHomeDialog, homeDialogNames } from '@screens/Home/dialogs';
 
-import { ordersSerialiazer } from './utils';
-
 export const actions = createTypes(
   completeTypes(
     [
@@ -34,27 +32,23 @@ export const actionCreators = {
     type: actions.GET_ACTIVE_ORDERS,
     target: targets.activeOrders,
     service: OrdersService.getActiveOrders,
-    payload: page || 1,
-    successSelector: response => ordersSerialiazer(response.data)
+    payload: page || 1
   }),
   getPastOrders: page => ({
     type: actions.GET_PAST_ORDERS,
     target: targets.pastOrders,
     service: OrdersService.getPastOrders,
-    payload: page || 1,
-    successSelector: response => ordersSerialiazer(response.data)
+    payload: page || 1
   }),
   refreshActiveOrders: () => ({
     type: actions.REFRESH_ACTIVE_ORDERS,
     target: targets.activeOrders,
-    service: OrdersService.getActiveOrders,
-    successSelector: response => ordersSerialiazer(response.data)
+    service: OrdersService.getActiveOrders
   }),
   refreshPastOrders: () => ({
     type: actions.REFRESH_PAST_ORDERS,
     target: targets.pastOrders,
-    service: OrdersService.getPastOrders,
-    successSelector: response => ordersSerialiazer(response.data)
+    service: OrdersService.getPastOrders
   }),
   getOrderById: id => ({
     type: actions.GET_ORDER_BY_ID,

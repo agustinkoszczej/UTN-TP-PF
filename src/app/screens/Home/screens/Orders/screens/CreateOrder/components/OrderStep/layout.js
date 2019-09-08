@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableWithoutFeedback } from 'react-native';
+import { View, TouchableWithoutFeedback, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import CustomDropdown from '@components/CustomDropdown';
 import Collapsible from '@components/Collapsible';
@@ -39,7 +39,7 @@ class OrderStep extends Component {
     };
     return (
       <TouchableWithoutFeedback onPress={hideOrShowCalendar(false)}>
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
           <CustomText>Precio:</CustomText>
           <CustomTextInput
             name={CREATE_ORDER_FIELDS.AMOUNT}
@@ -85,7 +85,7 @@ class OrderStep extends Component {
             onSelectItem={handlePaymentMethodChange}
             style={styles.paymentMethod}
           />
-        </View>
+        </ScrollView>
       </TouchableWithoutFeedback>
     );
   }

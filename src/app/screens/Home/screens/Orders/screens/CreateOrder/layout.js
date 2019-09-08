@@ -24,7 +24,7 @@ class CreateOrder extends Component {
     const { currentStep, handleSubmit, values, setFieldValue, onBack, loading } = this.props;
     const finalStep = currentStep === 3;
     return (
-      <BaseForm link onSubmit={handleSubmit} scrollable>
+      <BaseForm link onSubmit={handleSubmit}>
         <View style={styles.container}>
           <StepIndicator
             customStyles={stepIndicatorStyles}
@@ -38,7 +38,7 @@ class CreateOrder extends Component {
               0: <SupplierStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />,
               1: <OrderStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />,
               2: <ProductStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />,
-              3: <DetailStep handleSubmit={handleSubmit} values={values} />
+              3: <DetailStep handleSubmit={handleSubmit} values={values} creation />
             }[currentStep]
           }
           <View style={styles.buttons}>

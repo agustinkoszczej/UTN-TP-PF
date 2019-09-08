@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import Loadable from '@components/Loadable';
+import { PAYMENT_METHODS } from '@constants/paymentMethods';
 
 import styles from './styles';
 import OrderHeader from './components/OrderHeader';
@@ -12,8 +13,15 @@ function OrderDetail({ order, creation, showRateModal }) {
   const { products } = order;
   return (
     <ScrollView style={!creation && styles.container}>
-      <OrderHeader {...order} showRateModal={showRateModal} />
-      <PaymentMethod method={order.payment?.paymentOption} />
+      <OrderHeader {...order} creation={creation} showRateModal={showRateModal} />
+      <PaymentMethod
+        method={
+          order.payment?.paymentOption || {
+            id: order.paymentOptionId,
+            description: PAYMENT_METHODS[order.paymentOptionId - 1].text
+          }
+        }
+      />
       <OrderProducts products={products} />
     </ScrollView>
   );
@@ -28,6 +36,7 @@ OrderDetail.propTypes = {
     deliveryDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]).isRequired,
     amount: PropTypes.string.isRequired,
     status: PropTypes.string,
+    paymentOptionId: PropTypes.number,
     comment: PropTypes.string.isRequired,
     products: PropTypes.arrayOf(PropTypes.shape({})),
     payment: PropTypes.shape({
@@ -35,7 +44,7 @@ OrderDetail.propTypes = {
     })
   }).isRequired,
   creation: PropTypes.bool,
-  showRateModal: PropTypes.func.isRequired
+  showRateModal: PropTypes.func
 };
 
 export default Loadable(props => props.loading)(OrderDetail);

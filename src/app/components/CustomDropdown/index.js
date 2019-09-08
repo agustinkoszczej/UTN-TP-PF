@@ -4,7 +4,7 @@ import { FlatList, Image, Text, View, TouchableOpacity, ViewPropTypes } from 're
 import CustomModal from '@components/CustomModal';
 import CustomText from '@components/CustomText';
 import SeparatorWithText from '@components/SeparatorWithText';
-import { oceanGreen } from '@constants/colors';
+import { black } from '@constants/colors';
 
 import dropdownIcon from './assets/ic_angle_down_grey.png';
 import styles, { MAX_ITEMS } from './styles';
@@ -42,7 +42,7 @@ class CustomDropdown extends Component {
     return <DropdownItem item={item} itemNameSelector={itemNameSelector} onPress={this.handleOnPress} />;
   };
 
-  renderDropdownSeparator = () => <SeparatorWithText separatorStyle={{ backgroundColor: oceanGreen }} />;
+  renderDropdownSeparator = () => <SeparatorWithText separatorStyle={{ backgroundColor: black }} />;
 
   handleKey = item => `${item.id}`;
 

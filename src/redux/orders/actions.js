@@ -63,7 +63,7 @@ export const actionCreators = {
     payload: order,
     injections: [
       withPostSuccess(async dispatch => {
-        dispatch(DialogActions.showDialog(getHomeDialog(homeDialogNames.FINISH_CREATE_ORDER)()));
+        dispatch(DialogActions.showDialog(getHomeDialog(homeDialogNames.FINISH_CREATION_ORDER)()));
       })
     ]
   }),

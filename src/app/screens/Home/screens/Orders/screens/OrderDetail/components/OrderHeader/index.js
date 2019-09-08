@@ -20,7 +20,8 @@ function OrderHeader({
   deliveryDate,
   status,
   showRateModal,
-  rated
+  rated,
+  creation
 }) {
   const fullName = supplier?.fullName || receiverName;
   return (
@@ -45,7 +46,7 @@ function OrderHeader({
         </View>
         {status && <StatusTag status={status} />}
       </Card>
-      {!IS_ACTIVE_STATUS(status) && !rated && (
+      {!IS_ACTIVE_STATUS(status) && !rated && !creation && (
         <Card style={styles.rateButton}>
           <CustomButton title="Valorar" onPress={showRateModal} />
         </Card>
@@ -55,8 +56,9 @@ function OrderHeader({
 }
 
 OrderHeader.propTypes = {
-  showRateModal: PropTypes.func.isRequired,
-  rated: PropTypes.bool.isRequired,
+  showRateModal: PropTypes.func,
+  rated: PropTypes.bool,
+  creation: PropTypes.bool,
   supplier: PropTypes.shape({
     fullName: PropTypes.string
   }),

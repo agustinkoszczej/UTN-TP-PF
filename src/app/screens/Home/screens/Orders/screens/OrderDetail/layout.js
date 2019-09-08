@@ -6,14 +6,14 @@ import Loadable from '@components/Loadable';
 import styles from './styles';
 import OrderHeader from './components/OrderHeader';
 import OrderProducts from './components/OrderProducts';
-import PaymentMethod from './components/PaymentMethods';
+import PaymentMethod from './components/PaymentMethod';
 
 function OrderDetail({ order, creation, showRateModal }) {
   const { products } = order;
   return (
     <ScrollView style={!creation && styles.container}>
       <OrderHeader {...order} showRateModal={showRateModal} />
-      <PaymentMethod method={order.payment.paymentOption} />
+      <PaymentMethod method={order.payment?.paymentOption} />
       <OrderProducts products={products} />
     </ScrollView>
   );

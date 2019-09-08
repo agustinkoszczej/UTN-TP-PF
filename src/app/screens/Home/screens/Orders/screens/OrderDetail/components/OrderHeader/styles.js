@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
     marginRight: 20
   },
   rateButton: {
-    marginHorizontal: 20
+    marginHorizontal: 20,
+    marginBottom: 20
   }
 });
 export default styles;

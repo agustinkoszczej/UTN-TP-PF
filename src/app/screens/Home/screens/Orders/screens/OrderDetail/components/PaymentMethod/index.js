@@ -7,7 +7,9 @@ import SeparatorWithText from '@components/SeparatorWithText';
 
 import PaymentIcon from './components/PaymentIcon';
 
-function PaymentMethod({ method: { id, description } }) {
+function PaymentMethod({ method }) {
+  const id = method?.id || 1;
+  const description = method?.description || 'Efectivo';
   return (
     <Card style={{ marginHorizontal: 20, padding: 20 }}>
       <SeparatorWithText text="Método de pago" />

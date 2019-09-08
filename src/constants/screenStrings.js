@@ -4,12 +4,12 @@ export const strings = {
   [Routes.Auctions]: 'Subastas',
   [Routes.Chats]: 'Chats',
   [Routes.ChooseConfiguration]: 'Configuración',
-  [Routes.ActiveAuctions]: 'Subastas Activas',
-  [Routes.ActiveOrders]: 'Pedidos Activos',
+  [Routes.ActiveAuctions]: 'Activas',
+  [Routes.ActiveOrders]: 'Activos',
   [Routes.Configuration]: 'Configuración',
   [Routes.HomeMenu]: 'Inicio',
   [Routes.Orders]: 'Pedidos',
-  [Routes.PastOrders]: 'Pedidos Pasados',
+  [Routes.PastOrders]: 'Pasados',
   [Routes.Profile]: 'Perfil',
   [Routes.CreateAuction]: 'Crear Subasta',
   [Routes.CreateOrder]: 'Crear Pedido',
@@ -17,6 +17,6 @@ export const strings = {
   [Routes.Search]: 'Busqueda',
   [Routes.ProductDetail]: 'Producto',
   [Routes.SupplierProfile]: 'Distribuidor',
-  [Routes.ClosedAuctions]: 'Subastas Cerradas',
-  [Routes.ExpiredAuctions]: 'Subastas Expiradas'
+  [Routes.ClosedAuctions]: 'Cerradas',
+  [Routes.ExpiredAuctions]: 'Expiradas'
 };

@@ -29,7 +29,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   title: {
-    fontSize: 16
+    fontSize: 16,
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 30
   }
 });
 export default styles;

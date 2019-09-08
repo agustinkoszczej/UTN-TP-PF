@@ -10,8 +10,8 @@ import styles from './styles';
 function OrdersSection({ orders }) {
   return (
     <>
-      <Card>
-        <CustomText center style={styles.title}>
+      <Card style={styles.title}>
+        <CustomText center middle>
           Pedidos
         </CustomText>
       </Card>

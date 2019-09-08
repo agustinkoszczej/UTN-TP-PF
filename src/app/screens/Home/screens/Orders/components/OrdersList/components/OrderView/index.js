@@ -38,8 +38,8 @@ class OrderView extends Component {
         </View>
         <View style={styles.bottomOrder}>
           <View>
-            <CustomText>{`Precio: ${formatMoney(amount)}`}</CustomText>
-            <CustomText>{`Eentrega: ${dateFormat(deliveryDate)}`}</CustomText>
+            <CustomText style={{ marginBottom: 10 }}>{`Precio: ${formatMoney(amount)}`}</CustomText>
+            <CustomText>{`Entrega: ${dateFormat(deliveryDate)}`}</CustomText>
           </View>
           <CustomButton onPress={this.handleToogle} icon={collapsed ? arrowDown : arrowUp} />
         </View>

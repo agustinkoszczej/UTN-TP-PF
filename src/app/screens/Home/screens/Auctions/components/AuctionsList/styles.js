@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   orderContainer: {
     flex: 1,
     marginVertical: 15,
-    padding: 20,
+    padding: 25,
     minHeight: 150
   },
   userPicture: {
@@ -22,15 +22,14 @@ const styles = StyleSheet.create({
     color: white
   },
   seeButton: {
-    width: 50,
-    height: 50,
-    alignSelf: 'flex-end'
+    marginTop: 10
   },
   orderHeader: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginBottom: 10
   },
   orderName: {
     flex: 1,
@@ -41,12 +40,18 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginLeft: 65,
     alignItems: 'center',
-    height: 60
+    height: 60,
+    marginVertical: 5
   },
   name: {
     fontSize: 18
+  },
+  productContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 5
   }
 });
 export default styles;

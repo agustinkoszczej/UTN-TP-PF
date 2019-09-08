@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
     minHeight: 150
   },
   userPicture: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     borderRadius: 25,
     marginRight: 15
   },
@@ -41,9 +41,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginLeft: 65,
-    alignItems: 'center',
-    height: 60
+    marginLeft: 55,
+    height: 70,
+    marginTop: 5
   },
   name: {
     fontSize: 18

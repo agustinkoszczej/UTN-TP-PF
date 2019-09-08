@@ -30,7 +30,7 @@ class AuctionView extends Component {
     </View>
   );
 
-  renderSeparator = () => <SeparatorWithText text="Productos" style={{ marginBottom: 35 }} />;
+  renderSeparator = () => <SeparatorWithText text="Productos" />;
 
   render() {
     const {

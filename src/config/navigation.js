@@ -90,7 +90,8 @@ export const screensNavOptions = {
       activeTintColor: black,
       inactiveTintColor: boulder
     },
-    headerRight: <AddButton />
+    headerRight: <AddButton />,
+    headerLeft: null
   },
   [Routes.Profile]: {
     gesturesEnabled: false,
@@ -129,6 +130,7 @@ export const screensNavOptions = {
       inactiveTintColor: boulder
     },
     headerRight: <AddButton />,
+    headerLeft: null,
     lazy: true
   },
   [Routes.HomeMenu]: {
@@ -142,7 +144,8 @@ export const screensNavOptions = {
       activeTintColor: black,
       inactiveTintColor: boulder
     },
-    headerRight: <SearchButton />
+    headerRight: <SearchButton />,
+    headerLeft: null
   },
   [Routes.ActiveOrders]: {
     tabBarLabel: strings[Routes.ActiveOrders],

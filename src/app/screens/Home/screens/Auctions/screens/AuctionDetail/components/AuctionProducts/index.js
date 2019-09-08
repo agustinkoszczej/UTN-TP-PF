@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Card from '@components/Card';
 import CustomText from '@components/CustomText';
 import SeparatorWithText from '@components/SeparatorWithText';
-import { white } from '@constants/colors';
 
 import styles from './styles';
 
@@ -24,13 +23,7 @@ class AuctionProducts extends Component {
     </View>
   );
 
-  renderSeparator = () => (
-    <SeparatorWithText
-      text="Productos"
-      textStyle={styles.sepator}
-      separatorStyle={{ backgroundColor: white }}
-    />
-  );
+  renderSeparator = () => <SeparatorWithText text="Productos" />;
 
   keyExtractor = ({ id }) => `${id}`;
 

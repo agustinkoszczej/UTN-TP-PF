@@ -32,6 +32,8 @@ class AuctionView extends Component {
 
   renderSeparator = () => <SeparatorWithText text="Productos" />;
 
+  keyExtractor = ({ id }) => `${id}`;
+
   render() {
     const {
       auction: { deliveryDate, expirationDate, auctionProducts, id },
@@ -61,6 +63,7 @@ class AuctionView extends Component {
           <Collapsible collapsed={collapsed}>
             <FlatList
               data={auctionProducts}
+              keyExtractor={this.keyExtractor}
               renderItem={this.renderItem}
               ListHeaderComponent={this.renderSeparator}
               ListHeaderComponentStyle={{ marginBottom: 5 }}

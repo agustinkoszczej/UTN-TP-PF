@@ -32,11 +32,13 @@ class OrderView extends Component {
 
   renderSeparator = () => <SeparatorWithText text="Productos" />;
 
+  keyExtractor = ({ id }) => `${id}`;
+
   render() {
     const {
       order: {
         deliveryDate,
-        products = [],
+        orderProducts = [],
         id,
         amount,
         receiverName,
@@ -66,8 +68,9 @@ class OrderView extends Component {
         <View>
           <Collapsible collapsed={collapsed}>
             <FlatList
-              data={products}
+              data={orderProducts}
               renderItem={this.renderItem}
+              keyExtractor={this.keyExtractor}
               ListHeaderComponent={this.renderSeparator}
               ListHeaderComponentStyle={{ marginBottom: 5 }}
               ListFooterComponent={
@@ -91,9 +94,9 @@ OrderView.propTypes = {
   goToOrderDetail: PropTypes.func.isRequired,
   order: PropTypes.shape({
     deliveryDate: PropTypes.string,
-    products: PropTypes.arrayOf(PropTypes.shape({})),
+    orderProducts: PropTypes.arrayOf(PropTypes.shape({})),
     id: PropTypes.number,
-    amount: PropTypes.number,
+    amount: PropTypes.string,
     supplier: PropTypes.shape({
       picture: PropTypes.string
     }),

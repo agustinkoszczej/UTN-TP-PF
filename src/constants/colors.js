@@ -16,6 +16,7 @@ export const separator = '#EDEDED';
 
 export const wildSand = '#F5F5F5';
 export const white = '#FFF';
+export const spicyGray = '#7F7F7F';
 
 // Other colors
 export const transparent = 'transparent';

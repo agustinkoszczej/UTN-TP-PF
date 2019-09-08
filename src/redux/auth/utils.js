@@ -2,16 +2,7 @@ export const userSerializer = ({
   email,
   user_id: id,
   picture,
-  user_metadata: {
-    fullName,
-    companyName,
-    contactNumber,
-    streetAddress,
-    cuit,
-    qrUrl,
-    location,
-    rating: { score }
-  }
+  user_metadata: { fullName, companyName, contactNumber, streetAddress, cuit, qrUrl, location, rating }
 }) => {
   const locations = location.split(',');
   return {
@@ -26,6 +17,6 @@ export const userSerializer = ({
     companyName,
     cuit,
     picture,
-    rating: score
+    rating: rating?.score || {}
   };
 };

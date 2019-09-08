@@ -20,10 +20,11 @@ class HomeMenuContainer extends Component {
   render() {
     const { stats } = this.props;
     const orders = stats?.orders;
+    const auctions = stats?.auctions;
     return (
       <View style={styles.container}>
         <OrdersSection orders={orders} />
-        <AuctionsSection />
+        <AuctionsSection auctions={auctions} />
       </View>
     );
   }

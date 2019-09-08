@@ -34,9 +34,9 @@ class AuctionView extends Component {
 
   render() {
     const {
-      auction: { deliveryDate, expirationDate, auctionProducts },
+      auction: { deliveryDate, expirationDate, auctionProducts, id },
       goToAuctionDetail,
-      user: { picture, fullName, id }
+      user: { picture, fullName }
     } = this.props;
     const { collapsed } = this.state;
     return (
@@ -86,7 +86,8 @@ AuctionView.propTypes = {
   auction: PropTypes.shape({
     deliveryDate: PropTypes.string,
     expirationDate: PropTypes.string,
-    auctionProducts: PropTypes.arrayOf(PropTypes.shape({}))
+    auctionProducts: PropTypes.arrayOf(PropTypes.shape({})),
+    id: PropTypes.number
   }).isRequired,
   user: PropTypes.shape(userModel).isRequired
 };

@@ -2,14 +2,18 @@ import { completeTypes, createTypes } from 'redux-recompose';
 import AuctionsService from '@services/AuctionsService';
 
 export const actions = createTypes(
-  completeTypes(['GET_ACTIVE_AUCTIONS', 'GET_EXPIRED_AUCTIONS', 'GET_CLOSED_AUCTIONS'], []),
+  completeTypes(
+    ['GET_ACTIVE_AUCTIONS', 'GET_EXPIRED_AUCTIONS', 'GET_CLOSED_AUCTIONS', 'GET_AUCTION_BY_ID'],
+    []
+  ),
   '@@AUCTIONS'
 );
 
 const targets = {
   activeAuctions: 'activeAuctions',
   expiredAuctions: 'expiredAuctions',
-  closedAuctions: 'closedAuctions'
+  closedAuctions: 'closedAuctions',
+  currentAuction: 'currentAuction'
 };
 
 export const actionCreators = {
@@ -30,6 +34,12 @@ export const actionCreators = {
     target: targets.closedAuctions,
     service: AuctionsService.getClosedAuctions,
     payload: page || 1
+  }),
+  getAuctionById: id => ({
+    type: actions.GET_AUCTION_BY_ID,
+    target: targets.currentAuction,
+    service: AuctionsService.getAuctionById,
+    payload: id
   })
 };
 

@@ -20,6 +20,7 @@ const routes = {
   CreateOrder: 'CreateOrder',
   CreateAuction: 'CreateAuction',
   OrderDetail: 'OrderDetail',
+  AuctionDetail: 'AuctionDetail',
   Search: 'Search',
   ProductDetail: 'ProductDetail',
   SupplierProfile: 'SupplierProfile',

@@ -23,7 +23,7 @@ class AuctionsList extends Component {
       navigation: { navigate },
       getAuctionById
     } = this.props;
-    navigate(Routes.AuctionDetail, { id });
+    navigate(Routes.AuctionDetail);
     getAuctionById(id);
   };
 

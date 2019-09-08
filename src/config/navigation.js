@@ -275,6 +275,9 @@ export const screensNavOptions = {
   },
   [Routes.SupplierProfile]: {
     title: strings[Routes.SupplierProfile]
+  },
+  [Routes.AuctionDetail]: {
+    title: strings[Routes.AuctionDetail]
   }
 };
 

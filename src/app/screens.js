@@ -40,6 +40,7 @@ import ActiveAuctions from './screens/Home/screens/Auctions/screens/ActiveAuctio
 import ExpiredAuctions from './screens/Home/screens/Auctions/screens/ExpiredAuctions';
 import ClosedAuctions from './screens/Home/screens/Auctions/screens/ClosedAuctions';
 import CreateAuction from './screens/Home/screens/Auctions/screens/CreateAuction';
+import AuctionDetail from './screens/Home/screens/Auctions/screens/AuctionDetail';
 
 export default createStackNavigator(
   {
@@ -55,6 +56,7 @@ export default createStackNavigator(
     ...inferRoute({ OrderDetail }),
     ...inferRoute({ Search }),
     ...inferRoute({ ProductDetail }),
+    ...inferRoute({ AuctionDetail }),
     ...inferRoute({ SupplierProfile }),
     [Routes.Home]: {
       screen: createBottomTabNavigator(

@@ -9,7 +9,7 @@ import BaseForm from '@components/BaseForm';
 
 import { STEP_INDICATOR_LABELS, STEP_INDICATOR_STEPS, strings, CREATE_AUCTIONS_FIELDS } from './constants';
 import styles, { stepIndicatorStyles } from './styles';
-// import AuctionStep from './components/AuctionStep';
+import AuctionStep from './components/AuctionStep';
 
 class CreateAuction extends Component {
   componentDidUpdate(prevProps) {
@@ -32,7 +32,7 @@ class CreateAuction extends Component {
           />
           {
             {
-              // 0: <AuctionStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />
+              0: <AuctionStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />
               // 1: <ProductStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />,
               // 2: <DetailStep handleSubmit={handleSubmit} values={values} creation />
             }[currentStep]

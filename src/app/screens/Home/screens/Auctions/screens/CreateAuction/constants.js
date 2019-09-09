@@ -10,5 +10,6 @@ export const STEP_INDICATOR_STEPS = 3;
 export const CREATE_AUCTIONS_FIELDS = {
   PAYMENT_METHODS: 'paymentOptions',
   DELIVERY_DATE: 'deliveryDate',
-  PRODUCTS: 'products'
+  PRODUCTS: 'products',
+  SHARED: 'shared'
 };

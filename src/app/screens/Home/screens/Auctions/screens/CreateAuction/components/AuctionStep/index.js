@@ -26,6 +26,13 @@ class AuctionStepContainer extends Component {
 
   hideOrShowCalendar = show => () => this.setState({ show });
 
+  sharedSelector = method => method.text;
+
+  handleSharedChange = method => {
+    const { setFieldValue } = this.props;
+    setFieldValue(CREATE_AUCTIONS_FIELDS.SHARED, method.id);
+  };
+
   handleDateChange = (_, date) => {
     const { setFieldValue } = this.props;
     this.setState({ date: dateFormat(date) });
@@ -43,6 +50,8 @@ class AuctionStepContainer extends Component {
         handlePaymentSelect={this.handlePaymentSelect}
         date={date}
         show={show}
+        sharedSelector={this.sharedSelector}
+        handleSharedChange={this.handleSharedChange}
         values={values}
         handleDateChange={this.handleDateChange}
         hideOrShowCalendar={this.hideOrShowCalendar}

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import CustomButton from '@components/CustomButton';
 import CustomText from '@components/CustomText';
+import CustomDropdown from '@components/CustomDropdown';
 import Collapsible from '@components/Collapsible';
 import TextInput from '@components/CustomTextInput';
 
@@ -20,7 +21,9 @@ class AuctionStep extends Component {
       date,
       values,
       handleDateChange,
-      isSelected
+      isSelected,
+      handleSharedChange,
+      sharedSelector
     } = this.props;
     const commonProps = {
       underline: true,
@@ -30,7 +33,7 @@ class AuctionStep extends Component {
     };
     const isCashSelected = isSelected(1);
     const isMercadoPagoSelected = isSelected(2);
-
+    const shared = values[CREATE_AUCTIONS_FIELDS.SHARED] ? 'Si' : 'No';
     return (
       <TouchableWithoutFeedback onPress={hideOrShowCalendar(false)}>
         <View style={styles.container}>
@@ -66,6 +69,15 @@ class AuctionStep extends Component {
               />
             )}
           </Collapsible>
+          <CustomText>Compartida:</CustomText>
+          <CustomDropdown
+            closeOnOverlayPress
+            items={[{ id: true, text: 'Si' }, { id: false, text: 'No' }]}
+            itemNameSelector={sharedSelector}
+            selectedOption={shared}
+            onSelectItem={handleSharedChange}
+            style={styles.shared}
+          />
         </View>
       </TouchableWithoutFeedback>
     );
@@ -79,7 +91,9 @@ AuctionStep.propTypes = {
   isSelected: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
   date: PropTypes.string.isRequired,
-  values: PropTypes.shape({})
+  values: PropTypes.shape({}),
+  sharedSelector: PropTypes.func.isRequired,
+  handleSharedChange: PropTypes.func.isRequired
 };
 
 export default AuctionStep;

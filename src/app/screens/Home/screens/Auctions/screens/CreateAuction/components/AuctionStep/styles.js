@@ -16,6 +16,12 @@ const styles = StyleSheet.create({
   selected: {
     borderWidth: 2,
     borderColor: black
+  },
+  shared: {
+    paddingVertical: 15,
+    borderColor: black,
+    borderWidth: 0.2,
+    marginVertical: 10
   }
 });
 export default styles;

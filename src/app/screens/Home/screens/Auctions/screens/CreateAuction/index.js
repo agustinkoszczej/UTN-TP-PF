@@ -13,7 +13,8 @@ class CreateAuctionContainer extends Component {
   initialValues = {
     [CREATE_AUCTIONS_FIELDS.PAYMENT_METHODS]: [],
     [CREATE_AUCTIONS_FIELDS.DELIVERY_DATE]: new Date(),
-    [CREATE_AUCTIONS_FIELDS.PRODUCTS]: []
+    [CREATE_AUCTIONS_FIELDS.PRODUCTS]: [],
+    [CREATE_AUCTIONS_FIELDS.SHARED]: false
   };
 
   formValidationSchema = {

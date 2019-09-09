@@ -14,7 +14,8 @@ class CreateAuctionContainer extends Component {
     [CREATE_AUCTIONS_FIELDS.PAYMENT_METHODS]: [],
     [CREATE_AUCTIONS_FIELDS.DELIVERY_DATE]: new Date(),
     [CREATE_AUCTIONS_FIELDS.PRODUCTS]: [],
-    [CREATE_AUCTIONS_FIELDS.SHARED]: false
+    [CREATE_AUCTIONS_FIELDS.SHARED]: 0,
+    [CREATE_AUCTIONS_FIELDS.MERCHANT]: { fullName: this.props.user.fullName }
   };
 
   formValidationSchema = {
@@ -51,11 +52,14 @@ class CreateAuctionContainer extends Component {
 
 CreateAuctionContainer.propTypes = {
   createAuction: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
+  user: PropTypes.shape({
+    fullName: PropTypes.string
+  })
 };
 
 const mapStateToProps = state => ({
-  loading: state.orders.createOrderLoading
+  user: state.auth.currentUser
 });
 
 const mapDispatchToProps = dispatch => ({

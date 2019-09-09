@@ -11,7 +11,9 @@ class PaymentMethods extends Component {
   renderItem = ({ item: { description, id } }) => (
     <View style={{ marginTop: 10, flexDirection: 'row', alignItems: 'center' }}>
       <PaymentIcon id={id} />
-      <CustomText style={{ marginLeft: 20 }}>{description}</CustomText>
+      <CustomText style={{ marginLeft: 20 }}>
+        {description || id === 1 ? 'Efectivo' : 'Mercado Pagp'}
+      </CustomText>
     </View>
   );
 

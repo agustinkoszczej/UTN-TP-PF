@@ -30,7 +30,7 @@ class AuctionStepContainer extends Component {
 
   handleSharedChange = method => {
     const { setFieldValue } = this.props;
-    setFieldValue(CREATE_AUCTIONS_FIELDS.SHARED, method.id);
+    setFieldValue(CREATE_AUCTIONS_FIELDS.SHARED, !!method.id);
   };
 
   handleDateChange = (_, date) => {

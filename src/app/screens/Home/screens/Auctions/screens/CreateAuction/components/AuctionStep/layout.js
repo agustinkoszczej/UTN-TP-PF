@@ -72,7 +72,7 @@ class AuctionStep extends Component {
           <CustomText>Compartida:</CustomText>
           <CustomDropdown
             closeOnOverlayPress
-            items={[{ id: true, text: 'Si' }, { id: false, text: 'No' }]}
+            items={[{ id: 1, text: 'Si' }, { id: 0, text: 'No' }]}
             itemNameSelector={sharedSelector}
             selectedOption={shared}
             onSelectItem={handleSharedChange}

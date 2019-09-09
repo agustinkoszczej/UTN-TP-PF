@@ -11,5 +11,6 @@ export const CREATE_AUCTIONS_FIELDS = {
   PAYMENT_METHODS: 'paymentOptions',
   DELIVERY_DATE: 'deliveryDate',
   PRODUCTS: 'products',
-  SHARED: 'shared'
+  SHARED: 'shared',
+  MERCHANT: 'merchant'
 };

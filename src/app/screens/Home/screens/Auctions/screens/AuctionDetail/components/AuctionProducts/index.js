@@ -8,16 +8,11 @@ import SeparatorWithText from '@components/SeparatorWithText';
 import styles from './styles';
 
 class AuctionProducts extends Component {
-  renderItem = ({
-    item: {
-      quantity,
-      product: { description, imageUrl }
-    }
-  }) => (
+  renderItem = ({ item: { quantity, product, description, imageUrl } }) => (
     <View style={styles.productContainer}>
       <View style={styles.productInfo}>
-        <Image source={{ uri: imageUrl }} style={styles.productImage} />
-        <CustomText bold>{description}</CustomText>
+        <Image source={{ uri: product?.imageUrl || imageUrl }} style={styles.productImage} />
+        <CustomText bold>{product?.description || description}</CustomText>
       </View>
       <CustomText>{quantity}</CustomText>
     </View>

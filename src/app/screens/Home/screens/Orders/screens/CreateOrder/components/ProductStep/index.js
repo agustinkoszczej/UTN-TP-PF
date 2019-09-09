@@ -24,7 +24,7 @@ class ProductStep extends Component {
     const product = products.find(prod => prod.id === id);
     if (!product) {
       if (add) {
-        products = [{ id, quantity: 1, product: { imageUrl, description } }];
+        products = [...products, { id, quantity: 1, product: { imageUrl, description } }];
       }
     } else {
       const quantity = add ? product.quantity + 1 : product.quantity - 1;

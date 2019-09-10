@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { object } from 'yup';
+import { object, array } from 'yup';
 import { connect } from 'react-redux';
 import AuctionsActions from '@redux/auctions/actions';
 
@@ -15,12 +15,17 @@ class CreateAuctionContainer extends Component {
     [CREATE_AUCTIONS_FIELDS.DELIVERY_DATE]: new Date(),
     [CREATE_AUCTIONS_FIELDS.PRODUCTS]: [],
     [CREATE_AUCTIONS_FIELDS.SHARED]: 0,
-    [CREATE_AUCTIONS_FIELDS.MERCHANT]: { fullName: this.props.user.fullName }
+    [CREATE_AUCTIONS_FIELDS.MERCHANT]: { fullName: this.props.user.fullName },
+    [CREATE_AUCTIONS_FIELDS.EXPIRATION_DATE]: new Date(new Date().getTime() + 2 * 7 * 24 * 60 * 60 * 1000)
   };
 
   formValidationSchema = {
-    0: object().shape({}),
-    1: object().shape({}),
+    0: object().shape({
+      [CREATE_AUCTIONS_FIELDS.PAYMENT_METHODS]: array().required()
+    }),
+    1: object().shape({
+      [CREATE_AUCTIONS_FIELDS.PRODUCTS]: array().required()
+    }),
     2: object().shape({})
   };
 
@@ -59,7 +64,8 @@ CreateAuctionContainer.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.auth.currentUser
+  user: state.auth.currentUser,
+  loading: state.auctions.createAuctionLoading
 });
 
 const mapDispatchToProps = dispatch => ({

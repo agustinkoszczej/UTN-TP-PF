@@ -21,7 +21,7 @@ class CreateAuction extends Component {
 
   render() {
     const { currentStep, handleSubmit, values, setFieldValue, onBack, loading } = this.props;
-    const finalStep = currentStep === 3;
+    const finalStep = currentStep === 2;
     return (
       <BaseForm link onSubmit={handleSubmit}>
         <View style={styles.container}>
@@ -92,7 +92,7 @@ const enhancer = compose(
     mapPropsToValues: ({ initialValues }) => initialValues,
     validationSchema: ({ validationSchema, currentStep }) => validationSchema[currentStep],
     handleSubmit: (values, { props }) =>
-      props.currentStep === 3 ? props.onCreateAuction(values) : props.onNext()
+      props.currentStep === 2 ? props.onCreateAuction(values) : props.onNext()
   })
 );
 

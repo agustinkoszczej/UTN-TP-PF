@@ -12,5 +12,6 @@ export const CREATE_AUCTIONS_FIELDS = {
   DELIVERY_DATE: 'deliveryDate',
   PRODUCTS: 'products',
   SHARED: 'shared',
-  MERCHANT: 'merchant'
+  MERCHANT: 'merchant',
+  EXPIRATION_DATE: 'expirationDate'
 };

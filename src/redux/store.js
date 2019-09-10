@@ -49,7 +49,7 @@ enhancers.push(applyMiddleware(...middlewares));
 enhancers.push(reactotron.createEnhancer());
 
 // in dev mode, we'll create the store through Reactotron
-const createAppropriateStore = createStore;
-const store = createAppropriateStore(rootReducer, compose(...enhancers));
+
+const store = createStore(rootReducer, compose(...enhancers));
 
 export default store;

@@ -7,9 +7,12 @@ const getExpiredAuctions = page => api.get('/merchants/auctions', { page, status
 
 const getAuctionById = id => api.get(`/merchants/auctions/${id}`);
 
+const createAuction = auction => api.post('/merchants/auctions', auction);
+
 export default {
   getActiveAuctions,
   getClosedAuctions,
   getExpiredAuctions,
-  getAuctionById
+  getAuctionById,
+  createAuction
 };

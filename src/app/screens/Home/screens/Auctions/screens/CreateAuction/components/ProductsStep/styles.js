@@ -8,7 +8,8 @@ export default StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    marginBottom: 5
   },
   productImage: {
     width: 30,

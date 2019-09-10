@@ -1,9 +1,17 @@
-import { completeTypes, createTypes } from 'redux-recompose';
+import { completeTypes, createTypes, withPostSuccess } from 'redux-recompose';
 import AuctionsService from '@services/AuctionsService';
+import DialogActions from '@redux/dialog/actions';
+import { getHomeDialog, homeDialogNames } from '@screens/Home/dialogs';
 
 export const actions = createTypes(
   completeTypes(
-    ['GET_ACTIVE_AUCTIONS', 'GET_EXPIRED_AUCTIONS', 'GET_CLOSED_AUCTIONS', 'GET_AUCTION_BY_ID'],
+    [
+      'GET_ACTIVE_AUCTIONS',
+      'GET_EXPIRED_AUCTIONS',
+      'GET_CLOSED_AUCTIONS',
+      'GET_AUCTION_BY_ID',
+      'CREATE_AUCTION'
+    ],
     []
   ),
   '@@AUCTIONS'
@@ -13,7 +21,8 @@ const targets = {
   activeAuctions: 'activeAuctions',
   expiredAuctions: 'expiredAuctions',
   closedAuctions: 'closedAuctions',
-  currentAuction: 'currentAuction'
+  currentAuction: 'currentAuction',
+  createAuction: 'createAuction'
 };
 
 export const actionCreators = {
@@ -40,6 +49,17 @@ export const actionCreators = {
     target: targets.currentAuction,
     service: AuctionsService.getAuctionById,
     payload: id
+  }),
+  createAuction: values => ({
+    type: actions.CREATE_AUCTION,
+    target: targets.createAuction,
+    service: AuctionsService.createAuction,
+    payload: values,
+    injections: [
+      withPostSuccess(async dispatch => {
+        dispatch(DialogActions.showDialog(getHomeDialog(homeDialogNames.FINISH_CREATION_AUCTION)()));
+      })
+    ]
   })
 };
 

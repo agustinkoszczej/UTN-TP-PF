@@ -76,7 +76,7 @@ class ProductStep extends Component {
     );
   };
 
-  keyExtractor = ({ user_id: userId }) => `${userId}`;
+  keyExtractor = ({ id }) => `${id}`;
 
   render() {
     const { name } = this.state;

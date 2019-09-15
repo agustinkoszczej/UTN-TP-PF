@@ -8,7 +8,8 @@ const stateDescription = {
   expiredAuctions: null,
   closedAuctions: null,
   currentAuction: null,
-  createAuction: null
+  createAuction: null,
+  executeBid: null
 };
 
 const initialState = completeState(stateDescription);
@@ -19,7 +20,8 @@ const reducerDescription = {
     actions.GET_CLOSED_AUCTIONS,
     actions.GET_EXPIRED_AUCTIONS,
     actions.GET_AUCTION_BY_ID,
-    actions.CREATE_AUCTION
+    actions.CREATE_AUCTION,
+    actions.EXECUTE_BID
   ],
   override: {}
 };

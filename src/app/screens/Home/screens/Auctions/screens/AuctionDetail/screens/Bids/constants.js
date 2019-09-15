@@ -1,0 +1,4 @@
+export const BID_STATUS = {
+  ACCEPTED: 'ACCEPTED',
+  DECLINED: 'DECLINED'
+};

@@ -278,6 +278,9 @@ export const screensNavOptions = {
   },
   [Routes.AuctionDetail]: {
     title: strings[Routes.AuctionDetail]
+  },
+  [Routes.Bids]: {
+    title: strings[Routes.Bids]
   }
 };
 

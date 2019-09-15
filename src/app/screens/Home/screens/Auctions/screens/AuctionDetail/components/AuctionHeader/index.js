@@ -9,7 +9,7 @@ import SeparatorWithText from '@components/SeparatorWithText';
 
 import styles from './styles';
 
-function AuctionHeader({ merchant: { fullName }, deliveryDate, expirationDate, status }) {
+function AuctionHeader({ merchant: { fullName }, deliveryDate, expirationDate, status, shared }) {
   return (
     <>
       <Card style={styles.cardContainer}>
@@ -26,6 +26,10 @@ function AuctionHeader({ merchant: { fullName }, deliveryDate, expirationDate, s
           <CustomText style={styles.placeholder}>Fecha de expiración:</CustomText>
           <CustomText bold>{dateFormat(expirationDate)}</CustomText>
         </View>
+        <View style={styles.section}>
+          <CustomText style={styles.placeholder}>Compartida:</CustomText>
+          <CustomText bold>{shared ? 'Si' : 'No'}</CustomText>
+        </View>
         {status && <StatusTag status={status} />}
       </Card>
     </>
@@ -37,6 +41,7 @@ AuctionHeader.propTypes = {
     fullName: PropTypes.string
   }),
   status: PropTypes.string,
+  shared: PropTypes.bool,
   deliveryDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]).isRequired,
   expirationDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]).isRequired
 };

@@ -2,6 +2,7 @@ import { completeTypes, createTypes, withPostSuccess } from 'redux-recompose';
 import AuctionsService from '@services/AuctionsService';
 import DialogActions from '@redux/dialog/actions';
 import { getHomeDialog, homeDialogNames } from '@screens/Home/dialogs';
+import { StackActions } from 'react-navigation';
 
 export const actions = createTypes(
   completeTypes(
@@ -10,7 +11,8 @@ export const actions = createTypes(
       'GET_EXPIRED_AUCTIONS',
       'GET_CLOSED_AUCTIONS',
       'GET_AUCTION_BY_ID',
-      'CREATE_AUCTION'
+      'CREATE_AUCTION',
+      'EXECUTE_BID'
     ],
     []
   ),
@@ -22,7 +24,8 @@ const targets = {
   expiredAuctions: 'expiredAuctions',
   closedAuctions: 'closedAuctions',
   currentAuction: 'currentAuction',
-  createAuction: 'createAuction'
+  createAuction: 'createAuction',
+  executeBid: 'executeBid'
 };
 
 export const actionCreators = {
@@ -58,6 +61,20 @@ export const actionCreators = {
     injections: [
       withPostSuccess(async dispatch => {
         dispatch(DialogActions.showDialog(getHomeDialog(homeDialogNames.FINISH_CREATION_AUCTION)()));
+      })
+    ]
+  }),
+  executeBid: (id, status) => ({
+    type: actions.EXECUTE_BID,
+    target: targets.executeBid,
+    service: AuctionsService.executeBid,
+    payload: { id, status },
+    injections: [
+      withPostSuccess(async dispatch => {
+        dispatch(actionCreators.getActiveAuctions());
+        dispatch(actionCreators.getAuctionById(id));
+        dispatch(actionCreators.getClosedAuctions());
+        dispatch(StackActions.pop(2));
       })
     ]
   })

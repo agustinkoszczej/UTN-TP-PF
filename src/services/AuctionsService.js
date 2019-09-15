@@ -9,10 +9,13 @@ const getAuctionById = id => api.get(`/merchants/auctions/${id}`);
 
 const createAuction = auction => api.post('/merchants/auctions', auction);
 
+const executeBid = ({ id, status }) => api.patch(`/merchants/bids/${id}`, { status });
+
 export default {
   getActiveAuctions,
   getClosedAuctions,
   getExpiredAuctions,
   getAuctionById,
-  createAuction
+  createAuction,
+  executeBid
 };

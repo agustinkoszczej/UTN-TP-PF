@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, RefreshControl } from 'react-native';
 import PropTypes from 'prop-types';
 import Loadable from '@components/Loadable';
 import { PAYMENT_METHODS } from '@constants/paymentMethods';
@@ -9,10 +9,13 @@ import OrderHeader from './components/OrderHeader';
 import OrderProducts from './components/OrderProducts';
 import PaymentMethod from './components/PaymentMethod';
 
-function OrderDetail({ order, creation, showRateModal }) {
+function OrderDetail({ order, creation, showRateModal, loading, refreshOrder }) {
   const { products } = order;
   return (
-    <ScrollView style={!creation && styles.container}>
+    <ScrollView
+      style={!creation && styles.container}
+      refreshControl={<RefreshControl refreshing={loading} onRefresh={refreshOrder} />}
+    >
       <OrderHeader {...order} creation={creation} showRateModal={showRateModal} />
       <PaymentMethod
         method={
@@ -44,7 +47,9 @@ OrderDetail.propTypes = {
     })
   }).isRequired,
   creation: PropTypes.bool,
-  showRateModal: PropTypes.func
+  loading: PropTypes.bool,
+  showRateModal: PropTypes.func,
+  refreshOrder: PropTypes.func
 };
 
-export default Loadable(props => props.loading)(OrderDetail);
+export default Loadable(props => props.loading && !props.refreshing)(OrderDetail);

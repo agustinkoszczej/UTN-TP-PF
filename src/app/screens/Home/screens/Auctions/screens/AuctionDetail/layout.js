@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, RefreshControl } from 'react-native';
 import PropTypes from 'prop-types';
 import { compose, withProps } from 'recompose';
 import { withNavigation } from 'react-navigation';
@@ -23,9 +23,12 @@ class AuctionDetail extends Component {
   };
 
   render() {
-    const { auction, creation, bids } = this.props;
+    const { auction, creation, bids, loading, refreshAuction } = this.props;
     return (
-      <ScrollView style={!creation && styles.container}>
+      <ScrollView
+        style={!creation && styles.container}
+        refreshControl={<RefreshControl refreshing={loading} onRefresh={refreshAuction} />}
+      >
         <AuctionHeader {...auction} />
         {auction.status === AUCTION_STATUS.ACTIVE && (
           <Card style={styles.bidsButton}>
@@ -54,12 +57,14 @@ AuctionDetail.propTypes = {
   }).isRequired,
   creation: PropTypes.bool,
   navigation: PropTypes.shape(navigationModel).isRequired,
-  bids: PropTypes.arrayOf(PropTypes.shape({}))
+  bids: PropTypes.arrayOf(PropTypes.shape({})),
+  loading: PropTypes.bool.isRequired,
+  refreshAuction: PropTypes.func.isRequired
 };
 
 const enhancer = compose(
   withNavigation,
-  Loadable(props => props.loading),
+  Loadable(props => props.loading && !props.refreshing),
   withProps(props => {
     return { bids: props.auction.bids.filter(b => b.status === AUCTION_STATUS.ACTIVE) };
   })

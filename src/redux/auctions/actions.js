@@ -64,7 +64,7 @@ export const actionCreators = {
       })
     ]
   }),
-  executeBid: (id, status) => ({
+  executeBid: (id, status, auctionId) => ({
     type: actions.EXECUTE_BID,
     target: targets.executeBid,
     service: AuctionsService.executeBid,
@@ -72,7 +72,7 @@ export const actionCreators = {
     injections: [
       withPostSuccess(async dispatch => {
         dispatch(actionCreators.getActiveAuctions());
-        dispatch(actionCreators.getAuctionById(id));
+        dispatch(actionCreators.getAuctionById(auctionId));
         dispatch(actionCreators.getClosedAuctions());
         dispatch(StackActions.pop(2));
       })

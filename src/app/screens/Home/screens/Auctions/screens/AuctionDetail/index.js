@@ -55,7 +55,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getAuctionById: id => dispatch(AuctionsActions.getAuctionById(id))
+  getAuctionById: id => dispatch(AuctionsActions.getAuctionById(id)),
+  getBidById: id => dispatch(AuctionsActions.getBidById(id))
 });
 
 const enhance = compose(

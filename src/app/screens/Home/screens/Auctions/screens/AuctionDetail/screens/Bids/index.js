@@ -63,8 +63,8 @@ class Bids extends Component {
   };
 
   handleBidAction = (id, status) => () => {
-    const { executeBid } = this.props;
-    executeBid(id, status);
+    const { executeBid, navigation } = this.props;
+    executeBid(id, status, navigation.getParam('auctionId'));
   };
 
   keyExtractor = ({ id }) => `${id}`;

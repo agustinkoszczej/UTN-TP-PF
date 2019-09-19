@@ -19,8 +19,12 @@ import PaymentMethods from './components/PaymentMethods';
 
 class AuctionDetail extends Component {
   navigateToBids = () => {
-    const { navigation, bids } = this.props;
-    navigation.navigate({ routeName: Routes.Bids, params: { bids } });
+    const {
+      navigation,
+      bids,
+      auction: { id }
+    } = this.props;
+    navigation.navigate({ routeName: Routes.Bids, params: { bids, auctionId: id } });
   };
 
   render() {
@@ -54,7 +58,8 @@ AuctionDetail.propTypes = {
     products: PropTypes.arrayOf(PropTypes.shape({})),
     paymentOptions: PropTypes.arrayOf(PropTypes.shape({})),
     status: PropTypes.string,
-    bids: PropTypes.arrayOf(PropTypes.shape({}))
+    bids: PropTypes.arrayOf(PropTypes.shape({})),
+    id: PropTypes.number.isRequired
   }).isRequired,
   creation: PropTypes.bool,
   navigation: PropTypes.shape(navigationModel).isRequired,

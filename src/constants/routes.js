@@ -25,7 +25,8 @@ const routes = {
   ProductDetail: 'ProductDetail',
   SupplierProfile: 'SupplierProfile',
   ClosedAuctions: 'ClosedAuctions',
-  Bids: 'Bids'
+  Bids: 'Bids',
+  AgendaRequest: 'AgendaRequest'
 };
 
 export default routes;

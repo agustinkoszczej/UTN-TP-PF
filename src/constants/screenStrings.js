@@ -20,5 +20,6 @@ export const strings = {
   [Routes.ClosedAuctions]: 'Cerradas',
   [Routes.ExpiredAuctions]: 'Expiradas',
   [Routes.AuctionDetail]: 'Subasta',
-  [Routes.Bids]: 'Ofertas'
+  [Routes.Bids]: 'Ofertas',
+  [Routes.AgendaRequest]: 'Solicitudes de contacto'
 };

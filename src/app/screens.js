@@ -33,6 +33,7 @@ import SupplierProfile from './screens/Home/screens/Profile/screens/SupplierProf
 import HomeMenu from './screens/Home/screens/HomeMenu';
 import Search from './screens/Home/screens/HomeMenu/screens/Search';
 import ProductDetail from './screens/Home/screens/HomeMenu/screens/ProductDetail';
+import AgendaRequest from './screens/Home/screens/HomeMenu/screens/AgendaRequest';
 // Chats
 import Chats from './screens/Home/screens/Chats';
 // Auctions
@@ -60,6 +61,7 @@ export default createStackNavigator(
     ...inferRoute({ AuctionDetail }),
     ...inferRoute({ SupplierProfile }),
     ...inferRoute({ Bids }),
+    ...inferRoute({ AgendaRequest }),
     [Routes.Home]: {
       screen: createBottomTabNavigator(
         {

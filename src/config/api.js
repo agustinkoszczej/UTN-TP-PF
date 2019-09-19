@@ -4,8 +4,7 @@ import { create } from 'apisauce';
 const baseURL = 'https://sellyapi-env.9ust4eptpw.us-east-1.elasticbeanstalk.com/';
 
 const api = create({
-  baseURL,
-  timeout: 10000
+  baseURL
 });
 
 export const headers = {

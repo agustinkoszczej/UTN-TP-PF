@@ -3,18 +3,24 @@ import { FlatList, View, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import Card from '@components/Card';
 import CustomText from '@components/CustomText';
+import tickAsset from '@assets/tick.png';
 import SeparatorWithText from '@components/SeparatorWithText';
 
 import styles from './styles';
 
 class AuctionProducts extends Component {
-  renderItem = ({ item: { quantity, product, description, imageUrl } }) => (
+  renderItem = ({ item: { quantity, product, description, imageUrl, status } }) => (
     <View style={styles.productContainer}>
       <View style={styles.productInfo}>
         <Image source={{ uri: product?.imageUrl || imageUrl }} style={styles.productImage} />
-        <CustomText bold>{product?.description || description}</CustomText>
+        <CustomText bold style={{ marginRight: 20 }}>
+          {product?.description || description}
+        </CustomText>
       </View>
-      <CustomText>{quantity}</CustomText>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        {status === 'CONFIRMED' && <Image source={tickAsset} style={styles.productImage} />}
+        <CustomText>{quantity}</CustomText>
+      </View>
     </View>
   );
 

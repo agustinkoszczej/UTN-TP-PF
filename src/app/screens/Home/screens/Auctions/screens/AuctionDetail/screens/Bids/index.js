@@ -21,26 +21,42 @@ class Bids extends Component {
       id,
       deliveryDate,
       shipmentCost,
-      supplier: { fullName, picture }
+      supplier: { fullName, picture },
+      bidProducts
     }
   }) => {
     const { loading } = this.props;
+
+    const total = bidProducts.reduce(
+      (accum, product) => parseFloat(product.bidProduct.amount, 10) + accum,
+      0
+    );
     return (
       <Card style={styles.bidContainer}>
         <SeparatorWithText text="Detalle de oferta" />
-        <View style={styles.row}>
+        <View style={[styles.row, { marginTop: 10 }]}>
           <Image style={styles.image} source={{ uri: picture }} />
           <CustomText>{fullName}</CustomText>
         </View>
-        <View style={styles.row}>
+        <View style={[styles.row, styles.spaceBetween]}>
           <CustomText style={styles.placeholder}>Fecha de entrega:</CustomText>
           <CustomText>{dateFormat(deliveryDate)}</CustomText>
         </View>
-        <View style={styles.row}>
+        <View style={[styles.row, styles.spaceBetween]}>
+          <CustomText style={styles.placeholder}>Total:</CustomText>
+          <CustomText>{formatMoney(total)}</CustomText>
+        </View>
+        <View style={[styles.row, styles.spaceBetween]}>
           <CustomText style={styles.placeholder}>Costo de envío:</CustomText>
           <CustomText>{formatMoney(shipmentCost)}</CustomText>
         </View>
-        <View style={[styles.row, styles.spaceAround]}>
+        <FlatList
+          data={bidProducts}
+          keyExtractor={this.keyExtractor}
+          ListHeaderComponent={<SeparatorWithText text="Productos ofertados" />}
+          renderItem={this.renderBidProduct}
+        />
+        <View style={[styles.row, styles.spaceBetween]}>
           <CustomButton
             primaryBtn
             loading={loading}
@@ -62,6 +78,18 @@ class Bids extends Component {
     );
   };
 
+  renderBidProduct = ({
+    item: {
+      product: { description },
+      bidProduct: { amount }
+    }
+  }) => (
+    <View style={[styles.row, styles.spaceBetween, { marginVertical: 10 }]}>
+      <CustomText>{description}</CustomText>
+      <CustomText>{formatMoney(amount)}</CustomText>
+    </View>
+  );
+
   handleBidAction = (id, status) => () => {
     const { executeBid, navigation } = this.props;
     executeBid(id, status, navigation.getParam('auctionId'));
@@ -78,6 +106,7 @@ class Bids extends Component {
         style={styles.container}
         keyExtractor={this.keyExtractor}
         renderItem={this.renderItem}
+        extraData={this.props}
       />
     );
   }

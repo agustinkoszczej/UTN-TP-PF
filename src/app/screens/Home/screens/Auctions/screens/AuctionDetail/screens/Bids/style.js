@@ -4,14 +4,14 @@ import { white, alto } from '@constants/colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 20,
+    paddingTop: 20,
+    paddingBottom: 40,
     backgroundColor: alto
   },
   bidContainer: {
     marginHorizontal: 20,
     marginBottom: 20,
-    height: 250,
-    padding: 20,
+    padding: 30,
     justifyContent: 'space-around'
   },
   button: {
@@ -21,10 +21,12 @@ const styles = StyleSheet.create({
     color: white
   },
   row: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10
   },
-  spaceAround: {
-    justifyContent: 'space-around'
+  spaceBetween: {
+    justifyContent: 'space-between'
   },
   image: {
     width: 50,

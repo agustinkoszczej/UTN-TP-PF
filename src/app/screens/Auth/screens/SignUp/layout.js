@@ -31,7 +31,7 @@ class SignUp extends Component {
     const { currentStep, onGoToLogin, handleSubmit, values, setFieldValue, onBack } = this.props;
     const finalStep = currentStep === 3;
     return (
-      <BaseForm link onSubmit={handleSubmit}>
+      <BaseForm link scrolleable onSubmit={handleSubmit}>
         <KeyboardAwareView
           behavior="padding"
           style={styles.container}

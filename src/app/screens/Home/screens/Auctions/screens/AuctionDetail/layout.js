@@ -10,6 +10,7 @@ import CustomText from '@components/CustomText';
 import { navigationModel } from '@propTypes/navigationModel';
 import Routes from '@constants/routes';
 import { AUCTION_STATUS } from '@constants/auctionStatus';
+import { BID_STATUS } from '@constants/bidsStatus';
 
 import styles from './styles';
 import AuctionHeader from './components/AuctionHeader';
@@ -27,7 +28,7 @@ class AuctionDetail extends Component {
     return (
       <ScrollView
         style={!creation && styles.container}
-        refreshControl={<RefreshControl refreshing={loading} onRefresh={refreshAuction} />}
+        refreshControl={!creation && <RefreshControl refreshing={loading} onRefresh={refreshAuction} />}
       >
         <AuctionHeader {...auction} />
         {auction.status === AUCTION_STATUS.ACTIVE && (
@@ -58,15 +59,15 @@ AuctionDetail.propTypes = {
   creation: PropTypes.bool,
   navigation: PropTypes.shape(navigationModel).isRequired,
   bids: PropTypes.arrayOf(PropTypes.shape({})),
-  loading: PropTypes.bool.isRequired,
-  refreshAuction: PropTypes.func.isRequired
+  loading: PropTypes.bool,
+  refreshAuction: PropTypes.func
 };
 
 const enhancer = compose(
   withNavigation,
   Loadable(props => props.loading && !props.refreshing),
   withProps(props => {
-    return { bids: props.auction.bids.filter(b => b.status === AUCTION_STATUS.ACTIVE) };
+    return { bids: props.auction.bids?.filter(b => b.status === BID_STATUS.ACTIVE) };
   })
 );
 

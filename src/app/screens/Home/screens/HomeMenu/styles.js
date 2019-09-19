@@ -5,7 +5,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: alto,
     flex: 1,
-    padding: 20
+    paddingHorizontal: 20,
+    paddingVertical: 30
   }
 });
 export default styles;

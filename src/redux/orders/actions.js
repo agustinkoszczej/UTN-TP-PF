@@ -75,6 +75,7 @@ export const actionCreators = {
     injections: [
       withPostSuccess(async dispatch => {
         dispatch(DialogActions.closeDialog());
+        dispatch(actionCreators.getOrderById(id));
       })
     ]
   })

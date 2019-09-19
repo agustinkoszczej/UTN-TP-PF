@@ -63,6 +63,7 @@ class AuctionStep extends Component {
               <DateTimePicker
                 value={values[CREATE_AUCTIONS_FIELDS.DELIVERY_DATE]}
                 minimumDate={new Date()}
+                maximumDate={new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000)}
                 mode="date"
                 display="default"
                 onChange={handleDateChange}

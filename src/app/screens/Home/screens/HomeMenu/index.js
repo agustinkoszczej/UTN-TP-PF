@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 import AuthActions from '@redux/auth/actions';
 import Loadable from '@components/Loadable';
 import { ORDER_STATUS } from '@constants/orderStatus';
@@ -10,6 +10,7 @@ import { ORDER_STATUS } from '@constants/orderStatus';
 import OrdersSection from './components/OrdersSection';
 import AuctionsSection from './components/AuctionsSection';
 import styles from './styles';
+import BidsSection from './components/BidsSection';
 
 class HomeMenuContainer extends Component {
   componentDidMount() {
@@ -21,11 +22,13 @@ class HomeMenuContainer extends Component {
     const { stats } = this.props;
     const orders = stats?.orders;
     const auctions = stats?.auctions;
+    const bids = stats?.bid;
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <OrdersSection orders={orders} />
         <AuctionsSection auctions={auctions} />
-      </View>
+        <BidsSection bids={bids} />
+      </ScrollView>
     );
   }
 }

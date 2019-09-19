@@ -1,34 +1,34 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { PieChart } from 'react-native-chart-kit';
 import Card from '@components/Card';
 import CustomText from '@components/CustomText';
-import { AUCTION_STATUS } from '@constants/auctionStatus';
-import { spicyGray } from '@constants/colors';
+import { BID_STATUS } from '@constants/bidsStatus';
+import { spicyGray, thunderbird } from '@constants/colors';
 
 import styles from './styles';
 
-function AuctionsSection({ auctions }) {
+function BidsSection({ bids }) {
   const data = [
     {
-      name: 'Cerradas',
-      population: parseInt(auctions?.[AUCTION_STATUS.CLOSED], 10) || 0,
-      color: '#EF8301', // Naranja
-      legendFontColor: spicyGray,
-      legendFontSize: 13
-    },
-    {
-      name: 'Expiradas',
-      population: parseInt(auctions?.[AUCTION_STATUS.EXPIRED], 10) || 0,
-      color: '#053480', // Azul
+      name: 'Aceptadas',
+      population: parseInt(bids?.[BID_STATUS.ACCEPTED], 10) || 0,
+      color: thunderbird, // Rojo
       legendFontColor: spicyGray,
       legendFontSize: 13
     },
     {
       name: 'Activas',
-      population: parseInt(auctions?.[AUCTION_STATUS.ACTIVE], 10) || 0,
-      color: '#009ED0', // Celeste
+      population: parseInt(bids?.[BID_STATUS.ACTIVE], 10) || 0,
+      color: '#053480', // Azul
+      legendFontColor: spicyGray,
+      legendFontSize: 13
+    },
+    {
+      name: 'Declinadas',
+      population: parseInt(bids?.[BID_STATUS.DEECLINED], 10) || 0,
+      color: '#80AF51', // Verde
       legendFontColor: spicyGray,
       legendFontSize: 13
     }
@@ -40,10 +40,10 @@ function AuctionsSection({ auctions }) {
     strokeWidth: 2 // optional, default 3
   };
   return (
-    <>
+    <View style={{ marginBottom: 30 }}>
       <Card style={styles.title}>
         <CustomText center middle>
-          Subastas
+          Ofertas de subastas
         </CustomText>
       </Card>
       <>
@@ -58,16 +58,16 @@ function AuctionsSection({ auctions }) {
           absolute
         />
       </>
-    </>
+    </View>
   );
 }
 
-AuctionsSection.propTypes = {
-  auctions: PropTypes.shape({
-    [AUCTION_STATUS.EXPIRED]: PropTypes.string,
-    [AUCTION_STATUS.ACTIVE]: PropTypes.string,
-    [AUCTION_STATUS.CLOSED]: PropTypes.string
+BidsSection.propTypes = {
+  bids: PropTypes.shape({
+    [BID_STATUS.ACTIVE]: PropTypes.string,
+    [BID_STATUS.DEECLINED]: PropTypes.string,
+    [BID_STATUS.ACCEPTED]: PropTypes.string
   })
 };
 
-export default AuctionsSection;
+export default BidsSection;

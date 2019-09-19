@@ -13,42 +13,42 @@ function OrdersSection({ orders }) {
   const data = [
     {
       name: 'Cancelados',
-      population: orders?.[ORDER_STATUS.CANCELLED] || 0,
+      population: parseInt(orders?.[ORDER_STATUS.CANCELLED], 10) || 0,
       color: '#EF8301', // Naranja
       legendFontColor: spicyGray,
       legendFontSize: 13
     },
     {
       name: 'Rechazados',
-      population: orders?.[ORDER_STATUS.REJECTED] || 0,
+      population: parseInt(orders?.[ORDER_STATUS.REJECTED], 10) || 0,
       color: thunderbird, // Rojo
       legendFontColor: spicyGray,
       legendFontSize: 13
     },
     {
       name: 'Entregados',
-      population: orders?.[ORDER_STATUS.DELIVERED] || 0,
+      population: parseInt(orders?.[ORDER_STATUS.DELIVERED], 10) || 0,
       color: '#053480', // Azul
       legendFontColor: spicyGray,
       legendFontSize: 13
     },
     {
       name: 'En camino',
-      population: orders?.[ORDER_STATUS.ON_WAY] || 0,
+      population: parseInt(orders?.[ORDER_STATUS.ON_WAY], 10) || 0,
       color: '#009ED0', // Celeste
       legendFontColor: spicyGray,
       legendFontSize: 13
     },
     {
       name: 'Confirmados',
-      population: orders?.[ORDER_STATUS.CONFIRMED] || 0,
+      population: parseInt(orders?.[ORDER_STATUS.CONFIRMED], 10) || 0,
       color: '#80AF51', // Verde
       legendFontColor: spicyGray,
       legendFontSize: 13
     },
     {
       name: 'Pendientes',
-      population: orders?.[ORDER_STATUS.PENDING] || 0,
+      population: parseInt(orders?.[ORDER_STATUS.PENDING], 10) || 0,
       color: '#EBEB42', // Amarillo
       legendFontColor: spicyGray,
       legendFontSize: 13

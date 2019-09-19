@@ -14,7 +14,7 @@ class CreateAuctionContainer extends Component {
     [CREATE_AUCTIONS_FIELDS.PAYMENT_METHODS]: [],
     [CREATE_AUCTIONS_FIELDS.DELIVERY_DATE]: new Date(),
     [CREATE_AUCTIONS_FIELDS.PRODUCTS]: [],
-    [CREATE_AUCTIONS_FIELDS.SHARED]: 0,
+    [CREATE_AUCTIONS_FIELDS.SHARED]: false,
     [CREATE_AUCTIONS_FIELDS.MERCHANT]: { fullName: this.props.user.fullName },
     [CREATE_AUCTIONS_FIELDS.EXPIRATION_DATE]: new Date(new Date().getTime() + 2 * 7 * 24 * 60 * 60 * 1000)
   };

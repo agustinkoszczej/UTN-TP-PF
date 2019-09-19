@@ -11,8 +11,8 @@ import SeparatorWithText from '@components/SeparatorWithText';
 import { navigationModel } from '@propTypes/navigationModel';
 import { dateFormat } from '@utils/timeUtils';
 import { formatMoney } from '@utils/numberUtils';
+import { BID_STATUS } from '@constants/bidsStatus';
 
-import { BID_STATUS } from './constants';
 import styles from './style';
 
 class Bids extends Component {

@@ -26,11 +26,12 @@ class AuctionDetailContainer extends Component {
   };
 
   render() {
-    const { auction, loading } = this.props;
+    const { auction, loading, creation } = this.props;
     const { refreshing } = this.state;
     return (
       <AuctionDetail
         auction={auction}
+        creation={creation}
         loading={loading}
         refreshAuction={this.refreshAuction}
         refreshing={refreshing}
@@ -41,6 +42,7 @@ class AuctionDetailContainer extends Component {
 
 AuctionDetailContainer.propTypes = {
   loading: PropTypes.bool.isRequired,
+  creation: PropTypes.bool,
   auction: PropTypes.shape({
     id: PropTypes.number.isRequired
   }),

@@ -36,7 +36,7 @@ class CreateAuction extends Component {
             {
               0: <AuctionStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />,
               1: <ProductsStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />,
-              2: <DetailStep handleSubmit={handleSubmit} values={values} creation />
+              2: <DetailStep handleSubmit={handleSubmit} values={values} />
             }[currentStep]
           }
           <View style={styles.buttons}>

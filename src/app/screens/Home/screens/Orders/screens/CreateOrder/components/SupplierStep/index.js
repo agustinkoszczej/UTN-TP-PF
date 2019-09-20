@@ -101,7 +101,7 @@ SupplierStep.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  agenda: state.auth.agenda,
+  agenda: state.auth.agenda?.users || [],
   loading: state.auth.agendaLoading
 });
 

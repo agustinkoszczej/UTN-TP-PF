@@ -8,7 +8,7 @@ const stateDescription = {
   recoverPassword: null,
   signUpUser: null,
   updateUser: null,
-  agenda: [],
+  agenda: null,
   suppliers: [],
   stats: null
 };

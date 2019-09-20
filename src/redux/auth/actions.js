@@ -45,7 +45,6 @@ export const actionCreators = {
     const token = await AuthService.getToken();
     if (token) {
       await AuthService.setTokens(token);
-      redirectToEspecificTab(dispatch, Routes.HomeMenu);
       dispatch(actionCreators.getUserInfo());
     } else {
       dispatch(
@@ -66,7 +65,6 @@ export const actionCreators = {
       withPostSuccess(async (dispatch, response) => {
         await AuthService.setTokens(response.data.access_token);
         dispatch(actionCreators.getUserInfo());
-        redirectToEspecificTab(dispatch, Routes.HomeMenu);
       })
     ]
   }),
@@ -122,6 +120,10 @@ export const actionCreators = {
     successSelector: response => userSerializer(response.data),
     failureSelector: response => response.data,
     injections: [
+      withPostSuccess(dispatch => {
+        dispatch(actionCreators.getAgenda());
+        redirectToEspecificTab(dispatch, Routes.HomeMenu);
+      }),
       withPostFailure(async dispatch => {
         await AuthService.logOut();
         dispatch(
@@ -156,8 +158,7 @@ export const actionCreators = {
     type: actions.GET_AGENDA,
     target: targets.agenda,
     payload: name,
-    service: AuthService.getAgenda,
-    successSelector: response => response.data.users
+    service: AuthService.getAgenda
   }),
   getSuppliers: name => ({
     type: actions.GET_SUPPLIERS,

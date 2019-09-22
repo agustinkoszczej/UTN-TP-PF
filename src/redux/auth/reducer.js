@@ -10,7 +10,9 @@ const stateDescription = {
   updateUser: null,
   agenda: null,
   suppliers: [],
-  stats: null
+  stats: null,
+  acceptContact: null,
+  declineContact: null
 };
 
 const initialState = completeState(stateDescription, ['initialLoading']);

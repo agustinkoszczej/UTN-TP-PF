@@ -32,6 +32,9 @@ const getSuppliers = name => api.get('/merchants/suppliers', { name });
 
 const getStats = () => api.get('/merchants/stats');
 
+const acceptRequest = id => api.patch(`/merchants/agenda/${id}`, { action: 'ADD' });
+const declineRequest = id => api.patch(`/merchants/agenda/${id}`, { action: 'REMOVE' });
+
 export default {
   login,
   recoverPassword,
@@ -44,5 +47,7 @@ export default {
   removeTokens,
   getAgenda,
   getSuppliers,
-  getStats
+  getStats,
+  acceptRequest,
+  declineRequest
 };

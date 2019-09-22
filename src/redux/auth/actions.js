@@ -36,7 +36,9 @@ export const targets = {
   updateUser: 'updateUser',
   agenda: 'agenda',
   suppliers: 'suppliers',
-  stats: 'stats'
+  stats: 'stats',
+  acceptContact: 'acceptContact',
+  declineContact: 'declineContact'
 };
 
 export const actionCreators = {
@@ -175,6 +177,29 @@ export const actionCreators = {
     type: actions.GET_STATS,
     target: targets.stats,
     service: AuthService.getStats
+  }),
+  acceptRequest: id => ({
+    type: actions.GET_SUPPLIERS,
+    target: targets.acceptContact,
+    payload: id,
+    service: AuthService.acceptRequest,
+    injections: [
+      withPostSuccess(dispatch => {
+        dispatch(actionCreators.getAgenda());
+        dispatch(NavigationActions.navigate({ routeName: Routes.SupplierProfile }));
+      })
+    ]
+  }),
+  declineRequest: id => ({
+    type: actions.GET_SUPPLIERS,
+    target: targets.declineContact,
+    payload: id,
+    service: AuthService.declineRequest,
+    injections: [
+      withPostSuccess(dispatch => {
+        dispatch(actionCreators.getAgenda());
+      })
+    ]
   })
 };
 

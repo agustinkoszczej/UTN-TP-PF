@@ -1,8 +1,51 @@
 import React from 'react';
-import { View } from 'react-native';
+import PropTypes from 'prop-types';
+import { compose, withProps } from 'recompose';
+import { userModel } from '@propTypes/userModel';
 
-function SupplierProfile() {
-  return <View />;
+import Profile from '../..';
+
+function SupplierProfile({ supplier }) {
+  return <Profile supplier={supplier} />;
 }
 
-export default SupplierProfile;
+SupplierProfile.propTypes = {
+  supplier: PropTypes.shape(userModel)
+};
+
+const enhancer = compose(
+  withProps(ownProps => {
+    const {
+      email,
+      companyName,
+      contactNumber,
+      streetAddress,
+      qrUrl,
+      fullName,
+      user_id: id,
+      picture,
+      cuit,
+      location,
+      rating: { score }
+    } = ownProps.navigation.getParam('supplier');
+    const locations = location.split(',');
+    return {
+      supplier: {
+        email,
+        companyName,
+        fullName,
+        contactNumber,
+        streetAddress,
+        qrUrl,
+        id,
+        cuit,
+        picture,
+        latitude: locations[0],
+        longitude: locations[1],
+        rating: score
+      }
+    };
+  })
+);
+
+export default enhancer(SupplierProfile);

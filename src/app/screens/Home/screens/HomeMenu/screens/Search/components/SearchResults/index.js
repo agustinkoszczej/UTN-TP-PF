@@ -18,7 +18,8 @@ import { STATES_SELECTED } from '../../constants';
 import styles from './styles';
 
 class SearchResults extends Component {
-  renderItem = ({ item: { description, id, image_url: imageUrl, picture, fullName, companyName } }) => {
+  renderItem = ({ item }) => {
+    const { description, image_url: imageUrl, picture, fullName, companyName } = item;
     const image = imageUrl || picture;
     const text = description || `${fullName} (${companyName})`;
     return (
@@ -30,7 +31,7 @@ class SearchResults extends Component {
         <CustomButton
           title="Ver"
           primaryBtn
-          onPress={this.handleItemPress(id)}
+          onPress={this.handleItemPress(item)}
           style={styles.button}
           textStyle={styles.white}
         />
@@ -38,17 +39,16 @@ class SearchResults extends Component {
     );
   };
 
-  handleItemPress = id => () => {
+  handleItemPress = item => () => {
     const { navigation, getProductById, selected } = this.props;
     let route;
     if (selected === STATES_SELECTED.PRODUCT) {
       route = Routes.ProductDetail;
-      getProductById(id);
+      getProductById(item.id);
     } else {
       route = Routes.SupplierProfile;
     }
-
-    navigation.navigate(route, { id });
+    navigation.navigate(route, { supplier: item });
   };
 
   keyExtractor = ({ id, user_id: userId }) => `${id || userId}`;

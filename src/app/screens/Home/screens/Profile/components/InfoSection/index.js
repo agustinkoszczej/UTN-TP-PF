@@ -57,8 +57,8 @@ InfoSection.propTypes = {
   currentUser: PropTypes.shape(userModel).isRequired
 };
 
-const mapStateToProps = state => ({
-  currentUser: state.auth.currentUser
+const mapStateToProps = (state, ownProps) => ({
+  currentUser: ownProps?.supplier || state.auth.currentUser
 });
 
 export default connect(mapStateToProps)(InfoSection);

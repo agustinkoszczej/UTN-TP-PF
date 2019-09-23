@@ -11,25 +11,28 @@ import Routes from '@constants/routes';
 import styles from './styles';
 
 class ProductDetailSuppliers extends Component {
-  renderItem = ({ item: { fullName, id, picture } }) => (
-    <Card style={styles.supplierContainer}>
-      <View style={styles.infoSupplier}>
-        <Image source={{ uri: picture }} style={styles.image} />
-        <CustomText>{fullName}</CustomText>
-      </View>
-      <CustomButton
-        primaryBtn
-        textStyle={styles.white}
-        style={styles.button}
-        title="Ver"
-        onPress={this.handleGoToProfile(id)}
-      />
-    </Card>
-  );
+  renderItem = ({ item }) => {
+    const { fullName, picture } = item;
+    return (
+      <Card style={styles.supplierContainer}>
+        <View style={styles.infoSupplier}>
+          <Image source={{ uri: picture }} style={styles.image} />
+          <CustomText>{fullName}</CustomText>
+        </View>
+        <CustomButton
+          primaryBtn
+          textStyle={styles.white}
+          style={styles.button}
+          title="Ver"
+          onPress={this.handleGoToProfile(item)}
+        />
+      </Card>
+    );
+  };
 
-  handleGoToProfile = id => () => {
+  handleGoToProfile = item => () => {
     const { navigation } = this.props;
-    navigation.navigate(Routes.SupplierProfile, { id });
+    navigation.navigate(Routes.SupplierProfile, { supplier: item });
   };
 
   keyExtractor = ({ id }) => `${id}`;

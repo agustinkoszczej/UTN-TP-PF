@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavigationActions, StackActions, withNavigation } from 'react-navigation';
-import { compose } from 'recompose';
+import { compose, withProps } from 'recompose';
 import AuthActions from '@redux/auth/actions';
 import Routes from '@constants/routes';
 import { navigationModel } from '@propTypes/navigationModel';
@@ -26,8 +26,9 @@ class HeaderSectionContainer extends Component {
 
   render() {
     const {
-      currentUser: { fullName, email, picture, rating },
-      loading
+      currentUser: { fullName, email, picture, rating, requestSend, inAgenda },
+      loading,
+      isSupplier
     } = this.props;
     return (
       <HeaderSection
@@ -38,6 +39,9 @@ class HeaderSectionContainer extends Component {
         handleLogOut={this.handleLogOut}
         picture={picture}
         rating={rating}
+        isSupplier={isSupplier}
+        inAgenda={inAgenda}
+        requestSend={requestSend}
       />
     );
   }
@@ -46,8 +50,9 @@ class HeaderSectionContainer extends Component {
 HeaderSectionContainer.propTypes = {
   navigation: PropTypes.shape(navigationModel).isRequired,
   logOut: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
   currentUser: PropTypes.shape(userModel).isRequired,
+  loading: PropTypes.bool.isRequired,
+  isSupplier: PropTypes.bool.isRequired,
   redictToLogin: PropTypes.func.isRequired
 };
 
@@ -69,6 +74,9 @@ const mapDispatchToProps = dispatch => ({
 
 const enhance = compose(
   withNavigation,
+  withProps(ownProps => ({
+    isSupplier: !!ownProps?.supplier
+  })),
   connect(
     mapStateToProps,
     mapDispatchToProps

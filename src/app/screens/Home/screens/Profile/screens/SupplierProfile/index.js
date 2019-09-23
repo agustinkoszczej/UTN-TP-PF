@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, withProps } from 'recompose';
+import { connect } from 'react-redux';
 import { userModel } from '@propTypes/userModel';
 
 import Profile from '../..';
@@ -13,7 +14,12 @@ SupplierProfile.propTypes = {
   supplier: PropTypes.shape(userModel)
 };
 
+const mapStateToProps = state => ({
+  ownRequest: state.auth.agenda.ownRequests
+});
+
 const enhancer = compose(
+  connect(mapStateToProps),
   withProps(ownProps => {
     const {
       email,
@@ -26,9 +32,12 @@ const enhancer = compose(
       picture,
       cuit,
       location,
-      rating: { score }
+      rating,
+      inAgenda
     } = ownProps.navigation.getParam('supplier');
+    const requestSend = ownProps.ownRequest.some(supplier => supplier.user_id === id);
     const locations = location.split(',');
+    const score = rating?.score || 0;
     return {
       supplier: {
         email,
@@ -42,7 +51,9 @@ const enhancer = compose(
         picture,
         latitude: locations[0],
         longitude: locations[1],
-        rating: score
+        rating: score,
+        inAgenda,
+        requestSend
       }
     };
   })

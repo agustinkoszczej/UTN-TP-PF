@@ -178,15 +178,17 @@ export const actionCreators = {
     target: targets.stats,
     service: AuthService.getStats
   }),
-  acceptRequest: id => ({
+  acceptRequest: item => ({
     type: actions.GET_SUPPLIERS,
     target: targets.acceptContact,
-    payload: id,
+    payload: item.user_id,
     service: AuthService.acceptRequest,
     injections: [
       withPostSuccess(dispatch => {
         dispatch(actionCreators.getAgenda());
-        dispatch(NavigationActions.navigate({ routeName: Routes.SupplierProfile }));
+        dispatch(
+          NavigationActions.navigate({ routeName: Routes.SupplierProfile, params: { supplier: item } })
+        );
       })
     ]
   }),

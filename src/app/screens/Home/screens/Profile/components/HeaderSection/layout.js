@@ -11,7 +11,17 @@ import background from '../../assets/background.jpg';
 import { strings } from './constants';
 import styles from './styles';
 
-function HeaderSection({ fullName, email, handleLogOut, navigateToConfiguration, picture, rating }) {
+function HeaderSection({
+  fullName,
+  email,
+  handleLogOut,
+  navigateToConfiguration,
+  picture,
+  rating,
+  isSupplier,
+  requestSend,
+  inAgenda
+}) {
   return (
     <ImageBackground source={background} style={styles.container}>
       <View style={styles.userSection}>
@@ -28,16 +38,18 @@ function HeaderSection({ fullName, email, handleLogOut, navigateToConfiguration,
       <AirbnbRating defaultRating={rating} isDisabled showRating={false} />
       <CustomButton
         secondaryBtn
-        title={strings.edit}
-        style={styles.button}
+        title={inAgenda ? strings.remove : requestSend ? strings.cancelRequest : strings.edit}
+        style={[styles.button, isSupplier && { marginBottom: 10 }]}
         onPress={navigateToConfiguration}
       />
-      <CustomButton
-        title={strings.closeSession}
-        style={styles.button}
-        onPress={handleLogOut}
-        textStyle={styles.white}
-      />
+      {!isSupplier && (
+        <CustomButton
+          title={strings.closeSession}
+          style={styles.button}
+          onPress={handleLogOut}
+          textStyle={styles.white}
+        />
+      )}
     </ImageBackground>
   );
 }
@@ -48,7 +60,10 @@ HeaderSection.propTypes = {
   picture: PropTypes.string.isRequired,
   handleLogOut: PropTypes.func.isRequired,
   navigateToConfiguration: PropTypes.func.isRequired,
-  rating: PropTypes.number.isRequired
+  rating: PropTypes.number.isRequired,
+  isSupplier: PropTypes.bool.isRequired,
+  requestSend: PropTypes.bool.isRequired,
+  inAgenda: PropTypes.bool.isRequired
 };
 
 export default Loadable(props => props.loading)(HeaderSection);

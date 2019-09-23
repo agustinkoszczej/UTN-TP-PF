@@ -2,45 +2,61 @@ import React, { Component } from 'react';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FlatList, View } from 'react-native';
+import { FlatList, View, Image } from 'react-native';
 import Card from '@components/Card';
 import CustomText from '@components/CustomText';
 import CustomButton from '@components/CustomButton';
 import AuthActions from '@redux/auth/actions';
 import WithError from '@components/WithError';
 import worried from '@assets/worried.png';
+import aptIcon from '@assets/ic_apt.png';
+import locationIcon from '@assets/ic_localizacion.png';
 
 import styles from './styles';
 
 class AgendaRequest extends Component {
-  renderItem = ({ item: { fullName, companyName, user_id: id } }) => (
-    <Card style={styles.cardContainer}>
-      <CustomText>{fullName}</CustomText>
-      <CustomText>{companyName}</CustomText>
-      <View style={styles.row}>
-        <CustomButton
-          primaryBtn
-          onPress={this.handleAccept(id)}
-          textStyle={styles.white}
-          style={styles.button}
-          title="Aceptar"
-          loading={this.props.acceptLoading}
-        />
-        <CustomButton
-          primaryBtn
-          onPress={this.handleDecline(id)}
-          textStyle={styles.white}
-          style={styles.button}
-          title="Declinar"
-          loading={this.props.declineLoading}
-        />
-      </View>
-    </Card>
-  );
+  renderItem = ({ item }) => {
+    const { fullName, companyName, user_id: id, picture, streetAddress } = item;
+    return (
+      <Card style={styles.cardContainer}>
+        <View style={[styles.row, styles.alignItems, styles.bottom]}>
+          <Image source={{ uri: picture }} style={styles.image} />
+          <CustomText>{fullName}</CustomText>
+        </View>
+        <View style={styles.row}>
+          <View style={[styles.row, { marginRight: 40 }]}>
+            <Image source={aptIcon} style={styles.icon} />
+            <CustomText style={styles.bottom}>{companyName}</CustomText>
+          </View>
+          <View style={styles.row}>
+            <Image source={locationIcon} style={styles.icon} />
+            <CustomText style={styles.bottom}>{streetAddress}</CustomText>
+          </View>
+        </View>
+        <View style={[styles.row, styles.spaceBetween]}>
+          <CustomButton
+            primaryBtn
+            onPress={this.handleAccept(item)}
+            textStyle={styles.white}
+            style={styles.button}
+            title="Aceptar"
+            loading={this.props.acceptLoading}
+          />
+          <CustomButton
+            secondaryBtn
+            onPress={this.handleDecline(id)}
+            style={styles.button}
+            title="Declinar"
+            loading={this.props.declineLoading}
+          />
+        </View>
+      </Card>
+    );
+  };
 
-  handleAccept = id => () => {
+  handleAccept = item => () => {
     const { acceptRequest } = this.props;
-    acceptRequest(id);
+    acceptRequest(item);
   };
 
   handleDecline = id => () => {
@@ -89,7 +105,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  acceptRequest: id => dispatch(AuthActions.acceptRequest(id)),
+  acceptRequest: item => dispatch(AuthActions.acceptRequest(item)),
   refreshAgenda: () => dispatch(AuthActions.getAgenda()),
   declineRequest: id => dispatch(AuthActions.declineRequest(id))
 });

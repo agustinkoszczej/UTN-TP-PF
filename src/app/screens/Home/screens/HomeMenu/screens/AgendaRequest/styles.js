@@ -18,8 +18,28 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row'
   },
+  alignItems: {
+    alignItems: 'center'
+  },
+  spaceBetween: {
+    justifyContent: 'space-between'
+  },
   button: {
-    width: 100
+    width: '45%'
+  },
+  image: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 20
+  },
+  bottom: {
+    marginBottom: 15
+  },
+  icon: {
+    width: 20,
+    height: 20,
+    marginRight: 15
   }
 });
 export default styles;

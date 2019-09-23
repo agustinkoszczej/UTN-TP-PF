@@ -11,8 +11,9 @@ class SearchContainer extends Component {
   state = { selected: STATES_SELECTED.SUPPLIER };
 
   componentWillUnmount() {
-    const { clearCatalog } = this.props;
+    const { clearCatalog, clearSuppliers } = this.props;
     clearCatalog();
+    clearSuppliers();
   }
 
   handleSearch = ({ search }) => {

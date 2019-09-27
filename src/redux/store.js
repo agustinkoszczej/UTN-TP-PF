@@ -13,6 +13,7 @@ import dialog from './dialog/reducer';
 import orders from './orders/reducer';
 import product from './product/reducer';
 import auctions from './auctions/reducer';
+import chat from './chat/reducer';
 
 const nav = createNavigationReducer(Navigator);
 
@@ -24,7 +25,8 @@ const reducers = {
   dialog,
   orders,
   product,
-  auctions
+  auctions,
+  chat
 };
 
 const appReducer = combineReducers(reducers);

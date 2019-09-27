@@ -17,6 +17,7 @@ const routes = {
   ActiveAuctions: 'ActiveAuctions',
   HomeMenu: 'HomeMenu',
   Chats: 'Chats',
+  SupplierChat: 'SupplierChat',
   CreateOrder: 'CreateOrder',
   CreateAuction: 'CreateAuction',
   OrderDetail: 'OrderDetail',

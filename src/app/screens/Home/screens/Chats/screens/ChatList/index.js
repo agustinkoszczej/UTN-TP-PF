@@ -10,16 +10,11 @@ import CustomButton from '@components/CustomButton';
 import waveIcon from '@assets/wave.png'
 
 import styles from './styles';
-import reactotron from 'reactotron-react-native';
-
-import { ReactotronImpl } from 'reactotron-core-client';
 
 class ChatList extends Component {
   state = { name: '', rooms: [] };
 
   componentDidMount() {
-    reactotron.log(this.state);
-    reactotron.log(this.props);
     const { getPusherManager, userId } = this.props
     getPusherManager(userId).catch(err => { console.log(err) }); //TODO: unhandled promise rejection
 

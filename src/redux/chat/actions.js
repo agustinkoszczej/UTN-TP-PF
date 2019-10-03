@@ -1,5 +1,6 @@
 import { completeTypes, createTypes, withPostSuccess, withPostFailure} from 'redux-recompose';
 import ChatService from '@services/ChatService';
+import reactotron from 'reactotron-react-native';
 
 export const actions = createTypes(
   completeTypes(
@@ -18,16 +19,14 @@ export const actionCreators = {
     target: targets.pusherManager,
     payload: userId,
     service: ChatService.getPusherManager,
-    // successSelector: response => response.data,
-    // failureSelector: response => response,
-    // injections: [
-    //   withPostSuccess(dispatch => {
-    //     dispatch(actionCreators.getPusherManager(userId));
-    //   }),
+    injections: [
+      withPostSuccess(dispatch => {
+        dispatch(actionCreators.getPusherManager(userId));
+      }),
     //   withPostFailure(dispatch => {
-    //       //
-    //   })
-    // ]
+          
+    //  })
+    ]
   }),
 };
 

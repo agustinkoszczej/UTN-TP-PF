@@ -6,6 +6,7 @@ import CustomTextInput from '@components/CustomTextInput';
 import Routes from '@constants/routes';
 import CustomText from '@components/CustomText';
 import waveIcon from '@assets/wave.png';
+import { navigationModel } from '@propTypes/navigationModel';
 
 import styles from './styles';
 
@@ -31,8 +32,10 @@ class Chats extends Component {
   };
 
   selectSupplier = ({ id: user_id, name, avatar_url, room_id }) => () => {
-    const { navigation } = this.props;
-    navigation.navigate(Routes.SupplierChat, { user_id, name, avatar_url, room_id });
+    const {
+      navigation: { navigate }
+    } = this.props;
+    navigate(Routes.SupplierChat, { user_id, name, avatar_url, room_id });
   };
 
   renderItem = ({ item }) => {
@@ -56,12 +59,11 @@ class Chats extends Component {
     );
   };
 
-  keyExtractor = ({ room_id: id }) => `${id}`;
+  keyExtractor = ({ name: id }) => `${id}`;
 
   render() {
     const { rooms } = this.state;
     const { loading } = this.props;
-    debugger;
     return (
       <View style={styles.container}>
         <CustomTextInput
@@ -84,7 +86,8 @@ class Chats extends Component {
 Chats.propTypes = {
   rooms: PropTypes.arrayOf(PropTypes.shape({})),
   loading: PropTypes.bool.isRequired,
-  userId: PropTypes.string.isRequired
+  userId: PropTypes.string.isRequired,
+  navigation: PropTypes.shape(navigationModel).isRequired
 };
 
 const mapStateToProps = state => ({

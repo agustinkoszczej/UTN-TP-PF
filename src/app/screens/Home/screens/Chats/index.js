@@ -31,35 +31,35 @@ class Chats extends Component {
     this.setState({ rooms: filterRooms });
   };
 
-  selectSupplier = ({ id: user_id, name, avatar_url, room_id }) => () => {
+  selectSupplier = ({
+    supplierId,
+    name,
+    avatarUrl = 'http://www.facetheforce.today/random/400?r=1',
+    id
+  }) => () => {
     const {
       navigation: { navigate }
     } = this.props;
-    navigate(Routes.SupplierChat, { user_id, name, avatar_url, room_id });
+    navigate(Routes.SupplierChat, { supplierId, name, avatarUrl, id });
   };
 
   renderItem = ({ item }) => {
-    const { userId } = this.props;
-    const {
-      customData: { nameByUser }
-    } = item;
-    const supplierId = Object.keys(nameByUser).filter(id => id !== userId)[0];
-    const supplierName = nameByUser[supplierId];
+    const { name, avatarUrl } = item;
     return (
       <TouchableOpacity style={styles.supplierContainer} onPress={this.selectSupplier(item)}>
         <View style={styles.item}>
           <Image
-            source={{ uri: 'http://www.facetheforce.today/random/400?r=1' }}
+            source={{ uri: avatarUrl || 'http://www.facetheforce.today/random/400?r=1' }}
             style={styles.supplierPicture}
           />
-          <CustomText bold>{`${supplierName}`}</CustomText>
+          <CustomText bold>{name}</CustomText>
           <Image style={styles.wave} source={waveIcon} />
         </View>
       </TouchableOpacity>
     );
   };
 
-  keyExtractor = ({ name: id }) => `${id}`;
+  keyExtractor = ({ id }) => `${id}`;
 
   render() {
     const { rooms } = this.state;
@@ -92,7 +92,7 @@ Chats.propTypes = {
 
 const mapStateToProps = state => ({
   rooms: state.chat.rooms,
-  loading: state.chat.pusherConnectionLoading,
+  loading: state.chat.roomsLoading,
   userId: state.auth.currentUser.id
 });
 

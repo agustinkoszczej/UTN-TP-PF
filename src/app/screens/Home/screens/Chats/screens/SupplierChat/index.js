@@ -16,50 +16,50 @@ export default class SupplierChat extends React.Component {
     typingText: false
   };
 
-  supplierId = this.props.navigation.getParam('user_id');
+  // supplierId = this.props.navigation.getParam('user_id');
 
-  supplierName = this.props.navigation.getParam('name');
+  // supplierName = this.props.navigation.getParam('name');
 
-  supplierPicture = this.props.navigation.getParam('avatar_url');
+  // supplierPicture = this.props.navigation.getParam('avatar_url');
 
-  supplierRoomId = this.props.navigation.getParam('room_id');
+  // supplierRoomId = this.props.navigation.getParam('room_id');
 
-  componentDidMount() {
-    this.currentUser.subscribeToRoom({
-      roomId: this.supplierRoomId,
-      hooks: {
-        onMessage: this.onReceive,
-        onUserStartedTyping: this.setState({
-          typingText: true
-        }),
-        onUserStoppedTyping: this.setState({
-          typingText: false
-        })
-      }
-    });
-    this.getMessages();
-  }
+  // componentDidMount() {
+  //   this.currentUser.subscribeToRoom({
+  //     roomId: this.supplierRoomId,
+  //     hooks: {
+  //       onMessage: this.onReceive,
+  //       onUserStartedTyping: this.setState({
+  //         typingText: true
+  //       }),
+  //       onUserStoppedTyping: this.setState({
+  //         typingText: false
+  //       })
+  //     }
+  //   });
+  //   this.getMessages();
+  // }
 
-  getMessages = () => {
-    const { quantity } = this.state;
-    this.currentUser
-      .fetchMultipartMessages({
-        roomId: this.supplierRoomId,
-        direction: 'newer',
-        limit: quantity
-      })
-      .then(pusherMessages => {
-        this.setState({
-          messages: pusherMessages
-        });
-      })
-      .catch(err => {
-        console.log(`Error fetching messages: ${err}`);
-      });
-    this.setState(previousState => ({
-      quantity: previousState.quantity + 10
-    }));
-  };
+  // getMessages = () => {
+  //   const { quantity } = this.state;
+  //   this.currentUser
+  //     .fetchMultipartMessages({
+  //       roomId: this.supplierRoomId,
+  //       direction: 'newer',
+  //       limit: quantity
+  //     })
+  //     .then(pusherMessages => {
+  //       this.setState({
+  //         messages: pusherMessages
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.log(`Error fetching messages: ${err}`);
+  //     });
+  //   this.setState(previousState => ({
+  //     quantity: previousState.quantity + 10
+  //   }));
+  // };
 
   onSend(message) {
     this.currentUser.sendMessage({
@@ -68,47 +68,48 @@ export default class SupplierChat extends React.Component {
     });
   }
 
-  onReceive = message => {
-    const { id, senderId, text, createdAt } = message;
-    const incomingMessage = {
-      _id: id,
-      text,
-      createdAt: new Date(createdAt),
-      user: {
-        _id: senderId,
-        name: senderId,
-        avatar: this.supplierPicture // TODO: check if its merch or supp picture
-      }
-    };
+  // onReceive = message => {
+  //   const { id, senderId, text, createdAt } = message;
+  //   const incomingMessage = {
+  //     _id: id,
+  //     text,
+  //     createdAt: new Date(createdAt),
+  //     user: {
+  //       _id: senderId,
+  //       name: senderId,
+  //       avatar: this.supplierPicture // TODO: check if its merch or supp picture
+  //     }
+  //   };
 
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, incomingMessage)
-    }));
-  };
+  //   this.setState(previousState => ({
+  //     messages: GiftedChat.append(previousState.messages, incomingMessage)
+  //   }));
+  // };
 
-  onLoadEarlier() {
-    this.setState({
-      messages: this.getMessages()
-    });
-  }
+  // onLoadEarlier() {
+  //   this.setState({
+  //     messages: this.getMessages()
+  //   });
+  // }
 
-  renderBubble = props => {
-    return (
-      <Bubble
-        {...props}
-        wrapperStyle={{
-          right: {
-            backgroundColor: 'black'
-          }
-        }}
-      />
-    );
-  };
+  // renderBubble = props => {
+  //   return (
+  //     <Bubble
+  //       {...props}
+  //       wrapperStyle={{
+  //         right: {
+  //           backgroundColor: 'black'
+  //         }
+  //       }}
+  //     />
+  //   );
+  // };
 
   renderSend = props => {
     // FIX ME: clear text when message sent
+    debugger;
     if (props.text.trim().length > 0) {
-      this.currentUser.isTypingIn({ roomId: this.roomId });
+      // this.currentUser.isTypingIn({ roomId: this.roomId });
       return (
         <TouchableOpacity onPress={() => this.onSend(props)}>
           <View>
@@ -120,24 +121,24 @@ export default class SupplierChat extends React.Component {
     return null;
   };
 
-  renderLoadEarlier = props => {
-    return (
-      <TouchableOpacity style={styles.earlierContainer} onPress={this.onLoadEarlier}>
-        <CustomText style={styles.earlierText}>Cargar más mensajes</CustomText>
-      </TouchableOpacity>
-    );
-  };
+  // renderLoadEarlier = props => {
+  //   return (
+  //     <TouchableOpacity style={styles.earlierContainer} onPress={this.onLoadEarlier}>
+  //       <CustomText style={styles.earlierText}>Cargar más mensajes</CustomText>
+  //     </TouchableOpacity>
+  //   );
+  // };
 
-  renderFooter = props => {
-    if (this.state.typingText) {
-      return (
-        <View>
-          <Text style={styles.typingText}>{this.state.typingText}</Text>
-        </View>
-      );
-    }
-    return null;
-  };
+  // renderFooter = props => {
+  //   if (this.state.typingText) {
+  //     return (
+  //       <View>
+  //         <Text style={styles.typingText}>{this.state.typingText}</Text>
+  //       </View>
+  //     );
+  //   }
+  //   return null;
+  // };
 
   render() {
     return (
@@ -146,13 +147,14 @@ export default class SupplierChat extends React.Component {
         placeholder="Escribe un mensaje"
         isAnimated
         loadEarlier
+        onSend={() => {}}
         // onLoadEarlier={this.onLoadEarlier()}
         user={{
           _id: 'auth0|5d4f974c5559f40e2bc139d7' // TODO: my user id
         }}
-        renderBubble={this.renderBubble}
+        // renderBubble={this.renderBubble}
         renderSend={this.renderSend}
-        renderLoadEarlier={this.renderLoadEarlier}
+        // renderLoadEarlier={this.renderLoadEarlier}
         // renderFooter={this.renderFooter}
       />
     );

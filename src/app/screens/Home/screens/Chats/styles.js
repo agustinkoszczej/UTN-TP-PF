@@ -5,13 +5,13 @@ import { verticalScale } from '@utils/scalingUtils';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    height: '100%',
-    marginBottom: 10
+    marginBottom: 10,
+    padding: 20
   },
   formElement: {
     backgroundColor: transparent,
     height: verticalScale(42),
-    width: '70%'
+    width: '100%'
   },
   supplierContainer: {
     height: 75,

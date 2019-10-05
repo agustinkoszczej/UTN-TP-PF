@@ -5,6 +5,7 @@ import { redirectToEspecificTab } from '@utils/navUtils';
 import { apiSetup } from '@config/api';
 import Routes from '@constants/routes';
 import DialogActions from '@redux/dialog/actions';
+import ChatActions from '@redux/chat/actions';
 import { getAuthDialog, authDialogNames } from '@screens/Auth/dialogs';
 
 import { userSerializer } from './utils';
@@ -122,8 +123,9 @@ export const actionCreators = {
     successSelector: response => userSerializer(response.data),
     failureSelector: response => response.data,
     injections: [
-      withPostSuccess(dispatch => {
+      withPostSuccess((dispatch, response) => {
         dispatch(actionCreators.getAgenda());
+        dispatch(ChatActions.connectPusher(response.data.user_id));
         redirectToEspecificTab(dispatch, Routes.HomeMenu);
       }),
       withPostFailure(async dispatch => {

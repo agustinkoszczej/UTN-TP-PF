@@ -7,42 +7,17 @@ import CustomTextInput from '@components/CustomTextInput';
 import Routes from '@constants/routes';
 import CustomText from '@components/CustomText';
 import CustomButton from '@components/CustomButton';
-import waveIcon from '@assets/wave.png'
+import waveIcon from '@assets/wave.png';
 
 import styles from './styles';
 
 class ChatList extends Component {
-  state = { name: '', rooms: [] };
-
-  componentDidMount() {
-    const { getPusherManager, userId } = this.props
-    getPusherManager(userId).catch(err => { console.log(err) }); //TODO: unhandled promise rejection
-
-    // const { pusherManager } = this.props
-
-    // pusherManager ?.rooms.forEach(room =>
-    //   pusherManager.subscribeToRoomMultipart({
-    //     roomId: room.id,
-    //     hooks: {
-    //       onUserStartedTyping: (room, user) => {
-    //         //TODO:
-    //       },
-    //       onUserStoppedTyping: (room, user) => {
-    //         //TODO
-    //       }
-    //     }
-    //   })
-    // )
-    //   .catch(err => {
-    //     console.log(err);
-    //   })
-    // this.setState({ rooms: pusherManager ?.rooms });
-  };
+  state = { name: '' };
 
   handleTextSubmit = () => {
-    const { pusherManager } = this.props;
+    const { rooms } = this.props;
     const { name } = this.state;
-    this.setState({ rooms: pusherManager.rooms.users.filter(user => user.name.indexOf(name) > -1) })
+    this.setState({ rooms: rooms.users.filter(user => user.name.indexOf(name) > -1) });
   };
 
   handleInputChange = name => this.setState({ name });
@@ -53,14 +28,19 @@ class ChatList extends Component {
   };
 
   renderItem = ({ item }) => {
-    const { userId } = this.props
-    const { member_user_ids, custom_data, id: room_id, avatar_url, unreadCount } = item;
-    const supplierId = first(member_user_ids.filter(ids => ids != userId))
-    const supplierName = custom_data.nameByUser.supplierId
+    const { userId } = this.props;
+    const {
+      customData: { nameByUser }
+    } = item;
+    const supplierId = Object.keys(nameByUser).filter(id => id !== userId)[0];
+    const supplierName = nameByUser[supplierId];
     return (
       <TouchableOpacity style={styles.supplierContainer} onPress={this.selectSupplier(item)}>
         <View style={styles.item}>
-          <Image source={{ uri: 'http://www.facetheforce.today/random/400?r=1' }} style={styles.supplierPicture} />
+          <Image
+            source={{ uri: 'http://www.facetheforce.today/random/400?r=1' }}
+            style={styles.supplierPicture}
+          />
           <CustomText bold>{`${supplierName}`}</CustomText>
           <Image style={styles.wave} source={waveIcon} />
         </View>
@@ -72,7 +52,7 @@ class ChatList extends Component {
 
   render() {
     const { name } = this.state;
-    const { pusherManager, loading } = this.props;
+    const { rooms, loading } = this.props;
 
     return (
       <View style={styles.container}>
@@ -98,31 +78,23 @@ class ChatList extends Component {
         {loading ? (
           <ActivityIndicator />
         ) : (
-            <FlatList data={pusherManager ?.rooms} renderItem={this.renderItem} keyExtractor={this.keyExtractor} />
-          )}
+          <FlatList data={rooms} renderItem={this.renderItem} keyExtractor={this.keyExtractor} />
+        )}
       </View>
     );
   }
 }
 
 ChatList.propTypes = {
-  getPusherManager: PropTypes.func.isRequired,
-  pusherManager: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired
+  rooms: PropTypes.arrayOf(PropTypes.shape({})),
+  loading: PropTypes.bool.isRequired,
+  userId: PropTypes.string.isRequired
 };
 
-
 const mapStateToProps = state => ({
-  pusherManager: state.chat.pusherManager,
+  rooms: state.chat.rooms,
   loading: state.chat.pusherManagerLoading,
   userId: state.auth.currentUser.id
 });
 
-const mapDispatchToProps = dispatch => ({
-  getPusherManager: userId => dispatch(ChatActions.getPusherManager(userId))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ChatList);
+export default connect(mapStateToProps)(ChatList);

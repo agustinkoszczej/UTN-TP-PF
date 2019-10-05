@@ -1,33 +1,39 @@
-import { completeTypes, createTypes, withPostSuccess, withPostFailure} from 'redux-recompose';
+import { completeTypes, createTypes, withPostSuccess } from 'redux-recompose';
 import ChatService from '@services/ChatService';
-import reactotron from 'reactotron-react-native';
 
-export const actions = createTypes(
-  completeTypes(
-    ['GET_PUSHER_MANAGER'],
-    []
-  ), '@@CHAT'
-);
+export const actions = createTypes(completeTypes(['GET_PUSHER_MANAGER', 'SET_ROOMS'], []), '@@CHAT');
 
 export const targets = {
-  pusherManager: 'pusherManager'
+  pusherConnection: 'pusherConnection',
+  rooms: 'rooms'
+};
+
+const privateActions = {
+  setRooms: rooms => ({
+    type: actions.SET_ROOMS,
+    target: targets.rooms,
+    payload: rooms
+  })
 };
 
 export const actionCreators = {
-  getPusherManager: userId => ({
+  connectPusher: userId => ({
     type: actions.GET_PUSHER_MANAGER,
-    target: targets.pusherManager,
+    target: targets.pusherConnection,
     payload: userId,
     service: ChatService.getPusherManager,
+    successSelector: () => true,
     injections: [
-      withPostSuccess(dispatch => {
-        dispatch(actionCreators.getPusherManager(userId));
-      }),
-    //   withPostFailure(dispatch => {
-          
-    //  })
+      withPostSuccess((dispatch, response) => {
+        dispatch(privateActions.setRooms(response.data.rooms));
+      })
     ]
   }),
+  setRooms: rooms => ({
+    type: actions.SET_ROOMS,
+    target: targets.rooms,
+    payload: rooms
+  })
 };
 
 export default actionCreators;

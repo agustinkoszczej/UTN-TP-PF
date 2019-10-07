@@ -34,22 +34,22 @@ class Chats extends Component {
   selectSupplier = ({
     supplierId,
     name,
-    avatarUrl = 'http://www.facetheforce.today/random/400?r=1',
+    supplierPicture = 'http://www.facetheforce.today/random/400?r=1',
     id
   }) => () => {
     const {
       navigation: { navigate }
     } = this.props;
-    navigate(Routes.SupplierChat, { supplierId, name, avatarUrl, id });
+    navigate(Routes.SupplierChat, { supplierId, name, supplierPicture, id });
   };
 
   renderItem = ({ item }) => {
-    const { name, avatarUrl } = item;
+    const { name, supplierPicture } = item;
     return (
       <TouchableOpacity style={styles.supplierContainer} onPress={this.selectSupplier(item)}>
         <View style={styles.item}>
           <Image
-            source={{ uri: avatarUrl || 'http://www.facetheforce.today/random/400?r=1' }}
+            source={{ uri: supplierPicture || 'http://www.facetheforce.today/random/400?r=1' }}
             style={styles.supplierPicture}
           />
           <CustomText bold>{name}</CustomText>

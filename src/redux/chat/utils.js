@@ -1,9 +1,9 @@
 export const roomSerializer = (rooms, userId) =>
   rooms.map(({ id, unreadCount, lastMessageAt, userStore: { users } }) => {
-    const { avatar_url: avatarUrl, id: supplierId, name, presenceStore } = users[userId];
+    const { avatar_url: supplierPicture, id: supplierId, name, presenceStore } = users[userId];
     const online = presenceStore[userId] !== 'offline';
     return {
-      avatarUrl,
+      supplierPicture,
       id,
       lastMessageAt,
       name,

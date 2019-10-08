@@ -3,19 +3,19 @@ import { TouchableOpacity, Text, Image, View } from 'react-native';
 import PropTypes from 'prop-types';
 import CustomText from '@components/CustomText';
 import { GiftedChat, Bubble } from 'react-native-gifted-chat';
+import { connect } from 'react-redux';
 import sendIcon from '@assets/right-arrow.png';
-import { withProps } from 'recompose';
+import { withProps, compose } from 'recompose';
 import { currentUser } from '@services/ChatService';
 
 import styles from './styles';
-
-// import { ChatManager, TokenProvider } from '@pusher/chatkit-client';
 
 class SupplierChat extends React.Component {
   state = {
     messages: [],
     quantity: 10,
-    typingText: false
+    typingText: false,
+    text: ''
   };
 
   componentDidMount() {
@@ -34,7 +34,6 @@ class SupplierChat extends React.Component {
           })
       }
     });
-    this.getMessages();
   }
 
   getMessages = async () => {
@@ -78,9 +77,9 @@ class SupplierChat extends React.Component {
   };
 
   onLoadEarlier = () => {
-    this.setState({
-      messages: this.getMessages()
-    });
+    // this.setState({
+    //   messages: this.getMessages()
+    // });
   };
 
   renderBubble = props => {
@@ -97,9 +96,8 @@ class SupplierChat extends React.Component {
   };
 
   renderSend = props => {
-    // FIX ME: clear text when message sent
-    if (props.text.trim().length > 0) {
-      currentUser.isTypingIn({ roomId: this.props.roomId });
+    const text = props.text.trim();
+    if (text.length > 0) {
       return (
         <TouchableOpacity onPress={() => this.onSend(props)}>
           <View>
@@ -123,30 +121,40 @@ class SupplierChat extends React.Component {
     if (this.state.typingText) {
       return (
         <View>
-          <Text style={styles.typingText}>{this.state.typingText}</Text>
+          <Text style={styles.typingText}>Esta tipeando</Text>
         </View>
       );
     }
     return null;
   };
 
+  handleTextChange = text => this.setState({ text });
+
+  onSend = (messages = []) => {
+    this.handleTextChange('');
+    this.setState(previousState => ({
+      messages: GiftedChat.append(previousState.messages, messages)
+    }));
+  };
+
   render() {
-    const { messages } = this.state;
+    const { messages, text } = this.state;
+    const { userId } = this.props;
     return (
       <GiftedChat
         messages={messages}
         placeholder="Escribe un mensaje"
         isAnimated
         loadEarlier
-        onSend={() => {}}
+        onSend={this.onSend}
         onLoadEarlier={this.onLoadEarlier}
-        user={{
-          _id: 'auth0|5d4f974c5559f40e2bc139d7' // TODO: my user id
-        }}
+        user={{ _id: userId }}
         renderBubble={this.renderBubble}
         renderSend={this.renderSend}
         renderLoadEarlier={this.renderLoadEarlier}
         renderFooter={this.renderFooter}
+        text={text}
+        onInputTextChanged={this.handleTextChange}
       />
     );
   }
@@ -156,13 +164,23 @@ SupplierChat.propTypes = {
   supplierId: PropTypes.string.isRequired,
   roomId: PropTypes.string.isRequired,
   supplierPicture: PropTypes.string.isRequired,
-  supplierName: PropTypes.string.isRequired
+  supplierName: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired
 };
 
-export default withProps(({ navigation }) => {
-  const supplierId = navigation.getParam('supplierId');
-  const roomId = navigation.getParam('id');
-  const supplierPicture = navigation.getParam('avatarUrl');
-  const supplierName = navigation.getParam('name');
-  return { supplierId, supplierPicture, roomId, supplierName };
-})(SupplierChat);
+const mapStateToProps = state => ({
+  userId: state.auth.currentUser.id
+});
+
+const enhancer = compose(
+  withProps(({ navigation }) => {
+    const supplierId = navigation.getParam('supplierId');
+    const roomId = navigation.getParam('id');
+    const supplierPicture = navigation.getParam('avatarUrl');
+    const supplierName = navigation.getParam('name');
+    return { supplierId, supplierPicture, roomId, supplierName };
+  }),
+  connect(mapStateToProps)
+);
+
+export default enhancer(SupplierChat);

@@ -33,18 +33,18 @@ class Chats extends Component {
 
   selectSupplier = ({
     supplierId,
-    name,
+    supplierName,
     supplierPicture = 'http://www.facetheforce.today/random/400?r=1',
-    id
+    roomId
   }) => () => {
     const {
       navigation: { navigate }
     } = this.props;
-    navigate(Routes.SupplierChat, { supplierId, name, supplierPicture, id });
+    navigate(Routes.SupplierChat, { supplierId, supplierName, supplierPicture, roomId });
   };
 
   renderItem = ({ item }) => {
-    const { name, supplierPicture } = item;
+    const { supplierName, supplierPicture } = item;
     return (
       <TouchableOpacity style={styles.supplierContainer} onPress={this.selectSupplier(item)}>
         <View style={styles.item}>
@@ -52,14 +52,14 @@ class Chats extends Component {
             source={{ uri: supplierPicture || 'http://www.facetheforce.today/random/400?r=1' }}
             style={styles.supplierPicture}
           />
-          <CustomText bold>{name}</CustomText>
+          <CustomText bold>{supplierName}</CustomText>
           <Image style={styles.wave} source={waveIcon} />
         </View>
       </TouchableOpacity>
     );
   };
 
-  keyExtractor = ({ id }) => `${id}`;
+  keyExtractor = ({ roomId }) => `${roomId}`;
 
   render() {
     const { rooms } = this.state;

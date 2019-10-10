@@ -15,7 +15,7 @@ export const actionCreators = {
     target: targets.rooms,
     payload: userId,
     service: ChatService.getPusherManager,
-    successSelector: response => roomSerializer(response.data.rooms, userId)
+    successSelector: response => roomSerializer(response.data, userId)
   })
 };
 

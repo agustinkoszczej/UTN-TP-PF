@@ -50,7 +50,7 @@ class SupplierChat extends React.Component {
     }));
   };
 
-  onSend = message => {
+  onSend(message){
     const { roomId } = this.props;
     currentUser.sendMessage({
       text: message.text,
@@ -146,8 +146,8 @@ class SupplierChat extends React.Component {
         placeholder="Escribe un mensaje"
         isAnimated
         loadEarlier
-        onSend={this.onSend}
-        onLoadEarlier={this.onLoadEarlier}
+        //onSend={messages => this.onSend(messages)}
+        //onLoadEarlier={this.onLoadEarlier}
         user={{ _id: userId }}
         renderBubble={this.renderBubble}
         renderSend={this.renderSend}
@@ -175,9 +175,9 @@ const mapStateToProps = state => ({
 const enhancer = compose(
   withProps(({ navigation }) => {
     const supplierId = navigation.getParam('supplierId');
-    const roomId = navigation.getParam('id');
-    const supplierPicture = navigation.getParam('avatarUrl');
-    const supplierName = navigation.getParam('name');
+    const roomId = navigation.getParam('roomId');
+    const supplierPicture = navigation.getParam('supplierPicture');
+    const supplierName = navigation.getParam('supplierName');
     return { supplierId, supplierPicture, roomId, supplierName };
   }),
   connect(mapStateToProps)

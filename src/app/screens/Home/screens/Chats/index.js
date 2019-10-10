@@ -23,10 +23,9 @@ class Chats extends Component {
   handleTextSubmit = () => {};
 
   handleInputChange = name => {
-    const { rooms, userId } = this.props;
-    const filterRooms = rooms.filter(({ customData }) => {
-      const supplierId = Object.keys(customData.nameByUser).filter(id => id !== userId)[0];
-      return customData.nameByUser[supplierId].includes(name);
+    const { rooms } = this.props;
+    const filterRooms = rooms.filter(({ supplierName }) => {
+      return supplierName.includes(name);
     });
     this.setState({ rooms: filterRooms });
   };

@@ -14,6 +14,7 @@ import orders from './orders/reducer';
 import product from './product/reducer';
 import auctions from './auctions/reducer';
 import chat from './chat/reducer';
+import pushNotifications from './pushNotifications/reducer';
 
 const nav = createNavigationReducer(Navigator);
 
@@ -26,7 +27,8 @@ const reducers = {
   orders,
   product,
   auctions,
-  chat
+  chat,
+  pushNotifications
 };
 
 const appReducer = combineReducers(reducers);

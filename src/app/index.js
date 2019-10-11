@@ -4,14 +4,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import AppNavigator from '@components/AppNavigator';
 import AuthActions from '@redux/auth/actions';
+import configPushNotifications from '@config/PushNotifications';
 
 import ConnectedDialog from './components/ConnectedDialog';
 
 class App extends Component {
   componentDidMount() {
     SplashScreen.hide();
-    const { setUp } = this.props;
+    const { setUp, dispatch } = this.props;
     setUp();
+    configPushNotifications(dispatch);
   }
 
   render() {

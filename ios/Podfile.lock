@@ -148,6 +148,8 @@ PODS:
     - React
   - RNCAsyncStorage (1.5.1):
     - React
+  - RNCPushNotificationIOS (1.0.2):
+    - React
   - RNDateTimePicker (2.0.0):
     - React
   - RNFastImage (7.0.2):
@@ -198,6 +200,7 @@ DEPENDENCIES:
   - React-RCTWebSocket (from `../node_modules/react-native/Libraries/WebSocket`)
   - ReactNativePermissions (from `../node_modules/react-native-permissions`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
+  - "RNCPushNotificationIOS (from `../node_modules/@react-native-community/push-notification-ios`)"
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker/RNDateTimePicker.podspec`)"
   - RNFastImage (from `../node_modules/react-native-fast-image`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
@@ -271,6 +274,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-permissions"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-community/async-storage"
+  RNCPushNotificationIOS:
+    :path: "../node_modules/@react-native-community/push-notification-ios"
   RNDateTimePicker:
     :path: "../node_modules/@react-native-community/datetimepicker/RNDateTimePicker.podspec"
   RNFastImage:
@@ -317,6 +322,7 @@ SPEC CHECKSUMS:
   React-RCTWebSocket: fca087d583724aa0e5fef7d911f0f2a28d0f2736
   ReactNativePermissions: f3beb8871251594a8ea2c6b19a3f8252d5c7379d
   RNCAsyncStorage: b63d6e83fc629b01df6b624688f17944cea5637f
+  RNCPushNotificationIOS: 0b8d06ff190d84627dd17501bfb96652375970e4
   RNDateTimePicker: 0443103a1deefc342039432d615a0c2a53c9d81c
   RNFastImage: 9b0c22643872bb7494c8d87bbbb66cc4c0d9e7a2
   RNGestureHandler: 5329a942fce3d41c68b84c2c2276ce06a696d8b0
@@ -326,6 +332,6 @@ SPEC CHECKSUMS:
   SDWebImageWebPCoder: 7568737603c50f6237850afedd7e9e28e5917e6b
   yoga: 616fde658be980aa60a2158835170f3f9c2d04b4
 
-PODFILE CHECKSUM: 6fcdcd961e6ff9a233e4e5b4fec7fd1761b77523
+PODFILE CHECKSUM: 392c6a718ac66aa9a9b2d910393c071d6a9f7d1e
 
 COCOAPODS: 1.7.3

@@ -23,6 +23,7 @@ class HomeMenuContainer extends Component {
     const orders = stats?.orders;
     const auctions = stats?.auctions;
     const bids = stats?.bid;
+
     return (
       <ScrollView style={styles.container}>
         <OrdersSection orders={orders} />

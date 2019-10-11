@@ -40,6 +40,8 @@ target 'selly' do
   pod 'react-native-maps', path: '../node_modules/react-native-maps'
   pod 'react-native-google-maps', path: '../node_modules/react-native-maps'  # If you need GoogleMaps support on iOS
 
+  pod 'RNCPushNotificationIOS', :path => '../node_modules/@react-native-community/push-notification-ios'
+
   target 'sellyTests' do
     inherit! :search_paths
     # Pods for testing

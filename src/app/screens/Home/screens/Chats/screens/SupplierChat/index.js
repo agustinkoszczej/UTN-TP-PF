@@ -10,10 +10,11 @@ import { currentUser } from '@services/ChatService';
 
 import styles from './styles';
 
+const LOAD_EARLIER_QUANTITY = 10
+
 class SupplierChat extends React.Component {
   state = {
     messages: [],
-    quantity: 10,
     typingText: false,
     text: ''
   };
@@ -32,54 +33,61 @@ class SupplierChat extends React.Component {
           this.setState({
             typingText: false
           })
-      }
+      },
+      messageLimit: LOAD_EARLIER_QUANTITY
     });
   }
 
-  getMessages = async () => {
-    const { quantity } = this.state;
-    const { roomId } = this.props;
-    const messages = await currentUser.fetchMultipartMessages({
-      roomId,
-      direction: 'newer',
-      limit: quantity
-    });
-    this.setState(previousState => ({
-      messages,
-      quantity: previousState.quantity + 10
-    }));
-  };
-
-  onSend(message){
-    const { roomId } = this.props;
-    currentUser.sendMessage({
-      text: message.text,
-      roomId
-    });
-  };
-
-  onReceive = message => {
+  messageSerializer = message => {
+    const { supplierName, supplierPicture } = this.props
     const { id, senderId, text, createdAt } = message;
-    const { supplierPicture } = this.props;
-    const incomingMessage = {
+    return {
       _id: id,
       text,
       createdAt: new Date(createdAt),
       user: {
         _id: senderId,
-        name: senderId,
+        name: supplierName,
         avatar: supplierPicture
       }
     };
+  };
+
+  getMessages = async () => {
+    const { roomId } = this.props;
+    const { messages: oldMessages } = this.state;
+    const lastMessageId = oldMessages[oldMessages.length - 1]._id
+
+    const newMessages = await currentUser.fetchMessages({
+      roomId,
+      direction: 'older',
+      limit: LOAD_EARLIER_QUANTITY,
+      initialId: lastMessageId
+    });
+    return newMessages.map(message => this.messageSerializer(message)).reverse();
+  };
+
+  onSend = messages => {
+    const { roomId } = this.props;
+    currentUser.sendMessage({
+      text: messages.text,
+      roomId
+    });
+    this.handleTextChange('');
+  };
+
+  onReceive = message => {
+    const incomingMessage = this.messageSerializer(message);
     this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, incomingMessage)
+      messages: GiftedChat.append(previousState.messages, incomingMessage),
     }));
   };
 
-  onLoadEarlier = () => {
-    // this.setState({
-    //   messages: this.getMessages()
-    // });
+  onLoadEarlier = async () => {
+    const earlierMessages = await this.getMessages();
+    this.setState(previousState => ({
+      messages: GiftedChat.append(earlierMessages, previousState.messages)
+    }));
   };
 
   renderBubble = props => {
@@ -121,7 +129,7 @@ class SupplierChat extends React.Component {
     if (this.state.typingText) {
       return (
         <View>
-          <Text style={styles.typingText}>Esta tipeando</Text>
+          <Text style={styles.typingText}>{this.props.supplierName} está escribiendo un mensaje</Text>
         </View>
       );
     }
@@ -130,13 +138,6 @@ class SupplierChat extends React.Component {
 
   handleTextChange = text => this.setState({ text });
 
-  onSend = (messages = []) => {
-    this.handleTextChange('');
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages)
-    }));
-  };
-
   render() {
     const { messages, text } = this.state;
     const { userId } = this.props;
@@ -144,10 +145,8 @@ class SupplierChat extends React.Component {
       <GiftedChat
         messages={messages}
         placeholder="Escribe un mensaje"
-        isAnimated
-        loadEarlier
-        //onSend={messages => this.onSend(messages)}
-        //onLoadEarlier={this.onLoadEarlier}
+        isAnimated={true}
+        loadEarlier={true}
         user={{ _id: userId }}
         renderBubble={this.renderBubble}
         renderSend={this.renderSend}
@@ -155,6 +154,12 @@ class SupplierChat extends React.Component {
         renderFooter={this.renderFooter}
         text={text}
         onInputTextChanged={this.handleTextChange}
+        listViewProps={
+          {
+            onEndReached: this.onLoadEarlier.bind(this),
+            onEndReachedThreshold: 0.5,
+          }
+        }
       />
     );
   }

@@ -9,6 +9,7 @@ import waveIcon from '@assets/wave.png';
 import { navigationModel } from '@propTypes/navigationModel';
 
 import styles from './styles';
+import { currentUser } from '@services/ChatService';
 
 class Chats extends Component {
   static getDerivedStateFromProps({ rooms }, { loaded }) {
@@ -20,7 +21,47 @@ class Chats extends Component {
 
   state = { rooms: [], loaded: false }; // eslint-disable-line
 
-  handleTextSubmit = () => {};
+  //FIXME: Boilerplate with SupplierChat.js (move to another class?)
+  subscribeToRoom = roomId => {
+    currentUser.subscribeToRoom({
+      roomId,
+      hooks: {
+        onMessage: this.onReceive,
+        onUserStartedTyping: () =>
+          this.setState({
+            typingText: true
+          }),
+        onUserStoppedTyping: () =>
+          this.setState({
+            typingText: false
+          })
+      },
+      messageLimit: 1 //Only last message
+    });
+  }
+
+  //FIXME: Boilerplate with SupplierChat.js (move to another class?)
+  messageSerializer = message => {
+    const { supplierName, supplierPicture } = this.props
+    const { id, senderId, text, createdAt } = message;
+    return {
+      _id: id,
+      text,
+      createdAt: new Date(createdAt),
+      user: {
+        _id: senderId,
+        name: supplierName,
+        avatar: supplierPicture
+      }
+    };
+  };
+
+  onReceive = message => {
+    const incomingMessage = this.messageSerializer(message);
+    //WIP: Add it to the corresponding room
+  };
+
+  handleTextSubmit = () => { };
 
   handleInputChange = name => {
     const { rooms } = this.props;
@@ -33,7 +74,7 @@ class Chats extends Component {
   selectSupplier = ({
     supplierId,
     supplierName,
-    supplierPicture = 'http://www.facetheforce.today/random/400?r=1',
+    supplierPicture = 'http://www.facetheforce.today/random/',
     roomId
   }) => () => {
     const {
@@ -43,16 +84,18 @@ class Chats extends Component {
   };
 
   renderItem = ({ item }) => {
-    const { supplierName, supplierPicture } = item;
+    const { roomId, supplierName, supplierPicture } = item;
+    this.subscribeToRoom(roomId)
     return (
       <TouchableOpacity style={styles.supplierContainer} onPress={this.selectSupplier(item)}>
         <View style={styles.item}>
           <Image
-            source={{ uri: supplierPicture || 'http://www.facetheforce.today/random/400?r=1' }}
+            source={{ uri: supplierPicture || 'http://www.facetheforce.today/random/' }}
             style={styles.supplierPicture}
           />
           <CustomText bold>{supplierName}</CustomText>
           <Image style={styles.wave} source={waveIcon} />
+
         </View>
       </TouchableOpacity>
     );
@@ -75,8 +118,8 @@ class Chats extends Component {
         {loading ? (
           <ActivityIndicator />
         ) : (
-          <FlatList data={rooms} renderItem={this.renderItem} keyExtractor={this.keyExtractor} />
-        )}
+            <FlatList data={rooms} renderItem={this.renderItem} keyExtractor={this.keyExtractor} />
+          )}
       </View>
     );
   }

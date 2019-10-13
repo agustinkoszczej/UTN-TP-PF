@@ -1,5 +1,3 @@
-import reactotron from "reactotron-react-native";
-
 export const roomSerializer = (data, userId) =>
   data.rooms.map(({ id: roomId, unreadCount, lastMessageAt, customData, userStore: { users } }) => {
     const { avatar_url: supplierPicture, presenceStore } = users[userId];

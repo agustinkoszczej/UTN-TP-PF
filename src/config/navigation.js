@@ -4,10 +4,12 @@ import TabBarIcon from '@components/TabBarIcon';
 import AddButton from '@components/AddButton';
 import RequestButton from '@components/RequestButton';
 import SearchButton from '@components/SearchButton';
+import CustomText from '@components/CustomText';
 import { black, boulder, dustyGray, white } from '@constants/colors';
 import Routes from '@constants/routes';
 import statusBarConfig from '@constants/statusBar';
 import { strings } from '@constants/screenStrings';
+import { View, Image } from 'react-native';
 
 const homeScreensHeaderTitleStyle = {
   alignSelf: 'center',
@@ -285,6 +287,20 @@ export const screensNavOptions = {
   },
   [Routes.AgendaRequest]: {
     title: strings[Routes.AgendaRequest]
+  },
+  [Routes.SupplierChat]: ({ navigation }) => {
+    const { supplierName, supplierPicture } = navigation.state.params;
+    return {
+      headerTitle: (
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Image
+            source={{ uri: supplierPicture }}
+            style={{ width: 40, height: 40, borderRadius: 20, marginRight: 15 }}
+          />
+          <CustomText>{supplierName}</CustomText>
+        </View>
+      )
+    };
   }
 };
 

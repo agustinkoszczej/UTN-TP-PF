@@ -10,7 +10,7 @@ import { currentUser } from '@services/ChatService';
 
 import styles from './styles';
 
-const LOAD_EARLIER_QUANTITY = 10
+const LOAD_EARLIER_QUANTITY = 10;
 
 class SupplierChat extends React.Component {
   state = {
@@ -39,7 +39,7 @@ class SupplierChat extends React.Component {
   }
 
   messageSerializer = message => {
-    const { supplierName, supplierPicture } = this.props
+    const { supplierName, supplierPicture } = this.props;
     const { id, senderId, text, createdAt } = message;
     return {
       _id: id,
@@ -56,7 +56,7 @@ class SupplierChat extends React.Component {
   getMessages = async () => {
     const { roomId } = this.props;
     const { messages: oldMessages } = this.state;
-    const lastMessageId = oldMessages[oldMessages.length - 1]._id
+    const lastMessageId = oldMessages[oldMessages.length - 1]._id;
 
     const newMessages = await currentUser.fetchMessages({
       roomId,
@@ -79,7 +79,7 @@ class SupplierChat extends React.Component {
   onReceive = message => {
     const incomingMessage = this.messageSerializer(message);
     this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, incomingMessage),
+      messages: GiftedChat.append(previousState.messages, incomingMessage)
     }));
   };
 
@@ -145,8 +145,10 @@ class SupplierChat extends React.Component {
       <GiftedChat
         messages={messages}
         placeholder="Escribe un mensaje"
-        isAnimated={true}
-        loadEarlier={true}
+        isAnimated
+        loadEarlier
+        // onSend={messages => this.onSend(messages)}
+        // onLoadEarlier={this.onLoadEarlier}
         user={{ _id: userId }}
         renderBubble={this.renderBubble}
         renderSend={this.renderSend}
@@ -154,12 +156,10 @@ class SupplierChat extends React.Component {
         renderFooter={this.renderFooter}
         text={text}
         onInputTextChanged={this.handleTextChange}
-        listViewProps={
-          {
-            onEndReached: this.onLoadEarlier.bind(this),
-            onEndReachedThreshold: 0.5,
-          }
-        }
+        listViewProps={{
+          onEndReached: this.onLoadEarlier.bind(this),
+          onEndReachedThreshold: 0.5
+        }}
       />
     );
   }

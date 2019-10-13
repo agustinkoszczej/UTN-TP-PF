@@ -7,9 +7,9 @@ import Routes from '@constants/routes';
 import CustomText from '@components/CustomText';
 import waveIcon from '@assets/wave.png';
 import { navigationModel } from '@propTypes/navigationModel';
+import { currentUser } from '@services/ChatService';
 
 import styles from './styles';
-import { currentUser } from '@services/ChatService';
 
 class Chats extends Component {
   static getDerivedStateFromProps({ rooms }, { loaded }) {
@@ -19,9 +19,9 @@ class Chats extends Component {
     return null;
   }
 
-  state = { rooms: [], loaded: false }; // eslint-disable-line
+  state = { rooms: [], loaded: false, typingText: false }; // eslint-disable-line
 
-  //FIXME: Boilerplate with SupplierChat.js (move to another class?)
+  // FIXME: Boilerplate with SupplierChat.js (move to another class?)
   subscribeToRoom = roomId => {
     currentUser.subscribeToRoom({
       roomId,
@@ -36,13 +36,13 @@ class Chats extends Component {
             typingText: false
           })
       },
-      messageLimit: 1 //Only last message
+      messageLimit: 1 // Only last message
     });
-  }
+  };
 
-  //FIXME: Boilerplate with SupplierChat.js (move to another class?)
+  // FIXME: Boilerplate with SupplierChat.js (move to another class?)
   messageSerializer = message => {
-    const { supplierName, supplierPicture } = this.props
+    const { supplierName, supplierPicture } = this.props;
     const { id, senderId, text, createdAt } = message;
     return {
       _id: id,
@@ -58,10 +58,10 @@ class Chats extends Component {
 
   onReceive = message => {
     const incomingMessage = this.messageSerializer(message);
-    //WIP: Add it to the corresponding room
+    // WIP: Add it to the corresponding room
   };
 
-  handleTextSubmit = () => { };
+  handleTextSubmit = () => {};
 
   handleInputChange = name => {
     const { rooms } = this.props;
@@ -85,7 +85,7 @@ class Chats extends Component {
 
   renderItem = ({ item }) => {
     const { roomId, supplierName, supplierPicture } = item;
-    this.subscribeToRoom(roomId)
+    this.subscribeToRoom(roomId);
     return (
       <TouchableOpacity style={styles.supplierContainer} onPress={this.selectSupplier(item)}>
         <View style={styles.item}>
@@ -95,7 +95,6 @@ class Chats extends Component {
           />
           <CustomText bold>{supplierName}</CustomText>
           <Image style={styles.wave} source={waveIcon} />
-
         </View>
       </TouchableOpacity>
     );
@@ -118,8 +117,8 @@ class Chats extends Component {
         {loading ? (
           <ActivityIndicator />
         ) : (
-            <FlatList data={rooms} renderItem={this.renderItem} keyExtractor={this.keyExtractor} />
-          )}
+          <FlatList data={rooms} renderItem={this.renderItem} keyExtractor={this.keyExtractor} />
+        )}
       </View>
     );
   }
@@ -128,7 +127,6 @@ class Chats extends Component {
 Chats.propTypes = {
   rooms: PropTypes.arrayOf(PropTypes.shape({})),
   loading: PropTypes.bool.isRequired,
-  userId: PropTypes.string.isRequired,
   navigation: PropTypes.shape(navigationModel).isRequired
 };
 

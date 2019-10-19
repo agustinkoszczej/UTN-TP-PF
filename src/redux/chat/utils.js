@@ -1,15 +1,21 @@
 export const roomSerializer = (data, userId) =>
-  data.rooms.map(({ id: roomId, unreadCount, lastMessageAt, customData }) => {
-    const supplierPicture = customData.dataByUser[userId].picture;
-    const supplierName = customData.dataByUser[userId].fullName;
-    // const online = presenceStore[userId] !== 'offline';
-    const supplierId = customData.dataByUser[userId].user_id;
+  data.rooms.map(room => {
+    const {
+      id: roomId,
+      unreadCount,
+      lastMessageAt,
+      customData: { dataByUser },
+      userStore: { presenceStore }
+    } = room;
+    const supplierId = Object.keys(dataByUser).find(id => id !== userId);
+    const { fullName: supplierName, picture: supplierPicture } = dataByUser[userId];
+    const online = presenceStore[supplierId] !== 'offline';
     return {
       supplierPicture,
       roomId,
       lastMessageAt,
       supplierName,
-      // online,
+      online,
       supplierId,
       unreadCount
     };

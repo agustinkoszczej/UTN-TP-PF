@@ -11,9 +11,9 @@ import ConnectedDialog from './components/ConnectedDialog';
 class App extends Component {
   componentDidMount() {
     SplashScreen.hide();
-    const { setUp, dispatch } = this.props;
+    const { setUp, configNotifications } = this.props;
     setUp();
-    configPushNotifications(dispatch);
+    configNotifications();
   }
 
   render() {
@@ -27,11 +27,13 @@ class App extends Component {
 }
 
 App.propTypes = {
-  setUp: PropTypes.func.isRequired
+  setUp: PropTypes.func.isRequired,
+  configNotifications: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({
-  setUp: () => dispatch(AuthActions.setUp())
+  setUp: () => dispatch(AuthActions.setUp()),
+  configNotifications: () => configPushNotifications(dispatch)
 });
 
 export default connect(

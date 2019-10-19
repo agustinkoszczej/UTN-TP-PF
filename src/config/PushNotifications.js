@@ -16,12 +16,9 @@ const formatReceivedNotification = push => {
 
 export default function setUp(dispatch) {
   PushNotification.configure({
-    async onRegister(data) {
+    onRegister(data) {
       dispatch(NotificationActions.register(data.token));
-      const userLogged = await AuthService.isLogged();
-      if (userLogged) {
-        dispatch(NotificationActions.updateToken());
-      }
+      dispatch(NotificationActions.updateToken());
     },
     onNotification(notification) {
       dispatch(NotificationActions.notificationReceived(formatReceivedNotification(notification)));
@@ -30,7 +27,7 @@ export default function setUp(dispatch) {
         PushNotificationsService.setApplicationIconBadgeNumber(totalNotifications);
       }
     },
-    senderID: 'a',
+    senderID: '257392567314',
     permissions: {
       alert: true,
       badge: true,

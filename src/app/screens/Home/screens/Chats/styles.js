@@ -28,7 +28,7 @@ export default StyleSheet.create({
   supplierPicture: {
     width: 40,
     height: 40,
-    borderRadius: 10,
+    borderRadius: 20,
     marginRight: 15
   },
   selected: {
@@ -49,7 +49,8 @@ export default StyleSheet.create({
   wave: {
     width: 28,
     height: 28,
-    resizeMode: 'contain'
+    resizeMode: 'contain',
+    marginLeft: 15
   },
   item: {
     flexDirection: 'row',

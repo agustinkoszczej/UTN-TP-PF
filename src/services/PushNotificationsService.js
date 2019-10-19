@@ -1,4 +1,4 @@
-import { Platform, Alert, PushNotificationIOS } from 'react-native';
+import { Alert, PushNotificationIOS } from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import AsyncStorage from '@react-native-community/async-storage';
 import api from '@config/api';
@@ -11,13 +11,8 @@ const USER_PATH = '/users';
 const setDeviceId = id => AsyncStorage.setItem(DEVICE_ID_STORAGE_KEY, JSON.stringify(id));
 const getDeviceId = () => AsyncStorage.getItem(DEVICE_ID_STORAGE_KEY).then(JSON.parse);
 
-const updateDeviceToken = token => {
-  const data = {
-    device_type: Platform.OS,
-    device_token: token
-  };
-  return api.put(`${USER_PATH}/add_device_token`, data);
-};
+const updateDeviceToken = token => api.post('/merchants/notifications/subscribe', { token });
+
 const cancelAllPushNotifications = () => PushNotification.cancelAllLocalNotifications();
 
 const setApplicationIconBadgeNumber = number => {

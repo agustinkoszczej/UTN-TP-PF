@@ -57,7 +57,7 @@ class Chats extends Component {
   };
 
   onReceive = message => {
-    const incomingMessage = this.messageSerializer(message);
+    // const incomingMessage = this.messageSerializer(message);
     // WIP: Add it to the corresponding room
   };
 
@@ -71,12 +71,7 @@ class Chats extends Component {
     this.setState({ rooms: filterRooms });
   };
 
-  selectSupplier = ({
-    supplierId,
-    supplierName,
-    supplierPicture = 'http://www.facetheforce.today/random/',
-    roomId
-  }) => () => {
+  selectSupplier = ({ supplierId, supplierName, supplierPicture, roomId }) => () => {
     const {
       navigation: { navigate }
     } = this.props;
@@ -85,14 +80,11 @@ class Chats extends Component {
 
   renderItem = ({ item }) => {
     const { roomId, supplierName, supplierPicture } = item;
-    this.subscribeToRoom(roomId);
+    // this.subscribeToRoom(roomId);
     return (
       <TouchableOpacity style={styles.supplierContainer} onPress={this.selectSupplier(item)}>
         <View style={styles.item}>
-          <Image
-            source={{ uri: supplierPicture || 'http://www.facetheforce.today/random/' }}
-            style={styles.supplierPicture}
-          />
+          <Image source={{ uri: supplierPicture }} style={styles.supplierPicture} />
           <CustomText bold>{supplierName}</CustomText>
           <Image style={styles.wave} source={waveIcon} />
         </View>
@@ -114,7 +106,7 @@ class Chats extends Component {
           underline
           onChange={this.handleInputChange}
         />
-        {loading ? (
+        {true ? (
           <ActivityIndicator />
         ) : (
           <FlatList data={rooms} renderItem={this.renderItem} keyExtractor={this.keyExtractor} />

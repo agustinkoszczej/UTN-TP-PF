@@ -106,7 +106,7 @@ class Chats extends Component {
           underline
           onChange={this.handleInputChange}
         />
-        {true ? (
+        {loading ? (
           <ActivityIndicator />
         ) : (
           <FlatList data={rooms} renderItem={this.renderItem} keyExtractor={this.keyExtractor} />

@@ -7,13 +7,11 @@ const CHATKIT_TOKEN_PROVIDER =
 export let currentUser; // eslint-disable-line
 
 const getPusherManager = async userId => {
-  debugger;
   const data = await new ChatManager({
     instanceLocator: CHATKIT_INSTANCE_LOCATOR,
     userId,
     tokenProvider: new TokenProvider({ url: CHATKIT_TOKEN_PROVIDER })
   }).connect();
-  debugger;
   currentUser = data;
   return { ok: true, data };
 };

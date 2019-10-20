@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { View, FlatList, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import { View, FlatList, TouchableOpacity, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
 import CustomTextInput from '@components/CustomTextInput';
 import Routes from '@constants/routes';
 import CustomText from '@components/CustomText';
-import waveIcon from '@assets/wave.png';
 import { navigationModel } from '@propTypes/navigationModel';
+import Loadable from '@components/Loadable';
+import sendedIcon from '@assets/forward-arrow.png';
 import { currentUser } from '@services/ChatService';
 
 import styles from './styles';
@@ -19,7 +21,12 @@ class Chats extends Component {
     return null;
   }
 
-  state = { rooms: [], loaded: false, typingText: false }; // eslint-disable-line
+  state = { rooms: [], loaded: false, typingText: false, lastMessages: [] }; // eslint-disable-line
+
+  componentDidMount() {
+    const { rooms } = this.state;
+    rooms.forEach(({ roomId }) => this.subscribeToRoom(roomId));
+  }
 
   // FIXME: Boilerplate with SupplierChat.js (move to another class?)
   subscribeToRoom = roomId => {
@@ -42,22 +49,35 @@ class Chats extends Component {
 
   // FIXME: Boilerplate with SupplierChat.js (move to another class?)
   messageSerializer = message => {
-    const { supplierName, supplierPicture } = this.props;
-    const { id, senderId, text, createdAt } = message;
+    const { userId } = this.props;
+    const { roomId, senderId, text, createdAt } = message;
     return {
-      _id: id,
+      roomId,
       text,
       createdAt: new Date(createdAt),
-      user: {
-        _id: senderId,
-        name: supplierName,
-        avatar: supplierPicture
-      }
+      sendByMe: userId === senderId
     };
   };
 
   onReceive = message => {
-    // const incomingMessage = this.messageSerializer(message);
+    const { lastMessages } = this.state;
+    const lastMessage = this.messageSerializer(message);
+    const lastMessageRoom = lastMessages.find(
+      lastMessageState => lastMessageState.roomId === lastMessage.roomId
+    );
+    this.setState(prevState => {
+      if (lastMessageRoom) {
+        return [
+          ...prevState.filter(lastMessageState => lastMessageState.roomId === lastMessage.roomId),
+          lastMessage
+        ];
+      }
+      return {
+        ...prevState,
+        lastMessages: [...prevState.lastMessages, lastMessage]
+      };
+    });
+
     // WIP: Add it to the corresponding room
   };
 
@@ -80,13 +100,17 @@ class Chats extends Component {
 
   renderItem = ({ item }) => {
     const { roomId, supplierName, supplierPicture } = item;
-    // this.subscribeToRoom(roomId);
+    const { lastMessages } = this.state;
+    const message = lastMessages.find(lastMessage => roomId === lastMessage.roomId);
+    const text = message?.text || '';
+    const sended = message?.sendByMe;
     return (
       <TouchableOpacity style={styles.supplierContainer} onPress={this.selectSupplier(item)}>
         <View style={styles.item}>
           <Image source={{ uri: supplierPicture }} style={styles.supplierPicture} />
           <CustomText bold>{supplierName}</CustomText>
-          <Image style={styles.wave} source={waveIcon} />
+          {sended && <Image source={sendedIcon} style={styles.sended} />}
+          <CustomText style={styles.messageText}>{text}</CustomText>
         </View>
       </TouchableOpacity>
     );
@@ -95,8 +119,7 @@ class Chats extends Component {
   keyExtractor = ({ roomId }) => `${roomId}`;
 
   render() {
-    const { rooms } = this.state;
-    const { loading } = this.props;
+    const { rooms, lastMessages } = this.state;
     return (
       <View style={styles.container}>
         <CustomTextInput
@@ -106,11 +129,12 @@ class Chats extends Component {
           underline
           onChange={this.handleInputChange}
         />
-        {loading ? (
-          <ActivityIndicator />
-        ) : (
-          <FlatList data={rooms} renderItem={this.renderItem} keyExtractor={this.keyExtractor} />
-        )}
+        <FlatList
+          data={rooms}
+          renderItem={this.renderItem}
+          keyExtractor={this.keyExtractor}
+          extraData={{ lastMessages }}
+        />
       </View>
     );
   }
@@ -118,7 +142,7 @@ class Chats extends Component {
 
 Chats.propTypes = {
   rooms: PropTypes.arrayOf(PropTypes.shape({})),
-  loading: PropTypes.bool.isRequired,
+  userId: PropTypes.string.isRequired,
   navigation: PropTypes.shape(navigationModel).isRequired
 };
 
@@ -128,4 +152,9 @@ const mapStateToProps = state => ({
   userId: state.auth.currentUser.id
 });
 
-export default connect(mapStateToProps)(Chats);
+const enhancer = compose(
+  connect(mapStateToProps),
+  Loadable(props => props.loading)
+);
+
+export default enhancer(Chats);

@@ -46,9 +46,9 @@ export default StyleSheet.create({
     marginLeft: '5%',
     marginBottom: 15
   },
-  wave: {
-    width: 28,
-    height: 28,
+  sended: {
+    width: 15,
+    height: 15,
     resizeMode: 'contain',
     marginLeft: 15
   },
@@ -59,5 +59,8 @@ export default StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 12,
     paddingVertical: 8
+  },
+  messageText: {
+    marginLeft: 15
   }
 });

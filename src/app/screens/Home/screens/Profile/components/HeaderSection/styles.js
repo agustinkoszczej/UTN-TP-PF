@@ -26,6 +26,10 @@ const styles = StyleSheet.create({
     width: scale(250),
     marginTop: 20
   },
+  requestButton: {
+    width: scale(125),
+    marginTop: 20
+  },
   userSection: {
     flex: 1,
     flexDirection: 'row',

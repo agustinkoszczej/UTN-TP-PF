@@ -12,7 +12,8 @@ const stateDescription = {
   suppliers: [],
   stats: null,
   acceptContact: null,
-  declineContact: null
+  declineContact: null,
+  currentSupplier: null
 };
 
 const initialState = completeState(stateDescription, ['initialLoading']);
@@ -26,7 +27,8 @@ const reducerDescription = {
     actions.UPDATE_USER,
     actions.GET_AGENDA,
     actions.GET_SUPPLIERS,
-    actions.GET_STATS
+    actions.GET_STATS,
+    actions.GET_SUPPLIER_BY_ID
   ],
   override: {
     [actions.LOG_OUT]: onSetValue(null),

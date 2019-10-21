@@ -9,14 +9,14 @@ import styles from './styles';
 import HeaderSection from './components/HeaderSection';
 import InfoSection from './components/InfoSection';
 
-function Profile({ loading, getUserInfo, supplier }) {
+function Profile({ loading, getUserInfo }) {
   return (
     <ScrollView
       style={styles.container}
       refreshControl={<RefreshControl refreshing={loading} onRefresh={getUserInfo} />}
     >
-      <HeaderSection supplier={supplier} />
-      <InfoSection supplier={supplier} />
+      <HeaderSection />
+      <InfoSection />
     </ScrollView>
   );
 }

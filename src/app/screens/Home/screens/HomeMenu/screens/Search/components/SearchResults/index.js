@@ -9,6 +9,7 @@ import CustomButton from '@components/CustomButton';
 import Card from '@components/Card';
 import { navigationModel } from '@propTypes/navigationModel';
 import ProductActions from '@redux/product/actions';
+import AuthActions from '@redux/auth/actions';
 import Routes from '@constants/routes';
 import WithError from '@components/WithError';
 import worried from '@assets/worried.png';
@@ -40,15 +41,16 @@ class SearchResults extends Component {
   };
 
   handleItemPress = item => () => {
-    const { navigation, getProductById, selected } = this.props;
+    const { navigation, getProductById, selected, getSupplierById } = this.props;
     let route;
     if (selected === STATES_SELECTED.PRODUCT) {
       route = Routes.ProductDetail;
       getProductById(item.id);
     } else {
+      getSupplierById(item.user_id);
       route = Routes.SupplierProfile;
     }
-    navigation.navigate(route, { supplier: item });
+    navigation.navigate(route);
   };
 
   keyExtractor = ({ id, user_id: userId }) => `${id || userId}`;
@@ -79,7 +81,8 @@ SearchResults.propTypes = {
   ),
   selected: PropTypes.string.isRequired,
   users: PropTypes.arrayOf(PropTypes.shape({})),
-  getProductById: PropTypes.func.isRequired
+  getProductById: PropTypes.func.isRequired,
+  getSupplierById: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -89,7 +92,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getProductById: id => dispatch(ProductActions.getProductById(id))
+  getProductById: id => dispatch(ProductActions.getProductById(id)),
+  getSupplierById: id => dispatch(AuthActions.getSupplierById(id))
 });
 
 const enhancer = compose(

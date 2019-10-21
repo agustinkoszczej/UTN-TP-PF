@@ -36,7 +36,7 @@ class AgendaRequest extends Component {
         <View style={[styles.row, styles.spaceBetween]}>
           <CustomButton
             primaryBtn
-            onPress={this.handleAccept(item)}
+            onPress={this.handleAccept(id)}
             textStyle={styles.white}
             style={styles.button}
             title="Aceptar"
@@ -54,9 +54,9 @@ class AgendaRequest extends Component {
     );
   };
 
-  handleAccept = item => () => {
+  handleAccept = id => () => {
     const { acceptRequest } = this.props;
-    acceptRequest(item);
+    acceptRequest(id);
   };
 
   handleDecline = id => () => {
@@ -105,7 +105,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  acceptRequest: item => dispatch(AuthActions.acceptRequest(item)),
+  acceptRequest: id => dispatch(AuthActions.acceptRequest(id)),
   refreshAgenda: () => dispatch(AuthActions.getAgenda()),
   declineRequest: id => dispatch(AuthActions.declineRequest(id))
 });

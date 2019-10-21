@@ -1,4 +1,4 @@
-import { string, number } from 'prop-types';
+import { string, bool } from 'prop-types';
 
 export const userModel = {
   email: string.isRequired,
@@ -11,5 +11,6 @@ export const userModel = {
   companyName: string.isRequired,
   fullName: string.isRequired,
   cuit: string.isRequired,
-  contactNumber: string.isRequired
+  contactNumber: string.isRequired,
+  isSupplier: bool
 };

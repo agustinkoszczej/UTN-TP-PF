@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavigationActions, StackActions, withNavigation } from 'react-navigation';
-import { compose, withProps } from 'recompose';
+import { compose } from 'recompose';
 import AuthActions from '@redux/auth/actions';
 import Routes from '@constants/routes';
 import { navigationModel } from '@propTypes/navigationModel';
@@ -24,24 +24,50 @@ class HeaderSectionContainer extends Component {
     logOut();
   };
 
+  navigateToChat = () => {
+    const {
+      navigation: { navigate },
+      currentUser: { room }
+    } = this.props;
+    navigate(Routes.SupplierChat, room);
+  };
+
+  handleAccept = () => {
+    const {
+      acceptRequest,
+      currentUser: { id }
+    } = this.props;
+    acceptRequest(id);
+  };
+
+  handleDecline = () => {
+    const {
+      declineRequest,
+      currentUser: { id }
+    } = this.props;
+    declineRequest(id);
+  };
+
   render() {
     const {
-      currentUser: { fullName, email, picture, rating, requestSend, inAgenda },
-      loading,
-      isSupplier
+      currentUser: { fullName, email, picture, rating, requestSend, inAgenda, isSupplier, isRequesting }
     } = this.props;
     return (
       <HeaderSection
         fullName={fullName}
-        loading={loading}
+        {...this.props}
         email={email}
         navigateToConfiguration={this.navigateToConfiguration}
+        navigateToChat={this.navigateToChat}
         handleLogOut={this.handleLogOut}
         picture={picture}
         rating={rating}
-        isSupplier={isSupplier}
         inAgenda={inAgenda}
+        isSupplier={isSupplier}
         requestSend={requestSend}
+        handleDecline={this.handleDecline}
+        handleAccept={this.handleAccept}
+        isRequesting={isRequesting}
       />
     );
   }
@@ -52,13 +78,16 @@ HeaderSectionContainer.propTypes = {
   logOut: PropTypes.func.isRequired,
   currentUser: PropTypes.shape(userModel).isRequired,
   loading: PropTypes.bool.isRequired,
-  isSupplier: PropTypes.bool.isRequired,
-  redictToLogin: PropTypes.func.isRequired
+  redictToLogin: PropTypes.func.isRequired,
+  acceptRequest: PropTypes.func.isRequired,
+  declineRequest: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  currentUser: ownProps?.supplier || state.auth.currentUser,
-  loading: state.auth.currentUserLoading
+const mapStateToProps = state => ({
+  currentUser: state.auth.currentSupplier || state.auth.currentUser,
+  loading: state.auth.currentUserLoading,
+  acceptLoading: state.auth.acceptContactLoading,
+  declineLoading: state.auth.declineContactLoading
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -69,14 +98,13 @@ const mapDispatchToProps = dispatch => ({
         index: 0,
         actions: [NavigationActions.navigate({ routeName: Routes.Login })]
       })
-    )
+    ),
+  acceptRequest: id => dispatch(AuthActions.acceptRequest(id, true)),
+  declineRequest: id => dispatch(AuthActions.declineRequest(id))
 });
 
 const enhance = compose(
   withNavigation,
-  withProps(ownProps => ({
-    isSupplier: !!ownProps?.supplier
-  })),
   connect(
     mapStateToProps,
     mapDispatchToProps

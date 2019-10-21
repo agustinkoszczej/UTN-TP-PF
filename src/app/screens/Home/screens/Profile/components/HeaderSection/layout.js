@@ -20,7 +20,13 @@ function HeaderSection({
   rating,
   isSupplier,
   requestSend,
-  inAgenda
+  inAgenda,
+  navigateToChat,
+  declineLoading,
+  acceptLoading,
+  handleAccept,
+  handleDecline,
+  isRequesting
 }) {
   return (
     <ImageBackground source={background} style={styles.container}>
@@ -36,19 +42,56 @@ function HeaderSection({
         </View>
       </View>
       <AirbnbRating defaultRating={rating} isDisabled showRating={false} />
-      <CustomButton
-        secondaryBtn
-        title={inAgenda ? strings.remove : requestSend ? strings.cancelRequest : strings.edit}
-        style={[styles.button, isSupplier && { marginBottom: 10 }]}
-        onPress={navigateToConfiguration}
-      />
-      {!isSupplier && (
+      {requestSend ? (
+        <View style={{ flexDirection: 'row' }}>
+          <CustomButton
+            secondaryBtn
+            title="Aceptar"
+            style={[styles.requestButton, { marginBottom: 10, marginRight: 10 }]}
+            onPress={handleAccept}
+            loading={acceptLoading}
+          />
+          <CustomButton
+            secondaryBtn
+            title="Declinar"
+            style={[styles.requestButton, { marginBottom: 10 }]}
+            onPress={handleDecline}
+            loading={declineLoading}
+          />
+        </View>
+      ) : (
+        <CustomButton
+          secondaryBtn
+          title={
+            !isSupplier
+              ? strings.edit
+              : inAgenda
+              ? strings.remove
+              : isRequesting
+              ? strings.cancelRequest
+              : strings.requestContact
+          }
+          style={[styles.button, isSupplier && { marginBottom: 10 }]}
+          onPress={navigateToConfiguration}
+        />
+      )}
+
+      {!isSupplier ? (
         <CustomButton
           title={strings.closeSession}
           style={styles.button}
           onPress={handleLogOut}
           textStyle={styles.white}
         />
+      ) : (
+        inAgenda && (
+          <CustomButton
+            secondaryBtn
+            title="Mensaje"
+            style={[styles.button, { marginBottom: 10 }]}
+            onPress={navigateToChat}
+          />
+        )
       )}
     </ImageBackground>
   );
@@ -59,11 +102,17 @@ HeaderSection.propTypes = {
   email: PropTypes.string.isRequired,
   picture: PropTypes.string.isRequired,
   handleLogOut: PropTypes.func.isRequired,
+  navigateToChat: PropTypes.func.isRequired,
   navigateToConfiguration: PropTypes.func.isRequired,
   rating: PropTypes.number.isRequired,
   isSupplier: PropTypes.bool.isRequired,
   requestSend: PropTypes.bool.isRequired,
-  inAgenda: PropTypes.bool.isRequired
+  inAgenda: PropTypes.bool.isRequired,
+  handleAccept: PropTypes.func.isRequired,
+  handleDecline: PropTypes.func.isRequired,
+  acceptLoading: PropTypes.bool.isRequired,
+  declineLoading: PropTypes.bool.isRequired,
+  isRequesting: PropTypes.bool.isRequired
 };
 
 export default Loadable(props => props.loading)(HeaderSection);

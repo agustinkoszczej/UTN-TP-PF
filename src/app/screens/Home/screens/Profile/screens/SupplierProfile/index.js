@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose, withProps } from 'recompose';
 import { connect } from 'react-redux';
 import { userModel } from '@propTypes/userModel';
+import Loadable from '@components/Loadable';
 
 import Profile from '../..';
 
-function SupplierProfile({ supplier }) {
-  return <Profile supplier={supplier} />;
+class SupplierProfile extends Component {
+  render() {
+    const { supplier } = this.props;
+    return <Profile supplier={supplier} />;
+  }
 }
 
 SupplierProfile.propTypes = {
@@ -15,48 +19,17 @@ SupplierProfile.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  ownRequest: state.auth.agenda.ownRequests
+  ownRequest: state.auth.agenda.ownRequests,
+  loading: state.auth.currentSupplierLoading
 });
 
 const enhancer = compose(
   connect(mapStateToProps),
   withProps(ownProps => {
-    const {
-      email,
-      companyName,
-      contactNumber,
-      streetAddress,
-      qrUrl,
-      fullName,
-      user_id: id,
-      picture,
-      cuit,
-      location,
-      rating,
-      inAgenda
-    } = ownProps.navigation.getParam('supplier');
-    const requestSend = ownProps.ownRequest.some(supplier => supplier.user_id === id);
-    const locations = location.split(',');
-    const score = rating?.score || 0;
-    return {
-      supplier: {
-        email,
-        companyName,
-        fullName,
-        contactNumber,
-        streetAddress,
-        qrUrl,
-        id,
-        cuit,
-        picture,
-        latitude: locations[0],
-        longitude: locations[1],
-        rating: score,
-        inAgenda,
-        requestSend
-      }
-    };
-  })
+    const id = ownProps.navigation.getParam('id');
+    return { id };
+  }),
+  Loadable(props => props.loading)
 );
 
 export default enhancer(SupplierProfile);

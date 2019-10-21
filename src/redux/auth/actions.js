@@ -8,7 +8,7 @@ import DialogActions from '@redux/dialog/actions';
 import ChatActions from '@redux/chat/actions';
 import { getAuthDialog, authDialogNames } from '@screens/Auth/dialogs';
 
-import { userSerializer } from './utils';
+import { userSerializer, supplierSerializer } from './utils';
 
 export const actions = createTypes(
   completeTypes(
@@ -22,7 +22,8 @@ export const actions = createTypes(
       'GET_AGENDA',
       'GET_SUPPLIERS',
       'CLEAR_SUPPLIERS',
-      'GET_STATS'
+      'GET_STATS',
+      'GET_SUPPLIER_BY_ID'
     ],
     ['CLEAN_SIGN_UP_ERROR']
   ),
@@ -39,7 +40,8 @@ export const targets = {
   suppliers: 'suppliers',
   stats: 'stats',
   acceptContact: 'acceptContact',
-  declineContact: 'declineContact'
+  declineContact: 'declineContact',
+  currentSupplier: 'currentSupplier'
 };
 
 export const actionCreators = {
@@ -180,17 +182,16 @@ export const actionCreators = {
     target: targets.stats,
     service: AuthService.getStats
   }),
-  acceptRequest: item => ({
+  acceptRequest: (id, isInProfile) => ({
     type: actions.GET_SUPPLIERS,
     target: targets.acceptContact,
-    payload: item.user_id,
+    payload: id,
     service: AuthService.acceptRequest,
     injections: [
       withPostSuccess(dispatch => {
         dispatch(actionCreators.getAgenda());
-        dispatch(
-          NavigationActions.navigate({ routeName: Routes.SupplierProfile, params: { supplier: item } })
-        );
+        dispatch(actionCreators.getSupplierById(id));
+        if (!isInProfile) dispatch(NavigationActions.navigate({ routeName: Routes.SupplierProfile }));
       })
     ]
   }),
@@ -202,9 +203,19 @@ export const actionCreators = {
     injections: [
       withPostSuccess(dispatch => {
         dispatch(actionCreators.getAgenda());
+        dispatch(actionCreators.getSupplierById(id));
       })
     ]
-  })
+  }),
+  getSupplierById: id => (dispatch, getState) => {
+    dispatch({
+      type: actions.GET_SUPPLIER_BY_ID,
+      target: targets.currentSupplier,
+      payload: id,
+      service: AuthService.getSupplierById,
+      successSelector: response => supplierSerializer(response.data.user, getState)
+    });
+  }
 };
 
 export default actionCreators;

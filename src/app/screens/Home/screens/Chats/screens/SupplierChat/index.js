@@ -16,8 +16,7 @@ class SupplierChat extends React.Component {
   state = {
     messages: [],
     typingText: false,
-    text: '',
-    loadEarlier: true
+    text: ''
   };
 
   componentDidMount() {
@@ -85,12 +84,11 @@ class SupplierChat extends React.Component {
   };
 
   onLoadEarlier = async () => {
-    const { loadEarlier } = this.state;
-    if (loadEarlier) {
+    const { messages } = this.state;
+    if (messages.length % LOAD_EARLIER_QUANTITY === 0) {
       const earlierMessages = await this.getMessages();
       this.setState(previousState => ({
-        messages: GiftedChat.append(earlierMessages, previousState.messages),
-        loadEarlier: earlierMessages.length === LOAD_EARLIER_QUANTITY
+        messages: GiftedChat.append(earlierMessages, previousState.messages)
       }));
     }
   };
@@ -144,14 +142,15 @@ class SupplierChat extends React.Component {
   handleTextChange = text => this.setState({ text });
 
   render() {
-    const { messages, text, loadEarlier } = this.state;
+    const { messages, text } = this.state;
     const { userId } = this.props;
     return (
       <GiftedChat
+        textInputProps={{ autoFocus: true }}
         messages={messages}
         placeholder="Escribe un mensaje"
         isAnimated
-        loadEarlier={loadEarlier}
+        loadEarlier={messages.length % LOAD_EARLIER_QUANTITY === 0}
         user={{ _id: userId }}
         renderBubble={this.renderBubble}
         renderSend={this.renderSend}

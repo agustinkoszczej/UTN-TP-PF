@@ -47,7 +47,7 @@ class AgendaRequest extends Component {
             onPress={this.handleDecline(id)}
             style={styles.button}
             title="Declinar"
-            loading={this.props.declineLoading}
+            loading={this.props.deleteLoading}
           />
         </View>
       </Card>
@@ -60,8 +60,8 @@ class AgendaRequest extends Component {
   };
 
   handleDecline = id => () => {
-    const { declineRequest } = this.props;
-    declineRequest(id);
+    const { deleteContact } = this.props;
+    deleteContact(id);
   };
 
   handleRefresh = () => {
@@ -91,23 +91,23 @@ AgendaRequest.propTypes = {
   requests: PropTypes.arrayOf(PropTypes.shape({})),
   acceptRequest: PropTypes.func.isRequired,
   refreshAgenda: PropTypes.func.isRequired,
-  declineRequest: PropTypes.func.isRequired,
+  deleteContact: PropTypes.func.isRequired,
   refreshing: PropTypes.bool.isRequired,
   acceptLoading: PropTypes.bool.isRequired,
-  declineLoading: PropTypes.bool.isRequired
+  deleteLoading: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
   requests: state.auth.agenda?.requests || [],
   refreshing: state.auth.agendaLoading,
-  declineLoading: state.auth.declineContactLoading,
+  deleteLoading: state.auth.deleteContactLoading,
   acceptLoading: state.auth.acceptContactLoading
 });
 
 const mapDispatchToProps = dispatch => ({
   acceptRequest: id => dispatch(AuthActions.acceptRequest(id)),
   refreshAgenda: () => dispatch(AuthActions.getAgenda()),
-  declineRequest: id => dispatch(AuthActions.declineRequest(id))
+  deleteContact: id => dispatch(AuthActions.deleteContact(id))
 });
 
 const enhancer = compose(

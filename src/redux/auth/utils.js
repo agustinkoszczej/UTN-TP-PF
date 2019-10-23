@@ -46,8 +46,8 @@ export const supplierSerializer = (
     chat: { rooms }
   } = getState();
   const room = rooms.find(chat => chat.supplierId === id);
-  const isRequesting = requests.some(request => request.user_id === id);
-  const requestSend = ownRequests.some(request => request.user_id === id);
+  const isRequesting = ownRequests.some(request => request.user_id === id);
+  const requestSend = requests.some(request => request.user_id === id);
   return {
     email,
     id,

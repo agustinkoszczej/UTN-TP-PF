@@ -26,7 +26,10 @@ function HeaderSection({
   acceptLoading,
   handleAccept,
   handleDecline,
-  isRequesting
+  isRequesting,
+  handleDelete,
+  handleAdd,
+  contactLoading
 }) {
   return (
     <ImageBackground source={background} style={styles.container}>
@@ -72,7 +75,16 @@ function HeaderSection({
               : strings.requestContact
           }
           style={[styles.button, isSupplier && { marginBottom: 10 }]}
-          onPress={navigateToConfiguration}
+          onPress={
+            !isSupplier
+              ? navigateToConfiguration
+              : inAgenda
+              ? handleDelete
+              : isRequesting
+              ? handleDelete
+              : handleAdd
+          }
+          loading={contactLoading}
         />
       )}
 
@@ -104,6 +116,8 @@ HeaderSection.propTypes = {
   handleLogOut: PropTypes.func.isRequired,
   navigateToChat: PropTypes.func.isRequired,
   navigateToConfiguration: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
+  handleAdd: PropTypes.func.isRequired,
   rating: PropTypes.number.isRequired,
   isSupplier: PropTypes.bool.isRequired,
   requestSend: PropTypes.bool.isRequired,
@@ -112,7 +126,8 @@ HeaderSection.propTypes = {
   handleDecline: PropTypes.func.isRequired,
   acceptLoading: PropTypes.bool.isRequired,
   declineLoading: PropTypes.bool.isRequired,
-  isRequesting: PropTypes.bool.isRequired
+  isRequesting: PropTypes.bool.isRequired,
+  contactLoading: PropTypes.bool.isRequired
 };
 
 export default Loadable(props => props.loading)(HeaderSection);

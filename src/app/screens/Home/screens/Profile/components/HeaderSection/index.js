@@ -40,12 +40,20 @@ class HeaderSectionContainer extends Component {
     acceptRequest(id);
   };
 
-  handleDecline = () => {
+  handleDelete = () => {
     const {
-      declineRequest,
+      deleteContact,
       currentUser: { id }
     } = this.props;
-    declineRequest(id);
+    deleteContact(id);
+  };
+
+  handleAdd = () => {
+    const {
+      addContact,
+      currentUser: { id }
+    } = this.props;
+    addContact(id);
   };
 
   render() {
@@ -67,6 +75,8 @@ class HeaderSectionContainer extends Component {
         requestSend={requestSend}
         handleDecline={this.handleDecline}
         handleAccept={this.handleAccept}
+        handleAdd={this.handleAdd}
+        handleDelete={this.handleDelete}
         isRequesting={isRequesting}
       />
     );
@@ -80,14 +90,16 @@ HeaderSectionContainer.propTypes = {
   loading: PropTypes.bool.isRequired,
   redictToLogin: PropTypes.func.isRequired,
   acceptRequest: PropTypes.func.isRequired,
-  declineRequest: PropTypes.func.isRequired
+  addContact: PropTypes.func.isRequired,
+  deleteContact: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   currentUser: state.auth.currentSupplier || state.auth.currentUser,
   loading: state.auth.currentUserLoading,
   acceptLoading: state.auth.acceptContactLoading,
-  declineLoading: state.auth.declineContactLoading
+  declineLoading: state.auth.deleteContactLoading,
+  contactLoading: state.auth.deleteContactLoading || state.auth.contactLoading
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -100,7 +112,8 @@ const mapDispatchToProps = dispatch => ({
       })
     ),
   acceptRequest: id => dispatch(AuthActions.acceptRequest(id, true)),
-  declineRequest: id => dispatch(AuthActions.declineRequest(id))
+  deleteContact: id => dispatch(AuthActions.deleteContact(id)),
+  addContact: id => dispatch(AuthActions.addContact(id))
 });
 
 const enhance = compose(

@@ -33,7 +33,8 @@ const getSuppliers = name => api.get('/merchants/suppliers', { name });
 const getStats = () => api.get('/merchants/stats');
 
 const acceptRequest = id => api.patch(`/merchants/agenda/${id}`, { action: 'ADD' });
-const declineRequest = id => api.patch(`/merchants/agenda/${id}`, { action: 'REMOVE' });
+const addContact = supplierId => api.post('/merchants/agenda', { supplierId });
+const deleteContact = id => api.patch(`/merchants/agenda/${id}`, { action: 'REMOVE' });
 
 const getSupplierById = id => api.get(`/users/${id}`);
 
@@ -51,6 +52,7 @@ export default {
   getSuppliers,
   getStats,
   acceptRequest,
-  declineRequest,
-  getSupplierById
+  getSupplierById,
+  addContact,
+  deleteContact
 };

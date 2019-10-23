@@ -23,7 +23,9 @@ export const actions = createTypes(
       'GET_SUPPLIERS',
       'CLEAR_SUPPLIERS',
       'GET_STATS',
-      'GET_SUPPLIER_BY_ID'
+      'GET_SUPPLIER_BY_ID',
+      'ADD_CONTACT',
+      'DELETE_CONTACT'
     ],
     ['CLEAN_SIGN_UP_ERROR']
   ),
@@ -40,8 +42,9 @@ export const targets = {
   suppliers: 'suppliers',
   stats: 'stats',
   acceptContact: 'acceptContact',
-  declineContact: 'declineContact',
-  currentSupplier: 'currentSupplier'
+  deleteContact: 'deleteContact',
+  currentSupplier: 'currentSupplier',
+  contact: 'contact'
 };
 
 export const actionCreators = {
@@ -160,11 +163,12 @@ export const actionCreators = {
     type: actions.CLEAN_SIGN_UP_ERROR,
     target: targets.signUpUserError
   }),
-  getAgenda: name => ({
+  getAgenda: (name, injection) => ({
     type: actions.GET_AGENDA,
     target: targets.agenda,
     payload: name,
-    service: AuthService.getAgenda
+    service: AuthService.getAgenda,
+    injections: [withPostSuccess(() => injection && injection())]
   }),
   getSuppliers: name => ({
     type: actions.GET_SUPPLIERS,
@@ -189,21 +193,23 @@ export const actionCreators = {
     service: AuthService.acceptRequest,
     injections: [
       withPostSuccess(dispatch => {
-        dispatch(actionCreators.getAgenda());
-        dispatch(actionCreators.getSupplierById(id));
-        if (!isInProfile) dispatch(NavigationActions.navigate({ routeName: Routes.SupplierProfile }));
+        dispatch(
+          actionCreators.getAgenda('', () => {
+            dispatch(actionCreators.getSupplierById(id));
+            if (!isInProfile) dispatch(NavigationActions.navigate({ routeName: Routes.SupplierProfile }));
+          })
+        );
       })
     ]
   }),
-  declineRequest: id => ({
+  deleteContact: id => ({
     type: actions.GET_SUPPLIERS,
-    target: targets.declineContact,
+    target: targets.deleteContact,
     payload: id,
-    service: AuthService.declineRequest,
+    service: AuthService.deleteContact,
     injections: [
       withPostSuccess(dispatch => {
-        dispatch(actionCreators.getAgenda());
-        dispatch(actionCreators.getSupplierById(id));
+        dispatch(actionCreators.getAgenda('', () => dispatch(actionCreators.getSupplierById(id))));
       })
     ]
   }),
@@ -215,7 +221,18 @@ export const actionCreators = {
       service: AuthService.getSupplierById,
       successSelector: response => supplierSerializer(response.data.user, getState)
     });
-  }
+  },
+  addContact: id => ({
+    type: actions.ADD_CONTACT,
+    target: targets.contact,
+    payload: id,
+    service: AuthService.addContact,
+    injections: [
+      withPostSuccess(dispatch => {
+        dispatch(actionCreators.getAgenda('', () => dispatch(actionCreators.getSupplierById(id))));
+      })
+    ]
+  })
 };
 
 export default actionCreators;

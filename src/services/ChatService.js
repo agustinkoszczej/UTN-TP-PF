@@ -10,7 +10,8 @@ const getPusherManager = async userId => {
   const data = await new ChatManager({
     instanceLocator: CHATKIT_INSTANCE_LOCATOR,
     userId,
-    tokenProvider: new TokenProvider({ url: CHATKIT_TOKEN_PROVIDER })
+    tokenProvider: new TokenProvider({ url: CHATKIT_TOKEN_PROVIDER }),
+    connectionTimeout: 20000
   }).connect();
   currentUser = data;
   return { ok: true, data };

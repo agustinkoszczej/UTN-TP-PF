@@ -16,14 +16,14 @@ export default StyleSheet.create({
   supplierContainer: {
     height: 75,
     maxWidth: '100%',
-    borderWidth: 1,
+    //borderWidth: 1,
     borderColor: alto,
     marginBottom: 10,
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderRadius: 20
+    //borderRadius: 20
   },
   supplierPicture: {
     width: 40,

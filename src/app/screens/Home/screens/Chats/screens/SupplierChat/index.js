@@ -10,7 +10,7 @@ import { currentUser } from '@services/ChatService';
 
 import styles from './styles';
 
-const LOAD_EARLIER_QUANTITY = 10;
+import { messageSerializer, LOAD_EARLIER_QUANTITY } from '@utils/chatUtils';
 
 class SupplierChat extends React.Component {
   state = {
@@ -38,33 +38,15 @@ class SupplierChat extends React.Component {
     });
   }
 
-  messageSerializer = message => {
-    const { supplierName, supplierPicture } = this.props;
-    const { id, senderId, text, createdAt } = message;
-    return {
-      _id: id,
-      text,
-      createdAt: new Date(createdAt),
-      user: {
-        _id: senderId,
-        name: supplierName,
-        avatar: supplierPicture
-      }
-    };
-  };
-
-  getMessages = async () => {
-    const { roomId } = this.props;
-    const { messages: oldMessages } = this.state;
-    const lastMessageId = oldMessages[oldMessages.length - 1]._id;
-
+  getOlderMessages = async (fromMsgId) => {
+    const { roomId, supplierName, supplierPicture } = this.props;
     const newMessages = await currentUser.fetchMessages({
       roomId,
       direction: 'older',
       limit: LOAD_EARLIER_QUANTITY,
-      initialId: lastMessageId
+      initialId: fromMsgId
     });
-    return newMessages.map(message => this.messageSerializer(message)).reverse();
+    return newMessages.map(message => messageSerializer(message, supplierName, supplierPicture)).reverse();
   };
 
   onSend = messages => {
@@ -77,7 +59,8 @@ class SupplierChat extends React.Component {
   };
 
   onReceive = message => {
-    const incomingMessage = this.messageSerializer(message);
+    const { supplierName, supplierPicture } = this.props;
+    const incomingMessage = messageSerializer(message, supplierName, supplierPicture);
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, incomingMessage)
     }));
@@ -85,8 +68,10 @@ class SupplierChat extends React.Component {
 
   onLoadEarlier = async () => {
     const { messages } = this.state;
+    const lastMessageId = messages[messages.length - 1]._id;
+
     if (messages.length % LOAD_EARLIER_QUANTITY === 0) {
-      const earlierMessages = await this.getMessages();
+      const earlierMessages = await this.getOlderMessages(lastMessageId);
       this.setState(previousState => ({
         messages: GiftedChat.append(earlierMessages, previousState.messages)
       }));

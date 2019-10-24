@@ -10,6 +10,7 @@ import { navigationModel } from '@propTypes/navigationModel';
 import Loadable from '@components/Loadable';
 import sendedIcon from '@assets/forward-arrow.png';
 import { currentUser } from '@services/ChatService';
+import { messageSerializer } from '@utils/chatUtils';
 
 import styles from './styles';
 
@@ -21,14 +22,13 @@ class Chats extends Component {
     return null;
   }
 
-  state = { rooms: [], loaded: false, typingText: false, lastMessages: [] }; // eslint-disable-line
+  state = { rooms: [], loaded: false, typingText: false }; // eslint-disable-line
 
   componentDidMount() {
     const { rooms } = this.state;
     rooms.forEach(({ roomId }) => this.subscribeToRoom(roomId));
   }
 
-  // FIXME: Boilerplate with SupplierChat.js (move to another class?)
   subscribeToRoom = roomId => {
     currentUser.subscribeToRoom({
       roomId,
@@ -47,41 +47,21 @@ class Chats extends Component {
     });
   };
 
-  // FIXME: Boilerplate with SupplierChat.js (move to another class?)
-  messageSerializer = message => {
-    const { userId } = this.props;
-    const { roomId, senderId, text, createdAt } = message;
-    return {
-      roomId,
-      text,
-      createdAt: new Date(createdAt),
-      sendByMe: userId === senderId
-    };
-  };
-
   onReceive = message => {
-    const { lastMessages } = this.state;
-    const lastMessage = this.messageSerializer(message);
-    const lastMessageRoom = lastMessages.find(
-      lastMessageState => lastMessageState.roomId === lastMessage.roomId
-    );
+    const incomingMessage = messageSerializer(message);
     this.setState(prevState => {
-      if (lastMessageRoom) {
-        return [
-          ...prevState.filter(lastMessageState => lastMessageState.roomId === lastMessage.roomId),
-          lastMessage
-        ];
-      }
       return {
         ...prevState,
-        lastMessages: [...prevState.lastMessages, lastMessage]
+        rooms: [...prevState.rooms.map(room =>
+          room.roomId === incomingMessage.roomId ? {
+            ...room, lastMessageAt: incomingMessage.createdAt, message: incomingMessage
+          } : room
+        )].sort((room1, room2) => (room1.lastMessageAt > room2.lastMessageAt) ? 1 : -1)
       };
     });
-
-    // WIP: Add it to the corresponding room
   };
 
-  handleTextSubmit = () => {};
+  handleTextSubmit = () => { };
 
   handleInputChange = name => {
     const { rooms } = this.props;
@@ -100,10 +80,12 @@ class Chats extends Component {
 
   renderItem = ({ item }) => {
     const { roomId, supplierName, supplierPicture } = item;
-    const { lastMessages } = this.state;
-    const message = lastMessages.find(lastMessage => roomId === lastMessage.roomId);
-    const text = message?.text || '';
-    const sended = message?.sendByMe;
+    const { userId } = this.props;
+    const { rooms } = this.state;
+    const message = rooms.find(r => roomId === r.roomId) ?.message;
+    const text = message ?.text || '';
+    const sended = message ?.user ?._id === userId;
+    //const time = message ?.createdAt || '';
     return (
       <TouchableOpacity style={styles.supplierContainer} onPress={this.selectSupplier(item)}>
         <View style={styles.item}>
@@ -119,7 +101,7 @@ class Chats extends Component {
   keyExtractor = ({ roomId }) => `${roomId}`;
 
   render() {
-    const { rooms, lastMessages } = this.state;
+    const { rooms } = this.state;
     return (
       <View style={styles.container}>
         <CustomTextInput
@@ -133,7 +115,6 @@ class Chats extends Component {
           data={rooms}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
-          extraData={{ lastMessages }}
         />
       </View>
     );

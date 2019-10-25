@@ -1,8 +1,9 @@
 import { createTypes, completeTypes } from 'redux-recompose';
-import { isAndroid } from '@constants/platform';
 import PushNotificationsService from '@services/PushNotificationsService';
 import { getPushNotificationHandler } from '@redux/pushNotifications/utils';
 import DialogActions from '@redux/dialog/actions';
+
+import { pushMessage } from '../../utils/pushNotificationUtils';
 
 export const actions = createTypes(
   completeTypes(['UPDATE_TOKEN', 'DELETE_TOKEN'], ['REGISTER', 'NOTIFICATION_RECEIVED']),
@@ -50,19 +51,14 @@ export const actionCreators = {
      *    1- android: trigger a local notification that will appear in the notification bar
      *    2- ios: display an alert
      */
-    const { type: pushType, id } = isAndroid ? notification : notification.data;
-    const handler = getPushNotificationHandler(pushType, id);
+    const handler = getPushNotificationHandler(notification);
+    const message = pushMessage(notification);
     if (notification.userInteraction) {
       dispatch(DialogActions.closeDialog());
       PushNotificationsService.cancelAllPushNotifications();
-      handler(dispatch, notification.message);
+      handler(dispatch);
     } else {
-      PushNotificationsService.sendPushNotificationToDevices(
-        notification,
-        handler,
-        dispatch,
-        notification.message
-      );
+      PushNotificationsService.sendPushNotificationToDevices(notification, handler, dispatch, message);
       // update last order status when a push is received and app is open - without user interaction
     }
     dispatch({

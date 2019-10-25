@@ -47,7 +47,7 @@ const displayPushNotificationPrompt = message =>
 
 const sendPushNotificationToDevices = (notification, handler, dispatch, message) => {
   if (isAndroid) {
-    PushNotification.localNotification(notification);
+    PushNotification.localNotification({ ...notification, message });
   } else {
     displayPushNotificationPrompt(message).then(triggerPushAction => {
       if (triggerPushAction) {

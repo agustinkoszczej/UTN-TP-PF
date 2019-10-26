@@ -4,6 +4,7 @@ import TabBarIcon from '@components/TabBarIcon';
 import AddButton from '@components/AddButton';
 import RequestButton from '@components/RequestButton';
 import SearchButton from '@components/SearchButton';
+import InfoButton from '@components/InfoButton';
 import CustomText from '@components/CustomText';
 import { black, boulder, dustyGray, white } from '@constants/colors';
 import Routes from '@constants/routes';
@@ -298,6 +299,7 @@ export const screensNavOptions = {
             style={{ width: 40, height: 40, borderRadius: 20, marginRight: 15 }}
           />
           <CustomText>{supplierName}</CustomText>
+          <InfoButton />
         </View>
       )
     };

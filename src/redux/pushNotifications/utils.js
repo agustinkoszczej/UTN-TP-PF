@@ -27,7 +27,6 @@ const pushNotificationHandlers = (notification, getState) =>
       dispatch(NavigationActions.navigate({ routeName: Routes.SupplierChat, params: room }));
     },
     [NOTIFICATIONS.NOTIFICATION_EXPIRED_AUCTION]: dispatch => {
-      debugger;
       dispatch(AuctionsActions.getAuctionById(notification.id));
       dispatch(NavigationActions.navigate({ routeName: Routes.AuctionDetail }));
     }

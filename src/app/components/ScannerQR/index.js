@@ -56,6 +56,7 @@ class ScannerQR extends Component {
         <RNCamera
           barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
           style={styles.preview}
+          captureAudio={false}
           onBarCodeRead={barcodeReaderEnabled && this.onBarCodeRead}
           ref={this.camRef}
         />

@@ -56,7 +56,12 @@ class Chats extends Component {
           room.roomId === incomingMessage.roomId ? {
             ...room, lastMessageAt: incomingMessage.createdAt, message: incomingMessage
           } : room
-        )].sort((room1, room2) => (room1.lastMessageAt > room2.lastMessageAt) ? 1 : -1)
+        )].sort((r1,r2) => { 
+          if(!r1.lastMessageAt && !r2.lastMessageAt) return 0; 
+          if(!r1.lastMessageAt) return 1; 
+          if(!r2.lastMessageAt) return -1;  
+          return r1.lastMessageAt > r2.lastMessageAt ? -1: 1 
+        })
       };
     });
   };
@@ -85,11 +90,11 @@ class Chats extends Component {
     const message = rooms.find(r => roomId === r.roomId) ?.message;
     const text = message ?.text || '';
     const sended = message ?.user ?._id === userId;
-    //const time = message ?.createdAt || '';
     return (
       <TouchableOpacity style={styles.supplierContainer} onPress={this.selectSupplier(item)}>
+        <Image source={{ uri: supplierPicture }} style={styles.supplierPicture} />
         <View style={styles.item}>
-          <Image source={{ uri: supplierPicture }} style={styles.supplierPicture} />
+
           <CustomText bold>{supplierName}</CustomText>
           {sended && <Image source={sendedIcon} style={styles.sended} />}
           <CustomText style={styles.messageText}>{text}</CustomText>

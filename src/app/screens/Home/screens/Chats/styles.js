@@ -53,12 +53,12 @@ export default StyleSheet.create({
     marginLeft: 15
   },
   item: {
-    flexDirection: 'row',
+    //flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingLeft: 16,
-    paddingRight: 12,
-    paddingVertical: 8
+    //alignItems: 'center',
+    //paddingLeft: 16,
+    //paddingRight: 12,
+    //paddingVertical: 8
   },
   messageText: {
     marginLeft: 15

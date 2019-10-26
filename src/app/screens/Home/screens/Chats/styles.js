@@ -21,7 +21,7 @@ export default StyleSheet.create({
     marginBottom: 10,
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center',
+    //alignItems: 'center',
     borderBottomWidth: 1
     // borderRadius: 20
   },
@@ -49,13 +49,13 @@ export default StyleSheet.create({
   sended: {
     width: 15,
     height: 15,
-    resizeMode: 'contain',
+    //resizeMode: 'contain',
     marginLeft: 15
   },
   item: {
     // flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    //alignItems: 'center'
     // paddingLeft: 16,
     // paddingRight: 12,
     // paddingVertical: 8
@@ -64,6 +64,6 @@ export default StyleSheet.create({
     marginLeft: 15
   },
   timeText: {
-    left: 50
+    left: 200
   }
 });

@@ -20,10 +20,13 @@ class SupplierChat extends React.Component {
   };
 
   componentDidMount() {
-    const { roomId } = this.props;
+    const { roomId, navigation } = this.props;
     currentUser.subscribeToRoom({
       roomId,
       hooks: {
+        onPresenceChanged: (state, user) => {
+          navigation.setParams({ supplierStatus: state.current })
+        },
         onMessage: this.onReceive,
         onUserStartedTyping: () =>
           this.setState({
@@ -170,7 +173,8 @@ const enhancer = compose(
     const roomId = navigation.getParam('roomId');
     const supplierPicture = navigation.getParam('supplierPicture');
     const supplierName = navigation.getParam('supplierName');
-    return { supplierId, supplierPicture, roomId, supplierName };
+    const supplierStatus = navigation.getParam('supplierStatus');
+    return { supplierId, supplierPicture, roomId, supplierName, supplierStatus };
   }),
   connect(mapStateToProps)
 );

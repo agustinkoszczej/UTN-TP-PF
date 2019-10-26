@@ -9,7 +9,8 @@ export const roomSerializer = (data, userId) =>
     } = room;
     const supplierId = Object.keys(dataByUser).find(id => id !== userId);
     const { fullName: supplierName, picture: supplierPicture } = dataByUser[userId];
-    const online = presenceStore[supplierId] !== 'offline';
+    const online = (presenceStore[supplierId] === 'online')? 'online' : 'offline';
+
     return {
       supplierPicture,
       roomId,

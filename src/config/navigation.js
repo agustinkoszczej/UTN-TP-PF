@@ -12,6 +12,8 @@ import statusBarConfig from '@constants/statusBar';
 import { strings } from '@constants/screenStrings';
 import { View, Image } from 'react-native';
 
+import onlineIcon from '@assets/online.png';
+
 const homeScreensHeaderTitleStyle = {
   alignSelf: 'center',
   textAlign: 'center',
@@ -290,16 +292,27 @@ export const screensNavOptions = {
     title: strings[Routes.AgendaRequest]
   },
   [Routes.SupplierChat]: ({ navigation }) => {
-    const { supplierName, supplierPicture } = navigation.state.params;
+    const { supplierName, supplierPicture, supplierStatus } = navigation.state.params;
     return {
       headerTitle: (
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Image
-            source={{ uri: supplierPicture }}
-            style={{ width: 40, height: 40, borderRadius: 20, marginRight: 15 }}
-          />
-          <CustomText>{supplierName}</CustomText>
-          <InfoButton />
+        <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Image
+              source={{ uri: supplierPicture }}
+              style={{ width: 40, height: 40, borderRadius: 20, marginRight: 15 }}
+            />
+            <CustomText bold>{supplierName}</CustomText>
+            <InfoButton />
+          </View>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <CustomText style={{ fontSize: 13, opacity: 0.5 }}>
+              {supplierStatus === 'online' && <Image
+                source={onlineIcon}
+                style={{ width: 15, height: 15, borderRadius: 20, marginLeft: 30 }}
+              />}
+              {supplierStatus}
+            </CustomText>
+          </View>
         </View>
       )
     };

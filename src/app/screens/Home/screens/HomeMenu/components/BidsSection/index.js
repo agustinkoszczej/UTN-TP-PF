@@ -5,7 +5,7 @@ import { PieChart } from 'react-native-chart-kit';
 import Card from '@components/Card';
 import CustomText from '@components/CustomText';
 import { BID_STATUS } from '@constants/bidsStatus';
-import { spicyGray, thunderbird } from '@constants/colors';
+import { spicyGray } from '@constants/colors';
 
 import styles from './styles';
 
@@ -14,21 +14,21 @@ function BidsSection({ bids }) {
     {
       name: 'Aceptadas',
       population: parseInt(bids?.[BID_STATUS.ACCEPTED], 10) || 0,
-      color: thunderbird, // Rojo
+      color: '#319E11',
       legendFontColor: spicyGray,
       legendFontSize: 13
     },
     {
       name: 'Activas',
       population: parseInt(bids?.[BID_STATUS.ACTIVE], 10) || 0,
-      color: '#053480', // Azul
+      color: '#4AEE1A',
       legendFontColor: spicyGray,
       legendFontSize: 13
     },
     {
       name: 'Declinadas',
       population: parseInt(bids?.[BID_STATUS.DEECLINED], 10) || 0,
-      color: '#80AF51', // Verde
+      color: '#B2FF9B',
       legendFontColor: spicyGray,
       legendFontSize: 13
     }

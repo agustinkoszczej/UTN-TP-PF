@@ -22,12 +22,22 @@ class SearchResults extends Component {
   renderItem = ({ item }) => {
     const { description, image_url: imageUrl, picture, fullName, companyName } = item;
     const image = imageUrl || picture;
-    const text = description || `${fullName} (${companyName})`;
+    const text = description || fullName;
     return (
-      <Card style={styles.itemContainer}>
+      <Card
+        style={[
+          styles.itemContainer,
+          companyName && {
+            height: 80
+          }
+        ]}
+      >
         <View style={styles.info}>
           <Image source={{ uri: image }} style={styles.itemImage} />
-          <CustomText>{text}</CustomText>
+          <View>
+            <CustomText>{text}</CustomText>
+            {companyName && <CustomText>{companyName}</CustomText>}
+          </View>
         </View>
         <CustomButton
           title="Ver"

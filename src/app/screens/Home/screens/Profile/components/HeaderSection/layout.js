@@ -25,7 +25,6 @@ function HeaderSection({
   declineLoading,
   acceptLoading,
   handleAccept,
-  handleDecline,
   isRequesting,
   handleDelete,
   handleAdd,
@@ -58,7 +57,7 @@ function HeaderSection({
             secondaryBtn
             title="Declinar"
             style={[styles.requestButton, { marginBottom: 10 }]}
-            onPress={handleDecline}
+            onPress={handleDelete}
             loading={declineLoading}
           />
         </View>
@@ -118,16 +117,15 @@ HeaderSection.propTypes = {
   navigateToConfiguration: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
   handleAdd: PropTypes.func.isRequired,
-  rating: PropTypes.number.isRequired,
-  isSupplier: PropTypes.bool.isRequired,
-  requestSend: PropTypes.bool.isRequired,
-  inAgenda: PropTypes.bool.isRequired,
+  rating: PropTypes.number,
+  isSupplier: PropTypes.bool,
+  requestSend: PropTypes.bool,
+  inAgenda: PropTypes.bool,
   handleAccept: PropTypes.func.isRequired,
-  handleDecline: PropTypes.func.isRequired,
   acceptLoading: PropTypes.bool.isRequired,
   declineLoading: PropTypes.bool.isRequired,
-  isRequesting: PropTypes.bool.isRequired,
-  contactLoading: PropTypes.bool.isRequired
+  isRequesting: PropTypes.bool,
+  contactLoading: PropTypes.bool
 };
 
 export default Loadable(props => props.loading)(HeaderSection);

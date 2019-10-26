@@ -9,20 +9,21 @@ import styles from './styles';
 import HeaderSection from './components/HeaderSection';
 import InfoSection from './components/InfoSection';
 
-function Profile({ loading, getUserInfo }) {
+function Profile({ loading, getUserInfo, supplier }) {
   return (
     <ScrollView
       style={styles.container}
       refreshControl={<RefreshControl refreshing={loading} onRefresh={getUserInfo} />}
     >
-      <HeaderSection />
-      <InfoSection />
+      <HeaderSection supplier={supplier} />
+      <InfoSection supplier={supplier} />
     </ScrollView>
   );
 }
 
 Profile.propTypes = {
   loading: PropTypes.bool.isRequired,
+  supplier: PropTypes.bool,
   getUserInfo: PropTypes.func.isRequired
 };
 

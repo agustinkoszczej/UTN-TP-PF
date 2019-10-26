@@ -13,6 +13,7 @@ import { currentUser } from '@services/ChatService';
 import { messageSerializer } from '@utils/chatUtils';
 
 import styles from './styles';
+import { lastMessage } from './utils';
 
 class Chats extends Component {
   static getDerivedStateFromProps({ rooms }, { loaded }) {
@@ -52,21 +53,27 @@ class Chats extends Component {
     this.setState(prevState => {
       return {
         ...prevState,
-        rooms: [...prevState.rooms.map(room =>
-          room.roomId === incomingMessage.roomId ? {
-            ...room, lastMessageAt: incomingMessage.createdAt, message: incomingMessage
-          } : room
-        )].sort((r1,r2) => { 
-          if(!r1.lastMessageAt && !r2.lastMessageAt) return 0; 
-          if(!r1.lastMessageAt) return 1; 
-          if(!r2.lastMessageAt) return -1;  
-          return r1.lastMessageAt > r2.lastMessageAt ? -1: 1 
+        rooms: [
+          ...prevState.rooms.map(room =>
+            room.roomId === incomingMessage.roomId
+              ? {
+                  ...room,
+                  lastMessageAt: incomingMessage.createdAt,
+                  message: incomingMessage
+                }
+              : room
+          )
+        ].sort((r1, r2) => {
+          if (!r1.lastMessageAt && !r2.lastMessageAt) return 0;
+          if (!r1.lastMessageAt) return 1;
+          if (!r2.lastMessageAt) return -1;
+          return r1.lastMessageAt > r2.lastMessageAt ? -1 : 1;
         })
       };
     });
   };
 
-  handleTextSubmit = () => { };
+  handleTextSubmit = () => {};
 
   handleInputChange = name => {
     const { rooms } = this.props;
@@ -87,17 +94,18 @@ class Chats extends Component {
     const { roomId, supplierName, supplierPicture } = item;
     const { userId } = this.props;
     const { rooms } = this.state;
-    const message = rooms.find(r => roomId === r.roomId) ?.message;
-    const text = message ?.text || '';
-    const sended = message ?.user ?._id === userId;
+    const message = rooms.find(r => roomId === r.roomId)?.message;
+    const text = message?.text || '';
+    const sended = message?.user?._id === userId;
+    const time = message?.createdAt ? lastMessage(message.createdAt) : '';
     return (
       <TouchableOpacity style={styles.supplierContainer} onPress={this.selectSupplier(item)}>
         <Image source={{ uri: supplierPicture }} style={styles.supplierPicture} />
         <View style={styles.item}>
-
           <CustomText bold>{supplierName}</CustomText>
           {sended && <Image source={sendedIcon} style={styles.sended} />}
           <CustomText style={styles.messageText}>{text}</CustomText>
+          <CustomText style={styles.timeText}>{time}</CustomText>
         </View>
       </TouchableOpacity>
     );
@@ -116,11 +124,7 @@ class Chats extends Component {
           underline
           onChange={this.handleInputChange}
         />
-        <FlatList
-          data={rooms}
-          renderItem={this.renderItem}
-          keyExtractor={this.keyExtractor}
-        />
+        <FlatList data={rooms} renderItem={this.renderItem} keyExtractor={this.keyExtractor} />
       </View>
     );
   }

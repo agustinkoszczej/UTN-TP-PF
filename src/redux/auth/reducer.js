@@ -30,7 +30,8 @@ const reducerDescription = {
     actions.GET_SUPPLIERS,
     actions.GET_STATS,
     actions.GET_SUPPLIER_BY_ID,
-    actions.ADD_CONTACT
+    actions.ADD_CONTACT,
+    actions.DELETE_CONTACT
   ],
   override: {
     [actions.LOG_OUT]: onSetValue(null),

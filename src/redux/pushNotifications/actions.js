@@ -42,7 +42,7 @@ export const actionCreators = {
       service: PushNotificationsService.deleteDeviceToken
     });
   },
-  notificationReceived: notification => dispatch => {
+  notificationReceived: notification => (dispatch, getState) => {
     /**
      * if the push was tapped by the user (userInteraction flag) trigger the push action
      * if the push was not tapped by the user:
@@ -51,7 +51,7 @@ export const actionCreators = {
      *    1- android: trigger a local notification that will appear in the notification bar
      *    2- ios: display an alert
      */
-    const handler = getPushNotificationHandler(notification);
+    const handler = getPushNotificationHandler(notification, getState);
     const message = pushMessage(notification);
     if (notification.userInteraction) {
       dispatch(DialogActions.closeDialog());

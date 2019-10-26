@@ -16,14 +16,14 @@ export default StyleSheet.create({
   supplierContainer: {
     height: 75,
     maxWidth: '100%',
-    //borderWidth: 1,
+    // borderWidth: 1,
     borderColor: alto,
     marginBottom: 10,
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    borderBottomWidth: 1,
-    //borderRadius: 20
+    borderBottomWidth: 1
+    // borderRadius: 20
   },
   supplierPicture: {
     width: 40,
@@ -53,14 +53,17 @@ export default StyleSheet.create({
     marginLeft: 15
   },
   item: {
-    //flexDirection: 'row',
-    justifyContent: 'space-between',
-    //alignItems: 'center',
-    //paddingLeft: 16,
-    //paddingRight: 12,
-    //paddingVertical: 8
+    // flexDirection: 'row',
+    justifyContent: 'space-between'
+    // alignItems: 'center',
+    // paddingLeft: 16,
+    // paddingRight: 12,
+    // paddingVertical: 8
   },
   messageText: {
     marginLeft: 15
+  },
+  timeText: {
+    left: 50
   }
 });

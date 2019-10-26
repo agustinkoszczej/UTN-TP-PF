@@ -17,21 +17,20 @@ import styles from './styles';
 class AgendaRequest extends Component {
   renderItem = ({ item }) => {
     const { fullName, companyName, user_id: id, picture, streetAddress } = item;
+    const street = streetAddress?.split(',')[0] || '';
     return (
       <Card style={styles.cardContainer}>
         <View style={[styles.row, styles.alignItems, styles.bottom]}>
           <Image source={{ uri: picture }} style={styles.image} />
           <CustomText>{fullName}</CustomText>
         </View>
+        <View style={[styles.row, { marginRight: 40 }]}>
+          <Image source={aptIcon} style={styles.icon} />
+          <CustomText style={styles.bottom}>{companyName}</CustomText>
+        </View>
         <View style={styles.row}>
-          <View style={[styles.row, { marginRight: 40 }]}>
-            <Image source={aptIcon} style={styles.icon} />
-            <CustomText style={styles.bottom}>{companyName}</CustomText>
-          </View>
-          <View style={styles.row}>
-            <Image source={locationIcon} style={styles.icon} />
-            <CustomText style={styles.bottom}>{streetAddress}</CustomText>
-          </View>
+          <Image source={locationIcon} style={styles.icon} />
+          <CustomText style={styles.bottom}>{street}</CustomText>
         </View>
         <View style={[styles.row, styles.spaceBetween]}>
           <CustomButton

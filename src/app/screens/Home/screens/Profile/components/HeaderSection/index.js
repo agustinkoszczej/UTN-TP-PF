@@ -94,8 +94,8 @@ HeaderSectionContainer.propTypes = {
   deleteContact: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
-  currentUser: state.auth.currentSupplier || state.auth.currentUser,
+const mapStateToProps = (state, ownProps) => ({
+  currentUser: ownProps.supplier ? state.auth.currentSupplier : state.auth.currentUser,
   loading: state.auth.currentUserLoading,
   acceptLoading: state.auth.acceptContactLoading,
   declineLoading: state.auth.deleteContactLoading,

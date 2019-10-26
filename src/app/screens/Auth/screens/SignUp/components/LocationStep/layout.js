@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import PropTypes from 'prop-types';
 import Autocomplete from '@components/Autocomplete';
 
@@ -33,6 +33,7 @@ function LocationStep({
             <MapView
               style={styles.map}
               region={region}
+              provider={PROVIDER_GOOGLE}
               onRegionChange={onRegionChange}
               scrollEnabled={false}
               pitchEnabled={false}

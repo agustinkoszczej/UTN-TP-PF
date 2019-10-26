@@ -22,7 +22,7 @@
       android:theme="@style/AppTheme">
       <meta-data
         android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyBshEErhUfMRfpA5qkQbHs3TuXvln2X1M"/>
+        android:value="AIzaSyAMU94OHBSzc5ljz2cVHruc9gcjo6ju008"/>
       <!-- <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@mipmap/ic_notification" /> -->
       <meta-data android:name="com.dieam.reactnativepushnotification.notification_channel_name" android:value="${applicationId}"/>
       <meta-data android:name="com.dieam.reactnativepushnotification.notification_channel_description" android:value="${applicationId} - App notifications"/>

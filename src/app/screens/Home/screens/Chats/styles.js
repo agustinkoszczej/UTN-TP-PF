@@ -54,8 +54,8 @@ export default StyleSheet.create({
   },
   item: {
     // flexDirection: 'row',
-    justifyContent: 'space-between'
-    // alignItems: 'center',
+    justifyContent: 'space-between',
+    alignItems: 'center'
     // paddingLeft: 16,
     // paddingRight: 12,
     // paddingVertical: 8

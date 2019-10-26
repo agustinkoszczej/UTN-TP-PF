@@ -5,11 +5,12 @@ export default StyleSheet.create({
   send: {
     width: 28,
     height: 28,
-    marginRight: 20
+    marginRight: 10,
+    marginBottom: 8,
     // flex: 1,
-    // flexDirection: 'row',
-    // alignItems: 'center',
-    // resizeMode: 'contain'
+    flexDirection: 'row',
+    alignItems: 'center',
+    resizeMode: 'contain'
   },
   earlierContainer: {
     // width: 70,

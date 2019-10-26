@@ -27,7 +27,13 @@ class Chats extends Component {
 
   componentDidMount() {
     const { rooms } = this.state;
-    rooms.forEach(({ roomId }) => this.subscribeToRoom(roomId));
+    this.reload = this.props.navigation.addListener('willFocus', () => {
+      rooms.forEach(({ roomId }) => this.subscribeToRoom(roomId));
+    });
+  }
+
+  componentWillUnmount() {
+    this.reload.remove();
   }
 
   subscribeToRoom = roomId => {

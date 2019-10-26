@@ -55,7 +55,7 @@ export default StyleSheet.create({
   item: {
     //flexDirection: 'row',
     justifyContent: 'space-between',
-    //alignItems: 'center',
+    alignItems: 'center',
     //paddingLeft: 16,
     //paddingRight: 12,
     //paddingVertical: 8

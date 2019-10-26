@@ -13,6 +13,7 @@ import { currentUser } from '@services/ChatService';
 import { messageSerializer } from '@utils/chatUtils';
 
 import styles from './styles';
+import reactotron from 'reactotron-react-native';
 
 class Chats extends Component {
   static getDerivedStateFromProps({ rooms }, { loaded }) {
@@ -26,7 +27,14 @@ class Chats extends Component {
 
   componentDidMount() {
     const { rooms } = this.state;
-    rooms.forEach(({ roomId }) => this.subscribeToRoom(roomId));
+    
+    this.reload = this.props.navigation.addListener('willFocus', () => {
+      rooms.forEach(({ roomId }) => this.subscribeToRoom(roomId));
+    });
+  }
+
+  componentWillUnmount() {
+    this.reload;
   }
 
   subscribeToRoom = roomId => {
@@ -94,7 +102,6 @@ class Chats extends Component {
       <TouchableOpacity style={styles.supplierContainer} onPress={this.selectSupplier(item)}>
         <Image source={{ uri: supplierPicture }} style={styles.supplierPicture} />
         <View style={styles.item}>
-
           <CustomText bold>{supplierName}</CustomText>
           {sended && <Image source={sendedIcon} style={styles.sended} />}
           <CustomText style={styles.messageText}>{text}</CustomText>

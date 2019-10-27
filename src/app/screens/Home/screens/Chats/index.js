@@ -118,7 +118,7 @@ class Chats extends Component {
             <CustomText bold style={styles.name} textProps={{ numberOfLines: 1 }}>
               {supplierName}
             </CustomText>
-            <CustomText>{time}</CustomText>
+            <CustomText style={{ fontSize: 12, opacity: 0.5}}>{time}</CustomText>
           </View>
           <View style={styles.header}>
             {sended && <Image source={sendedIcon} style={styles.sended} />}

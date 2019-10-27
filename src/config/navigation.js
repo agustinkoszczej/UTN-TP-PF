@@ -294,27 +294,33 @@ export const screensNavOptions = {
     const { supplierName, supplierPicture, supplierStatus } = navigation.state.params;
     return {
       headerTitle: (
-        <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Image
-              source={{ uri: supplierPicture }}
-              style={{ width: 40, height: 40, borderRadius: 20, marginRight: 15 }}
-            />
-            <CustomText bold>{supplierName}</CustomText>
-            <InfoButton />
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={{ flexDirection: 'column' }}>
+            <View style={{ flexDirection: 'row', flex: 1 }}>
+              <Image
+                source={{ uri: supplierPicture }}
+                style={{ width: 40, height: 40, borderRadius: 20, marginRight: 10 }}
+              />
+            </View>
           </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <CustomText style={{ fontSize: 13, opacity: 0.5, top: -15 }}>
-              {supplierStatus === 'online' && (
-                <Image
-                  source={onlineIcon}
-                  style={{ width: 15, height: 15, borderRadius: 20, marginLeft: 30 }}
-                />
-              )}
-              {supplierStatus}
-            </CustomText>
+          <View style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+            <View style={{ flexDirection: 'row', flex: 1 }}>
+              <CustomText bold style={{ fontSize: 16 }}>{supplierName}</CustomText>
+              <InfoButton />
+            </View>
+            <View style={{ flexDirection: 'row', flex: 0.5, marginLeft: -5 }}>
+              <CustomText style={{ fontSize: 13, opacity: 0.5, top: -15 }}>
+                {supplierStatus === 'online' && (
+                  <Image
+                    source={onlineIcon}
+                    style={{ width: 15, height: 15, borderRadius: 20 }}
+                  />
+                )}
+                {' ' + supplierStatus}
+              </CustomText>
+            </View>
           </View>
-        </View>
+        </View >
       )
     };
   }

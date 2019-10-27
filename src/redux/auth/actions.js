@@ -27,7 +27,7 @@ export const actions = createTypes(
       'ADD_CONTACT',
       'DELETE_CONTACT'
     ],
-    ['CLEAN_SIGN_UP_ERROR']
+    ['CLEAN_SIGN_UP_ERROR', 'CLEAN_SUPPLIER']
   ),
   '@@AUTH'
 );
@@ -232,6 +232,10 @@ export const actionCreators = {
         dispatch(actionCreators.getAgenda('', () => dispatch(actionCreators.getSupplierById(id))));
       })
     ]
+  }),
+  cleanSupplier: () => ({
+    type: actions.CLEAN_SUPPLIER,
+    target: targets.currentSupplier
   })
 };
 

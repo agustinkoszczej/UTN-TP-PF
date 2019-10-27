@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { View, Image, ImageBackground } from 'react-native';
 import { AirbnbRating } from 'react-native-ratings';
 import CustomText from '@components/CustomText';
-import Loadable from '@components/Loadable';
 import CustomButton from '@components/CustomButton';
 
 import background from '../../assets/background.jpg';
@@ -128,4 +127,4 @@ HeaderSection.propTypes = {
   contactLoading: PropTypes.bool
 };
 
-export default Loadable(props => props.loading)(HeaderSection);
+export default HeaderSection;

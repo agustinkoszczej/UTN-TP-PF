@@ -57,27 +57,18 @@ class HeaderSectionContainer extends Component {
   };
 
   render() {
-    const {
-      currentUser: { fullName, email, picture, rating, requestSend, inAgenda, isSupplier, isRequesting }
-    } = this.props;
+    const { currentUser } = this.props;
     return (
       <HeaderSection
-        fullName={fullName}
+        {...currentUser}
         {...this.props}
-        email={email}
         navigateToConfiguration={this.navigateToConfiguration}
         navigateToChat={this.navigateToChat}
         handleLogOut={this.handleLogOut}
-        picture={picture}
-        rating={rating}
-        inAgenda={inAgenda}
-        isSupplier={isSupplier}
-        requestSend={requestSend}
         handleDecline={this.handleDecline}
         handleAccept={this.handleAccept}
         handleAdd={this.handleAdd}
         handleDelete={this.handleDelete}
-        isRequesting={isRequesting}
       />
     );
   }
@@ -87,7 +78,6 @@ HeaderSectionContainer.propTypes = {
   navigation: PropTypes.shape(navigationModel).isRequired,
   logOut: PropTypes.func.isRequired,
   currentUser: PropTypes.shape(userModel).isRequired,
-  loading: PropTypes.bool.isRequired,
   redictToLogin: PropTypes.func.isRequired,
   acceptRequest: PropTypes.func.isRequired,
   addContact: PropTypes.func.isRequired,
@@ -96,7 +86,6 @@ HeaderSectionContainer.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
   currentUser: ownProps.supplier ? state.auth.currentSupplier : state.auth.currentUser,
-  loading: state.auth.currentUserLoading,
   acceptLoading: state.auth.acceptContactLoading,
   declineLoading: state.auth.deleteContactLoading,
   contactLoading: state.auth.deleteContactLoading || state.auth.contactLoading

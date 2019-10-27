@@ -36,6 +36,7 @@ const reducerDescription = {
   override: {
     [actions.LOG_OUT]: onSetValue(null),
     [actions.CLEAN_SIGN_UP_ERROR]: onSetValue(null),
+    [actions.CLEAN_SUPPLIER]: onSetValue(null),
     [actions.CLEAR_SUPPLIERS]: onSetValue([])
   }
 };

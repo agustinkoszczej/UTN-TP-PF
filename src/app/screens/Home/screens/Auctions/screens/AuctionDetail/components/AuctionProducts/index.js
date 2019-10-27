@@ -13,7 +13,11 @@ class AuctionProducts extends Component {
     <View style={styles.productContainer}>
       <View style={styles.productInfo}>
         <Image source={{ uri: product?.imageUrl || imageUrl }} style={styles.productImage} />
-        <CustomText bold style={{ marginRight: 20 }}>
+        <CustomText
+          bold
+          textProps={{ numberOfLines: 1 }}
+          style={{ marginRight: 20, overflow: 'hidden', width: 175 }}
+        >
           {product?.description || description}
         </CustomText>
       </View>

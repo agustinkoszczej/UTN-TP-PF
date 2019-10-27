@@ -17,7 +17,13 @@ class OrderProducts extends Component {
     <View style={styles.productContainer}>
       <View style={styles.productInfo}>
         <Image source={{ uri: imageUrl }} style={styles.productImage} />
-        <CustomText bold>{description}</CustomText>
+        <CustomText
+          bold
+          textProps={{ numberOfLines: 1 }}
+          style={{ marginRight: 20, overflow: 'hidden', width: 175 }}
+        >
+          {description}
+        </CustomText>
       </View>
       <CustomText>{quantity}</CustomText>
     </View>

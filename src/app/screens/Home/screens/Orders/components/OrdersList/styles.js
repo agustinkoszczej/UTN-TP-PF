@@ -45,13 +45,19 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   name: {
-    fontSize: 18
+    fontSize: 18,
+    width: 200,
+    overflow: 'hidden'
   },
   productContainer: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginVertical: 5
+  },
+  description: {
+    width: 250,
+    overflow: 'hidden'
   }
 });
 export default styles;

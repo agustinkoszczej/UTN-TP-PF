@@ -10,13 +10,16 @@ import SeparatorWithText from '@components/SeparatorWithText';
 import styles from './styles';
 
 function AuctionHeader({ merchant: { fullName }, deliveryDate, expirationDate, status, shared }) {
+  const textProps = { numberOfLines: 1 };
   return (
     <>
       <Card style={styles.cardContainer}>
         <SeparatorWithText text="Detalle de subasta" style={{ marginBottom: 15 }} />
         <View style={styles.section}>
           <CustomText style={styles.placeholder}>Distribuidor:</CustomText>
-          <CustomText bold>{fullName}</CustomText>
+          <CustomText textProps={textProps} style={styles.ellipsis} bold>
+            {fullName}
+          </CustomText>
         </View>
         <View style={styles.section}>
           <CustomText style={styles.placeholder}>Fecha de entrega:</CustomText>

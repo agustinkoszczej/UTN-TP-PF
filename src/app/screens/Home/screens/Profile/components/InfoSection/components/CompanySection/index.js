@@ -15,12 +15,17 @@ function CompanySection({ cuit, companyName, contactNumber }) {
       <Card style={styles.card}>
         <Image source={aptIcon} style={styles.icon} />
         <CustomText style={styles.placeholder}>Nombre:</CustomText>
-        <CustomText>{companyName}</CustomText>
+        <CustomText
+          textProps={{ numberOfLines: 1 }}
+          style={{ marginLeft: 5, overflow: 'hidden', width: 125 }}
+        >
+          {companyName}
+        </CustomText>
       </Card>
       <Card style={styles.card}>
         <Image source={noteIcon} style={styles.icon} />
         <CustomText style={styles.placeholder}>CUIT:</CustomText>
-        <CustomText>{cuit}</CustomText>
+        <CustomText style={{ marginLeft: 25 }}>{cuit}</CustomText>
       </Card>
       <Card style={styles.card}>
         <Image source={phoneIcon} style={styles.icon} />

@@ -16,11 +16,15 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 24,
-    color: white
+    color: white,
+    overflow: 'hidden',
+    width: 220
   },
   email: {
     fontSize: 16,
-    color: white
+    color: white,
+    overflow: 'hidden',
+    width: 220
   },
   button: {
     width: scale(250),

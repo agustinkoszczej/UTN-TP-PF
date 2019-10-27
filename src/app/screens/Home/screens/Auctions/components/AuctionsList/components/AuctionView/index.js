@@ -25,7 +25,9 @@ class AuctionView extends Component {
     }
   }) => (
     <View style={styles.productContainer}>
-      <CustomText>{description}</CustomText>
+      <CustomText textProps={{ numberOfLines: 1 }} style={styles.description}>
+        {description}
+      </CustomText>
       <CustomText>{quantity}</CustomText>
     </View>
   );
@@ -46,7 +48,7 @@ class AuctionView extends Component {
         <View style={styles.orderHeader}>
           <View style={styles.orderName}>
             <Image source={{ uri: picture }} style={styles.userPicture} />
-            <CustomText style={styles.name} title bold>
+            <CustomText textProps={{ numberOfLines: 1 }} style={styles.name} title bold>
               {fullName}
             </CustomText>
           </View>

@@ -46,21 +46,21 @@ class UserDataStep extends Component {
           applyTrim
           {...(update && { returnKeyType: 'go' })}
         />
-        {!update && (
-          <CustomTextInput
-            {...commonProps}
-            keyboardType="email-address"
-            labelIcon={emailIcon}
-            name={SIGN_UP_FIELDS.EMAIL}
-            placeholder={strings.email}
-            onTextSubmitEditing={update ? handleSubmit : this.handleEmailSubmitting}
-            invalid={!!emailError}
-            error={emailError}
-            onChange={onEmailChange}
-            textRef={this[SIGN_UP_FIELDS.EMAIL]}
-            applyTrim
-          />
-        )}
+        <CustomTextInput
+          {...commonProps}
+          keyboardType="email-address"
+          labelIcon={emailIcon}
+          name={SIGN_UP_FIELDS.EMAIL}
+          placeholder={strings.email}
+          onTextSubmitEditing={update ? handleSubmit : this.handleEmailSubmitting}
+          invalid={!!emailError}
+          error={emailError}
+          onChange={onEmailChange}
+          textRef={this[SIGN_UP_FIELDS.EMAIL]}
+          applyTrim
+          editable={!update}
+        />
+
         {!update && (
           <CustomTextInput
             {...commonProps}

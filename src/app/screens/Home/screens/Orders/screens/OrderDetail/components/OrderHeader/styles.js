@@ -24,6 +24,11 @@ const styles = StyleSheet.create({
   rateButton: {
     marginHorizontal: 20,
     marginBottom: 20
+  },
+  ellipsis: {
+    width: 150,
+    overflow: 'hidden',
+    textAlign: 'right'
   }
 });
 export default styles;

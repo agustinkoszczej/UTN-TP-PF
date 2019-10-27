@@ -32,7 +32,6 @@ class AuctionStep extends Component {
       style: styles.formElement
     };
     const isCashSelected = isSelected(1);
-    const isMercadoPagoSelected = isSelected(2);
     const shared = values[CREATE_AUCTIONS_FIELDS.SHARED] ? 'Si' : 'No';
     return (
       <TouchableWithoutFeedback onPress={hideOrShowCalendar(false)}>
@@ -44,12 +43,6 @@ class AuctionStep extends Component {
               secondaryBtn
               title="Efectivo"
               onPress={handlePaymentSelect(1)}
-            />
-            <CustomButton
-              style={[styles.paymentButton, isMercadoPagoSelected && styles.selected]}
-              secondaryBtn
-              title="Mercado Pago"
-              onPress={handlePaymentSelect(2)}
             />
           </View>
           <TouchableOpacity onPress={hideOrShowCalendar(true)}>

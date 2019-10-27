@@ -34,10 +34,10 @@ function HeaderSection({
       <View style={styles.userSection}>
         <Image source={{ uri: picture }} style={styles.icon} />
         <View style={styles.nameSection}>
-          <CustomText bold style={styles.name} ellipsisMode="tail">
+          <CustomText bold textProps={{ numberOfLines: 1 }} style={styles.name} ellipsisMode="tail">
             {fullName}
           </CustomText>
-          <CustomText style={styles.email} ellipsisMode="tail">
+          <CustomText textProps={{ numberOfLines: 1 }} style={styles.email} ellipsisMode="tail">
             {email}
           </CustomText>
         </View>

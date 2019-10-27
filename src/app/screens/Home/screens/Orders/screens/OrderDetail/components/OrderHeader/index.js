@@ -24,17 +24,22 @@ function OrderHeader({
   creation
 }) {
   const fullName = supplier?.fullName || receiverName;
+  const textProps = { numberOfLines: 1 };
   return (
     <>
       <Card style={styles.cardContainer}>
         <SeparatorWithText text="Detalle de pedido" style={{ marginBottom: 15 }} />
         <View style={styles.section}>
           <CustomText style={styles.placeholder}>Distribuidor:</CustomText>
-          <CustomText bold>{fullName}</CustomText>
+          <CustomText textProps={textProps} style={styles.ellipsis} bold>
+            {fullName}
+          </CustomText>
         </View>
         <View style={styles.section}>
           <CustomText style={styles.placeholder}>Comentario:</CustomText>
-          <CustomText bold>{comment}</CustomText>
+          <CustomText textProps={textProps} style={styles.ellipsis} bold>
+            {comment}
+          </CustomText>
         </View>
         <View style={styles.section}>
           <CustomText style={styles.placeholder}>Precio:</CustomText>

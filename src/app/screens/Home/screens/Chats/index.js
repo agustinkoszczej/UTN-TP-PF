@@ -107,8 +107,7 @@ class Chats extends Component {
     const { userId } = this.props;
     const { rooms } = this.state;
     const message = rooms.find(r => roomId === r.roomId)?.message;
-    let text = '';
-    if (message?.text) text = message.text.substring(0, 30) + (message?.text?.length > 30 ? '...' : '');
+    const text = message?.text || '';
     const sended = message?.user?._id === userId;
     const time = message?.createdAt ? lastMessage(message.createdAt) : '';
     return (
@@ -123,7 +122,12 @@ class Chats extends Component {
           </View>
           <View style={styles.header}>
             {sended && <Image source={sendedIcon} style={styles.sended} />}
-            <CustomText style={styles.messageText}>{text}</CustomText>
+            <CustomText
+              textProps={{ numberOfLines: 1 }}
+              style={[sended && styles.margin, styles.messageText]}
+            >
+              {text}
+            </CustomText>
           </View>
         </View>
       </TouchableOpacity>

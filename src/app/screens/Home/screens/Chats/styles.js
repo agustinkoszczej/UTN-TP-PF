@@ -18,10 +18,9 @@ export default StyleSheet.create({
     maxWidth: '100%',
     // borderWidth: 1,
     borderColor: alto,
-    marginBottom: 10,
     flex: 1,
     flexDirection: 'row',
-    // alignItems: 'center',
+    alignItems: 'center',
     borderBottomWidth: 1
     // borderRadius: 20
   },
@@ -39,26 +38,18 @@ export default StyleSheet.create({
     color: white
   },
   header: {
-    flexDirection: 'row'
-  },
-  search: {
-    width: '25%',
-    marginLeft: '5%',
-    marginBottom: 15
+    flexDirection: 'row',
+    justifyContent: 'flex-start'
   },
   sended: {
     width: 15,
     height: 15
   },
-  item: {
-    // flexDirection: 'row',
-    justifyContent: 'space-between'
-    // alignItems: 'center'
-    // paddingLeft: 16,
-    // paddingRight: 12,
-    // paddingVertical: 8
-  },
   messageText: {
+    width: 200,
+    overflow: 'hidden'
+  },
+  margin: {
     marginLeft: 15
   },
   name: {
@@ -66,9 +57,9 @@ export default StyleSheet.create({
     overflow: 'hidden'
   },
   upperChat: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginBottom: 7.5
   }
 });

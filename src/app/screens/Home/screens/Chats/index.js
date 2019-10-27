@@ -63,10 +63,10 @@ class Chats extends Component {
           ...prevState.rooms.map(room =>
             room.roomId === incomingMessage.roomId
               ? {
-                ...room,
-                lastMessageAt: incomingMessage.createdAt,
-                message: incomingMessage
-              }
+                  ...room,
+                  lastMessageAt: incomingMessage.createdAt,
+                  message: incomingMessage
+                }
               : room
           )
         ].sort((r1, r2) => {
@@ -79,7 +79,7 @@ class Chats extends Component {
     });
   };
 
-  handleTextSubmit = () => { };
+  handleTextSubmit = () => {};
 
   handleInputChange = name => {
     const { rooms } = this.props;
@@ -93,27 +93,38 @@ class Chats extends Component {
     const {
       navigation: { navigate }
     } = this.props;
-    navigate(Routes.SupplierChat, { supplierId, supplierName, supplierPicture, roomId, supplierStatus: online });
+    navigate(Routes.SupplierChat, {
+      supplierId,
+      supplierName,
+      supplierPicture,
+      roomId,
+      supplierStatus: online
+    });
   };
 
   renderItem = ({ item }) => {
     const { roomId, supplierName, supplierPicture } = item;
     const { userId } = this.props;
     const { rooms } = this.state;
-    const message = rooms.find(r => roomId === r.roomId) ?.message;
+    const message = rooms.find(r => roomId === r.roomId)?.message;
     let text = '';
-    if (message ?.text)
-      text = message.text.substring(0, 30) + ((message ?.text ?.length > 30) ? '...' : '')
-    const sended = message ?.user ?._id === userId;
-    const time = message ?.createdAt ? lastMessage(message.createdAt) : '';
+    if (message?.text) text = message.text.substring(0, 30) + (message?.text?.length > 30 ? '...' : '');
+    const sended = message?.user?._id === userId;
+    const time = message?.createdAt ? lastMessage(message.createdAt) : '';
     return (
       <TouchableOpacity style={styles.supplierContainer} onPress={this.selectSupplier(item)}>
         <Image source={{ uri: supplierPicture }} style={styles.supplierPicture} />
         <View style={styles.item}>
-          <CustomText bold >{supplierName}</CustomText>
-          {sended && <Image source={sendedIcon} style={styles.sended} />}
-          <CustomText style={styles.messageText}>{text}</CustomText>
-          <CustomText style={styles.timeText}>{time}</CustomText>
+          <View style={styles.upperChat}>
+            <CustomText bold style={styles.name} textProps={{ numberOfLines: 1 }}>
+              {supplierName}
+            </CustomText>
+            <CustomText>{time}</CustomText>
+          </View>
+          <View style={styles.header}>
+            {sended && <Image source={sendedIcon} style={styles.sended} />}
+            <CustomText style={styles.messageText}>{text}</CustomText>
+          </View>
         </View>
       </TouchableOpacity>
     );

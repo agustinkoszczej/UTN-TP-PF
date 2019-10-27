@@ -21,7 +21,7 @@ export default StyleSheet.create({
     marginBottom: 10,
     flex: 1,
     flexDirection: 'row',
-    //alignItems: 'center',
+    // alignItems: 'center',
     borderBottomWidth: 1
     // borderRadius: 20
   },
@@ -48,14 +48,12 @@ export default StyleSheet.create({
   },
   sended: {
     width: 15,
-    height: 15,
-    //resizeMode: 'contain',
-    marginLeft: 15
+    height: 15
   },
   item: {
     // flexDirection: 'row',
-    justifyContent: 'space-between',
-    //alignItems: 'center'
+    justifyContent: 'space-between'
+    // alignItems: 'center'
     // paddingLeft: 16,
     // paddingRight: 12,
     // paddingVertical: 8
@@ -63,7 +61,14 @@ export default StyleSheet.create({
   messageText: {
     marginLeft: 15
   },
-  timeText: {
-    left: 200
+  name: {
+    width: 200,
+    overflow: 'hidden'
+  },
+  upperChat: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
   }
 });

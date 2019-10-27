@@ -7,10 +7,10 @@ import { connect } from 'react-redux';
 import sendIcon from '@assets/right-arrow.png';
 import { withProps, compose } from 'recompose';
 import { currentUser } from '@services/ChatService';
+import { messageSerializer, LOAD_EARLIER_QUANTITY } from '@utils/chatUtils';
+import { navigationModel } from '@propTypes/navigationModel';
 
 import styles from './styles';
-
-import { messageSerializer, LOAD_EARLIER_QUANTITY } from '@utils/chatUtils';
 
 class SupplierChat extends React.Component {
   state = {
@@ -24,8 +24,8 @@ class SupplierChat extends React.Component {
     currentUser.subscribeToRoom({
       roomId,
       hooks: {
-        onPresenceChanged: (state, user) => {
-          navigation.setParams({ supplierStatus: state.current })
+        onPresenceChanged: state => {
+          navigation.setParams({ supplierStatus: state.current });
         },
         onMessage: this.onReceive,
         onUserStartedTyping: () =>
@@ -41,7 +41,7 @@ class SupplierChat extends React.Component {
     });
   }
 
-  getOlderMessages = async (fromMsgId) => {
+  getOlderMessages = async fromMsgId => {
     const { roomId, supplierName, supplierPicture } = this.props;
     const newMessages = await currentUser.fetchMessages({
       roomId,
@@ -71,7 +71,7 @@ class SupplierChat extends React.Component {
 
   onLoadEarlier = async () => {
     const { messages } = this.state;
-    const lastMessageId = messages[messages.length - 1]._id;
+    const lastMessageId = messages[messages.length - 1]._id; // eslint-disable-line
 
     if (messages.length % LOAD_EARLIER_QUANTITY === 0) {
       const earlierMessages = await this.getOlderMessages(lastMessageId);
@@ -160,7 +160,8 @@ SupplierChat.propTypes = {
   roomId: PropTypes.string.isRequired,
   supplierPicture: PropTypes.string.isRequired,
   supplierName: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired
+  userId: PropTypes.string.isRequired,
+  navigation: PropTypes.shape(navigationModel).isRequired
 };
 
 const mapStateToProps = state => ({

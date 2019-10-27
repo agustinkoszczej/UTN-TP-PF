@@ -11,7 +11,6 @@ import Routes from '@constants/routes';
 import statusBarConfig from '@constants/statusBar';
 import { strings } from '@constants/screenStrings';
 import { View, Image } from 'react-native';
-
 import onlineIcon from '@assets/online.png';
 
 const homeScreensHeaderTitleStyle = {
@@ -305,11 +304,13 @@ export const screensNavOptions = {
             <InfoButton />
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <CustomText style={{ fontSize: 13, opacity: 0.5 }}>
-              {supplierStatus === 'online' && <Image
-                source={onlineIcon}
-                style={{ width: 15, height: 15, borderRadius: 20, marginLeft: 30 }}
-              />}
+            <CustomText style={{ fontSize: 13, opacity: 0.5, top: -15 }}>
+              {supplierStatus === 'online' && (
+                <Image
+                  source={onlineIcon}
+                  style={{ width: 15, height: 15, borderRadius: 20, marginLeft: 30 }}
+                />
+              )}
               {supplierStatus}
             </CustomText>
           </View>

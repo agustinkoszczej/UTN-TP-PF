@@ -116,12 +116,12 @@ export const actionCreators = {
     payload: updateUpData,
     injections: [
       withPostSuccess(dispatch => {
-        dispatch(actionCreators.getUserInfo());
+        dispatch(actionCreators.getUserInfo(false));
         dispatch(NavigationActions.back());
       })
     ]
   }),
-  getUserInfo: () => ({
+  getUserInfo: (redirect = true) => ({
     type: actions.GET_USER_INFO,
     target: targets.user,
     service: AuthService.getUserInfo,
@@ -131,7 +131,7 @@ export const actionCreators = {
       withPostSuccess((dispatch, response) => {
         dispatch(actionCreators.getAgenda());
         dispatch(ChatActions.connectPusher(response.data.user_id));
-        redirectToEspecificTab(dispatch, Routes.HomeMenu);
+        if (redirect) redirectToEspecificTab(dispatch, Routes.HomeMenu);
       }),
       withPostFailure(async dispatch => {
         await AuthService.logOut();

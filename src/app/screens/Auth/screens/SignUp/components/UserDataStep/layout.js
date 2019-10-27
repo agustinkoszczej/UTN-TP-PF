@@ -17,7 +17,8 @@ class UserDataStep extends Component {
   [SIGN_UP_FIELDS.PASSWORD] = React.createRef();
 
   handleNameSubmitting = () => {
-    this[SIGN_UP_FIELDS.EMAIL].current.focus();
+    const { update } = this.props;
+    if (!update) this[SIGN_UP_FIELDS.EMAIL].current.focus();
   };
 
   handleEmailSubmitting = () => {
@@ -40,9 +41,10 @@ class UserDataStep extends Component {
           labelIcon={userIcon}
           name={SIGN_UP_FIELDS.NAME}
           placeholder={strings.name}
-          onTextSubmitEditing={this.handleNameSubmitting}
+          onTextSubmitEditing={update ? handleSubmit : this.handleNameSubmitting}
           maxLength={NAME_LENGTH}
           applyTrim
+          {...(update && { returnKeyType: 'go' })}
         />
         {!update && (
           <CustomTextInput
@@ -57,7 +59,6 @@ class UserDataStep extends Component {
             onChange={onEmailChange}
             textRef={this[SIGN_UP_FIELDS.EMAIL]}
             applyTrim
-            {...(update && { returnKeyType: 'go' })}
           />
         )}
         {!update && (

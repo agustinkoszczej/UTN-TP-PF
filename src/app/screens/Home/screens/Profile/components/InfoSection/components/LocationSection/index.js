@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import Card from '@components/Card';
 import CustomText from '@components/CustomText';
 
@@ -15,13 +15,7 @@ function LocationSection({ region, coordinate, streetAddress }) {
         <CustomText style={styles.text}>{location}</CustomText>
       </Card>
       <Card styles={styles.mapCard}>
-        <MapView
-          style={styles.map}
-          provider={PROVIDER_GOOGLE}
-          region={region}
-          scrollEnabled={false}
-          pitchEnabled={false}
-        >
+        <MapView style={styles.map} region={region} scrollEnabled={false} pitchEnabled={false}>
           <Marker coordinate={coordinate} />
         </MapView>
       </Card>

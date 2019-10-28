@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { withNavigation } from 'react-navigation';
 import { compose } from 'recompose';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 import CustomButton from '@components/CustomButton';
 import Routes from '@constants/routes';
 import { safeCameraRequest } from '@utils/cameraPermission';
+import qrScan from '@assets/qr-scan.png';
 
 import styles from './styles';
 
@@ -21,9 +22,11 @@ class QRStep extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <CustomButton title="Escanear" onPress={this.handleScanQrCode} />
-      </View>
+      <TouchableOpacity
+      onPress={this.handleScanQrCode} style={styles.container}>
+        <Image source={qrScan} style={styles.qrImage} />
+        <CustomButton primaryBtn textStyle={styles.white} style={styles.button} title="Escanear"/>
+      </TouchableOpacity>
     );
   }
 }

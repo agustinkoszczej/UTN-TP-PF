@@ -47,19 +47,21 @@ export default StyleSheet.create({
   },
   messageText: {
     width: 200,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    opacity: 0.5
   },
   margin: {
     marginLeft: 15
   },
   name: {
     width: 200,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    fontSize: 16
   },
   upperChat: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 7.5
+    marginBottom: 2.5
   }
 });

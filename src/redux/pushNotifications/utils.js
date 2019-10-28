@@ -5,7 +5,7 @@ import OrdersActions from '@redux/orders/actions';
 import { NavigationActions } from 'react-navigation';
 import Routes from '@constants/routes';
 
-const pushNotificationHandlers = (notification, getState) =>
+const pushNotificationHandlers = notification =>
   ({
     [NOTIFICATIONS.NOTIFICATION_NEW_BID]: dispatch => {
       dispatch(AuctionsActions.getAuctionById(notification.id));
@@ -20,8 +20,8 @@ const pushNotificationHandlers = (notification, getState) =>
       dispatch(OrdersActions.getOrderById(id));
       dispatch(NavigationActions.navigate({ routeName: Routes.OrderDetail, params: { id } }));
     },
-    [NOTIFICATIONS.NOTIFICATION_NEW_MESSAGE]: dispatch => {
-      const room = getState().chat.rooms.find(
+    [NOTIFICATIONS.NOTIFICATION_NEW_MESSAGE]: (dispatch, state) => {
+      const room = state.chat.rooms.find(
         roomm => roomm.roomId === JSON.parse(notification.messages)[0].room_id
       );
       dispatch(NavigationActions.navigate({ routeName: Routes.SupplierChat, params: room }));
@@ -32,13 +32,10 @@ const pushNotificationHandlers = (notification, getState) =>
     }
   }[notification.type]);
 
-// const hasTypeNotification = type => notifications =>
-//   notifications.length && notifications.some(notification => notification.type === type);
-
-export const getPushNotificationHandler = (pushType, id) => {
-  let handler = pushNotificationHandlers(pushType, id);
+export const getPushNotificationHandler = notification => {
+  let handler = pushNotificationHandlers(notification);
   if (!handler) {
-    console.warn(`Push notification with type ${pushType} is not being handled`);
+    console.warn(`Push notification with type ${notification.type} is not being handled`);
     handler = () => {};
   }
   return handler;

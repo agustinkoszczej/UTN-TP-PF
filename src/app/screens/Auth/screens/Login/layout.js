@@ -36,7 +36,7 @@ class Login extends Component {
   };
 
   render() {
-    const { handleSubmit, onInputChange, credentialsError, gotoSignUp } = this.props;
+    const { handleSubmit, onInputChange, credentialsError, gotoSignUp, onEmailChange, email } = this.props;
     return (
       <BaseForm link onSubmit={handleSubmit}>
         <KeyboardAwareView
@@ -62,8 +62,9 @@ class Login extends Component {
               returnKeyType="next"
               onTextSubmitEditing={this.handleEmailSubmitting}
               underline
-              onChange={onInputChange}
+              onChange={onEmailChange}
               invalid={!!credentialsError}
+              value={email}
             />
             <CustomTextInput
               name={LOGIN_FIELDS.PASSWORD}
@@ -122,7 +123,9 @@ Login.propTypes = {
   gotoRecoverPassword: PropTypes.func.isRequired,
   credentialsError: PropTypes.string,
   values: PropTypes.shape({ email: PropTypes.string, password: PropTypes.string }),
-  gotoSignUp: PropTypes.func.isRequired
+  gotoSignUp: PropTypes.func.isRequired,
+  onEmailChange: PropTypes.func.isRequired,
+  email: PropTypes.string
 };
 
 const enhancer = compose(

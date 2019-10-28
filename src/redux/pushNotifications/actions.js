@@ -51,15 +51,14 @@ export const actionCreators = {
      *    1- android: trigger a local notification that will appear in the notification bar
      *    2- ios: display an alert
      */
-    const handler = getPushNotificationHandler(notification, getState);
+    const handler = getPushNotificationHandler(notification);
     const message = pushMessage(notification);
     if (notification.userInteraction) {
       dispatch(DialogActions.closeDialog());
       PushNotificationsService.cancelAllPushNotifications();
-      handler(dispatch);
+      if (getState().auth.currentUser) handler(dispatch);
     } else {
       PushNotificationsService.sendPushNotificationToDevices(notification, handler, dispatch, message);
-      // update last order status when a push is received and app is open - without user interaction
     }
     dispatch({
       type: actions.NOTIFICATION_RECEIVED,

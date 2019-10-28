@@ -8,6 +8,8 @@ import DialogActions from '@redux/dialog/actions';
 import ChatActions from '@redux/chat/actions';
 import { getAuthDialog, authDialogNames } from '@screens/Auth/dialogs';
 
+import { getPushNotificationHandler } from '../pushNotifications/utils';
+
 import { userSerializer, supplierSerializer } from './utils';
 
 export const actions = createTypes(
@@ -80,7 +82,12 @@ export const actionCreators = {
     type: actions.RECOVER_PASSWORD,
     service: AuthService.recoverPassword,
     payload: { email },
-    target: targets.recoverPassword
+    target: targets.recoverPassword,
+    injections: [
+      withPostSuccess(dispatch => {
+        dispatch(NavigationActions.back());
+      })
+    ]
   }),
   signUp: signUpData => ({
     type: actions.SIGN_UP,
@@ -128,10 +135,17 @@ export const actionCreators = {
     successSelector: response => userSerializer(response.data),
     failureSelector: response => response.data,
     injections: [
-      withPostSuccess((dispatch, response) => {
+      withPostSuccess((dispatch, response, state) => {
         dispatch(actionCreators.getAgenda());
-        dispatch(ChatActions.connectPusher(response.data.user_id));
-        if (redirect) redirectToEspecificTab(dispatch, Routes.HomeMenu);
+        const { readNotifications } = state.pushNotifications;
+        let handler;
+        if (redirect) {
+          redirectToEspecificTab(dispatch, Routes.HomeMenu);
+        } else if (readNotifications.length) {
+          const lastNotification = readNotifications[readNotifications.length - 1];
+          handler = getPushNotificationHandler(lastNotification, state);
+        }
+        dispatch(ChatActions.connectPusher(response.data.user_id, handler));
       }),
       withPostFailure(async dispatch => {
         await AuthService.logOut();

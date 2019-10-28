@@ -11,7 +11,7 @@ import Login from './layout';
 class LoginContainer extends Component {
   EMPTY_STRING = '';
 
-  state = { credentialsError: this.EMPTY_STRING };
+  state = { credentialsError: this.EMPTY_STRING, email: '' };
 
   initialValues = {
     [LOGIN_FIELDS.USERNAME]: this.EMPTY_STRING,
@@ -47,13 +47,20 @@ class LoginContainer extends Component {
     if (credentialsError) this.clearError();
   };
 
+  handleEmailChange = email => {
+    const { credentialsError } = this.state;
+    if (credentialsError) this.clearError();
+    this.setState({ email });
+  };
+
   gotoSignUp = () => {
     const { navigation } = this.props;
     navigation.navigate(Routes.SignUp);
   };
 
-  gotoRecoverPassword = email => {
+  gotoRecoverPassword = () => {
     const { navigation } = this.props;
+    const { email } = this.state;
     navigation.navigate(Routes.RecoverPassword, { email });
   };
 
@@ -62,9 +69,10 @@ class LoginContainer extends Component {
   };
 
   render() {
-    const { credentialsError } = this.state;
+    const { credentialsError, email } = this.state;
     return (
       <Login
+        email={email}
         onLogin={this.handleLogin}
         gotoSignUp={this.gotoSignUp}
         gotoRecoverPassword={this.gotoRecoverPassword}
@@ -72,6 +80,7 @@ class LoginContainer extends Component {
         validationSchema={this.validationSchema}
         credentialsError={credentialsError}
         onInputChange={this.handleInputChange}
+        onEmailChange={this.handleEmailChange}
         {...this.props}
       />
     );

@@ -28,10 +28,8 @@ class InfoSection extends Component {
   };
 
   renderCompany = () => {
-    const {
-      currentUser: { cuit, companyName, contactNumber }
-    } = this.props;
-    return <CompanySection cuit={cuit} companyName={companyName} contactNumber={contactNumber} />;
+    const { currentUser } = this.props;
+    return <CompanySection {...currentUser} />;
   };
 
   handleIndexChange = index => this.setState({ index });

@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   hiddenLogoView: {
     paddingTop: scale(30),
-    paddingBottom: scale(200),
+    //paddingBottom: scale(200),
     justifyContent: 'flex-start'
   },
   logo: {

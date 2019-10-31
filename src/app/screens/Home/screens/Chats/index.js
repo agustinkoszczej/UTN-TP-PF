@@ -84,7 +84,7 @@ class Chats extends Component {
   handleInputChange = name => {
     const { rooms } = this.props;
     const filterRooms = rooms.filter(({ supplierName }) => {
-      return supplierName.includes(name);
+      return supplierName.toLowerCase().includes(String(name).toLowerCase());
     });
     this.setState({ rooms: filterRooms });
   };

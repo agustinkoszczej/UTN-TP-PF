@@ -119,7 +119,7 @@ const enhancer = compose(
     ({ refreshing, error }) => ({
       asset: worried,
       handleError: error && this.handleRefresh,
-      title: 'No tienes solicitudes de amistad',
+      title: 'No tienes solicitudes de contacto',
       loading: refreshing
     })
   )

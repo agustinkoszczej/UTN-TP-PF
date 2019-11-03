@@ -46,7 +46,7 @@ export default StyleSheet.create({
     height: 15
   },
   messageText: {
-    width: 200,
+    width: '70%',
     overflow: 'hidden',
     opacity: 0.5
   },
@@ -54,7 +54,7 @@ export default StyleSheet.create({
     marginLeft: 15
   },
   name: {
-    width: 200,
+    width: '70%',
     overflow: 'hidden',
     fontSize: 16
   },

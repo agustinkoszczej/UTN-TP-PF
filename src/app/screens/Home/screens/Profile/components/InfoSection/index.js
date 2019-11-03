@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { connect } from 'react-redux';
 import { WIDTH } from '@constants/platform';
-import { formatLocation } from '@constants/geolocation';
 import { userModel } from '@propTypes/userModel';
 
 import LocationSection from './components/LocationSection';
@@ -21,15 +20,11 @@ class InfoSection extends Component {
   renderTabBar = props => <TabBar {...props} style={styles.tabBar} scrollEnabled />;
 
   renderLocation = () => {
-    const {
-      currentUser: { streetAddress, latitude, longitude }
-    } = this.props;
-    return <LocationSection {...formatLocation({ longitude, latitude })} streetAddress={streetAddress} />;
+    return <LocationSection />;
   };
 
   renderCompany = () => {
-    const { currentUser } = this.props;
-    return <CompanySection {...currentUser} />;
+    return <CompanySection />;
   };
 
   handleIndexChange = index => this.setState({ index });

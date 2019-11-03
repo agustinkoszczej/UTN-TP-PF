@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import Card from '@components/Card';
+import { connect } from 'react-redux';
+import { userModel } from '@propTypes/userModel';
 import CustomText from '@components/CustomText';
 import phoneIcon from '@assets/ic_phone.png';
 import aptIcon from '@assets/ic_apt.png';
@@ -9,7 +11,8 @@ import noteIcon from '@assets/ic_note.png';
 
 import styles from './styles';
 
-function CompanySection({ cuit, companyName, contactNumber }) {
+function CompanySection({ currentUser }) {
+  const { cuit, companyName, contactNumber } = currentUser;
   return (
     <View>
       <Card style={styles.card}>
@@ -39,7 +42,12 @@ function CompanySection({ cuit, companyName, contactNumber }) {
 CompanySection.propTypes = {
   cuit: PropTypes.string.isRequired,
   companyName: PropTypes.string.isRequired,
+  currentUser: PropTypes.shape(userModel).isRequired,
   contactNumber: PropTypes.string.isRequired
 };
 
-export default CompanySection;
+const mapStateToProps = (state, ownProps) => ({
+  currentUser: ownProps.supplier ? state.auth.currentSupplier : state.auth.currentUser
+});
+
+export default connect(mapStateToProps)(CompanySection);

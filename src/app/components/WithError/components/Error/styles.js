@@ -6,7 +6,6 @@ const ICON_SIZE = 300;
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: white,

@@ -55,7 +55,9 @@ class ProductStep extends Component {
       <Card style={styles.productContainer}>
         <View style={styles.row}>
           <Image source={{ uri: imageUrl }} style={styles.productImage} />
-          <CustomText>{description}</CustomText>
+          <CustomText style={{ width: 175, overflow: 'hidden' }} textProps={{ numberOfLines: 1 }}>
+            {description}
+          </CustomText>
         </View>
         <View style={styles.row}>
           <CustomText>{quantity}</CustomText>

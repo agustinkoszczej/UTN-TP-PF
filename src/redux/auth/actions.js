@@ -206,10 +206,11 @@ export const actionCreators = {
     payload: id,
     service: AuthService.acceptRequest,
     injections: [
-      withPostSuccess(dispatch => {
+      withPostSuccess((dispatch, _, state) => {
         dispatch(
           actionCreators.getAgenda('', () => {
             dispatch(actionCreators.getSupplierById(id));
+            dispatch(ChatActions.connectPusher(state.auth.currentUser.id));
             if (!isInProfile) dispatch(NavigationActions.navigate({ routeName: Routes.SupplierProfile }));
           })
         );
@@ -222,8 +223,9 @@ export const actionCreators = {
     payload: id,
     service: AuthService.deleteContact,
     injections: [
-      withPostSuccess(dispatch => {
+      withPostSuccess((dispatch, _, state) => {
         dispatch(actionCreators.getAgenda('', () => dispatch(actionCreators.getSupplierById(id))));
+        dispatch(ChatActions.connectPusher(state.auth.currentUser.id));
       })
     ]
   }),

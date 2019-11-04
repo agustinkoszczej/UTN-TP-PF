@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { View, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import CustomButton from '@components/CustomButton';
 import CustomText from '@components/CustomText';
 import CustomDropdown from '@components/CustomDropdown';
-import Collapsible from '@components/Collapsible';
 import TextInput from '@components/CustomTextInput';
+import { isIos } from '@constants/platform';
+import Calendar from '@components/Calendar';
 
 import { CREATE_AUCTIONS_FIELDS } from '../../constants';
 
@@ -34,7 +34,7 @@ class AuctionStep extends Component {
     const isCashSelected = isSelected(1);
     const shared = values[CREATE_AUCTIONS_FIELDS.SHARED] ? 'Si' : 'No';
     return (
-      <TouchableWithoutFeedback onPress={hideOrShowCalendar(false)}>
+      <TouchableWithoutFeedback {...(isIos && { onPress: hideOrShowCalendar(false) })}>
         <View style={styles.container}>
           <CustomText>Métodos de pago:</CustomText>
           <View style={styles.row}>
@@ -51,18 +51,11 @@ class AuctionStep extends Component {
               <TextInput {...commonProps} value={date} />
             </View>
           </TouchableOpacity>
-          <Collapsible collapsed={!show}>
-            {show && (
-              <DateTimePicker
-                value={values[CREATE_AUCTIONS_FIELDS.DELIVERY_DATE]}
-                minimumDate={new Date()}
-                maximumDate={new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000)}
-                mode="date"
-                display="default"
-                onChange={handleDateChange}
-              />
-            )}
-          </Collapsible>
+          <Calendar
+            value={values[CREATE_AUCTIONS_FIELDS.DELIVERY_DATE]}
+            show={show}
+            updateDate={handleDateChange}
+          />
           <CustomText>Compartida:</CustomText>
           <CustomDropdown
             closeOnOverlayPress

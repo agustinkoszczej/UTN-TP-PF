@@ -110,7 +110,7 @@ function HeaderSection({
 HeaderSection.propTypes = {
   fullName: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  picture: PropTypes.string.isRequired,
+  picture: PropTypes.string,
   handleLogOut: PropTypes.func.isRequired,
   navigateToChat: PropTypes.func.isRequired,
   navigateToConfiguration: PropTypes.func.isRequired,

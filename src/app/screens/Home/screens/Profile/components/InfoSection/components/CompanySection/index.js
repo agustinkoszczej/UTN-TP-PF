@@ -40,10 +40,10 @@ function CompanySection({ currentUser }) {
 }
 
 CompanySection.propTypes = {
-  cuit: PropTypes.string.isRequired,
-  companyName: PropTypes.string.isRequired,
-  currentUser: PropTypes.shape(userModel).isRequired,
-  contactNumber: PropTypes.string.isRequired
+  cuit: PropTypes.string,
+  companyName: PropTypes.string,
+  currentUser: PropTypes.shape(userModel),
+  contactNumber: PropTypes.string
 };
 
 const mapStateToProps = (state, ownProps) => ({

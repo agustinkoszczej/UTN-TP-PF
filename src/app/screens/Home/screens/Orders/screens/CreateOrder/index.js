@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { object, string } from 'yup';
+import { object, string, array } from 'yup';
 import { connect } from 'react-redux';
 import OrdersActions from '@redux/orders/actions';
 import { PAYMENT_METHODS } from '@constants/paymentMethods';
@@ -29,7 +29,7 @@ class CreateOrderContainer extends Component {
       [CREATE_ORDER_FIELDS.AMOUNT]: string().required('Campo requerido')
     }),
     2: object().shape({
-      [CREATE_ORDER_FIELDS.SUPPLIER_ID]: string().required('Campo requerido')
+      [CREATE_ORDER_FIELDS.PRODUCTS]: array().required('Campo requerido')
     }),
     3: object().shape({
       [CREATE_ORDER_FIELDS.SUPPLIER_ID]: string().required('Campo requerido')

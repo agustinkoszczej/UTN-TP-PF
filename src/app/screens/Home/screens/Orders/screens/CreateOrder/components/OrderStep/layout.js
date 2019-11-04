@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { View, TouchableWithoutFeedback, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import CustomDropdown from '@components/CustomDropdown';
-import Collapsible from '@components/Collapsible';
 import CustomText from '@components/CustomText';
 import TextInput, { FormField as CustomTextInput } from '@components/CustomTextInput';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { PAYMENT_METHODS } from '@constants/paymentMethods';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { isIos } from '@constants/platform';
+import Calendar from '@components/Calendar';
 
 import { CREATE_ORDER_FIELDS } from '../../constants';
 
@@ -38,7 +38,7 @@ class OrderStep extends Component {
       style: styles.formElement
     };
     return (
-      <TouchableWithoutFeedback onPress={hideOrShowCalendar(false)}>
+      <TouchableWithoutFeedback {...(isIos && { onPress: hideOrShowCalendar(false) })}>
         <ScrollView style={styles.container}>
           <CustomText>Precio:</CustomText>
           <CustomTextInput
@@ -64,19 +64,11 @@ class OrderStep extends Component {
               <TextInput {...commonProps} value={date} />
             </View>
           </TouchableOpacity>
-          <Collapsible collapsed={!show}>
-            {show && (
-              <DateTimePicker
-                value={values[CREATE_ORDER_FIELDS.DELIVERY_DATE]}
-                minimumDate={new Date()}
-                maximumDate={new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000)}
-                mode="date"
-                display="default"
-                onChange={handleDateChange}
-              />
-            )}
-          </Collapsible>
-
+          <Calendar
+            value={values[CREATE_ORDER_FIELDS.DELIVERY_DATE]}
+            show={show}
+            updateDate={handleDateChange}
+          />
           <CustomText>Método de pago:</CustomText>
           <CustomDropdown
             closeOnOverlayPress

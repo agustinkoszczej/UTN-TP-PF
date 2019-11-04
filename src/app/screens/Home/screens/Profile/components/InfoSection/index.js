@@ -20,11 +20,13 @@ class InfoSection extends Component {
   renderTabBar = props => <TabBar {...props} style={styles.tabBar} scrollEnabled />;
 
   renderLocation = () => {
-    return <LocationSection />;
+    const { supplier } = this.props;
+    return <LocationSection supplier={supplier} />;
   };
 
   renderCompany = () => {
-    return <CompanySection />;
+    const { supplier } = this.props;
+    return <CompanySection supplier={supplier} />;
   };
 
   handleIndexChange = index => this.setState({ index });
@@ -47,7 +49,8 @@ class InfoSection extends Component {
 }
 
 InfoSection.propTypes = {
-  currentUser: PropTypes.shape(userModel).isRequired
+  currentUser: PropTypes.shape(userModel),
+  supplier: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => ({

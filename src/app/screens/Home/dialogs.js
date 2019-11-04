@@ -9,7 +9,8 @@ import { strings } from './constants';
 export const homeDialogNames = {
   FINISH_CREATION_ORDER: 'finishCreationOrder',
   FINISH_CREATION_AUCTION: 'finishCreationAuction',
-  RATE_ORDER: 'rateOrder'
+  RATE_ORDER: 'rateOrder',
+  FAIL_UPDATE: 'failUpdate'
 };
 
 export const getHomeDialog = dialogType =>
@@ -40,5 +41,14 @@ export const getHomeDialog = dialogType =>
     }),
     [homeDialogNames.RATE_ORDER]: () => ({
       dialogType: dialogTypes.RATE_DIALOG
+    }),
+    [homeDialogNames.FAIL_UPDATE]: () => ({
+      dialogType: dialogTypes.SIMPLE_DIALOG,
+      dialogContent: {
+        title: strings.failUpdate,
+        message: strings.failUpdateMessage,
+        acceptText: strings.continue,
+        onAcceptDialog: () => {}
+      }
     })
   }[dialogType]);

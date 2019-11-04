@@ -7,6 +7,7 @@ import Routes from '@constants/routes';
 import DialogActions from '@redux/dialog/actions';
 import ChatActions from '@redux/chat/actions';
 import { getAuthDialog, authDialogNames } from '@screens/Auth/dialogs';
+import { getHomeDialog, homeDialogNames } from '@screens/Home/dialogs';
 
 import { getPushNotificationHandler } from '../pushNotifications/utils';
 
@@ -125,6 +126,9 @@ export const actionCreators = {
       withPostSuccess(dispatch => {
         dispatch(actionCreators.getUserInfo(false));
         dispatch(NavigationActions.back());
+      }),
+      withPostFailure(dispatch => {
+        dispatch(DialogActions.showDialog(getHomeDialog(homeDialogNames.FAIL_UPDATE)()));
       })
     ]
   }),

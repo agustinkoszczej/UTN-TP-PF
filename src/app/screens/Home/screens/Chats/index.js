@@ -11,6 +11,9 @@ import Loadable from '@components/Loadable';
 import sendedIcon from '@assets/forward-arrow.png';
 import { currentUser } from '@services/ChatService';
 import { messageSerializer } from '@utils/chatUtils';
+import WithError from '@components/WithError';
+
+import worried from '@assets/worried.png';
 
 import styles from './styles';
 import { lastMessage } from './utils';
@@ -167,7 +170,16 @@ const mapStateToProps = state => ({
 
 const enhancer = compose(
   connect(mapStateToProps),
-  Loadable(props => props.loading)
+  Loadable(props => props.loading),
+  WithError(
+    ({ error, rooms }) => error || rooms?.length === 0,
+    ({ refreshing, error }) => ({
+      asset: worried,
+      handleError: error && this.handleRefresh,
+      title: 'No posees contactos',
+      loading: refreshing
+    })
+  )
 );
 
 export default enhancer(Chats);

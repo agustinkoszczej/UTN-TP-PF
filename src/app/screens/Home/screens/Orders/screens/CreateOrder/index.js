@@ -17,7 +17,7 @@ class CreateOrderContainer extends Component {
     [CREATE_ORDER_FIELDS.MERCHANT_ID]: this.props.currentUserId,
     [CREATE_ORDER_FIELDS.PRODUCTS]: [],
     [CREATE_ORDER_FIELDS.COMMENT]: '',
-    [CREATE_ORDER_FIELDS.AMOUNT]: ''
+    [CREATE_ORDER_FIELDS.AMOUNT]: 0
   };
 
   formValidationSchema = {
@@ -25,8 +25,7 @@ class CreateOrderContainer extends Component {
       [CREATE_ORDER_FIELDS.SUPPLIER_ID]: string().required('Campo requerido')
     }),
     1: object().shape({
-      [CREATE_ORDER_FIELDS.COMMENT]: string().required('Campo requerido'),
-      [CREATE_ORDER_FIELDS.AMOUNT]: string().required('Campo requerido')
+      [CREATE_ORDER_FIELDS.SUPPLIER_ID]: string().required('Campo requerido')
     }),
     2: object().shape({
       [CREATE_ORDER_FIELDS.PRODUCTS]: array().required('Campo requerido')

@@ -18,9 +18,10 @@ class ProductStep extends Component {
     getSupplierProducts(values[CREATE_ORDER_FIELDS.SUPPLIER_ID]);
   }
 
-  handleProductChange = ({ id, imageUrl, description }, add) => () => {
+  handleProductChange = ({ id, imageUrl, description }, price, add) => () => {
     const { setFieldValue, values } = this.props;
     let products = values[CREATE_ORDER_FIELDS.PRODUCTS];
+    const amount = values[CREATE_ORDER_FIELDS.AMOUNT];
     const product = products.find(prod => prod.id === id);
     if (!product) {
       if (add) {
@@ -36,10 +37,11 @@ class ProductStep extends Component {
         );
       }
     }
+    setFieldValue(CREATE_ORDER_FIELDS.AMOUNT, amount + (add ? 1 : -1) * price);
     setFieldValue(CREATE_ORDER_FIELDS.PRODUCTS, products);
   };
 
-  renderItem = ({ item: { product } }) => {
+  renderItem = ({ item: { product, price } }) => {
     const { values } = this.props;
     const { id, imageUrl, description } = product;
     const quantity = values[CREATE_ORDER_FIELDS.PRODUCTS].find(prod => prod.id === id)?.quantity || 0;
@@ -57,13 +59,13 @@ class ProductStep extends Component {
             style={styles.rightButton}
             textStyle={styles.buttonFont}
             title="+"
-            onPress={this.handleProductChange(product, true)}
+            onPress={this.handleProductChange(product, price, true)}
           />
           <CustomButton
             style={styles.rightButton}
             textStyle={styles.buttonFont}
             title="-"
-            onPress={this.handleProductChange(product)}
+            onPress={this.handleProductChange(product, price)}
           />
         </View>
       </Card>

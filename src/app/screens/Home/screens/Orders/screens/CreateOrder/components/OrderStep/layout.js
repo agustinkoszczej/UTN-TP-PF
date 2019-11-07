@@ -40,15 +40,6 @@ class OrderStep extends Component {
     return (
       <TouchableWithoutFeedback {...(isIos && { onPress: hideOrShowCalendar(false) })}>
         <ScrollView style={styles.container}>
-          <CustomText>Precio:</CustomText>
-          <CustomTextInput
-            name={CREATE_ORDER_FIELDS.AMOUNT}
-            {...commonProps}
-            keyboardType="phone-pad"
-            placeholder="Precio"
-            onTextSubmitEditing={this.handleAmountChange}
-            maxLength={9}
-          />
           <CustomText>Comentario:</CustomText>
           <CustomTextInput
             name={CREATE_ORDER_FIELDS.COMMENT}
@@ -93,7 +84,7 @@ OrderStep.propTypes = {
   date: PropTypes.string.isRequired,
   values: PropTypes.shape({
     [CREATE_ORDER_FIELDS.COMMENT]: PropTypes.string,
-    [CREATE_ORDER_FIELDS.AMOUNT]: PropTypes.string,
+    [CREATE_ORDER_FIELDS.AMOUNT]: PropTypes.number,
     [CREATE_ORDER_FIELDS.PAYMENT_METHOD]: PropTypes.number,
     [CREATE_ORDER_FIELDS.DELIVERY_DATE]: PropTypes.instanceOf(Date)
   }).isRequired

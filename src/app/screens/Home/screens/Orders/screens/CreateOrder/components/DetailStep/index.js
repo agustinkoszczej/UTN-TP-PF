@@ -11,7 +11,7 @@ function DetailStep({ values }) {
 DetailStep.propTypes = {
   values: PropTypes.shape({
     [CREATE_ORDER_FIELDS.COMMENT]: PropTypes.string,
-    [CREATE_ORDER_FIELDS.AMOUNT]: PropTypes.string,
+    [CREATE_ORDER_FIELDS.AMOUNT]: PropTypes.number,
     [CREATE_ORDER_FIELDS.PAYMENT_METHOD]: PropTypes.number,
     [CREATE_ORDER_FIELDS.SUPPLIER_ID]: PropTypes.string,
     [CREATE_ORDER_FIELDS.SUPPLIER_PICTURE]: PropTypes.string,

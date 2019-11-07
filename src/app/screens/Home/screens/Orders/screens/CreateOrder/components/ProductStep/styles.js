@@ -7,10 +7,11 @@ export default StyleSheet.create({
   },
   productContainer: {
     flexDirection: 'row',
-    height: 50,
+    height: 75,
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    marginBottom: 10
   },
   productImage: {
     width: 30,

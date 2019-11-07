@@ -7,6 +7,7 @@ import ProductsActions from '@redux/product/actions';
 import CustomText from '@components/CustomText';
 import CustomButton from '@components/CustomButton';
 import Card from '@components/Card';
+import { formatMoney } from '@utils/numberUtils';
 
 import { CREATE_ORDER_FIELDS } from '../../constants';
 
@@ -49,9 +50,12 @@ class ProductStep extends Component {
       <Card style={styles.productContainer}>
         <View style={styles.row}>
           <Image source={{ uri: imageUrl }} style={styles.productImage} />
-          <CustomText style={{ width: 175, overflow: 'hidden' }} textProps={{ numberOfLines: 1 }}>
-            {description}
-          </CustomText>
+          <View style={{ justifyContent: 'center' }}>
+            <CustomText style={{ width: 175, overflow: 'hidden' }} textProps={{ numberOfLines: 1 }}>
+              {description}
+            </CustomText>
+            <CustomText>{formatMoney(price)}</CustomText>
+          </View>
         </View>
         <View style={styles.row}>
           <CustomText>{quantity}</CustomText>

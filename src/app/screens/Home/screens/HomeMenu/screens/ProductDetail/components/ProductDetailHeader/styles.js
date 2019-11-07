@@ -5,7 +5,8 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 20,
     marginHorizontal: 20,
-    height: 175
+    height: 175,
+    flex: 0.4
   },
   image: {
     height: 100,
@@ -15,7 +16,8 @@ const styles = StyleSheet.create({
     borderWidth: 2
   },
   title: {
-    fontSize: 24
+    fontSize: 24,
+    textAlign: 'center'
   },
   category: {
     fontSize: 16

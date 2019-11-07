@@ -16,7 +16,7 @@ function AuctionHeader({ merchant: { fullName }, deliveryDate, expirationDate, s
       <Card style={styles.cardContainer}>
         <SeparatorWithText text="Detalle de subasta" style={{ marginBottom: 15 }} />
         <View style={styles.section}>
-          <CustomText style={styles.placeholder}>Distribuidor:</CustomText>
+          <CustomText style={styles.placeholder}>Comerciante:</CustomText>
           <CustomText textProps={textProps} style={styles.ellipsis} bold>
             {fullName}
           </CustomText>

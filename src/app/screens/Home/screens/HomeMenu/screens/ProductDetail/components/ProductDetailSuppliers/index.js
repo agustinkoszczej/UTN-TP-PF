@@ -45,8 +45,11 @@ class ProductDetailSuppliers extends Component {
     const { suppliers } = this.props;
     return (
       <View style={styles.container}>
-        <CustomText style={styles.title}>Distribuidores</CustomText>
-        <FlatList data={suppliers} keyExtractor={this.keyExtractor} renderItem={this.renderItem} />
+        <CustomText bold style={styles.title}>Distribuidores</CustomText>
+    {suppliers.length === 0 && (<CustomText >No posee distribuidores con este producto</CustomText>)}
+          <FlatList data={suppliers} keyExtractor={this.keyExtractor} renderItem={this.renderItem} />
+
+        
       </View>
     );
   }

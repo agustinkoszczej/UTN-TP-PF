@@ -6,10 +6,10 @@ export const strings = {
   invalidPhoneMsg: 'Formato incorrecto',
   invalidPhoneCodeMsg: code => `Formato incorrecto. Debe empezar con ${code}`,
   invalidPhoneLengthMsg: length => `Formato incorrecto. Debe tener ${length} números`,
-  invalidPasswordMin: 'Debe tener al menos 8 caracteres',
+  invalidPasswordMin: 'La contraseña debe tener al menos 8 caracteres',
   invalidCUITLength: 'Debe tener 11 caracteres',
   invalidCUIT: 'El cuit es inválido',
-  invalidPasswordMsg: 'Solo puede contener mayúsculas, minúsculas y números',
+  invalidPasswordMsg: 'La contraseña debe contener mayúsculas, minúsculas y números',
   timeoutError: 'Verifique su conexión a internet',
   error: 'Error'
 };

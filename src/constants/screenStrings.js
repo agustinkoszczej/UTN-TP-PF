@@ -21,5 +21,6 @@ export const strings = {
   [Routes.ExpiredAuctions]: 'Expiradas',
   [Routes.AuctionDetail]: 'Subasta',
   [Routes.Bids]: 'Ofertas',
-  [Routes.AgendaRequest]: 'Solicitudes de contacto'
+  [Routes.AgendaRequest]: 'Solicitudes de contacto',
+  [Routes.ScannerQR]: 'QR AFIP Data Fiscal'
 };

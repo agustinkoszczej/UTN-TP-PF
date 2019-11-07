@@ -40,7 +40,7 @@ class SupplierStep extends Component {
     return (
       <TouchableOpacity style={styles.supplierContainer} onPress={this.selectSupplier(item)}>
         <Image source={{ uri: picture }} style={styles.supplierPicture} />
-        <CustomText>{`${fullName || name} (${companyName})`}</CustomText>
+        <CustomText textProps={{ numberOfLines: 2}} style={{overflow: 'hidden', width: 250}}>{`${fullName || name} (${companyName})`}</CustomText>
       </TouchableOpacity>
     );
   };

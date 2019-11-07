@@ -16,12 +16,12 @@ function ProductDetailHeader({
     <View style={styles.container}>
       <View style={styles.productHeader}>
         <Image source={{ uri: imageUrl }} style={styles.image} />
-        <CustomText title style={styles.title}>
+        <CustomText bold title style={styles.title}>
           {description}
         </CustomText>
       </View>
       <View style={styles.categorySection}>
-        <CustomText style={styles.categoryPlaceholder}>Categoria:</CustomText>
+        <CustomText bold style={styles.categoryPlaceholder}>Categoría:</CustomText>
         <CustomText style={styles.category}>{categoryDescription}</CustomText>
       </View>
     </View>

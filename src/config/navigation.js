@@ -290,6 +290,9 @@ export const screensNavOptions = {
   [Routes.AgendaRequest]: {
     title: strings[Routes.AgendaRequest]
   },
+  [Routes.ScannerQR]: {
+    title: strings[Routes.ScannerQR]
+  },
   [Routes.SupplierChat]: ({ navigation }) => {
     const { supplierName, supplierPicture, supplierStatus } = navigation.state.params;
     return {

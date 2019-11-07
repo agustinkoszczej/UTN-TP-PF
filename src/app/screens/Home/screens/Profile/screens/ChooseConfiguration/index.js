@@ -45,12 +45,6 @@ class ChooseConfiguration extends Component {
           style={styles.button}
           onPress={this.handleClick(TYPES.LOCATION)}
         />
-        <CustomButton
-          secondaryBtn
-          title={strings.editQR}
-          style={styles.button}
-          onPress={this.handleClick(TYPES.QR)}
-        />
       </ImageBackground>
     );
   }

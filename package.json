@@ -7,7 +7,8 @@
     "test": "jest",
     "lint": "eslint .",
     "lint-fix": "eslint src --fix",
-    "postinstall": "npx jetify"
+    "postinstall": "npx jetify",
+    "build": "cd android && ./gradlew app:assembleRelease"
   },
   "dependencies": {
     "@pusher/chatkit-client": "^1.13.0",

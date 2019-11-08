@@ -14,6 +14,7 @@ import { formatMoney } from '@utils/numberUtils';
 import { BID_STATUS } from '@constants/bidsStatus';
 
 import styles from './style';
+import { overlay } from 'reactotron-react-native';
 
 class Bids extends Component {
   renderItem = ({
@@ -80,15 +81,16 @@ class Bids extends Component {
 
   renderBidProduct = ({
     item: {
-      product: { description },
+      product: { description, imageUrl },
       bidProduct: { amount }
     }
   }) => (
-    <View style={[styles.row, styles.spaceBetween, { marginVertical: 10 }]}>
-      <CustomText>{description}</CustomText>
-      <CustomText>{formatMoney(amount)}</CustomText>
-    </View>
-  );
+      <View style={[styles.row, { marginVertical: 10}]}>
+        <Image source={{ uri: imageUrl }} style={styles.productImage} />
+        <CustomText textProps={{ numberOfLines: 2 }} style={{ width: 175, overflow: 'hidden', marginHorizontal: 10}}>{description}</CustomText>
+        <CustomText>{formatMoney(amount)}</CustomText>
+      </View>
+    );
 
   handleBidAction = (id, status) => () => {
     const { executeBid, navigation } = this.props;

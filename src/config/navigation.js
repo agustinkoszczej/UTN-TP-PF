@@ -308,7 +308,7 @@ export const screensNavOptions = {
           </View>
           <View style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
             <View style={{ flexDirection: 'row', flex: 1 }}>
-              <CustomText bold style={{ fontSize: 16 }}>{supplierName}</CustomText>
+              <CustomText textProps={{ numberOfLines: 1}} bold style={{ fontSize: 16, overflow: 'hidden', width: 200}}>{supplierName}</CustomText>
               <InfoButton />
             </View>
             <View style={{ flexDirection: 'row', flex: 0.5, marginLeft: -5 }}>

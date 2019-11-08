@@ -34,6 +34,12 @@ const styles = StyleSheet.create({
     marginRight: 20,
     borderRadius: 25
   },
+  productImage: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    marginLeft: -15
+  },
   placeholder: {
     marginRight: 20
   }

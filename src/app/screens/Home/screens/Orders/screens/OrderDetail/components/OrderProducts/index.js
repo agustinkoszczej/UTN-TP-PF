@@ -18,7 +18,6 @@ class OrderProducts extends Component {
       <View style={styles.productInfo}>
         <Image source={{ uri: imageUrl }} style={styles.productImage} />
         <CustomText
-          bold
           textProps={{ numberOfLines: 1 }}
           style={{ marginRight: 20, overflow: 'hidden', width: 175 }}
         >
@@ -29,7 +28,7 @@ class OrderProducts extends Component {
     </View>
   );
 
-  renderSeparator = () => <SeparatorWithText text="Productos" />;
+  renderSeparator = () => <SeparatorWithText text="Productos"/>;
 
   keyExtractor = ({ id }) => `${id}`;
 

@@ -9,7 +9,7 @@ function SeparatorWithText({ text, style, textStyle, separatorStyle, small }) {
   return (
     <View style={[styles.container, style]}>
       {text && (
-        <CustomText justify style={[styles.text, textStyle]} divider={!small} dividerSmall={small} borderless>
+        <CustomText bold justify style={[styles.text, textStyle]} divider={!small} dividerSmall={small} borderless>
           {text}
         </CustomText>
       )}

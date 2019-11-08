@@ -39,9 +39,14 @@ class SupplierStep extends Component {
     const { fullName, picture, companyName, name } = item;
     return (
       <TouchableOpacity style={styles.supplierContainer} onPress={this.selectSupplier(item)}>
-        <Image source={{ uri: picture }} style={styles.supplierPicture} />
-        <CustomText textProps={{ numberOfLines: 2}} style={{overflow: 'hidden', width: 250}}>{`${fullName || name} (${companyName})`}</CustomText>
-      </TouchableOpacity>
+        <View style={{ flexDirection: 'column' }}>
+          <Image source={{ uri: picture }} style={styles.supplierPicture} />
+        </View>
+        <View style={{ flexDirection: 'column', alignItems: 'flex-start', overflow: 'hidden', width: 250 }}>
+          <CustomText bold textProps={{ numberOfLines: 1 }}>{fullName || name}</CustomText>
+          <CustomText textProps={{ numberOfLines: 1 }}>{`(${companyName})`}</CustomText>
+        </View>
+      </TouchableOpacity >
     );
   };
 
@@ -57,8 +62,13 @@ class SupplierStep extends Component {
       <View style={styles.container}>
         {picture && (
           <View style={styles.valueSelected}>
-            <Image source={{ uri: picture }} style={styles.supplierPicture} />
-            <CustomText>{`${fullName} (${companyName})`}</CustomText>
+            <View style={{ flexDirection: 'column' }}>
+              <Image source={{ uri: picture }} style={styles.supplierPicture} />
+            </View>
+            <View style={{ flexDirection: 'column', alignItems: 'flex-start', overflow: 'hidden', width: 250 }}>
+              <CustomText bold textProps={{ numberOfLines: 1 }}>{fullName || name}</CustomText>
+              <CustomText textProps={{ numberOfLines: 1 }}>{`(${companyName})`}</CustomText>
+            </View>
           </View>
         )}
         <View style={styles.header}>
@@ -83,8 +93,8 @@ class SupplierStep extends Component {
         {loading ? (
           <ActivityIndicator />
         ) : (
-          <FlatList data={agenda} renderItem={this.renderItem} keyExtractor={this.keyExtractor} />
-        )}
+            <FlatList data={agenda} renderItem={this.renderItem} keyExtractor={this.keyExtractor} />
+          )}
       </View>
     );
   }
@@ -101,7 +111,7 @@ SupplierStep.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  agenda: state.auth.agenda?.users || [],
+  agenda: state.auth.agenda ?.users || [],
   loading: state.auth.agendaLoading
 });
 

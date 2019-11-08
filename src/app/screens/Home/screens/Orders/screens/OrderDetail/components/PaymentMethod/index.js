@@ -12,7 +12,7 @@ function PaymentMethod({ method }) {
   const description = method?.description || 'Efectivo';
   return (
     <Card style={{ marginHorizontal: 20, padding: 20 }}>
-      <SeparatorWithText text="Método de pago" />
+      <SeparatorWithText text="Métodos de pago"/>
       <View style={{ marginTop: 10, flexDirection: 'row', alignItems: 'center' }}>
         <PaymentIcon id={id} />
         <CustomText style={{ marginLeft: 20 }}>{description}</CustomText>

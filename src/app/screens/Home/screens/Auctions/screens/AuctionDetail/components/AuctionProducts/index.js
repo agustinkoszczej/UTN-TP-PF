@@ -14,7 +14,6 @@ class AuctionProducts extends Component {
       <View style={styles.productInfo}>
         <Image source={{ uri: product?.imageUrl || imageUrl }} style={styles.productImage} />
         <CustomText
-          bold
           textProps={{ numberOfLines: 1 }}
           style={{ marginRight: 20, overflow: 'hidden', width: 175 }}
         >

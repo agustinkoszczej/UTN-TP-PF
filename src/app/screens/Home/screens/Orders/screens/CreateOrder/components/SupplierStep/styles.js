@@ -14,7 +14,7 @@ export default StyleSheet.create({
     width: '70%'
   },
   supplierContainer: {
-    height: 50,
+    height: 65,
     borderWidth: 1,
     borderColor: alto,
     marginBottom: 10,
@@ -24,8 +24,8 @@ export default StyleSheet.create({
     paddingHorizontal: 20
   },
   supplierPicture: {
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
     borderRadius: 10,
     marginRight: 30
   },
@@ -45,8 +45,8 @@ export default StyleSheet.create({
     marginBottom: 15
   },
   valueSelected: {
-    height: 50,
-    marginBottom: 10,
+    height: 65,
+    //marginBottom: 10,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 20

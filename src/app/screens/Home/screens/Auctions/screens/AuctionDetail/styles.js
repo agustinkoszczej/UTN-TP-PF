@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { alto } from '@constants/colors';
+import { alto, white } from '@constants/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
-  }
+  },
+  white: {
+    color: white
+  },
 });
 export default styles;

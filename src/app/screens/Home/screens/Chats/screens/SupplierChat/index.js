@@ -25,7 +25,8 @@ class SupplierChat extends React.Component {
       roomId,
       hooks: {
         onPresenceChanged: state => {
-          navigation.setParams({ supplierStatus: state.current });
+          const supplierStatus = state.current;
+          navigation.setParams({ supplierStatus });
         },
         onMessage: this.onReceive,
         onUserStartedTyping: () =>

@@ -45,7 +45,7 @@ class AuctionStep extends Component {
               onPress={handlePaymentSelect(1)}
             />
           </View>
-          <TouchableOpacity onPress={hideOrShowCalendar(true)}>
+          <TouchableOpacity {...(isIos && { onPress: hideOrShowCalendar(true) })}>
             <View pointerEvents="none">
               <CustomText>Fecha de entrega:</CustomText>
               <TextInput {...commonProps} value={date} />

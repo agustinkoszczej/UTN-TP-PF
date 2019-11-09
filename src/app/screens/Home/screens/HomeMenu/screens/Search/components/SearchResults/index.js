@@ -34,9 +34,9 @@ class SearchResults extends Component {
       >
         <View style={styles.info}>
           <Image source={{ uri: image }} style={styles.itemImage} />
-          <View style={{overflow: 'hidden', width: 200}}>
-            <CustomText textProps={{ numberOfLines: 1 }} >{text}</CustomText>
-            {companyName && <CustomText textProps={{ numberOfLines: 1 }} >{companyName}</CustomText>}
+          <View style={{ overflow: 'hidden', width: 175 }}>
+            <CustomText textProps={{ numberOfLines: 1 }}>{text}</CustomText>
+            {companyName && <CustomText textProps={{ numberOfLines: 1 }}>{companyName}</CustomText>}
           </View>
         </View>
         <CustomButton

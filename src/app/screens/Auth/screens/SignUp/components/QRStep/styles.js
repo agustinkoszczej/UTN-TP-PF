@@ -15,8 +15,9 @@ const styles = StyleSheet.create({
   },
   qrImage: {
     width: 250,
-    height: 280,
-    resizeMode: 'contain'
+    height: 250,
+    resizeMode: 'contain',
+    marginVertical: 15
   },
   white: {
     color: white

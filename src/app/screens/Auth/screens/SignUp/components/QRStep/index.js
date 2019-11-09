@@ -7,6 +7,7 @@ import CustomButton from '@components/CustomButton';
 import Routes from '@constants/routes';
 import { safeCameraRequest } from '@utils/cameraPermission';
 import qrScan from '@assets/qr-scan.png';
+import greenCheck from '@assets/green-check.png';
 
 import styles from './styles';
 
@@ -21,11 +22,12 @@ class QRStep extends Component {
   };
 
   render() {
+    const { qrUrl } = this.props;
+
     return (
-      <TouchableOpacity
-      onPress={this.handleScanQrCode} style={styles.container}>
-        <Image source={qrScan} style={styles.qrImage} />
-        <CustomButton primaryBtn textStyle={styles.white} style={styles.button} title="Escanear"/>
+      <TouchableOpacity onPress={this.handleScanQrCode} style={styles.container}>
+        <Image source={qrUrl ? greenCheck : qrScan} style={styles.qrImage} />
+        <CustomButton primaryBtn textStyle={styles.white} style={styles.button} title="Escanear" />
       </TouchableOpacity>
     );
   }
@@ -34,6 +36,7 @@ class QRStep extends Component {
 const enhancer = compose(withNavigation);
 
 QRStep.propTypes = {
+  qrUrl: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired

@@ -57,7 +57,13 @@ class SignUp extends Component {
                 <CompanyDataStep handleSubmit={handleSubmit} values={values} setFieldValue={setFieldValue} />
               ),
               2: <LocationStep setFieldValue={setFieldValue} values={values} />,
-              3: <QRStep setFieldValue={setFieldValue} handleSubmit={handleSubmit} />
+              3: (
+                <QRStep
+                  setFieldValue={setFieldValue}
+                  handleSubmit={handleSubmit}
+                  qrUrl={values[SIGN_UP_FIELDS.QR_URL]}
+                />
+              )
             }[currentStep]
           }
           <View style={styles.buttons}>

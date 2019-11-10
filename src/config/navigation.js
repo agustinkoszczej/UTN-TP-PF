@@ -5,6 +5,7 @@ import AddButton from '@components/AddButton';
 import RequestButton from '@components/RequestButton';
 import SearchButton from '@components/SearchButton';
 import InfoButton from '@components/InfoButton';
+import ReloadChatsButton from '@components/ReloadChatsButton';
 import CustomText from '@components/CustomText';
 import { black, boulder, dustyGray, white } from '@constants/colors';
 import Routes from '@constants/routes';
@@ -120,6 +121,7 @@ export const screensNavOptions = {
       activeTintColor: black,
       inactiveTintColor: boulder
     },
+    headerRight: <ReloadChatsButton />,
     lazy: true
   },
   [Routes.Auctions]: {

@@ -11,7 +11,6 @@ import Routes from '@constants/routes';
 import statusBarConfig from '@constants/statusBar';
 import { strings } from '@constants/screenStrings';
 import { View, Image } from 'react-native';
-import onlineIcon from '@assets/online.png';
 
 const homeScreensHeaderTitleStyle = {
   alignSelf: 'center',
@@ -294,7 +293,7 @@ export const screensNavOptions = {
     title: strings[Routes.ScannerQR]
   },
   [Routes.SupplierChat]: ({ navigation }) => {
-    const { supplierName, supplierPicture, supplierStatus } = navigation.state.params;
+    const { supplierName, supplierPicture } = navigation.state.params;
     return {
       headerTitle: (
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -308,22 +307,17 @@ export const screensNavOptions = {
           </View>
           <View style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
             <View style={{ flexDirection: 'row', flex: 1 }}>
-              <CustomText textProps={{ numberOfLines: 1}} bold style={{ fontSize: 16, overflow: 'hidden', width: 200}}>{supplierName}</CustomText>
+              <CustomText
+                textProps={{ numberOfLines: 1 }}
+                bold
+                style={{ fontSize: 16, overflow: 'hidden', width: 200 }}
+              >
+                {supplierName}
+              </CustomText>
               <InfoButton />
             </View>
-            <View style={{ flexDirection: 'row', flex: 0.5, marginLeft: -5 }}>
-              <CustomText style={{ fontSize: 13, opacity: 0.5, top: -15 }}>
-                {supplierStatus === 'online' && (
-                  <Image
-                    source={onlineIcon}
-                    style={{ width: 15, height: 15, borderRadius: 20 }}
-                  />
-                )}
-                {' ' + supplierStatus}
-              </CustomText>
-            </View>
           </View>
-        </View >
+        </View>
       )
     };
   }

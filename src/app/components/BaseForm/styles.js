@@ -7,7 +7,8 @@ const FOOTER_HEIGHT = verticalScale(50);
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: white
+    backgroundColor: white,
+    marginBottom: 20
   },
   contentContainer: {
     justifyContent: 'space-between',

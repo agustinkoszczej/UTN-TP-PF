@@ -20,7 +20,6 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-*.xcworkspace
 *dev_push_certificates
 *stage_push_certificates
 *qa_push_certificates
@@ -40,6 +39,7 @@ android/app/google-services/
 node_modules/
 npm-debug.log
 yarn-error.log
+!debug.keystore
 
 # BUCK
 buck-out/

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { dateFormat } from '@utils/timeUtils';
+import { isIos } from '@constants/platform';
 
 import { CREATE_ORDER_FIELDS } from '../../constants';
 
@@ -18,6 +19,7 @@ class OrderStepContainer extends Component {
       this.setState({ date: dateFormat(date) });
       setFieldValue(CREATE_ORDER_FIELDS.DELIVERY_DATE, date);
     }
+    if (!isIos) this.setState({ show: false });
   };
 
   hideOrShowCalendar = show => () => this.setState({ show });

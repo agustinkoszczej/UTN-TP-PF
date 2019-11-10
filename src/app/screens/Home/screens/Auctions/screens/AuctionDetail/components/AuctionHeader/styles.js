@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20
   },
   ellipsis: {
-    width: 150,
+    width: 100,
     overflow: 'hidden',
     textAlign: 'right'
   }

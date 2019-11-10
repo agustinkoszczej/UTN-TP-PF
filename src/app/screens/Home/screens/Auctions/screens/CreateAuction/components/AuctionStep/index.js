@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { dateFormat } from '@utils/timeUtils';
+import { isIos } from '@constants/platform';
 
 import { CREATE_AUCTIONS_FIELDS } from '../../constants';
 
@@ -39,6 +40,7 @@ class AuctionStepContainer extends Component {
       this.setState({ date: dateFormat(date) });
       setFieldValue(CREATE_AUCTIONS_FIELDS.DELIVERY_DATE, date);
     }
+    if (!isIos) this.setState({ show: false });
   };
 
   isSelected = id =>

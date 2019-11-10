@@ -49,10 +49,7 @@ class OrderStep extends Component {
             maxLength={150}
             applyTrim
           />
-          <TouchableOpacity
-            style={styles.inputDateBirthday}
-            {...(isIos && { onPress: hideOrShowCalendar(true) })}
-          >
+          <TouchableOpacity style={styles.inputDateBirthday} onPress={hideOrShowCalendar(true)}>
             <View pointerEvents="none">
               <CustomText>Fecha de entrega:</CustomText>
               <TextInput {...commonProps} value={date} />

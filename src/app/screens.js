@@ -7,11 +7,8 @@ import {
 } from '@config/navigation';
 import Routes from '@constants/routes';
 import { inferRoute } from '@utils/navUtils';
-import {
-  createBottomTabNavigator,
-  createMaterialTopTabNavigator,
-  createStackNavigator
-} from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator, createMaterialTopTabNavigator } from 'react-navigation-tabs';
 
 // Auth
 import Login from './screens/Auth/screens/Login';

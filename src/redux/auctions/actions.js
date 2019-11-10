@@ -1,6 +1,8 @@
 import { completeTypes, createTypes, withPostSuccess } from 'redux-recompose';
 import AuctionsService from '@services/AuctionsService';
 import DialogActions from '@redux/dialog/actions';
+import ChatsActions from '@redux/chat/actions';
+import AuthActions from '@redux/auth/actions';
 import { getHomeDialog, homeDialogNames } from '@screens/Home/dialogs';
 import { StackActions } from 'react-navigation';
 
@@ -77,11 +79,13 @@ export const actionCreators = {
       service: AuctionsService.acceptBid,
       payload: { id },
       injections: [
-        withPostSuccess(async () => {
+        withPostSuccess(async (_, a, state) => {
           dispatch(actionCreators.getActiveAuctions());
           dispatch(actionCreators.getAuctionById(auctionId));
           dispatch(actionCreators.getClosedAuctions());
           dispatch(StackActions.pop(2));
+          dispatch(AuthActions.getAgenda());
+          dispatch(ChatsActions.connectPusher(state.auth.currentUser.id));
         })
       ]
     });

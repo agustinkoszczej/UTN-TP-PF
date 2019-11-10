@@ -12,7 +12,9 @@ export const actions = createTypes(
       'GET_CLOSED_AUCTIONS',
       'GET_AUCTION_BY_ID',
       'CREATE_AUCTION',
-      'EXECUTE_BID'
+      'EXECUTE_BID',
+      'ACCEPT_BID',
+      'DECLINE_BID'
     ],
     []
   ),
@@ -25,7 +27,8 @@ const targets = {
   closedAuctions: 'closedAuctions',
   currentAuction: 'currentAuction',
   createAuction: 'createAuction',
-  executeBid: 'executeBid'
+  acceptBid: 'acceptBid',
+  declineBid: 'declineBid'
 };
 
 export const actionCreators = {
@@ -64,11 +67,25 @@ export const actionCreators = {
       })
     ]
   }),
-  executeBid: (id, status, auctionId) => ({
-    type: actions.EXECUTE_BID,
-    target: targets.executeBid,
-    service: AuctionsService.executeBid,
-    payload: { id, status },
+  acceptBid: (id, auctionId) => ({
+    type: actions.ACCEPT_BID,
+    target: targets.acceptBid,
+    service: AuctionsService.acceptBid,
+    payload: { id },
+    injections: [
+      withPostSuccess(async dispatch => {
+        dispatch(actionCreators.getActiveAuctions());
+        dispatch(actionCreators.getAuctionById(auctionId));
+        dispatch(actionCreators.getClosedAuctions());
+        dispatch(StackActions.pop(2));
+      })
+    ]
+  }),
+  declineBid: (id, auctionId) => ({
+    type: actions.DECLINE_BID,
+    target: targets.declineBid,
+    service: AuctionsService.declineBid,
+    payload: { id },
     injections: [
       withPostSuccess(async dispatch => {
         dispatch(actionCreators.getActiveAuctions());

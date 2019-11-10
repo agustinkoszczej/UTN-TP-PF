@@ -11,10 +11,8 @@ import SeparatorWithText from '@components/SeparatorWithText';
 import { navigationModel } from '@propTypes/navigationModel';
 import { dateFormat } from '@utils/timeUtils';
 import { formatMoney } from '@utils/numberUtils';
-import { BID_STATUS } from '@constants/bidsStatus';
 
 import styles from './style';
-import { overlay } from 'reactotron-react-native';
 
 class Bids extends Component {
   renderItem = ({
@@ -26,8 +24,7 @@ class Bids extends Component {
       bidProducts
     }
   }) => {
-    const { loading } = this.props;
-
+    const { declineBidLoading, acceptBidLoading } = this.props;
     const total = bidProducts.reduce(
       (accum, product) => parseFloat(product.bidProduct.amount, 10) + accum,
       0
@@ -60,19 +57,19 @@ class Bids extends Component {
         <View style={[styles.row, styles.spaceBetween]}>
           <CustomButton
             primaryBtn
-            loading={loading}
+            loading={acceptBidLoading}
             style={styles.button}
             textStyle={styles.white}
             title="Aceptar"
-            onPress={this.handleBidAction(id, BID_STATUS.ACCEPTED)}
+            onPress={this.acceptBid(id)}
           />
           <CustomButton
             primaryBtn
-            loading={loading}
+            loading={declineBidLoading}
             style={styles.button}
             textStyle={styles.white}
             title="Rechazar"
-            onPress={this.handleBidAction(id, BID_STATUS.DECLINED)}
+            onPress={this.declineBid(id)}
           />
         </View>
       </Card>
@@ -85,16 +82,28 @@ class Bids extends Component {
       bidProduct: { amount }
     }
   }) => (
-      <View style={[styles.row, { marginVertical: 10}]}>
+    <View style={[styles.row, { marginVertical: 10, justifyContent: 'space-between' }]}>
+      <View style={styles.row}>
         <Image source={{ uri: imageUrl }} style={styles.productImage} />
-        <CustomText textProps={{ numberOfLines: 2 }} style={{ width: 175, overflow: 'hidden', marginHorizontal: 10}}>{description}</CustomText>
-        <CustomText>{formatMoney(amount)}</CustomText>
+        <CustomText
+          textProps={{ numberOfLines: 1 }}
+          style={{ width: 200, overflow: 'hidden', marginHorizontal: 10 }}
+        >
+          {description}
+        </CustomText>
       </View>
-    );
+      <CustomText style={{ bottom: 5 }}>{formatMoney(amount)}</CustomText>
+    </View>
+  );
 
-  handleBidAction = (id, status) => () => {
-    const { executeBid, navigation } = this.props;
-    executeBid(id, status, navigation.getParam('auctionId'));
+  acceptBid = id => () => {
+    const { acceptBid, navigation } = this.props;
+    acceptBid(id, navigation.getParam('auctionId'));
+  };
+
+  declineBid = id => () => {
+    const { declineBid, navigation } = this.props;
+    declineBid(id, navigation.getParam('auctionId'));
   };
 
   keyExtractor = ({ id }) => `${id}`;
@@ -116,16 +125,20 @@ class Bids extends Component {
 
 Bids.propTypes = {
   navigation: PropTypes.shape(navigationModel).isRequired,
-  executeBid: PropTypes.func.isRequired,
-  loading: PropTypes.bool
+  acceptBid: PropTypes.func.isRequired,
+  declineBid: PropTypes.func.isRequired,
+  acceptBidLoading: PropTypes.bool,
+  declineBidLoading: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-  loading: state.auctions.executeBidLoading
+  acceptBidLoading: state.auctions.acceptBidLoading,
+  declineBidLoading: state.auctions.declineBidLoading
 });
 
 const mapDispatchToProps = {
-  executeBid: AuctionActions.executeBid
+  acceptBid: AuctionActions.acceptBid,
+  declineBid: AuctionActions.declineBid
 };
 
 const enhancer = compose(

@@ -9,7 +9,8 @@ const getAuctionById = id => api.get(`/merchants/auctions/${id}`);
 
 const createAuction = auction => api.post('/merchants/auctions', auction);
 
-const executeBid = ({ id, status }) => api.patch(`/merchants/bids/${id}`, { status });
+const acceptBid = ({ id }) => api.patch(`/merchants/bids/${id}`, { status: 'ACCEPTED' });
+const declineBid = ({ id }) => api.patch(`/merchants/bids/${id}`, { status: 'DECLINED' });
 
 export default {
   getActiveAuctions,
@@ -17,5 +18,6 @@ export default {
   getExpiredAuctions,
   getAuctionById,
   createAuction,
-  executeBid
+  acceptBid,
+  declineBid
 };

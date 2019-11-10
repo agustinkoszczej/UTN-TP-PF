@@ -6,6 +6,8 @@ import Card from '@components/Card';
 import CustomText from '@components/CustomText';
 import { BID_STATUS } from '@constants/bidsStatus';
 import { spicyGray } from '@constants/colors';
+import LottieView from 'lottie-react-native';
+import empty from '@lottieAssets/chart.json';
 
 import styles from './styles';
 
@@ -39,6 +41,7 @@ function BidsSection({ bids }) {
     color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
     strokeWidth: 2 // optional, default 3
   };
+  const hasBids = bids && Object.values(bids).some(val => val);
   return (
     <View style={{ marginBottom: 30 }}>
       <Card style={styles.title}>
@@ -46,7 +49,7 @@ function BidsSection({ bids }) {
           Ofertas de subastas
         </CustomText>
       </Card>
-      <>
+      {hasBids ? (
         <PieChart
           data={data}
           width={Dimensions.get('window').width - 40}
@@ -57,7 +60,14 @@ function BidsSection({ bids }) {
           paddingLeft="15"
           absolute
         />
-      </>
+      ) : (
+        <View style={{ height: 200, width: 200, flexDirection: 'row' }}>
+          <LottieView source={empty} autoPlay loop={false} />
+          <CustomText style={{ left: 200, top: 50, width: 150, fontSize: 20 }}>
+            No posees ninguna oferta de subasta
+          </CustomText>
+        </View>
+      )}
     </View>
   );
 }

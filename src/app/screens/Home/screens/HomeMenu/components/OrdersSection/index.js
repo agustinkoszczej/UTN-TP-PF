@@ -1,11 +1,13 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { PieChart } from 'react-native-chart-kit';
 import Card from '@components/Card';
 import CustomText from '@components/CustomText';
 import { ORDER_STATUS } from '@constants/orderStatus';
 import { spicyGray } from '@constants/colors';
+import LottieView from 'lottie-react-native';
+import empty from '@lottieAssets/chart.json';
 
 import styles from './styles';
 
@@ -61,6 +63,7 @@ function OrdersSection({ orders }) {
     color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
     strokeWidth: 2 // optional, default 3
   };
+  const hasOrders = orders && Object.values(orders).some(val => val);
   return (
     <>
       <Card style={styles.title}>
@@ -68,7 +71,7 @@ function OrdersSection({ orders }) {
           Pedidos
         </CustomText>
       </Card>
-      <>
+      {hasOrders ? (
         <PieChart
           data={data}
           width={Dimensions.get('window').width - 40}
@@ -79,7 +82,14 @@ function OrdersSection({ orders }) {
           paddingLeft="15"
           absolute
         />
-      </>
+      ) : (
+        <View style={{ height: 200, width: 200, flexDirection: 'row' }}>
+          <LottieView source={empty} autoPlay loop={false} />
+          <CustomText style={{ left: 200, top: 75, width: 150, fontSize: 20 }}>
+            No posees ningun pedido
+          </CustomText>
+        </View>
+      )}
     </>
   );
 }

@@ -1,11 +1,13 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { PieChart } from 'react-native-chart-kit';
+import LottieView from 'lottie-react-native';
 import Card from '@components/Card';
 import CustomText from '@components/CustomText';
 import { AUCTION_STATUS } from '@constants/auctionStatus';
 import { spicyGray } from '@constants/colors';
+import empty from '@lottieAssets/chart.json';
 
 import styles from './styles';
 
@@ -39,6 +41,7 @@ function AuctionsSection({ auctions }) {
     color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
     strokeWidth: 2 // optional, default 3
   };
+  const hasAuctions = auctions && Object.values(auctions).some(val => val);
   return (
     <>
       <Card style={styles.title}>
@@ -47,16 +50,25 @@ function AuctionsSection({ auctions }) {
         </CustomText>
       </Card>
       <>
-        <PieChart
-          data={data}
-          width={Dimensions.get('window').width - 40}
-          height={220}
-          chartConfig={chartConfig}
-          accessor="population"
-          backgroundColor="transparent"
-          paddingLeft="15"
-          absolute
-        />
+        {hasAuctions ? (
+          <PieChart
+            data={data}
+            width={Dimensions.get('window').width - 40}
+            height={220}
+            chartConfig={chartConfig}
+            accessor="population"
+            backgroundColor="transparent"
+            paddingLeft="15"
+            absolute
+          />
+        ) : (
+          <View style={{ height: 200, width: 200, flexDirection: 'row' }}>
+            <LottieView source={empty} autoPlay loop={false} />
+            <CustomText style={{ left: 200, top: 75, width: 150, fontSize: 20 }}>
+              No posees ninguna subasta
+            </CustomText>
+          </View>
+        )}
       </>
     </>
   );

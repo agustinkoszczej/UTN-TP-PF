@@ -53,7 +53,7 @@ function OrderHeader({
       </Card>
       {!IS_ACTIVE_STATUS(status) && !rated && !creation && (
         <Card style={styles.rateButton}>
-          <CustomButton title="Valorar" onPress={showRateModal} />
+          <CustomButton primaryBtn textStyle={styles.white} title="Valorar" onPress={showRateModal} />
         </Card>
       )}
     </>

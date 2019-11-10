@@ -38,12 +38,17 @@ class AuctionDetail extends Component {
         {auction.status === AUCTION_STATUS.ACTIVE && (
           <Card style={styles.bidsButton}>
             {bids.length ? (
-              <CustomButton primaryBtn title="Ver ofertas" textStyle={styles.white} onPress={this.navigateToBids} />
+              <CustomButton
+                primaryBtn
+                title="Ver ofertas"
+                textStyle={styles.white}
+                onPress={this.navigateToBids}
+              />
             ) : (
-                <View style={styles.noOffers}>
-                  <CustomText>No tenes ninguna oferta</CustomText>
-                </View>
-              )}
+              <View style={styles.noOffers}>
+                <CustomText>No tenes ninguna oferta</CustomText>
+              </View>
+            )}
           </Card>
         )}
         <PaymentMethods methods={auction.paymentOptions} />
@@ -72,7 +77,7 @@ const enhancer = compose(
   withNavigation,
   Loadable(props => props.loading && !props.refreshing),
   withProps(props => {
-    return { bids: props.auction.bids ?.filter(b => b.status === BID_STATUS.ACTIVE) };
+    return { bids: props.auction.bids?.filter(b => b.status === BID_STATUS.ACTIVE) };
   })
 );
 

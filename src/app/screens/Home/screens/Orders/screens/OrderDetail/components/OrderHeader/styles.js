@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { white } from '@constants/colors';
 
 const styles = StyleSheet.create({
   cardContainer: {
@@ -29,6 +30,9 @@ const styles = StyleSheet.create({
     width: 150,
     overflow: 'hidden',
     textAlign: 'right'
+  },
+  white: {
+    color: white
   }
 });
 export default styles;

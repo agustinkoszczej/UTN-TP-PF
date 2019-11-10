@@ -43,10 +43,12 @@ class SupplierStep extends Component {
           <Image source={{ uri: picture }} style={styles.supplierPicture} />
         </View>
         <View style={{ flexDirection: 'column', alignItems: 'flex-start', overflow: 'hidden', width: 250 }}>
-          <CustomText bold textProps={{ numberOfLines: 1 }}>{fullName || name}</CustomText>
+          <CustomText bold textProps={{ numberOfLines: 1 }}>
+            {fullName || name}
+          </CustomText>
           <CustomText textProps={{ numberOfLines: 1 }}>{`(${companyName})`}</CustomText>
         </View>
-      </TouchableOpacity >
+      </TouchableOpacity>
     );
   };
 
@@ -65,8 +67,12 @@ class SupplierStep extends Component {
             <View style={{ flexDirection: 'column' }}>
               <Image source={{ uri: picture }} style={styles.supplierPicture} />
             </View>
-            <View style={{ flexDirection: 'column', alignItems: 'flex-start', overflow: 'hidden', width: 250 }}>
-              <CustomText bold textProps={{ numberOfLines: 1 }}>{fullName || name}</CustomText>
+            <View
+              style={{ flexDirection: 'column', alignItems: 'flex-start', overflow: 'hidden', width: 250 }}
+            >
+              <CustomText bold textProps={{ numberOfLines: 1 }}>
+                {fullName || name}
+              </CustomText>
               <CustomText textProps={{ numberOfLines: 1 }}>{`(${companyName})`}</CustomText>
             </View>
           </View>
@@ -93,8 +99,8 @@ class SupplierStep extends Component {
         {loading ? (
           <ActivityIndicator />
         ) : (
-            <FlatList data={agenda} renderItem={this.renderItem} keyExtractor={this.keyExtractor} />
-          )}
+          <FlatList data={agenda} renderItem={this.renderItem} keyExtractor={this.keyExtractor} />
+        )}
       </View>
     );
   }
@@ -111,7 +117,7 @@ SupplierStep.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  agenda: state.auth.agenda ?.users || [],
+  agenda: state.auth.agenda?.users || [],
   loading: state.auth.agendaLoading
 });
 

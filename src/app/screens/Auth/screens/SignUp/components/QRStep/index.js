@@ -6,8 +6,9 @@ import { Image, TouchableOpacity } from 'react-native';
 import CustomButton from '@components/CustomButton';
 import Routes from '@constants/routes';
 import { safeCameraRequest } from '@utils/cameraPermission';
+import LottieView from 'lottie-react-native';
 import qrScan from '@assets/qr-scan.png';
-import greenCheck from '@assets/green-check.png';
+import greenCheck from '@lottieAssets/green-check.json';
 
 import styles from './styles';
 
@@ -26,7 +27,11 @@ class QRStep extends Component {
 
     return (
       <TouchableOpacity onPress={this.handleScanQrCode} style={styles.container}>
-        <Image source={qrUrl ? greenCheck : qrScan} style={styles.qrImage} />
+        {qrUrl ? (
+          <LottieView source={greenCheck} autoPlay loop={false} style={{ width: 200, height: 200 }} />
+        ) : (
+          <Image source={qrScan} style={styles.qrImage} />
+        )}
         <CustomButton primaryBtn textStyle={styles.white} style={styles.button} title="Escanear" />
       </TouchableOpacity>
     );

@@ -51,13 +51,14 @@ class SearchResults extends Component {
   };
 
   handleItemPress = item => () => {
-    const { navigation, getProductById, selected, getSupplierById } = this.props;
+    const { navigation, getProductById, selected, getSupplierById, getAgenda } = this.props;
     let route;
     if (selected === STATES_SELECTED.PRODUCT) {
       route = Routes.ProductDetail;
       getProductById(item.id);
     } else {
       getSupplierById(item.user_id);
+      getAgenda();
       route = Routes.SupplierProfile;
     }
     navigation.navigate(route);
@@ -92,7 +93,8 @@ SearchResults.propTypes = {
   selected: PropTypes.string.isRequired,
   users: PropTypes.arrayOf(PropTypes.shape({})),
   getProductById: PropTypes.func.isRequired,
-  getSupplierById: PropTypes.func.isRequired
+  getSupplierById: PropTypes.func.isRequired,
+  getAgenda: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -103,7 +105,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getProductById: id => dispatch(ProductActions.getProductById(id)),
-  getSupplierById: id => dispatch(AuthActions.getSupplierById(id))
+  getSupplierById: id => dispatch(AuthActions.getSupplierById(id)),
+  getAgenda: () => dispatch(AuthActions.getAgenda())
 });
 
 const enhancer = compose(

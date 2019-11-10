@@ -30,7 +30,7 @@ export const actions = createTypes(
       'ADD_CONTACT',
       'DELETE_CONTACT'
     ],
-    ['CLEAN_SIGN_UP_ERROR', 'CLEAN_SUPPLIER']
+    ['CLEAN_SIGN_UP_ERROR', 'CLEAN_SUPPLIER', 'SET_ACCEPT_CONTACT_ID', 'SET_DELETE_CONTACT_ID']
   ),
   '@@AUTH'
 );
@@ -47,7 +47,8 @@ export const targets = {
   acceptContact: 'acceptContact',
   deleteContact: 'deleteContact',
   currentSupplier: 'currentSupplier',
-  contact: 'contact'
+  contact: 'contact',
+  acceptContactLoadingId: 'acceptContactLoadingId'
 };
 
 export const actionCreators = {
@@ -204,35 +205,49 @@ export const actionCreators = {
     target: targets.stats,
     service: AuthService.getStats
   }),
-  acceptRequest: (id, isInProfile) => ({
-    type: actions.GET_SUPPLIERS,
-    target: targets.acceptContact,
-    payload: id,
-    service: AuthService.acceptRequest,
-    injections: [
-      withPostSuccess((dispatch, _, state) => {
-        dispatch(
-          actionCreators.getAgenda('', () => {
-            dispatch(actionCreators.getSupplierById(id));
-            dispatch(ChatActions.connectPusher(state.auth.currentUser.id));
-            if (!isInProfile) dispatch(NavigationActions.navigate({ routeName: Routes.SupplierProfile }));
-          })
-        );
-      })
-    ]
-  }),
-  deleteContact: id => ({
-    type: actions.GET_SUPPLIERS,
-    target: targets.deleteContact,
-    payload: id,
-    service: AuthService.deleteContact,
-    injections: [
-      withPostSuccess((dispatch, _, state) => {
-        dispatch(actionCreators.getAgenda('', () => dispatch(actionCreators.getSupplierById(id))));
-        dispatch(ChatActions.connectPusher(state.auth.currentUser.id));
-      })
-    ]
-  }),
+  acceptRequest: (id, isInProfile) => dispatch => {
+    dispatch({
+      type: actions.SET_ACCEPT_CONTACT_ID,
+      target: targets.acceptContactLoadingId,
+      payload: id
+    });
+    dispatch({
+      type: actions.GET_SUPPLIERS,
+      target: targets.acceptContact,
+      payload: id,
+      service: AuthService.acceptRequest,
+      injections: [
+        withPostSuccess((a, _, state) => {
+          dispatch(
+            actionCreators.getAgenda('', () => {
+              dispatch(actionCreators.getSupplierById(id));
+              dispatch(ChatActions.connectPusher(state.auth.currentUser.id));
+              if (!isInProfile) dispatch(NavigationActions.navigate({ routeName: Routes.SupplierProfile }));
+            })
+          );
+        })
+      ]
+    });
+  },
+  deleteContact: id => dispatch => {
+    dispatch({
+      type: actions.SET_DELETE_CONTACT_ID,
+      payload: id,
+      target: targets.deleteContactLoadingId
+    });
+    dispatch({
+      type: actions.GET_SUPPLIERS,
+      target: targets.deleteContact,
+      payload: id,
+      service: AuthService.deleteContact,
+      injections: [
+        withPostSuccess((a, b, state) => {
+          dispatch(actionCreators.getAgenda('', () => dispatch(actionCreators.getSupplierById(id))));
+          dispatch(ChatActions.connectPusher(state.auth.currentUser.id));
+        })
+      ]
+    });
+  },
   getSupplierById: id => (dispatch, getState) => {
     dispatch({
       type: actions.GET_SUPPLIER_BY_ID,

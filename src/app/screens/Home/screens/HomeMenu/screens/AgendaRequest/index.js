@@ -16,8 +16,11 @@ import styles from './styles';
 
 class AgendaRequest extends Component {
   renderItem = ({ item }) => {
+    const { deleteLoadingId, deleteLoading, acceptLoadingId, acceptLoading } = this.props;
     const { fullName, companyName, user_id: id, picture, streetAddress } = item;
     const street = streetAddress?.split(',')[0] || '';
+    const loadAccept = id === acceptLoadingId && acceptLoading;
+    const loadDelete = id === deleteLoadingId && deleteLoading;
     return (
       <Card style={styles.cardContainer}>
         <View style={[styles.row, styles.alignItems, styles.bottom]}>
@@ -39,14 +42,14 @@ class AgendaRequest extends Component {
             textStyle={styles.white}
             style={styles.button}
             title="Aceptar"
-            loading={this.props.acceptLoading}
+            loading={loadAccept}
           />
           <CustomButton
             secondaryBtn
             onPress={this.handleDecline(id)}
             style={styles.button}
             title="Declinar"
-            loading={this.props.deleteLoading}
+            loading={loadDelete}
           />
         </View>
       </Card>
@@ -93,13 +96,17 @@ AgendaRequest.propTypes = {
   deleteContact: PropTypes.func.isRequired,
   refreshing: PropTypes.bool.isRequired,
   acceptLoading: PropTypes.bool.isRequired,
-  deleteLoading: PropTypes.bool.isRequired
+  deleteLoading: PropTypes.bool.isRequired,
+  deleteLoadingId: PropTypes.string,
+  acceptLoadingId: PropTypes.string
 };
 
 const mapStateToProps = state => ({
   requests: state.auth.agenda?.requests || [],
   refreshing: state.auth.agendaLoading,
+  deleteLoadingId: state.auth.deleteContactLoadingId,
   deleteLoading: state.auth.deleteContactLoading,
+  acceptLoadingId: state.auth.acceptContactLoadingId,
   acceptLoading: state.auth.acceptContactLoading
 });
 

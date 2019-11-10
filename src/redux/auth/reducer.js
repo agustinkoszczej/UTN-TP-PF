@@ -1,5 +1,6 @@
 import { createReducer, completeReducer, completeState, onSetValue } from 'redux-recompose';
 import Immutable from 'seamless-immutable';
+import onReadValue from 'redux-recompose/lib/effects/onReadValue';
 
 import { actions } from './actions';
 
@@ -12,12 +13,18 @@ const stateDescription = {
   suppliers: [],
   stats: null,
   acceptContact: null,
+  acceptContactLoadingId: null,
   deleteContact: null,
+  deleteContactLoadingId: null,
   currentSupplier: null,
   contact: null
 };
 
-const initialState = completeState(stateDescription, ['initialLoading']);
+const initialState = completeState(stateDescription, [
+  'initialLoading',
+  'acceptContactLoadingId',
+  'deleteContactLoadingId'
+]);
 
 const reducerDescription = {
   primaryActions: [
@@ -37,7 +44,9 @@ const reducerDescription = {
     [actions.LOG_OUT]: onSetValue(null),
     [actions.CLEAN_SIGN_UP_ERROR]: onSetValue(null),
     [actions.CLEAN_SUPPLIER]: onSetValue(null),
-    [actions.CLEAR_SUPPLIERS]: onSetValue([])
+    [actions.CLEAR_SUPPLIERS]: onSetValue([]),
+    [actions.SET_ACCEPT_CONTACT_ID]: onReadValue(),
+    [actions.SET_DELETE_CONTACT_ID]: onReadValue()
   }
 };
 

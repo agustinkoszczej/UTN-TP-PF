@@ -44,6 +44,7 @@ class OrderStep extends Component {
           <CustomTextInput
             name={CREATE_ORDER_FIELDS.COMMENT}
             {...commonProps}
+            onFocus={isIos ? hideOrShowCalendar(false) : null}
             textRef={this[CREATE_ORDER_FIELDS.COMMENT]}
             placeholder="Comentario"
             maxLength={150}

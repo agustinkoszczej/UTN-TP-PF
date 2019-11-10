@@ -1,4 +1,4 @@
-import { createReducer, completeReducer, completeState } from 'redux-recompose';
+import { createReducer, completeReducer, completeState, onReadValue } from 'redux-recompose';
 import Immutable from 'seamless-immutable';
 
 import { actions } from './actions';
@@ -10,7 +10,9 @@ const stateDescription = {
   currentAuction: null,
   createAuction: null,
   acceptBid: null,
-  declineBid: null
+  declineBid: null,
+  acceptBidLoadingId: null,
+  declineBidLoadingId: null
 };
 
 const initialState = completeState(stateDescription);
@@ -25,7 +27,10 @@ const reducerDescription = {
     actions.ACCEPT_BID,
     actions.DECLINE_BID
   ],
-  override: {}
+  override: {
+    [actions.SET_ACCEPT_BID_LOADING]: onReadValue(),
+    [actions.SET_DECLINE_BID_LOADING]: onReadValue()
+  }
 };
 
 export default createReducer(Immutable(initialState), completeReducer(reducerDescription));

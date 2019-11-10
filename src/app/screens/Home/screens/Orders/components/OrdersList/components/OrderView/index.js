@@ -43,8 +43,7 @@ class OrderView extends Component {
         orderProducts = [],
         id,
         amount,
-        receiverName,
-        supplier: { picture }
+        supplier: { picture, fullName }
       },
       goToOrderDetail
     } = this.props;
@@ -55,7 +54,7 @@ class OrderView extends Component {
           <View style={styles.orderName}>
             <Image source={{ uri: picture }} style={styles.userPicture} />
             <CustomText textProps={{ numberOfLines: 1 }} style={styles.name} title bold>
-              {receiverName}
+              {fullName}
             </CustomText>
           </View>
         </View>
@@ -100,7 +99,8 @@ OrderView.propTypes = {
     id: PropTypes.number,
     amount: PropTypes.string,
     supplier: PropTypes.shape({
-      picture: PropTypes.string
+      picture: PropTypes.string,
+      fullName: PropTypes.string
     }),
     receiverName: PropTypes.string
   }).isRequired

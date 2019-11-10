@@ -22,7 +22,9 @@ class OrderStepContainer extends Component {
     if (!isIos) this.setState({ show: false });
   };
 
-  hideOrShowCalendar = show => () => this.setState({ show });
+  hideOrShowCalendar = show => () => {
+    this.setState({ show });
+  };
 
   paymentMethodSelector = method => method.text;
 

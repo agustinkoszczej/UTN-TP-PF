@@ -24,11 +24,13 @@ class Bids extends Component {
       bidProducts
     }
   }) => {
-    const { declineBidLoading, acceptBidLoading } = this.props;
+    const { declineBidLoading, declineBidLoadingId, acceptBidLoading, acceptBidLoadingId } = this.props;
     const total = bidProducts.reduce(
       (accum, product) => parseFloat(product.bidProduct.amount, 10) + accum,
       0
     );
+    const loadAccept = acceptBidLoading && acceptBidLoadingId === id;
+    const loadDecline = declineBidLoading && declineBidLoadingId === id;
     return (
       <Card style={styles.bidContainer}>
         <SeparatorWithText text="Detalle de oferta" />
@@ -57,7 +59,7 @@ class Bids extends Component {
         <View style={[styles.row, styles.spaceBetween]}>
           <CustomButton
             primaryBtn
-            loading={acceptBidLoading}
+            loading={loadAccept}
             style={styles.button}
             textStyle={styles.white}
             title="Aceptar"
@@ -65,7 +67,7 @@ class Bids extends Component {
           />
           <CustomButton
             primaryBtn
-            loading={declineBidLoading}
+            loading={loadDecline}
             style={styles.button}
             textStyle={styles.white}
             title="Rechazar"
@@ -128,11 +130,15 @@ Bids.propTypes = {
   acceptBid: PropTypes.func.isRequired,
   declineBid: PropTypes.func.isRequired,
   acceptBidLoading: PropTypes.bool,
-  declineBidLoading: PropTypes.bool
+  acceptBidLoadingId: PropTypes.number,
+  declineBidLoading: PropTypes.bool,
+  declineBidLoadingId: PropTypes.number
 };
 
 const mapStateToProps = state => ({
   acceptBidLoading: state.auctions.acceptBidLoading,
+  acceptBidLoadingId: state.auctions.acceptBidLoadingId,
+  declineBidLoadingId: state.auctions.declineBidLoadingId,
   declineBidLoading: state.auctions.declineBidLoading
 });
 

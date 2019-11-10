@@ -16,7 +16,7 @@ export const actions = createTypes(
       'ACCEPT_BID',
       'DECLINE_BID'
     ],
-    []
+    ['SET_ACCEPT_BID_LOADING', 'SET_DECLINE_BID_LOADING']
   ),
   '@@AUCTIONS'
 );
@@ -28,7 +28,9 @@ const targets = {
   currentAuction: 'currentAuction',
   createAuction: 'createAuction',
   acceptBid: 'acceptBid',
-  declineBid: 'declineBid'
+  acceptBidLoadingId: 'acceptBidLoadingId',
+  declineBid: 'declineBid',
+  declineBidLoadingId: 'declineBidLoadingId'
 };
 
 export const actionCreators = {
@@ -67,34 +69,40 @@ export const actionCreators = {
       })
     ]
   }),
-  acceptBid: (id, auctionId) => ({
-    type: actions.ACCEPT_BID,
-    target: targets.acceptBid,
-    service: AuctionsService.acceptBid,
-    payload: { id },
-    injections: [
-      withPostSuccess(async dispatch => {
-        dispatch(actionCreators.getActiveAuctions());
-        dispatch(actionCreators.getAuctionById(auctionId));
-        dispatch(actionCreators.getClosedAuctions());
-        dispatch(StackActions.pop(2));
-      })
-    ]
-  }),
-  declineBid: (id, auctionId) => ({
-    type: actions.DECLINE_BID,
-    target: targets.declineBid,
-    service: AuctionsService.declineBid,
-    payload: { id },
-    injections: [
-      withPostSuccess(async dispatch => {
-        dispatch(actionCreators.getActiveAuctions());
-        dispatch(actionCreators.getAuctionById(auctionId));
-        dispatch(actionCreators.getClosedAuctions());
-        dispatch(StackActions.pop(2));
-      })
-    ]
-  })
+  acceptBid: (id, auctionId) => dispatch => {
+    dispatch({ type: actions.SET_ACCEPT_BID_LOADING, target: targets.acceptBidLoadingId, payload: id });
+    dispatch({
+      type: actions.ACCEPT_BID,
+      target: targets.acceptBid,
+      service: AuctionsService.acceptBid,
+      payload: { id },
+      injections: [
+        withPostSuccess(async () => {
+          dispatch(actionCreators.getActiveAuctions());
+          dispatch(actionCreators.getAuctionById(auctionId));
+          dispatch(actionCreators.getClosedAuctions());
+          dispatch(StackActions.pop(2));
+        })
+      ]
+    });
+  },
+  declineBid: (id, auctionId) => dispatch => {
+    dispatch({ type: actions.SET_DECLINE_BID_LOADING, target: targets.declineBidLoadingId, payload: id });
+    dispatch({
+      type: actions.DECLINE_BID,
+      target: targets.declineBid,
+      service: AuctionsService.declineBid,
+      payload: { id },
+      injections: [
+        withPostSuccess(async () => {
+          dispatch(actionCreators.getActiveAuctions());
+          dispatch(actionCreators.getAuctionById(auctionId));
+          dispatch(actionCreators.getClosedAuctions());
+          dispatch(StackActions.pop(2));
+        })
+      ]
+    });
+  }
 };
 
 export default actionCreators;

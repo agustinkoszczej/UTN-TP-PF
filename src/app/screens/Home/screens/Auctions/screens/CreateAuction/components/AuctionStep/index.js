@@ -36,11 +36,13 @@ class AuctionStepContainer extends Component {
 
   handleDateChange = (_, date) => {
     const { setFieldValue } = this.props;
+    let changed = false;
     if (date) {
-      this.setState({ date: dateFormat(date) });
+      isIos? this.setState({ date: dateFormat(date)}) : this.setState({ date: dateFormat(date), show: false });
       setFieldValue(CREATE_AUCTIONS_FIELDS.DELIVERY_DATE, date);
+      changed = true;
     }
-    if (!isIos) this.setState({ show: false });
+    if (!isIos && !changed) this.setState({ show: false });
   };
 
   isSelected = id =>

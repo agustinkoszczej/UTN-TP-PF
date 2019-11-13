@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export const dateFormat = date => moment(date).format('DD/MM/YYYY');
+export const dateFormat = date => moment.utc(date).format('DD/MM/YYYY');
 
 export const getTimezoneOffset = () => new Date().getTimezoneOffset() / 60 + 1;
 

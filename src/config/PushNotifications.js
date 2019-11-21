@@ -16,9 +16,12 @@ const formatReceivedNotification = push => {
 
 export default function setUp(dispatch) {
   PushNotification.configure({
-    onRegister(data) {
+    async onRegister(data) {
       dispatch(NotificationActions.register(data.token));
-      dispatch(NotificationActions.updateToken());
+      const userLogged = await AuthService.isLogged();
+      if (userLogged) {
+        dispatch(NotificationActions.updateToken());
+      }
     },
     onNotification(notification) {
       dispatch(NotificationActions.notificationReceived(formatReceivedNotification(notification)));

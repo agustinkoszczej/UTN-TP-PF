@@ -6,6 +6,7 @@ import { apiSetup } from '@config/api';
 import Routes from '@constants/routes';
 import DialogActions from '@redux/dialog/actions';
 import ChatActions from '@redux/chat/actions';
+import NotificationActions from '@redux/pushNotifications/actions';
 import { getAuthDialog, authDialogNames } from '@screens/Auth/dialogs';
 import { getHomeDialog, homeDialogNames } from '@screens/Home/dialogs';
 
@@ -75,6 +76,7 @@ export const actionCreators = {
     failureSelector: response => response.data,
     injections: [
       withPostSuccess(async (dispatch, response) => {
+        dispatch(NotificationActions.updateToken());
         await AuthService.setTokens(response.data.access_token);
         dispatch(actionCreators.getUserInfo());
       })

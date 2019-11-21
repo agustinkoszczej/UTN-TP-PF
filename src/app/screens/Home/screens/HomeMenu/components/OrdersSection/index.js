@@ -16,7 +16,7 @@ function OrdersSection({ orders }) {
     {
       name: 'Cancelados',
       population: parseInt(orders?.[ORDER_STATUS.CANCELLED], 10) || 0,
-      color: '#D85F49',
+      color: '#F1F1F1',
 
       legendFontColor: spicyGray,
       legendFontSize: 13
@@ -24,35 +24,35 @@ function OrdersSection({ orders }) {
     {
       name: 'Rechazados',
       population: parseInt(orders?.[ORDER_STATUS.REJECTED], 10) || 0,
-      color: '#F66D3B',
+      color: '#C9C9C9',
       legendFontColor: spicyGray,
       legendFontSize: 13
     },
     {
       name: 'Entregados',
       population: parseInt(orders?.[ORDER_STATUS.DELIVERED], 10) || 0,
-      color: '#D92E1D',
+      color: '#9D9D9D',
       legendFontColor: spicyGray,
       legendFontSize: 13
     },
     {
       name: 'En camino',
       population: parseInt(orders?.[ORDER_STATUS.ON_WAY], 10) || 0,
-      color: '#D73C4C',
+      color: '#737373',
       legendFontColor: spicyGray,
       legendFontSize: 13
     },
     {
       name: 'Confirmados',
       population: parseInt(orders?.[ORDER_STATUS.CONFIRMED], 10) || 0,
-      color: '#FFAF59',
+      color: '#4E4E4E',
       legendFontColor: spicyGray,
       legendFontSize: 13
     },
     {
       name: 'Pendientes',
       population: parseInt(orders?.[ORDER_STATUS.PENDING], 10) || 0,
-      color: '#E28300',
+      color: '#111111',
       legendFontColor: spicyGray,
       legendFontSize: 13
     }

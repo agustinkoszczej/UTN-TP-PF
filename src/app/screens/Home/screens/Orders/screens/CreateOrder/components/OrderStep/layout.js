@@ -38,7 +38,10 @@ class OrderStep extends Component {
       style: styles.formElement
     };
     return (
-      <TouchableWithoutFeedback {...(isIos && { onPress: hideOrShowCalendar(false) })}>
+      <TouchableWithoutFeedback
+        style={styles.container}
+        {...(isIos && { onPress: hideOrShowCalendar(false) })}
+      >
         <ScrollView style={styles.container}>
           <CustomText>Comentario:</CustomText>
           <CustomTextInput

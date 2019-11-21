@@ -16,21 +16,21 @@ function BidsSection({ bids }) {
     {
       name: 'Aceptadas',
       population: parseInt(bids?.[BID_STATUS.ACCEPTED], 10) || 0,
-      color: '#319E11',
+      color: 'black',
       legendFontColor: spicyGray,
       legendFontSize: 13
     },
     {
       name: 'Activas',
       population: parseInt(bids?.[BID_STATUS.ACTIVE], 10) || 0,
-      color: '#4AEE1A',
+      color: 'gray',
       legendFontColor: spicyGray,
       legendFontSize: 13
     },
     {
       name: 'Declinadas',
       population: parseInt(bids?.[BID_STATUS.DEECLINED], 10) || 0,
-      color: '#B2FF9B',
+      color: 'silver',
       legendFontColor: spicyGray,
       legendFontSize: 13
     }

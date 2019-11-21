@@ -38,7 +38,8 @@ class ProductStep extends Component {
         );
       }
     }
-    setFieldValue(CREATE_ORDER_FIELDS.AMOUNT, amount + (add ? 1 : -1) * price);
+    const newAmount = !product && !add ? amount : amount + (add ? 1 : -1) * price;
+    setFieldValue(CREATE_ORDER_FIELDS.AMOUNT, newAmount);
     setFieldValue(CREATE_ORDER_FIELDS.PRODUCTS, products);
   };
 

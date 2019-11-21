@@ -298,27 +298,19 @@ export const screensNavOptions = {
     const { supplierName, supplierPicture } = navigation.state.params;
     return {
       headerTitle: (
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <View style={{ flexDirection: 'column' }}>
-            <View style={{ flexDirection: 'row', flex: 1 }}>
-              <Image
-                source={{ uri: supplierPicture }}
-                style={{ width: 40, height: 40, borderRadius: 20, marginRight: 10 }}
-              />
-            </View>
-          </View>
-          <View style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-            <View style={{ flexDirection: 'row', flex: 1 }}>
-              <CustomText
-                textProps={{ numberOfLines: 1 }}
-                bold
-                style={{ fontSize: 16, overflow: 'hidden', width: 200 }}
-              >
-                {supplierName}
-              </CustomText>
-              <InfoButton />
-            </View>
-          </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+          <Image
+            source={{ uri: supplierPicture }}
+            style={{ width: 40, height: 40, borderRadius: 20, marginRight: 10 }}
+          />
+          <CustomText
+            textProps={{ numberOfLines: 1 }}
+            bold
+            style={{ fontSize: 16, overflow: 'hidden', width: 150 }}
+          >
+            {supplierName}
+          </CustomText>
+          <InfoButton />
         </View>
       )
     };

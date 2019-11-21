@@ -14,7 +14,6 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import org.reactnative.camera.RNCameraPackage;
 import com.airbnb.android.react.maps.MapsPackage;
-import com.reactcommunity.rndatetimepicker.RNDateTimePickerPackage;
 import com.horcrux.svg.SvgPackage;
 
 import java.lang.reflect.InvocationTargetException;

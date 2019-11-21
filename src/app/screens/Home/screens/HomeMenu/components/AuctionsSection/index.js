@@ -16,21 +16,21 @@ function AuctionsSection({ auctions }) {
     {
       name: 'Cerradas',
       population: parseInt(auctions?.[AUCTION_STATUS.CLOSED], 10) || 0,
-      color: '#388087',
+      color: 'black',
       legendFontColor: spicyGray,
       legendFontSize: 13
     },
     {
       name: 'Expiradas',
       population: parseInt(auctions?.[AUCTION_STATUS.EXPIRED], 10) || 0,
-      color: '#6fb3b8',
+      color: 'gray',
       legendFontColor: spicyGray,
       legendFontSize: 13
     },
     {
       name: 'Activas',
       population: parseInt(auctions?.[AUCTION_STATUS.ACTIVE], 10) || 0,
-      color: '#badfe7',
+      color: 'silver',
       legendFontColor: spicyGray,
       legendFontSize: 13
     }

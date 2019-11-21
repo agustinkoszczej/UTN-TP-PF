@@ -14,6 +14,7 @@ class App extends Component {
     const { setUp, configNotifications } = this.props;
     setUp();
     configNotifications();
+    console.disableYellowBox = true;
   }
 
   render() {

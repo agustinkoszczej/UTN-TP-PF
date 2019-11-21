@@ -26,6 +26,11 @@ const logOut = async () => {
   return { ok: true };
 };
 
+const isLogged = async () => {
+  const tokens = await getToken();
+  return tokens !== null;
+};
+
 const update = values => api.put('/users/profile', values);
 
 const getSuppliers = name => api.get('/merchants/suppliers', { name });
@@ -39,6 +44,7 @@ const deleteContact = id => api.patch(`/merchants/agenda/${id}`, { action: 'REMO
 const getSupplierById = id => api.get(`/users/${id}`);
 
 export default {
+  isLogged,
   login,
   recoverPassword,
   signUp,

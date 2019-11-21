@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "lint-fix": "eslint src --fix",
     "postinstall": "npx jetify",
-    "build": "cd android && ./gradlew app:assembleRelease"
+    "build": "cd android && ./gradlew app:assembleRelease",
+    "clean": "cd android && ./gradlew clean"
   },
   "dependencies": {
     "@pusher/chatkit-client": "^1.13.0",
@@ -44,7 +45,7 @@
     "react-native-chart-kit": "^3.3.1",
     "react-native-device-info": "2.1.2",
     "react-native-fast-image": "^7.0.2",
-    "react-native-gesture-handler": "^1.3.0",
+    "react-native-gesture-handler": "^1.5.0",
     "react-native-gifted-chat": "^0.9.11",
     "react-native-google-places-autocomplete": "^1.3.9",
     "react-native-linear-gradient": "^2.5.4",
@@ -55,6 +56,7 @@
     "react-native-qrcode-scanner": "^1.2.3",
     "react-native-ratings": "^6.4.0",
     "react-native-reanimated": "^1.1.0",
+    "react-native-screens": "^2.0.0-alpha.8",
     "react-native-splash-screen": "^3.2.0",
     "react-native-step-indicator": "^0.0.11",
     "react-native-svg": "^9.8.5",
